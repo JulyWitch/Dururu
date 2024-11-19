@@ -17,6 +17,11 @@ dependencies:
   riverpod: ^2.6.1
   riverpod_annotation: ^2.6.1
   go_router: ^14.6.0
+  flutter_secure_storage: ^9.2.2
+  dio: ^5.7.0
+  crypto: ^3.0.6
+  flutter_riverpod: ^2.6.1
+  animated_snack_bar: ^0.4.0
 
 dev_dependencies:
   flutter_test:

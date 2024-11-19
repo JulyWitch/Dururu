@@ -1,16 +1,20 @@
 # dururu
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+This app is under development
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Here, I keep a todo list of things that should be implemented:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [x] State management for logged in user
+- [x] Storage (Store username and password)
+- [ ] In future, We might need to be able to switch between servers
+- [ ] Write providers for fetching songs
+- [ ] UI for showing songs of different folders
+- [ ] UI for showing songs of different geners
+- [ ] UI for showing songs of different artists
+- [ ] UI for showing songs of different albums
+- [ ] UI for playing songs
+- [ ] Work on offline access
+
