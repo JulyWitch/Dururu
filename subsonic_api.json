@@ -1,0 +1,1218 @@
+[
+  {
+    "method": "Introduction",
+    "comment": "The Subsonic API allows anyone to build their own programs using Subsonic as the media server, whether they're on the web, the desktop or on mobile devices. All the Subsonic apps are built using the Subsonic API.\nFeel free to join the Subsonic App Developers group for discussions, suggestions and questions.\nThe Subsonic API allows you to call methods that respond in REST style xml. Individual methods are detailed below.\nPlease note that all methods take the following parameters:\n*) Either p or both t and s must be specified.\nRemember to URL encode the request parameters. All methods (except those that return binary data) returns XML documents conforming to the subsonic-rest-api.xsd schema. The XML documents are encoded with UTF-8.\nIf your targeting API version 1.12.0 or earlier, authentication is performed by sending the password as clear text or hex-encoded. Examples:\nhttp://your-server/rest/ping.view?u=joe&p=sesame&v=1.12.0&c=myapp http://your-server/rest/ping.view?u=joe&p=enc:736573616d65&v=1.12.0&c=myapp\nStarting with API version 1.13.0, the recommended authentication scheme is to send an authentication token, calculated as a one-way salted hash of the password.\nThis involves two steps:\nFor example: if the password is sesame and the random salt is c19b2d, then token = md5(\"sesamec19b2d\") = 26719a1196d2a940705a59634eb18eab. The corresponding request URL then becomes:\nhttp://your-server/rest/ping.view?u=joe&t=26719a1196d2a940705a59634eb18eab&s=c19b2d&v=1.12.0&c=myapp\nIf a method fails it will return an error code and message in an <error> element. In addition, the status attribute of the <subsonic-response> root element will be set to failed instead of ok. For example:\n<?xml version=\"1.0\" encoding=\"UTF-8\"?> <subsonic-response xmlns=\"http://subsonic.org/restapi\" status=\"failed\" version=\"1.1.0\"> <error code=\"40\" message=\"Wrong username or password\"/> </subsonic-response>\nThe following error codes are defined:\nThis table shows the REST API version implemented in different Subsonic versions:\nNote that a Subsonic server is backward compatible with a REST client if and only if the major version is the same, and the minor version of the client is less than or equal to the server's. For example, if the server has REST API version 2.2, it supports client versions 2.0, 2.1 and 2.2, but not versions 1.x, 2.3+ or 3.x. The third part of the version number is not used to determine compatibility.\nStarting with version 1.8.0, the API provides methods for accessing the media collection organized according to ID3 tags, rather than file structure.\nFor instance, browsing through the collection using ID3 tags should use the getArtists, getArtist and getAlbum methods. To browse using file structure you would use getIndexes and getMusicDirectory.\nCorrespondingly, there are two sets of methods for searching, starring and album lists. Refer to the method documentation for details.\n@param u The username.\n@param p The password, either in clear text or hex-encoded with a \"enc:\" prefix. Since 1.13.0 this should only be used for testing purposes.\n@param t (Since 1.13.0) The authentication token computed as md5(password + salt). See below for details.\n@param s (Since 1.13.0) A random string (\"salt\") used as input for computing the password hash. See below for details.\n@param v The protocol version implemented by the client, i.e., the version of the subsonic-rest-api.xsd schema used (see below).\n@param c A unique string identifying the client application.\n@param f Default(xml) Request data to be returned in this format. Supported values are \"xml\", \"json\" (since 1.4.0) and \"jsonp\" (since 1.6.0). If using jsonp, specify name of javascript callback function using a callback parameter.",
+    "args": {
+      "u": {
+        "required": true,
+        "default": null
+      },
+      "p": {
+        "required": false,
+        "default": null
+      },
+      "t": {
+        "required": false,
+        "default": null
+      },
+      "s": {
+        "required": false,
+        "default": null
+      },
+      "v": {
+        "required": true,
+        "default": null
+      },
+      "c": {
+        "required": true,
+        "default": null
+      },
+      "f": {
+        "required": false,
+        "default": "xml"
+      }
+    }
+  },
+  {
+    "method": "ping",
+    "comment": "http://your-server/rest/ping Since 1.0.0\nUsed to test connectivity with the server. Takes no extra parameters.\nReturns an empty <subsonic-response> element on success. Example.",
+    "args": {}
+  },
+  {
+    "method": "getLicense",
+    "comment": "http://your-server/rest/getLicense Since 1.0.0\nGet details about the software license. Takes no extra parameters. Please note that access to the REST API requires that the server has a valid license (after a 30-day trial period). To get a license key you must upgrade to Subsonic Premium.\nReturns a <subsonic-response> element with a nested <license> element on success. Example.",
+    "args": {}
+  },
+  {
+    "method": "getMusicFolders",
+    "comment": "http://your-server/rest/getMusicFolders Since 1.0.0\nReturns all configured top-level music folders. Takes no extra parameters.\nReturns a <subsonic-response> element with a nested <musicFolders> element on success. Example.",
+    "args": {}
+  },
+  {
+    "method": "getIndexes",
+    "comment": "http://your-server/rest/getIndexes Since 1.0.0\nReturns an indexed structure of all artists.\nReturns a <subsonic-response> element with a nested <indexes> element on success. Example.\n@param musicFolderId If specified, only return artists in the music folder with the given ID. See getMusicFolders.\n@param ifModifiedSince If specified, only return a result if the artist collection has changed since the given time (in milliseconds since 1 Jan 1970).",
+    "args": {
+      "musicFolderId": {
+        "required": false,
+        "default": null
+      },
+      "ifModifiedSince": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getMusicDirectory",
+    "comment": "http://your-server/rest/getMusicDirectory Since 1.0.0\nReturns a listing of all files in a music directory. Typically used to get list of albums for an artist, or list of songs for an album.\nReturns a <subsonic-response> element with a nested <directory> element on success. Example 1. Example 2.\n@param id A string which uniquely identifies the music folder. Obtained by calls to getIndexes or getMusicDirectory.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getGenres",
+    "comment": "http://your-server/rest/getGenres Since 1.9.0\nReturns all genres.\nReturns a <subsonic-response> element with a nested <genres> element on success. Example.",
+    "args": {}
+  },
+  {
+    "method": "getArtists",
+    "comment": "http://your-server/rest/getArtists Since 1.8.0\nSimilar to getIndexes, but organizes music according to ID3 tags.\nReturns a <subsonic-response> element with a nested <artists> element on success. Example.\n@param musicFolderId If specified, only return artists in the music folder with the given ID. See getMusicFolders.",
+    "args": {
+      "musicFolderId": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getArtist",
+    "comment": "http://your-server/rest/getArtist Since 1.8.0\nReturns details for an artist, including a list of albums. This method organizes music according to ID3 tags.\nReturns a <subsonic-response> element with a nested <artist> element on success. Example.\n@param id The artist ID.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getAlbum",
+    "comment": "http://your-server/rest/getAlbum Since 1.8.0\nReturns details for an album, including a list of songs. This method organizes music according to ID3 tags.\nReturns a <subsonic-response> element with a nested <album> element on success. Example.\n@param id The album ID.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getSong",
+    "comment": "http://your-server/rest/getSong Since 1.8.0\nReturns details for a song.\nReturns a <subsonic-response> element with a nested <song> element on success. Example.\n@param id The song ID.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getVideos",
+    "comment": "http://your-server/rest/getVideos Since 1.8.0\nReturns all video files.\nReturns a <subsonic-response> element with a nested <videos> element on success. Example.",
+    "args": {}
+  },
+  {
+    "method": "getVideoInfo",
+    "comment": "http://your-server/rest/getVideoInfo Since 1.14.0\nReturns details for a video, including information about available audio tracks, subtitles (captions) and conversions.\nReturns a <subsonic-response> element with a nested <videoInfo> element on success. Example.\n@param id The video ID.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getArtistInfo",
+    "comment": "http://your-server/rest/getArtistInfo Since 1.11.0\nReturns artist info with biography, image URLs and similar artists, using data from last.fm.\nReturns a <subsonic-response> element with a nested <artistInfo> element on success. Example.\n@param id The artist, album or song ID.\n@param count Default(20) Max number of similar artists to return.\n@param includeNotPresent Default(false) Whether to return artists that are not present in the media library.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "count": {
+        "required": false,
+        "default": 20
+      },
+      "includeNotPresent": {
+        "required": false,
+        "default": false
+      }
+    }
+  },
+  {
+    "method": "getArtistInfo2",
+    "comment": "http://your-server/rest/getArtistInfo2 Since 1.11.0\nSimilar to getArtistInfo, but organizes music according to ID3 tags.\nReturns a <subsonic-response> element with a nested <artistInfo2> element on success. Example.\n@param id The artist ID.\n@param count Default(20) Max number of similar artists to return.\n@param includeNotPresent Default(false) Whether to return artists that are not present in the media library.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "count": {
+        "required": false,
+        "default": 20
+      },
+      "includeNotPresent": {
+        "required": false,
+        "default": false
+      }
+    }
+  },
+  {
+    "method": "getAlbumInfo",
+    "comment": "http://your-server/rest/getAlbumInfo Since 1.14.0\nReturns album notes, image URLs etc, using data from last.fm.\nReturns a <subsonic-response> element with a nested <albumInfo> element on success. Example.\n@param id The album or song ID.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getAlbumInfo2",
+    "comment": "http://your-server/rest/getAlbumInfo2 Since 1.14.0\nSimilar to getAlbumInfo, but organizes music according to ID3 tags.\nReturns a <subsonic-response> element with a nested <albumInfo> element on success. Example.\n@param id The album ID.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getSimilarSongs",
+    "comment": "http://your-server/rest/getSimilarSongs Since 1.11.0\nReturns a random collection of songs from the given artist and similar artists, using data from last.fm. Typically used for artist radio features.\nReturns a <subsonic-response> element with a nested <similarSongs> element on success. Example.\n@param id The artist, album or song ID.\n@param count Default(50) Max number of songs to return.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "count": {
+        "required": false,
+        "default": 50
+      }
+    }
+  },
+  {
+    "method": "getSimilarSongs2",
+    "comment": "http://your-server/rest/getSimilarSongs2 Since 1.11.0\nSimilar to getSimilarSongs, but organizes music according to ID3 tags.\nReturns a <subsonic-response> element with a nested <similarSongs2> element on success. Example.\n@param id The artist ID.\n@param count Default(50) Max number of songs to return.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "count": {
+        "required": false,
+        "default": 50
+      }
+    }
+  },
+  {
+    "method": "getTopSongs",
+    "comment": "http://your-server/rest/getTopSongs Since 1.13.0\nReturns top songs for the given artist, using data from last.fm.\nReturns a <subsonic-response> element with a nested <topSongs> element on success. Example.\n@param artist The artist name.\n@param count Default(50) Max number of songs to return.",
+    "args": {
+      "artist": {
+        "required": true,
+        "default": null
+      },
+      "count": {
+        "required": false,
+        "default": 50
+      }
+    }
+  },
+  {
+    "method": "getAlbumList",
+    "comment": "http://your-server/rest/getAlbumList Since 1.2.0\nReturns a list of random, newest, highest rated etc. albums. Similar to the album lists on the home page of the Subsonic web interface.\nReturns a <subsonic-response> element with a nested <albumList> element on success. Example.\n@param type The list type. Must be one of the following: random, newest, highest, frequent, recent. Since 1.8.0 you can also use alphabeticalByName or alphabeticalByArtist to page through all albums alphabetically, and starred to retrieve starred albums. Since 1.10.1 you can use byYear and byGenre to list albums in a given year range or genre.\n@param size Default(10) The number of albums to return. Max 500.\n@param offset Default(0) The list offset. Useful if you for example want to page through the list of newest albums.\n@param fromYear The first year in the range. If fromYear > toYear a reverse chronological list is returned.\n@param toYear The last year in the range.\n@param genre The name of the genre, e.g., \"Rock\".\n@param musicFolderId (Since 1.11.0) Only return albums in the music folder with the given ID. See getMusicFolders.",
+    "args": {
+      "type": {
+        "required": true,
+        "default": null
+      },
+      "size": {
+        "required": false,
+        "default": 10
+      },
+      "offset": {
+        "required": false,
+        "default": 0
+      },
+      "fromYear": {
+        "required": false,
+        "default": null
+      },
+      "toYear": {
+        "required": false,
+        "default": null
+      },
+      "genre": {
+        "required": false,
+        "default": null
+      },
+      "musicFolderId": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getAlbumList2",
+    "comment": "http://your-server/rest/getAlbumList2 Since 1.8.0\nSimilar to getAlbumList, but organizes music according to ID3 tags.\nReturns a <subsonic-response> element with a nested <albumList2> element on success. Example.\n@param type The list type. Must be one of the following: random, newest, frequent, recent, starred, alphabeticalByName or alphabeticalByArtist. Since 1.10.1 you can use byYear and byGenre to list albums in a given year range or genre.\n@param size Default(10) The number of albums to return. Max 500.\n@param offset Default(0) The list offset. Useful if you for example want to page through the list of newest albums.\n@param fromYear The first year in the range. If fromYear > toYear a reverse chronological list is returned.\n@param toYear The last year in the range.\n@param genre The name of the genre, e.g., \"Rock\".\n@param musicFolderId (Since 1.12.0) Only return albums in the music folder with the given ID. See getMusicFolders.",
+    "args": {
+      "type": {
+        "required": true,
+        "default": null
+      },
+      "size": {
+        "required": false,
+        "default": 10
+      },
+      "offset": {
+        "required": false,
+        "default": 0
+      },
+      "fromYear": {
+        "required": false,
+        "default": null
+      },
+      "toYear": {
+        "required": false,
+        "default": null
+      },
+      "genre": {
+        "required": false,
+        "default": null
+      },
+      "musicFolderId": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getRandomSongs",
+    "comment": "http://your-server/rest/getRandomSongs Since 1.2.0\nReturns random songs matching the given criteria.\nReturns a <subsonic-response> element with a nested <randomSongs> element on success. Example.\n@param size Default(10) The maximum number of songs to return. Max 500.\n@param genre Only returns songs belonging to this genre.\n@param fromYear Only return songs published after or in this year.\n@param toYear Only return songs published before or in this year.\n@param musicFolderId Only return songs in the music folder with the given ID. See getMusicFolders.",
+    "args": {
+      "size": {
+        "required": false,
+        "default": 10
+      },
+      "genre": {
+        "required": false,
+        "default": null
+      },
+      "fromYear": {
+        "required": false,
+        "default": null
+      },
+      "toYear": {
+        "required": false,
+        "default": null
+      },
+      "musicFolderId": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getSongsByGenre",
+    "comment": "http://your-server/rest/getSongsByGenre Since 1.9.0\nReturns songs in a given genre.\nReturns a <subsonic-response> element with a nested <songsByGenre> element on success. Example.\n@param genre The genre, as returned by getGenres.\n@param count Default(10) The maximum number of songs to return. Max 500.\n@param offset Default(0) The offset. Useful if you want to page through the songs in a genre.\n@param musicFolderId (Since 1.12.0) Only return albums in the music folder with the given ID. See getMusicFolders.",
+    "args": {
+      "genre": {
+        "required": true,
+        "default": null
+      },
+      "count": {
+        "required": false,
+        "default": 10
+      },
+      "offset": {
+        "required": false,
+        "default": 0
+      },
+      "musicFolderId": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getNowPlaying",
+    "comment": "http://your-server/rest/getNowPlaying Since 1.0.0\nReturns what is currently being played by all users. Takes no extra parameters.\nReturns a <subsonic-response> element with a nested <nowPlaying> element on success. Example.",
+    "args": {}
+  },
+  {
+    "method": "getStarred",
+    "comment": "http://your-server/rest/getStarred Since 1.8.0\nReturns starred songs, albums and artists.\nReturns a <subsonic-response> element with a nested <starred> element on success. Example.\n@param musicFolderId (Since 1.12.0) Only return results from the music folder with the given ID. See getMusicFolders.",
+    "args": {
+      "musicFolderId": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getStarred2",
+    "comment": "http://your-server/rest/getStarred2 Since 1.8.0\nSimilar to getStarred, but organizes music according to ID3 tags.\nReturns a <subsonic-response> element with a nested <starred2> element on success. Example.\n@param musicFolderId (Since 1.12.0) Only return results from the music folder with the given ID. See getMusicFolders.",
+    "args": {
+      "musicFolderId": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "search",
+    "comment": "http://your-server/rest/search Since 1.0.0 Deprecated since 1.4.0, use search2 instead.\nReturns a listing of files matching the given search criteria. Supports paging through the result.\nReturns a <subsonic-response> element with a nested <searchResult> element on success. Example.\n@param artist Artist to search for.\n@param album Album to searh for.\n@param title Song title to search for.\n@param any Searches all fields.\n@param count Default(20) Maximum number of results to return.\n@param offset Default(0) Search result offset. Used for paging.\n@param newerThan Only return matches that are newer than this. Given as milliseconds since 1970.",
+    "args": {
+      "artist": {
+        "required": false,
+        "default": null
+      },
+      "album": {
+        "required": false,
+        "default": null
+      },
+      "title": {
+        "required": false,
+        "default": null
+      },
+      "any": {
+        "required": false,
+        "default": null
+      },
+      "count": {
+        "required": false,
+        "default": 20
+      },
+      "offset": {
+        "required": false,
+        "default": 0
+      },
+      "newerThan": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "search2",
+    "comment": "http://your-server/rest/search2 Since 1.4.0\nReturns albums, artists and songs matching the given search criteria. Supports paging through the result.\nReturns a <subsonic-response> element with a nested <searchResult2> element on success. Example.\n@param query Search query.\n@param artistCount Default(20) Maximum number of artists to return.\n@param artistOffset Default(0) Search result offset for artists. Used for paging.\n@param albumCount Default(20) Maximum number of albums to return.\n@param albumOffset Default(0) Search result offset for albums. Used for paging.\n@param songCount Default(20) Maximum number of songs to return.\n@param songOffset Default(0) Search result offset for songs. Used for paging.\n@param musicFolderId (Since 1.12.0) Only return results from the music folder with the given ID. See getMusicFolders.",
+    "args": {
+      "query": {
+        "required": true,
+        "default": null
+      },
+      "artistCount": {
+        "required": false,
+        "default": 20
+      },
+      "artistOffset": {
+        "required": false,
+        "default": 0
+      },
+      "albumCount": {
+        "required": false,
+        "default": 20
+      },
+      "albumOffset": {
+        "required": false,
+        "default": 0
+      },
+      "songCount": {
+        "required": false,
+        "default": 20
+      },
+      "songOffset": {
+        "required": false,
+        "default": 0
+      },
+      "musicFolderId": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "search3",
+    "comment": "http://your-server/rest/search3 Since 1.8.0\nSimilar to search2, but organizes music according to ID3 tags.\nReturns a <subsonic-response> element with a nested <searchResult3> element on success. Example.\n@param query Search query.\n@param artistCount Default(20) Maximum number of artists to return.\n@param artistOffset Default(0) Search result offset for artists. Used for paging.\n@param albumCount Default(20) Maximum number of albums to return.\n@param albumOffset Default(0) Search result offset for albums. Used for paging.\n@param songCount Default(20) Maximum number of songs to return.\n@param songOffset Default(0) Search result offset for songs. Used for paging.\n@param musicFolderId (Since 1.12.0) Only return results from music folder with the given ID. See getMusicFolders.",
+    "args": {
+      "query": {
+        "required": true,
+        "default": null
+      },
+      "artistCount": {
+        "required": false,
+        "default": 20
+      },
+      "artistOffset": {
+        "required": false,
+        "default": 0
+      },
+      "albumCount": {
+        "required": false,
+        "default": 20
+      },
+      "albumOffset": {
+        "required": false,
+        "default": 0
+      },
+      "songCount": {
+        "required": false,
+        "default": 20
+      },
+      "songOffset": {
+        "required": false,
+        "default": 0
+      },
+      "musicFolderId": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getPlaylists",
+    "comment": "http://your-server/rest/getPlaylists Since 1.0.0\nReturns all playlists a user is allowed to play.\nReturns a <subsonic-response> element with a nested <playlists> element on success. Example.\n@param username (Since 1.8.0) If specified, return playlists for this user rather than for the authenticated user. The authenticated user must have admin role if this parameter is used.",
+    "args": {
+      "username": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getPlaylist",
+    "comment": "http://your-server/rest/getPlaylist Since 1.0.0\nReturns a listing of files in a saved playlist.\nReturns a <subsonic-response> element with a nested <playlist> element on success. Example.\n@param id ID of the playlist to return, as obtained by getPlaylists.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "createPlaylist",
+    "comment": "http://your-server/rest/createPlaylist Since 1.2.0\nCreates (or updates) a playlist.\nSince 1.14.0 the newly created/updated playlist is returned. In earlier versions an empty <subsonic-response> element is returned.\n@param playlistId The playlist ID.\n@param name The human-readable name of the playlist.\n@param songId ID of a song in the playlist. Use one songId parameter for each song in the playlist.",
+    "args": {
+      "playlistId": {
+        "required": false,
+        "default": null
+      },
+      "name": {
+        "required": false,
+        "default": null
+      },
+      "songId": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "updatePlaylist",
+    "comment": "http://your-server/rest/updatePlaylist Since 1.8.0\nUpdates a playlist. Only the owner of a playlist is allowed to update it.\nReturns an empty <subsonic-response> element on success.\n@param playlistId The playlist ID.\n@param name The human-readable name of the playlist.\n@param comment The playlist comment.\n@param public true if the playlist should be visible to all users, false otherwise.\n@param songIdToAdd Add this song with this ID to the playlist. Multiple parameters allowed.\n@param songIndexToRemove Remove the song at this position in the playlist. Multiple parameters allowed.",
+    "args": {
+      "playlistId": {
+        "required": true,
+        "default": null
+      },
+      "name": {
+        "required": false,
+        "default": null
+      },
+      "comment": {
+        "required": false,
+        "default": null
+      },
+      "public": {
+        "required": false,
+        "default": null
+      },
+      "songIdToAdd": {
+        "required": false,
+        "default": null
+      },
+      "songIndexToRemove": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "deletePlaylist",
+    "comment": "http://your-server/rest/deletePlaylist Since 1.2.0\nDeletes a saved playlist.\nReturns an empty <subsonic-response> element on success.\n@param id ID of the playlist to delete, as obtained by getPlaylists.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "stream",
+    "comment": "http://your-server/rest/stream Since 1.0.0\nStreams a given media file.\nReturns binary data on success, or an XML document on error (in which case the HTTP content type will start with \"text/xml\").\n@param id A string which uniquely identifies the file to stream. Obtained by calls to getMusicDirectory.\n@param maxBitRate (Since 1.2.0) If specified, the server will attempt to limit the bitrate to this value, in kilobits per second. If set to zero, no limit is imposed.\n@param format (Since 1.6.0) Specifies the preferred target format (e.g., \"mp3\" or \"flv\") in case there are multiple applicable transcodings. Starting with 1.9.0 you can use the special value \"raw\" to disable transcoding.\n@param timeOffset Only applicable to video streaming. If specified, start streaming at the given offset (in seconds) into the video. Typically used to implement video skipping.\n@param size (Since 1.6.0) Only applicable to video streaming. Requested video size specified as WxH, for instance \"640x480\".\n@param estimateContentLength Default(false) (Since 1.8.0). If set to \"true\", the Content-Length HTTP header will be set to an estimated value for transcoded or downsampled media.\n@param converted Default(false) (Since 1.14.0) Only applicable to video streaming. Subsonic can optimize videos for streaming by converting them to MP4. If a conversion exists for the video in question, then setting this parameter to \"true\" will cause the converted video to be returned instead of the original.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "maxBitRate": {
+        "required": false,
+        "default": null
+      },
+      "format": {
+        "required": false,
+        "default": null
+      },
+      "timeOffset": {
+        "required": false,
+        "default": null
+      },
+      "size": {
+        "required": false,
+        "default": null
+      },
+      "estimateContentLength": {
+        "required": false,
+        "default": false
+      },
+      "converted": {
+        "required": false,
+        "default": false
+      }
+    }
+  },
+  {
+    "method": "download",
+    "comment": "http://your-server/rest/download Since 1.0.0\nDownloads a given media file. Similar to stream, but this method returns the original media data without transcoding or downsampling.\nReturns binary data on success, or an XML document on error (in which case the HTTP content type will start with \"text/xml\").\n@param id A string which uniquely identifies the file to download. Obtained by calls to getMusicDirectory.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "hls",
+    "comment": "http://your-server/rest/hls.m3u8 Since 1.8.0\nCreates an HLS (HTTP Live Streaming) playlist used for streaming video or audio. HLS is a streaming protocol implemented by Apple and works by breaking the overall stream into a sequence of small HTTP-based file downloads. It's supported by iOS and newer versions of Android. This method also supports adaptive bitrate streaming, see the bitRate parameter.\nReturns an M3U8 playlist on success (content type \"application/vnd.apple.mpegurl\"), or an XML document on error (in which case the HTTP content type will start with \"text/xml\").\n@param id A string which uniquely identifies the media file to stream.\n@param bitRate If specified, the server will attempt to limit the bitrate to this value, in kilobits per second. If this parameter is specified more than once, the server will create a variant playlist, suitable for adaptive bitrate streaming. The playlist will support streaming at all the specified bitrates. The server will automatically choose video dimensions that are suitable for the given bitrates. Since 1.9.0 you may explicitly request a certain width (480) and height (360) like so: bitRate=1000@480x360\n@param audioTrack The ID of the audio track to use. See getVideoInfo for how to get the list of available audio tracks for a video.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "bitRate": {
+        "required": false,
+        "default": null
+      },
+      "audioTrack": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getCaptions",
+    "comment": "http://your-server/rest/getCaptions Since 1.14.0\nReturns captions (subtitles) for a video. Use getVideoInfo to get a list of available captions.\nReturns the raw video captions.\n@param id The ID of the video.\n@param format Preferred captions format (\"srt\" or \"vtt\").",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "format": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getCoverArt",
+    "comment": "http://your-server/rest/getCoverArt Since 1.0.0\nReturns a cover art image.\nReturns the cover art image in binary form.\n@param id The ID of a song, album or artist.\n@param size If specified, scale image to this size.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "size": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getLyrics",
+    "comment": "http://your-server/rest/getLyrics Since 1.2.0\nSearches for and returns lyrics for a given song.\nReturns a <subsonic-response> element with a nested <lyrics> element on success. The <lyrics> element is empty if no matching lyrics was found. Example.\n@param artist The artist name.\n@param title The song title.",
+    "args": {
+      "artist": {
+        "required": false,
+        "default": null
+      },
+      "title": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getAvatar",
+    "comment": "http://your-server/rest/getAvatar Since 1.8.0\nReturns the avatar (personal image) for a user.\nReturns the avatar image in binary form.\n@param username The user in question.",
+    "args": {
+      "username": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "star",
+    "comment": "http://your-server/rest/star Since 1.8.0\nAttaches a star to a song, album or artist.\nReturns an empty <subsonic-response> element on success.\n@param id The ID of the file (song) or folder (album/artist) to star. Multiple parameters allowed.\n@param albumId The ID of an album to star. Use this rather than id if the client accesses the media collection according to ID3 tags rather than file structure. Multiple parameters allowed.\n@param artistId The ID of an artist to star. Use this rather than id if the client accesses the media collection according to ID3 tags rather than file structure. Multiple parameters allowed.",
+    "args": {
+      "id": {
+        "required": false,
+        "default": null
+      },
+      "albumId": {
+        "required": false,
+        "default": null
+      },
+      "artistId": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "unstar",
+    "comment": "http://your-server/rest/unstar Since 1.8.0\nRemoves the star from a song, album or artist.\nReturns an empty <subsonic-response> element on success.\n@param id The ID of the file (song) or folder (album/artist) to unstar. Multiple parameters allowed.\n@param albumId The ID of an album to unstar. Use this rather than id if the client accesses the media collection according to ID3 tags rather than file structure. Multiple parameters allowed.\n@param artistId The ID of an artist to unstar. Use this rather than id if the client accesses the media collection according to ID3 tags rather than file structure. Multiple parameters allowed.",
+    "args": {
+      "id": {
+        "required": false,
+        "default": null
+      },
+      "albumId": {
+        "required": false,
+        "default": null
+      },
+      "artistId": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "setRating",
+    "comment": "http://your-server/rest/setRating Since 1.6.0\nSets the rating for a music file.\nReturns an empty <subsonic-response> element on success.\n@param id A string which uniquely identifies the file (song) or folder (album/artist) to rate.\n@param rating The rating between 1 and 5 (inclusive), or 0 to remove the rating.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "rating": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "scrobble",
+    "comment": "http://your-server/rest/scrobble Since 1.5.0\nRegisters the local playback of one or more media files. Typically used when playing media that is cached on the client. This operation includes the following:\nSince 1.8.0 you may specify multiple id (and optionally time) parameters to scrobble multiple files.\nReturns an empty <subsonic-response> element on success.\n@param id A string which uniquely identifies the file to scrobble.\n@param time (Since 1.8.0) The time (in milliseconds since 1 Jan 1970) at which the song was listened to.\n@param submission Default(True) Whether this is a \"submission\" or a \"now playing\" notification.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "time": {
+        "required": false,
+        "default": null
+      },
+      "submission": {
+        "required": false,
+        "default": "True"
+      }
+    }
+  },
+  {
+    "method": "getShares",
+    "comment": "http://your-server/rest/getShares Since 1.6.0\nReturns information about shared media this user is allowed to manage. Takes no extra parameters.\nReturns a <subsonic-response> element with a nested <shares> element on success. Example.",
+    "args": {}
+  },
+  {
+    "method": "createShare",
+    "comment": "http://your-server/rest/createShare Since 1.6.0\nCreates a public URL that can be used by anyone to stream music or video from the Subsonic server. The URL is short and suitable for posting on Facebook, Twitter etc. Note: The user must be authorized to share (see Settings > Users > User is allowed to share files with anyone).\nReturns a <subsonic-response> element with a nested <shares> element on success, which in turns contains a single <share> element for the newly created share. Example.\n@param id ID of a song, album or video to share. Use one id parameter for each entry to share.\n@param description A user-defined description that will be displayed to people visiting the shared media.\n@param expires The time at which the share expires. Given as milliseconds since 1970.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "description": {
+        "required": false,
+        "default": null
+      },
+      "expires": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "updateShare",
+    "comment": "http://your-server/rest/updateShare Since 1.6.0\nUpdates the description and/or expiration date for an existing share.\nReturns an empty <subsonic-response> element on success.\n@param id ID of the share to update.\n@param description A user-defined description that will be displayed to people visiting the shared media.\n@param expires The time at which the share expires. Given as milliseconds since 1970, or zero to remove the expiration.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "description": {
+        "required": false,
+        "default": null
+      },
+      "expires": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "deleteShare",
+    "comment": "http://your-server/rest/deleteShare Since 1.6.0\nDeletes an existing share.\nReturns an empty <subsonic-response> element on success.\n@param id ID of the share to delete.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getPodcasts",
+    "comment": "http://your-server/rest/getPodcasts Since 1.6.0\nReturns all Podcast channels the server subscribes to, and (optionally) their episodes. This method can also be used to return details for only one channel - refer to the id parameter. A typical use case for this method would be to first retrieve all channels without episodes, and then retrieve all episodes for the single channel the user selects.\nReturns a <subsonic-response> element with a nested <podcasts> element on success. Example.\n@param includeEpisodes Default(true) (Since 1.9.0) Whether to include Podcast episodes in the returned result.\n@param id (Since 1.9.0) If specified, only return the Podcast channel with this ID.",
+    "args": {
+      "includeEpisodes": {
+        "required": false,
+        "default": true
+      },
+      "id": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getNewestPodcasts",
+    "comment": "http://your-server/rest/getNewestPodcasts Since 1.13.0\nReturns the most recently published Podcast episodes.\nReturns a <subsonic-response> element with a nested <newestPodcasts> element on success. Example.\n@param count Default(20) The maximum number of episodes to return.",
+    "args": {
+      "count": {
+        "required": false,
+        "default": 20
+      }
+    }
+  },
+  {
+    "method": "refreshPodcasts",
+    "comment": "http://your-server/rest/refreshPodcasts Since 1.9.0\nRequests the server to check for new Podcast episodes. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).\nReturns an empty <subsonic-response> element on success.",
+    "args": {}
+  },
+  {
+    "method": "createPodcastChannel",
+    "comment": "http://your-server/rest/createPodcastChannel Since 1.9.0\nAdds a new Podcast channel. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).\nReturns an empty <subsonic-response> element on success.\n@param url The URL of the Podcast to add.",
+    "args": {
+      "url": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "deletePodcastChannel",
+    "comment": "http://your-server/rest/deletePodcastChannel Since 1.9.0\nDeletes a Podcast channel. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).\nReturns an empty <subsonic-response> element on success.\n@param id The ID of the Podcast channel to delete.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "deletePodcastEpisode",
+    "comment": "http://your-server/rest/deletePodcastEpisode Since 1.9.0\nDeletes a Podcast episode. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).\nReturns an empty <subsonic-response> element on success.\n@param id The ID of the Podcast episode to delete.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "downloadPodcastEpisode",
+    "comment": "http://your-server/rest/downloadPodcastEpisode Since 1.9.0\nRequest the server to start downloading a given Podcast episode. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).\nReturns an empty <subsonic-response> element on success.\n@param id The ID of the Podcast episode to download.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "jukeboxControl",
+    "comment": "http://your-server/rest/jukeboxControl Since 1.2.0\nControls the jukebox, i.e., playback directly on the server's audio hardware. Note: The user must be authorized to control the jukebox (see Settings > Users > User is allowed to play files in jukebox mode).\nReturns a <jukeboxStatus> element on success, unless the get action is used, in which case a nested <jukeboxPlaylist> element is returned. Example 1. Example 2.\n@param action The operation to perform. Must be one of: get, status (since 1.7.0), set (since 1.7.0), start, stop, skip, add, clear, remove, shuffle, setGain\n@param index Used by skip and remove. Zero-based index of the song to skip to or remove.\n@param offset (Since 1.7.0) Used by skip. Start playing this many seconds into the track.\n@param id Used by add and set. ID of song to add to the jukebox playlist. Use multiple id parameters to add many songs in the same request. (set is similar to a clear followed by a add, but will not change the currently playing track.)\n@param gain Used by setGain to control the playback volume. A float value between 0.0 and 1.0.",
+    "args": {
+      "action": {
+        "required": true,
+        "default": null
+      },
+      "index": {
+        "required": false,
+        "default": null
+      },
+      "offset": {
+        "required": false,
+        "default": null
+      },
+      "id": {
+        "required": false,
+        "default": null
+      },
+      "gain": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getInternetRadioStations",
+    "comment": "http://your-server/rest/getInternetRadioStations Since 1.9.0\nReturns all internet radio stations. Takes no extra parameters.\nReturns a <subsonic-response> element with a nested <internetRadioStations> element on success. Example.",
+    "args": {}
+  },
+  {
+    "method": "createInternetRadioStation",
+    "comment": "http://your-server/rest/createInternetRadioStation Since 1.16.0\nAdds a new internet radio station. Only users with admin privileges are allowed to call this method.\nReturns an empty <subsonic-response> element on success.\n@param streamUrl The stream URL for the station.\n@param name The user-defined name for the station.\n@param homepageUrl The home page URL for the station.",
+    "args": {
+      "streamUrl": {
+        "required": true,
+        "default": null
+      },
+      "name": {
+        "required": true,
+        "default": null
+      },
+      "homepageUrl": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "updateInternetRadioStation",
+    "comment": "http://your-server/rest/updateInternetRadioStation Since 1.16.0\nUpdates an existing internet radio station. Only users with admin privileges are allowed to call this method.\nReturns an empty <subsonic-response> element on success.\n@param id The ID for the station.\n@param streamUrl The stream URL for the station.\n@param name The user-defined name for the station.\n@param homepageUrl The home page URL for the station.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "streamUrl": {
+        "required": true,
+        "default": null
+      },
+      "name": {
+        "required": true,
+        "default": null
+      },
+      "homepageUrl": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "deleteInternetRadioStation",
+    "comment": "http://your-server/rest/deleteInternetRadioStation Since 1.16.0\nDeletes an existing internet radio station. Only users with admin privileges are allowed to call this method.\nReturns an empty <subsonic-response> element on success.\n@param id The ID for the station.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getChatMessages",
+    "comment": "http://your-server/rest/getChatMessages Since 1.2.0\nReturns the current visible (non-expired) chat messages.\nReturns a <subsonic-response> element with a nested <chatMessages> element on success. Example.\n@param since Only return messages newer than this time (in millis since Jan 1 1970).",
+    "args": {
+      "since": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "addChatMessage",
+    "comment": "http://your-server/rest/addChatMessage Since 1.2.0\nAdds a message to the chat log.\nReturns an empty <subsonic-response> element on success.\n@param message The chat message.",
+    "args": {
+      "message": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getUser",
+    "comment": "http://your-server/rest/getUser Since 1.3.0\nGet details about a given user, including which authorization roles and folder access it has. Can be used to enable/disable certain features in the client, such as jukebox control.\nReturns a <subsonic-response> element with a nested <user> element on success. Example.\n@param username The name of the user to retrieve. You can only retrieve your own user unless you have admin privileges.",
+    "args": {
+      "username": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getUsers",
+    "comment": "http://your-server/rest/getUsers Since 1.8.0\nGet details about all users, including which authorization roles and folder access they have. Only users with admin privileges are allowed to call this method.\nReturns a <subsonic-response> element with a nested <users> element on success. Example.",
+    "args": {}
+  },
+  {
+    "method": "createUser",
+    "comment": "http://your-server/rest/createUser Since 1.1.0\nCreates a new Subsonic user, using the following parameters:\nReturns an empty <subsonic-response> element on success.\n@param username The name of the new user.\n@param password The password of the new user, either in clear text of hex-encoded (see above).\n@param email The email address of the new user.\n@param ldapAuthenticated Default(false) Whether the user is authenicated in LDAP.\n@param adminRole Default(false) Whether the user is administrator.\n@param settingsRole Default(true) Whether the user is allowed to change personal settings and password.\n@param streamRole Default(true) Whether the user is allowed to play files.\n@param jukeboxRole Default(false) Whether the user is allowed to play files in jukebox mode.\n@param downloadRole Default(false) Whether the user is allowed to download files.\n@param uploadRole Default(false) Whether the user is allowed to upload files.\n@param playlistRole Default(false) Whether the user is allowed to create and delete playlists. Since 1.8.0, changing this role has no effect.\n@param coverArtRole Default(false) Whether the user is allowed to change cover art and tags.\n@param commentRole Default(false) Whether the user is allowed to create and edit comments and ratings.\n@param podcastRole Default(false) Whether the user is allowed to administrate Podcasts.\n@param shareRole Default(false) (Since 1.8.0) Whether the user is allowed to share files with anyone.\n@param videoConversionRole Default(false) (Since 1.15.0) Whether the user is allowed to start video conversions.\n@param musicFolderId Default(All folders) (Since 1.12.0) IDs of the music folders the user is allowed access to. Include the parameter once for each folder.",
+    "args": {
+      "username": {
+        "required": true,
+        "default": null
+      },
+      "password": {
+        "required": true,
+        "default": null
+      },
+      "email": {
+        "required": true,
+        "default": null
+      },
+      "ldapAuthenticated": {
+        "required": false,
+        "default": false
+      },
+      "adminRole": {
+        "required": false,
+        "default": false
+      },
+      "settingsRole": {
+        "required": false,
+        "default": true
+      },
+      "streamRole": {
+        "required": false,
+        "default": true
+      },
+      "jukeboxRole": {
+        "required": false,
+        "default": false
+      },
+      "downloadRole": {
+        "required": false,
+        "default": false
+      },
+      "uploadRole": {
+        "required": false,
+        "default": false
+      },
+      "playlistRole": {
+        "required": false,
+        "default": false
+      },
+      "coverArtRole": {
+        "required": false,
+        "default": false
+      },
+      "commentRole": {
+        "required": false,
+        "default": false
+      },
+      "podcastRole": {
+        "required": false,
+        "default": false
+      },
+      "shareRole": {
+        "required": false,
+        "default": false
+      },
+      "videoConversionRole": {
+        "required": false,
+        "default": false
+      },
+      "musicFolderId": {
+        "required": false,
+        "default": "All folders"
+      }
+    }
+  },
+  {
+    "method": "updateUser",
+    "comment": "http://your-server/rest/updateUser Since 1.10.1\nModifies an existing Subsonic user, using the following parameters:\nReturns an empty <subsonic-response> element on success.\n@param username The name of the user.\n@param password The password of the user, either in clear text of hex-encoded (see above).\n@param email The email address of the user.\n@param ldapAuthenticated Whether the user is authenicated in LDAP.\n@param adminRole Whether the user is administrator.\n@param settingsRole Whether the user is allowed to change personal settings and password.\n@param streamRole Whether the user is allowed to play files.\n@param jukeboxRole Whether the user is allowed to play files in jukebox mode.\n@param downloadRole Whether the user is allowed to download files.\n@param uploadRole Whether the user is allowed to upload files.\n@param coverArtRole Whether the user is allowed to change cover art and tags.\n@param commentRole Whether the user is allowed to create and edit comments and ratings.\n@param podcastRole Whether the user is allowed to administrate Podcasts.\n@param shareRole Whether the user is allowed to share files with anyone.\n@param videoConversionRole Default(false) (Since 1.15.0) Whether the user is allowed to start video conversions.\n@param musicFolderId (Since 1.12.0) IDs of the music folders the user is allowed access to. Include the parameter once for each folder.\n@param maxBitRate (Since 1.13.0) The maximum bit rate (in Kbps) for the user. Audio streams of higher bit rates are automatically downsampled to this bit rate. Legal values: 0 (no limit), 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320.",
+    "args": {
+      "username": {
+        "required": true,
+        "default": null
+      },
+      "password": {
+        "required": false,
+        "default": null
+      },
+      "email": {
+        "required": false,
+        "default": null
+      },
+      "ldapAuthenticated": {
+        "required": false,
+        "default": null
+      },
+      "adminRole": {
+        "required": false,
+        "default": null
+      },
+      "settingsRole": {
+        "required": false,
+        "default": null
+      },
+      "streamRole": {
+        "required": false,
+        "default": null
+      },
+      "jukeboxRole": {
+        "required": false,
+        "default": null
+      },
+      "downloadRole": {
+        "required": false,
+        "default": null
+      },
+      "uploadRole": {
+        "required": false,
+        "default": null
+      },
+      "coverArtRole": {
+        "required": false,
+        "default": null
+      },
+      "commentRole": {
+        "required": false,
+        "default": null
+      },
+      "podcastRole": {
+        "required": false,
+        "default": null
+      },
+      "shareRole": {
+        "required": false,
+        "default": null
+      },
+      "videoConversionRole": {
+        "required": false,
+        "default": false
+      },
+      "musicFolderId": {
+        "required": false,
+        "default": null
+      },
+      "maxBitRate": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "deleteUser",
+    "comment": "http://your-server/rest/deleteUser Since 1.3.0\nDeletes an existing Subsonic user, using the following parameters:\nReturns an empty <subsonic-response> element on success.\n@param username The name of the user to delete.",
+    "args": {
+      "username": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "changePassword",
+    "comment": "http://your-server/rest/changePassword Since 1.1.0\nChanges the password of an existing Subsonic user, using the following parameters. You can only change your own password unless you have admin privileges.\nReturns an empty <subsonic-response> element on success.\n@param username The name of the user which should change its password.\n@param password The new password of the new user, either in clear text of hex-encoded (see above).",
+    "args": {
+      "username": {
+        "required": true,
+        "default": null
+      },
+      "password": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getBookmarks",
+    "comment": "http://your-server/rest/getBookmarks Since 1.9.0\nReturns all bookmarks for this user. A bookmark is a position within a certain media file.\nReturns a <subsonic-response> element with a nested <bookmarks> element on success. Example.",
+    "args": {}
+  },
+  {
+    "method": "createBookmark",
+    "comment": "http://your-server/rest/createBookmark Since 1.9.0\nCreates or updates a bookmark (a position within a media file). Bookmarks are personal and not visible to other users.\nReturns an empty <subsonic-response> element on success.\n@param id ID of the media file to bookmark. If a bookmark already exists for this file it will be overwritten.\n@param position The position (in milliseconds) within the media file.\n@param comment A user-defined comment.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "position": {
+        "required": true,
+        "default": null
+      },
+      "comment": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "deleteBookmark",
+    "comment": "http://your-server/rest/deleteBookmark Since 1.9.0\nDeletes the bookmark for a given file.\nReturns an empty <subsonic-response> element on success.\n@param id ID of the media file for which to delete the bookmark. Other users' bookmarks are not affected.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getPlayQueue",
+    "comment": "http://your-server/rest/getPlayQueue Since 1.12.0\nReturns the state of the play queue for this user (as set by savePlayQueue). This includes the tracks in the play queue, the currently playing track, and the position within this track. Typically used to allow a user to move between different clients/apps while retaining the same play queue (for instance when listening to an audio book).\nReturns a <subsonic-response> element with a nested <playQueue> element on success, or an empty <subsonic-response> if no play queue has been saved. Example.",
+    "args": {}
+  },
+  {
+    "method": "savePlayQueue",
+    "comment": "http://your-server/rest/savePlayQueue Since 1.12.0\nSaves the state of the play queue for this user. This includes the tracks in the play queue, the currently playing track, and the position within this track. Typically used to allow a user to move between different clients/apps while retaining the same play queue (for instance when listening to an audio book).\nReturns an empty <subsonic-response> element on success.\n@param id ID of a song in the play queue. Use one id parameter for each song in the play queue.\n@param current The ID of the current playing song.\n@param position The position in milliseconds within the currently playing song.",
+    "args": {
+      "id": {
+        "required": true,
+        "default": null
+      },
+      "current": {
+        "required": false,
+        "default": null
+      },
+      "position": {
+        "required": false,
+        "default": null
+      }
+    }
+  },
+  {
+    "method": "getScanStatus",
+    "comment": "http://your-server/rest/getScanStatus Since 1.15.0\nReturns the current status for media library scanning. Takes no extra parameters.\nReturns a <subsonic-response> element with a nested <scanStatus> element on success. Example.",
+    "args": {}
+  },
+  {
+    "method": "startScan",
+    "comment": "http://your-server/rest/startScan Since 1.15.0\nInitiates a rescan of the media libraries. Takes no extra parameters.\nReturns a <subsonic-response> element with a nested <scanStatus> element on success. Example.",
+    "args": {}
+  }
+]
