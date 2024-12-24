@@ -26,7 +26,7 @@ class Auth extends _$Auth {
 
   Map<String, String> getAuthorization() {
     if (state.value == null) throw Exception();
-    const chars = 'qwertyuiop[]asdfghjkl;zxcvbnm,./';
+    const chars = 'qwertyuiopasdfghjklzxcvbnm';
     final random = Random.secure();
 
     final salt =

@@ -6,7 +6,7 @@ part of 'subsonic_apis.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$introductionHash() => r'4ce4b593dc2b1587e10ceb4d112d31ceb93e0507';
+String _$introductionHash() => r'fdadeef28bf1c32f0f496600cb6a3fedbf6c3dbe';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -151,23 +151,11 @@ class IntroductionFamily extends Family<AsyncValue<Response>> {
   /// @param f Default(xml) Request data to be returned in this format. Supported values are "xml", "json" (since 1.4.0) and "jsonp" (since 1.6.0). If using jsonp, specify name of javascript callback function using a callback parameter.
   ///
   /// Copied from [introduction].
-  IntroductionProvider call({
-    required dynamic u,
-    required dynamic v,
-    required dynamic c,
-    dynamic p,
-    dynamic t,
-    dynamic s,
-    dynamic f = "xml",
-  }) {
+  IntroductionProvider call(
+    IntroductionRequest request,
+  ) {
     return IntroductionProvider(
-      u: u,
-      v: v,
-      c: c,
-      p: p,
-      t: t,
-      s: s,
-      f: f,
+      request,
     );
   }
 
@@ -176,13 +164,7 @@ class IntroductionFamily extends Family<AsyncValue<Response>> {
     covariant IntroductionProvider provider,
   ) {
     return call(
-      u: provider.u,
-      v: provider.v,
-      c: provider.c,
-      p: provider.p,
-      t: provider.t,
-      s: provider.s,
-      f: provider.f,
+      provider.request,
     );
   }
 
@@ -260,24 +242,12 @@ class IntroductionProvider extends AutoDisposeFutureProvider<Response> {
   /// @param f Default(xml) Request data to be returned in this format. Supported values are "xml", "json" (since 1.4.0) and "jsonp" (since 1.6.0). If using jsonp, specify name of javascript callback function using a callback parameter.
   ///
   /// Copied from [introduction].
-  IntroductionProvider({
-    required dynamic u,
-    required dynamic v,
-    required dynamic c,
-    dynamic p,
-    dynamic t,
-    dynamic s,
-    dynamic f = "xml",
-  }) : this._internal(
+  IntroductionProvider(
+    IntroductionRequest request,
+  ) : this._internal(
           (ref) => introduction(
             ref as IntroductionRef,
-            u: u,
-            v: v,
-            c: c,
-            p: p,
-            t: t,
-            s: s,
-            f: f,
+            request,
           ),
           from: introductionProvider,
           name: r'introductionProvider',
@@ -288,13 +258,7 @@ class IntroductionProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: IntroductionFamily._dependencies,
           allTransitiveDependencies:
               IntroductionFamily._allTransitiveDependencies,
-          u: u,
-          v: v,
-          c: c,
-          p: p,
-          t: t,
-          s: s,
-          f: f,
+          request: request,
         );
 
   IntroductionProvider._internal(
@@ -304,22 +268,10 @@ class IntroductionProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.u,
-    required this.v,
-    required this.c,
-    required this.p,
-    required this.t,
-    required this.s,
-    required this.f,
+    required this.request,
   }) : super.internal();
 
-  final dynamic u;
-  final dynamic v;
-  final dynamic c;
-  final dynamic p;
-  final dynamic t;
-  final dynamic s;
-  final dynamic f;
+  final IntroductionRequest request;
 
   @override
   Override overrideWith(
@@ -334,13 +286,7 @@ class IntroductionProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        u: u,
-        v: v,
-        c: c,
-        p: p,
-        t: t,
-        s: s,
-        f: f,
+        request: request,
       ),
     );
   }
@@ -352,26 +298,13 @@ class IntroductionProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is IntroductionProvider &&
-        other.u == u &&
-        other.v == v &&
-        other.c == c &&
-        other.p == p &&
-        other.t == t &&
-        other.s == s &&
-        other.f == f;
+    return other is IntroductionProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, u.hashCode);
-    hash = _SystemHash.combine(hash, v.hashCode);
-    hash = _SystemHash.combine(hash, c.hashCode);
-    hash = _SystemHash.combine(hash, p.hashCode);
-    hash = _SystemHash.combine(hash, t.hashCode);
-    hash = _SystemHash.combine(hash, s.hashCode);
-    hash = _SystemHash.combine(hash, f.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -380,26 +313,8 @@ class IntroductionProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin IntroductionRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `u` of this provider.
-  dynamic get u;
-
-  /// The parameter `v` of this provider.
-  dynamic get v;
-
-  /// The parameter `c` of this provider.
-  dynamic get c;
-
-  /// The parameter `p` of this provider.
-  dynamic get p;
-
-  /// The parameter `t` of this provider.
-  dynamic get t;
-
-  /// The parameter `s` of this provider.
-  dynamic get s;
-
-  /// The parameter `f` of this provider.
-  dynamic get f;
+  /// The parameter `request` of this provider.
+  IntroductionRequest get request;
 }
 
 class _IntroductionProviderElement
@@ -407,22 +322,10 @@ class _IntroductionProviderElement
   _IntroductionProviderElement(super.provider);
 
   @override
-  dynamic get u => (origin as IntroductionProvider).u;
-  @override
-  dynamic get v => (origin as IntroductionProvider).v;
-  @override
-  dynamic get c => (origin as IntroductionProvider).c;
-  @override
-  dynamic get p => (origin as IntroductionProvider).p;
-  @override
-  dynamic get t => (origin as IntroductionProvider).t;
-  @override
-  dynamic get s => (origin as IntroductionProvider).s;
-  @override
-  dynamic get f => (origin as IntroductionProvider).f;
+  IntroductionRequest get request => (origin as IntroductionProvider).request;
 }
 
-String _$pingHash() => r'e51133166446e8772d3205bf7999430880ca9030';
+String _$pingHash() => r'400bc7709f08f4228e2efaf4a157fca570dcc7e9';
 
 /// http://your-server/rest/ping Since 1.0.0
 /// Used to test connectivity with the server. Takes no extra parameters.
@@ -442,7 +345,7 @@ final pingProvider = AutoDisposeFutureProvider<Response>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef PingRef = AutoDisposeFutureProviderRef<Response>;
-String _$getLicenseHash() => r'ba3ce325acfc7b63e3606412ee8636936a7f2e97';
+String _$getLicenseHash() => r'6671ecfda66d7da234be23b199c25a3f93b65ee0';
 
 /// http://your-server/rest/getLicense Since 1.0.0
 /// Get details about the software license. Takes no extra parameters. Please note that access to the REST API requires that the server has a valid license (after a 30-day trial period). To get a license key you must upgrade to Subsonic Premium.
@@ -462,7 +365,7 @@ final getLicenseProvider = AutoDisposeFutureProvider<Response>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetLicenseRef = AutoDisposeFutureProviderRef<Response>;
-String _$getMusicFoldersHash() => r'18e9c42dc26699f7e974d971723c9f86b66d36ed';
+String _$getMusicFoldersHash() => r'c0e786c23eca0dd7e4a0ab7248fef168cafe08f8';
 
 /// http://your-server/rest/getMusicFolders Since 1.0.0
 /// Returns all configured top-level music folders. Takes no extra parameters.
@@ -483,7 +386,7 @@ final getMusicFoldersProvider = AutoDisposeFutureProvider<Response>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetMusicFoldersRef = AutoDisposeFutureProviderRef<Response>;
-String _$getIndexesHash() => r'31a0928b499dedf62706b8f1b8fb57f63b953dcb';
+String _$getIndexesHash() => r'ea6233cd7b9b78aefb5cc13ed4f4c884813b0b78';
 
 /// http://your-server/rest/getIndexes Since 1.0.0
 /// Returns an indexed structure of all artists.
@@ -519,13 +422,11 @@ class GetIndexesFamily extends Family<AsyncValue<Response>> {
   /// @param ifModifiedSince If specified, only return a result if the artist collection has changed since the given time (in milliseconds since 1 Jan 1970).
   ///
   /// Copied from [getIndexes].
-  GetIndexesProvider call({
-    dynamic musicFolderId,
-    dynamic ifModifiedSince,
-  }) {
+  GetIndexesProvider call(
+    GetIndexesRequest request,
+  ) {
     return GetIndexesProvider(
-      musicFolderId: musicFolderId,
-      ifModifiedSince: ifModifiedSince,
+      request,
     );
   }
 
@@ -534,8 +435,7 @@ class GetIndexesFamily extends Family<AsyncValue<Response>> {
     covariant GetIndexesProvider provider,
   ) {
     return call(
-      musicFolderId: provider.musicFolderId,
-      ifModifiedSince: provider.ifModifiedSince,
+      provider.request,
     );
   }
 
@@ -569,14 +469,12 @@ class GetIndexesProvider extends AutoDisposeFutureProvider<Response> {
   /// @param ifModifiedSince If specified, only return a result if the artist collection has changed since the given time (in milliseconds since 1 Jan 1970).
   ///
   /// Copied from [getIndexes].
-  GetIndexesProvider({
-    dynamic musicFolderId,
-    dynamic ifModifiedSince,
-  }) : this._internal(
+  GetIndexesProvider(
+    GetIndexesRequest request,
+  ) : this._internal(
           (ref) => getIndexes(
             ref as GetIndexesRef,
-            musicFolderId: musicFolderId,
-            ifModifiedSince: ifModifiedSince,
+            request,
           ),
           from: getIndexesProvider,
           name: r'getIndexesProvider',
@@ -587,8 +485,7 @@ class GetIndexesProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetIndexesFamily._dependencies,
           allTransitiveDependencies:
               GetIndexesFamily._allTransitiveDependencies,
-          musicFolderId: musicFolderId,
-          ifModifiedSince: ifModifiedSince,
+          request: request,
         );
 
   GetIndexesProvider._internal(
@@ -598,12 +495,10 @@ class GetIndexesProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.musicFolderId,
-    required this.ifModifiedSince,
+    required this.request,
   }) : super.internal();
 
-  final dynamic musicFolderId;
-  final dynamic ifModifiedSince;
+  final GetIndexesRequest request;
 
   @override
   Override overrideWith(
@@ -618,8 +513,7 @@ class GetIndexesProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        musicFolderId: musicFolderId,
-        ifModifiedSince: ifModifiedSince,
+        request: request,
       ),
     );
   }
@@ -631,16 +525,13 @@ class GetIndexesProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetIndexesProvider &&
-        other.musicFolderId == musicFolderId &&
-        other.ifModifiedSince == ifModifiedSince;
+    return other is GetIndexesProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, musicFolderId.hashCode);
-    hash = _SystemHash.combine(hash, ifModifiedSince.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -649,11 +540,8 @@ class GetIndexesProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetIndexesRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `musicFolderId` of this provider.
-  dynamic get musicFolderId;
-
-  /// The parameter `ifModifiedSince` of this provider.
-  dynamic get ifModifiedSince;
+  /// The parameter `request` of this provider.
+  GetIndexesRequest get request;
 }
 
 class _GetIndexesProviderElement
@@ -661,12 +549,10 @@ class _GetIndexesProviderElement
   _GetIndexesProviderElement(super.provider);
 
   @override
-  dynamic get musicFolderId => (origin as GetIndexesProvider).musicFolderId;
-  @override
-  dynamic get ifModifiedSince => (origin as GetIndexesProvider).ifModifiedSince;
+  GetIndexesRequest get request => (origin as GetIndexesProvider).request;
 }
 
-String _$getMusicDirectoryHash() => r'015dc890d66cdf858d64a492b3f60bbaa1d761e4';
+String _$getMusicDirectoryHash() => r'a0e93bc58c3b85edf999ffbfac4be06139a90bf2';
 
 /// http://your-server/rest/getMusicDirectory Since 1.0.0
 /// Returns a listing of all files in a music directory. Typically used to get list of albums for an artist, or list of songs for an album.
@@ -698,11 +584,11 @@ class GetMusicDirectoryFamily extends Family<AsyncValue<Response>> {
   /// @param id A string which uniquely identifies the music folder. Obtained by calls to getIndexes or getMusicDirectory.
   ///
   /// Copied from [getMusicDirectory].
-  GetMusicDirectoryProvider call({
-    required dynamic id,
-  }) {
+  GetMusicDirectoryProvider call(
+    GetMusicDirectoryRequest request,
+  ) {
     return GetMusicDirectoryProvider(
-      id: id,
+      request,
     );
   }
 
@@ -711,7 +597,7 @@ class GetMusicDirectoryFamily extends Family<AsyncValue<Response>> {
     covariant GetMusicDirectoryProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -743,12 +629,12 @@ class GetMusicDirectoryProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id A string which uniquely identifies the music folder. Obtained by calls to getIndexes or getMusicDirectory.
   ///
   /// Copied from [getMusicDirectory].
-  GetMusicDirectoryProvider({
-    required dynamic id,
-  }) : this._internal(
+  GetMusicDirectoryProvider(
+    GetMusicDirectoryRequest request,
+  ) : this._internal(
           (ref) => getMusicDirectory(
             ref as GetMusicDirectoryRef,
-            id: id,
+            request,
           ),
           from: getMusicDirectoryProvider,
           name: r'getMusicDirectoryProvider',
@@ -759,7 +645,7 @@ class GetMusicDirectoryProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetMusicDirectoryFamily._dependencies,
           allTransitiveDependencies:
               GetMusicDirectoryFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   GetMusicDirectoryProvider._internal(
@@ -769,10 +655,10 @@ class GetMusicDirectoryProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final GetMusicDirectoryRequest request;
 
   @override
   Override overrideWith(
@@ -787,7 +673,7 @@ class GetMusicDirectoryProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -799,13 +685,13 @@ class GetMusicDirectoryProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetMusicDirectoryProvider && other.id == id;
+    return other is GetMusicDirectoryProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -814,8 +700,8 @@ class GetMusicDirectoryProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetMusicDirectoryRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  GetMusicDirectoryRequest get request;
 }
 
 class _GetMusicDirectoryProviderElement
@@ -824,10 +710,11 @@ class _GetMusicDirectoryProviderElement
   _GetMusicDirectoryProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetMusicDirectoryProvider).id;
+  GetMusicDirectoryRequest get request =>
+      (origin as GetMusicDirectoryProvider).request;
 }
 
-String _$getGenresHash() => r'b32a760984a748fd590f93dc16bbd18bc5442d40';
+String _$getGenresHash() => r'd4fa796ab66114507c7e832a703a311ea99f0fb8';
 
 /// http://your-server/rest/getGenres Since 1.9.0
 /// Returns all genres.
@@ -847,7 +734,7 @@ final getGenresProvider = AutoDisposeFutureProvider<Response>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetGenresRef = AutoDisposeFutureProviderRef<Response>;
-String _$getArtistsHash() => r'eba5c186e073364823f24008a4a18097aefc7f52';
+String _$getArtistsHash() => r'370fc974a48bcda96e5b9bde8f3b07dd051e2f6a';
 
 /// http://your-server/rest/getArtists Since 1.8.0
 /// Similar to getIndexes, but organizes music according to ID3 tags.
@@ -879,11 +766,11 @@ class GetArtistsFamily extends Family<AsyncValue<Response>> {
   /// @param musicFolderId If specified, only return artists in the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getArtists].
-  GetArtistsProvider call({
-    dynamic musicFolderId,
-  }) {
+  GetArtistsProvider call(
+    GetArtistsRequest request,
+  ) {
     return GetArtistsProvider(
-      musicFolderId: musicFolderId,
+      request,
     );
   }
 
@@ -892,7 +779,7 @@ class GetArtistsFamily extends Family<AsyncValue<Response>> {
     covariant GetArtistsProvider provider,
   ) {
     return call(
-      musicFolderId: provider.musicFolderId,
+      provider.request,
     );
   }
 
@@ -924,12 +811,12 @@ class GetArtistsProvider extends AutoDisposeFutureProvider<Response> {
   /// @param musicFolderId If specified, only return artists in the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getArtists].
-  GetArtistsProvider({
-    dynamic musicFolderId,
-  }) : this._internal(
+  GetArtistsProvider(
+    GetArtistsRequest request,
+  ) : this._internal(
           (ref) => getArtists(
             ref as GetArtistsRef,
-            musicFolderId: musicFolderId,
+            request,
           ),
           from: getArtistsProvider,
           name: r'getArtistsProvider',
@@ -940,7 +827,7 @@ class GetArtistsProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetArtistsFamily._dependencies,
           allTransitiveDependencies:
               GetArtistsFamily._allTransitiveDependencies,
-          musicFolderId: musicFolderId,
+          request: request,
         );
 
   GetArtistsProvider._internal(
@@ -950,10 +837,10 @@ class GetArtistsProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.musicFolderId,
+    required this.request,
   }) : super.internal();
 
-  final dynamic musicFolderId;
+  final GetArtistsRequest request;
 
   @override
   Override overrideWith(
@@ -968,7 +855,7 @@ class GetArtistsProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        musicFolderId: musicFolderId,
+        request: request,
       ),
     );
   }
@@ -980,13 +867,13 @@ class GetArtistsProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetArtistsProvider && other.musicFolderId == musicFolderId;
+    return other is GetArtistsProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, musicFolderId.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -995,8 +882,8 @@ class GetArtistsProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetArtistsRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `musicFolderId` of this provider.
-  dynamic get musicFolderId;
+  /// The parameter `request` of this provider.
+  GetArtistsRequest get request;
 }
 
 class _GetArtistsProviderElement
@@ -1004,10 +891,10 @@ class _GetArtistsProviderElement
   _GetArtistsProviderElement(super.provider);
 
   @override
-  dynamic get musicFolderId => (origin as GetArtistsProvider).musicFolderId;
+  GetArtistsRequest get request => (origin as GetArtistsProvider).request;
 }
 
-String _$getArtistHash() => r'58e96786dbb3cd0780963eada9190628eead9273';
+String _$getArtistHash() => r'a371957738fc718e993dd2ceeab8280ad4c2aa1a';
 
 /// http://your-server/rest/getArtist Since 1.8.0
 /// Returns details for an artist, including a list of albums. This method organizes music according to ID3 tags.
@@ -1039,11 +926,11 @@ class GetArtistFamily extends Family<AsyncValue<Response>> {
   /// @param id The artist ID.
   ///
   /// Copied from [getArtist].
-  GetArtistProvider call({
-    required dynamic id,
-  }) {
+  GetArtistProvider call(
+    GetArtistRequest request,
+  ) {
     return GetArtistProvider(
-      id: id,
+      request,
     );
   }
 
@@ -1052,7 +939,7 @@ class GetArtistFamily extends Family<AsyncValue<Response>> {
     covariant GetArtistProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -1084,12 +971,12 @@ class GetArtistProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id The artist ID.
   ///
   /// Copied from [getArtist].
-  GetArtistProvider({
-    required dynamic id,
-  }) : this._internal(
+  GetArtistProvider(
+    GetArtistRequest request,
+  ) : this._internal(
           (ref) => getArtist(
             ref as GetArtistRef,
-            id: id,
+            request,
           ),
           from: getArtistProvider,
           name: r'getArtistProvider',
@@ -1099,7 +986,7 @@ class GetArtistProvider extends AutoDisposeFutureProvider<Response> {
                   : _$getArtistHash,
           dependencies: GetArtistFamily._dependencies,
           allTransitiveDependencies: GetArtistFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   GetArtistProvider._internal(
@@ -1109,10 +996,10 @@ class GetArtistProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final GetArtistRequest request;
 
   @override
   Override overrideWith(
@@ -1127,7 +1014,7 @@ class GetArtistProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -1139,13 +1026,13 @@ class GetArtistProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetArtistProvider && other.id == id;
+    return other is GetArtistProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -1154,8 +1041,8 @@ class GetArtistProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetArtistRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  GetArtistRequest get request;
 }
 
 class _GetArtistProviderElement
@@ -1163,10 +1050,10 @@ class _GetArtistProviderElement
   _GetArtistProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetArtistProvider).id;
+  GetArtistRequest get request => (origin as GetArtistProvider).request;
 }
 
-String _$getAlbumHash() => r'6a3e7890bdded4f45092fcf3540cd79d00f52e2c';
+String _$getAlbumHash() => r'dc038f179093e0f48cc04dead8fe5174645e7d10';
 
 /// http://your-server/rest/getAlbum Since 1.8.0
 /// Returns details for an album, including a list of songs. This method organizes music according to ID3 tags.
@@ -1198,11 +1085,11 @@ class GetAlbumFamily extends Family<AsyncValue<Response>> {
   /// @param id The album ID.
   ///
   /// Copied from [getAlbum].
-  GetAlbumProvider call({
-    required dynamic id,
-  }) {
+  GetAlbumProvider call(
+    GetAlbumRequest request,
+  ) {
     return GetAlbumProvider(
-      id: id,
+      request,
     );
   }
 
@@ -1211,7 +1098,7 @@ class GetAlbumFamily extends Family<AsyncValue<Response>> {
     covariant GetAlbumProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -1243,12 +1130,12 @@ class GetAlbumProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id The album ID.
   ///
   /// Copied from [getAlbum].
-  GetAlbumProvider({
-    required dynamic id,
-  }) : this._internal(
+  GetAlbumProvider(
+    GetAlbumRequest request,
+  ) : this._internal(
           (ref) => getAlbum(
             ref as GetAlbumRef,
-            id: id,
+            request,
           ),
           from: getAlbumProvider,
           name: r'getAlbumProvider',
@@ -1258,7 +1145,7 @@ class GetAlbumProvider extends AutoDisposeFutureProvider<Response> {
                   : _$getAlbumHash,
           dependencies: GetAlbumFamily._dependencies,
           allTransitiveDependencies: GetAlbumFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   GetAlbumProvider._internal(
@@ -1268,10 +1155,10 @@ class GetAlbumProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final GetAlbumRequest request;
 
   @override
   Override overrideWith(
@@ -1286,7 +1173,7 @@ class GetAlbumProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -1298,13 +1185,13 @@ class GetAlbumProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetAlbumProvider && other.id == id;
+    return other is GetAlbumProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -1313,8 +1200,8 @@ class GetAlbumProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetAlbumRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  GetAlbumRequest get request;
 }
 
 class _GetAlbumProviderElement
@@ -1322,10 +1209,10 @@ class _GetAlbumProviderElement
   _GetAlbumProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetAlbumProvider).id;
+  GetAlbumRequest get request => (origin as GetAlbumProvider).request;
 }
 
-String _$getSongHash() => r'6a2de7b0379c4e8a6381cefb1e5755b9c8e00798';
+String _$getSongHash() => r'bdb2192b867f36a6a878e2108ee3ff3b7e78d93b';
 
 /// http://your-server/rest/getSong Since 1.8.0
 /// Returns details for a song.
@@ -1357,11 +1244,11 @@ class GetSongFamily extends Family<AsyncValue<Response>> {
   /// @param id The song ID.
   ///
   /// Copied from [getSong].
-  GetSongProvider call({
-    required dynamic id,
-  }) {
+  GetSongProvider call(
+    GetSongRequest request,
+  ) {
     return GetSongProvider(
-      id: id,
+      request,
     );
   }
 
@@ -1370,7 +1257,7 @@ class GetSongFamily extends Family<AsyncValue<Response>> {
     covariant GetSongProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -1402,12 +1289,12 @@ class GetSongProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id The song ID.
   ///
   /// Copied from [getSong].
-  GetSongProvider({
-    required dynamic id,
-  }) : this._internal(
+  GetSongProvider(
+    GetSongRequest request,
+  ) : this._internal(
           (ref) => getSong(
             ref as GetSongRef,
-            id: id,
+            request,
           ),
           from: getSongProvider,
           name: r'getSongProvider',
@@ -1417,7 +1304,7 @@ class GetSongProvider extends AutoDisposeFutureProvider<Response> {
                   : _$getSongHash,
           dependencies: GetSongFamily._dependencies,
           allTransitiveDependencies: GetSongFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   GetSongProvider._internal(
@@ -1427,10 +1314,10 @@ class GetSongProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final GetSongRequest request;
 
   @override
   Override overrideWith(
@@ -1445,7 +1332,7 @@ class GetSongProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -1457,13 +1344,13 @@ class GetSongProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetSongProvider && other.id == id;
+    return other is GetSongProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -1472,8 +1359,8 @@ class GetSongProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetSongRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  GetSongRequest get request;
 }
 
 class _GetSongProviderElement extends AutoDisposeFutureProviderElement<Response>
@@ -1481,10 +1368,10 @@ class _GetSongProviderElement extends AutoDisposeFutureProviderElement<Response>
   _GetSongProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetSongProvider).id;
+  GetSongRequest get request => (origin as GetSongProvider).request;
 }
 
-String _$getVideosHash() => r'a7a1bf7b768786874f4219b4d3904173a7c0e72e';
+String _$getVideosHash() => r'c03091c0125be801db07f65377cbde4ae0e27ed4';
 
 /// http://your-server/rest/getVideos Since 1.8.0
 /// Returns all video files.
@@ -1504,7 +1391,7 @@ final getVideosProvider = AutoDisposeFutureProvider<Response>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetVideosRef = AutoDisposeFutureProviderRef<Response>;
-String _$getVideoInfoHash() => r'629287d2457d0f2966b36017bf2f623636cf0f3d';
+String _$getVideoInfoHash() => r'65c91120bd89df8123b58c8ccf85176b6778a133';
 
 /// http://your-server/rest/getVideoInfo Since 1.14.0
 /// Returns details for a video, including information about available audio tracks, subtitles (captions) and conversions.
@@ -1536,11 +1423,11 @@ class GetVideoInfoFamily extends Family<AsyncValue<Response>> {
   /// @param id The video ID.
   ///
   /// Copied from [getVideoInfo].
-  GetVideoInfoProvider call({
-    required dynamic id,
-  }) {
+  GetVideoInfoProvider call(
+    GetVideoInfoRequest request,
+  ) {
     return GetVideoInfoProvider(
-      id: id,
+      request,
     );
   }
 
@@ -1549,7 +1436,7 @@ class GetVideoInfoFamily extends Family<AsyncValue<Response>> {
     covariant GetVideoInfoProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -1581,12 +1468,12 @@ class GetVideoInfoProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id The video ID.
   ///
   /// Copied from [getVideoInfo].
-  GetVideoInfoProvider({
-    required dynamic id,
-  }) : this._internal(
+  GetVideoInfoProvider(
+    GetVideoInfoRequest request,
+  ) : this._internal(
           (ref) => getVideoInfo(
             ref as GetVideoInfoRef,
-            id: id,
+            request,
           ),
           from: getVideoInfoProvider,
           name: r'getVideoInfoProvider',
@@ -1597,7 +1484,7 @@ class GetVideoInfoProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetVideoInfoFamily._dependencies,
           allTransitiveDependencies:
               GetVideoInfoFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   GetVideoInfoProvider._internal(
@@ -1607,10 +1494,10 @@ class GetVideoInfoProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final GetVideoInfoRequest request;
 
   @override
   Override overrideWith(
@@ -1625,7 +1512,7 @@ class GetVideoInfoProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -1637,13 +1524,13 @@ class GetVideoInfoProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetVideoInfoProvider && other.id == id;
+    return other is GetVideoInfoProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -1652,8 +1539,8 @@ class GetVideoInfoProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetVideoInfoRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  GetVideoInfoRequest get request;
 }
 
 class _GetVideoInfoProviderElement
@@ -1661,10 +1548,10 @@ class _GetVideoInfoProviderElement
   _GetVideoInfoProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetVideoInfoProvider).id;
+  GetVideoInfoRequest get request => (origin as GetVideoInfoProvider).request;
 }
 
-String _$getArtistInfoHash() => r'b08e9c359c233779991368e8451a6df929b82976';
+String _$getArtistInfoHash() => r'22ef8a83ae9b966e92c5a9faf85fec138697b1d7';
 
 /// http://your-server/rest/getArtistInfo Since 1.11.0
 /// Returns artist info with biography, image URLs and similar artists, using data from last.fm.
@@ -1704,15 +1591,11 @@ class GetArtistInfoFamily extends Family<AsyncValue<Response>> {
   /// @param includeNotPresent Default(false) Whether to return artists that are not present in the media library.
   ///
   /// Copied from [getArtistInfo].
-  GetArtistInfoProvider call({
-    required dynamic id,
-    dynamic count = 20,
-    dynamic includeNotPresent = false,
-  }) {
+  GetArtistInfoProvider call(
+    GetArtistInfoRequest request,
+  ) {
     return GetArtistInfoProvider(
-      id: id,
-      count: count,
-      includeNotPresent: includeNotPresent,
+      request,
     );
   }
 
@@ -1721,9 +1604,7 @@ class GetArtistInfoFamily extends Family<AsyncValue<Response>> {
     covariant GetArtistInfoProvider provider,
   ) {
     return call(
-      id: provider.id,
-      count: provider.count,
-      includeNotPresent: provider.includeNotPresent,
+      provider.request,
     );
   }
 
@@ -1759,16 +1640,12 @@ class GetArtistInfoProvider extends AutoDisposeFutureProvider<Response> {
   /// @param includeNotPresent Default(false) Whether to return artists that are not present in the media library.
   ///
   /// Copied from [getArtistInfo].
-  GetArtistInfoProvider({
-    required dynamic id,
-    dynamic count = 20,
-    dynamic includeNotPresent = false,
-  }) : this._internal(
+  GetArtistInfoProvider(
+    GetArtistInfoRequest request,
+  ) : this._internal(
           (ref) => getArtistInfo(
             ref as GetArtistInfoRef,
-            id: id,
-            count: count,
-            includeNotPresent: includeNotPresent,
+            request,
           ),
           from: getArtistInfoProvider,
           name: r'getArtistInfoProvider',
@@ -1779,9 +1656,7 @@ class GetArtistInfoProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetArtistInfoFamily._dependencies,
           allTransitiveDependencies:
               GetArtistInfoFamily._allTransitiveDependencies,
-          id: id,
-          count: count,
-          includeNotPresent: includeNotPresent,
+          request: request,
         );
 
   GetArtistInfoProvider._internal(
@@ -1791,14 +1666,10 @@ class GetArtistInfoProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.count,
-    required this.includeNotPresent,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic count;
-  final dynamic includeNotPresent;
+  final GetArtistInfoRequest request;
 
   @override
   Override overrideWith(
@@ -1813,9 +1684,7 @@ class GetArtistInfoProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        count: count,
-        includeNotPresent: includeNotPresent,
+        request: request,
       ),
     );
   }
@@ -1827,18 +1696,13 @@ class GetArtistInfoProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetArtistInfoProvider &&
-        other.id == id &&
-        other.count == count &&
-        other.includeNotPresent == includeNotPresent;
+    return other is GetArtistInfoProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, count.hashCode);
-    hash = _SystemHash.combine(hash, includeNotPresent.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -1847,14 +1711,8 @@ class GetArtistInfoProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetArtistInfoRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `count` of this provider.
-  dynamic get count;
-
-  /// The parameter `includeNotPresent` of this provider.
-  dynamic get includeNotPresent;
+  /// The parameter `request` of this provider.
+  GetArtistInfoRequest get request;
 }
 
 class _GetArtistInfoProviderElement
@@ -1862,15 +1720,10 @@ class _GetArtistInfoProviderElement
   _GetArtistInfoProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetArtistInfoProvider).id;
-  @override
-  dynamic get count => (origin as GetArtistInfoProvider).count;
-  @override
-  dynamic get includeNotPresent =>
-      (origin as GetArtistInfoProvider).includeNotPresent;
+  GetArtistInfoRequest get request => (origin as GetArtistInfoProvider).request;
 }
 
-String _$getArtistInfo2Hash() => r'b2ef1bc71b9de1c3582fa5de31d553d0dddedb38';
+String _$getArtistInfo2Hash() => r'b65d480d0e765743801d1102721c39506402e744';
 
 /// http://your-server/rest/getArtistInfo2 Since 1.11.0
 /// Similar to getArtistInfo, but organizes music according to ID3 tags.
@@ -1910,15 +1763,11 @@ class GetArtistInfo2Family extends Family<AsyncValue<Response>> {
   /// @param includeNotPresent Default(false) Whether to return artists that are not present in the media library.
   ///
   /// Copied from [getArtistInfo2].
-  GetArtistInfo2Provider call({
-    required dynamic id,
-    dynamic count = 20,
-    dynamic includeNotPresent = false,
-  }) {
+  GetArtistInfo2Provider call(
+    GetArtistInfo2Request request,
+  ) {
     return GetArtistInfo2Provider(
-      id: id,
-      count: count,
-      includeNotPresent: includeNotPresent,
+      request,
     );
   }
 
@@ -1927,9 +1776,7 @@ class GetArtistInfo2Family extends Family<AsyncValue<Response>> {
     covariant GetArtistInfo2Provider provider,
   ) {
     return call(
-      id: provider.id,
-      count: provider.count,
-      includeNotPresent: provider.includeNotPresent,
+      provider.request,
     );
   }
 
@@ -1965,16 +1812,12 @@ class GetArtistInfo2Provider extends AutoDisposeFutureProvider<Response> {
   /// @param includeNotPresent Default(false) Whether to return artists that are not present in the media library.
   ///
   /// Copied from [getArtistInfo2].
-  GetArtistInfo2Provider({
-    required dynamic id,
-    dynamic count = 20,
-    dynamic includeNotPresent = false,
-  }) : this._internal(
+  GetArtistInfo2Provider(
+    GetArtistInfo2Request request,
+  ) : this._internal(
           (ref) => getArtistInfo2(
             ref as GetArtistInfo2Ref,
-            id: id,
-            count: count,
-            includeNotPresent: includeNotPresent,
+            request,
           ),
           from: getArtistInfo2Provider,
           name: r'getArtistInfo2Provider',
@@ -1985,9 +1828,7 @@ class GetArtistInfo2Provider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetArtistInfo2Family._dependencies,
           allTransitiveDependencies:
               GetArtistInfo2Family._allTransitiveDependencies,
-          id: id,
-          count: count,
-          includeNotPresent: includeNotPresent,
+          request: request,
         );
 
   GetArtistInfo2Provider._internal(
@@ -1997,14 +1838,10 @@ class GetArtistInfo2Provider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.count,
-    required this.includeNotPresent,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic count;
-  final dynamic includeNotPresent;
+  final GetArtistInfo2Request request;
 
   @override
   Override overrideWith(
@@ -2019,9 +1856,7 @@ class GetArtistInfo2Provider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        count: count,
-        includeNotPresent: includeNotPresent,
+        request: request,
       ),
     );
   }
@@ -2033,18 +1868,13 @@ class GetArtistInfo2Provider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetArtistInfo2Provider &&
-        other.id == id &&
-        other.count == count &&
-        other.includeNotPresent == includeNotPresent;
+    return other is GetArtistInfo2Provider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, count.hashCode);
-    hash = _SystemHash.combine(hash, includeNotPresent.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -2053,14 +1883,8 @@ class GetArtistInfo2Provider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetArtistInfo2Ref on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `count` of this provider.
-  dynamic get count;
-
-  /// The parameter `includeNotPresent` of this provider.
-  dynamic get includeNotPresent;
+  /// The parameter `request` of this provider.
+  GetArtistInfo2Request get request;
 }
 
 class _GetArtistInfo2ProviderElement
@@ -2068,15 +1892,11 @@ class _GetArtistInfo2ProviderElement
   _GetArtistInfo2ProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetArtistInfo2Provider).id;
-  @override
-  dynamic get count => (origin as GetArtistInfo2Provider).count;
-  @override
-  dynamic get includeNotPresent =>
-      (origin as GetArtistInfo2Provider).includeNotPresent;
+  GetArtistInfo2Request get request =>
+      (origin as GetArtistInfo2Provider).request;
 }
 
-String _$getAlbumInfoHash() => r'bd21cc23bd35722bec0ddc21ef4ef9f4b7aa4f6a';
+String _$getAlbumInfoHash() => r'78fb6b6dcfeff23638215ffeaffb37e5bef129e2';
 
 /// http://your-server/rest/getAlbumInfo Since 1.14.0
 /// Returns album notes, image URLs etc, using data from last.fm.
@@ -2108,11 +1928,11 @@ class GetAlbumInfoFamily extends Family<AsyncValue<Response>> {
   /// @param id The album or song ID.
   ///
   /// Copied from [getAlbumInfo].
-  GetAlbumInfoProvider call({
-    required dynamic id,
-  }) {
+  GetAlbumInfoProvider call(
+    GetAlbumInfoRequest request,
+  ) {
     return GetAlbumInfoProvider(
-      id: id,
+      request,
     );
   }
 
@@ -2121,7 +1941,7 @@ class GetAlbumInfoFamily extends Family<AsyncValue<Response>> {
     covariant GetAlbumInfoProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -2153,12 +1973,12 @@ class GetAlbumInfoProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id The album or song ID.
   ///
   /// Copied from [getAlbumInfo].
-  GetAlbumInfoProvider({
-    required dynamic id,
-  }) : this._internal(
+  GetAlbumInfoProvider(
+    GetAlbumInfoRequest request,
+  ) : this._internal(
           (ref) => getAlbumInfo(
             ref as GetAlbumInfoRef,
-            id: id,
+            request,
           ),
           from: getAlbumInfoProvider,
           name: r'getAlbumInfoProvider',
@@ -2169,7 +1989,7 @@ class GetAlbumInfoProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetAlbumInfoFamily._dependencies,
           allTransitiveDependencies:
               GetAlbumInfoFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   GetAlbumInfoProvider._internal(
@@ -2179,10 +1999,10 @@ class GetAlbumInfoProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final GetAlbumInfoRequest request;
 
   @override
   Override overrideWith(
@@ -2197,7 +2017,7 @@ class GetAlbumInfoProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -2209,13 +2029,13 @@ class GetAlbumInfoProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetAlbumInfoProvider && other.id == id;
+    return other is GetAlbumInfoProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -2224,8 +2044,8 @@ class GetAlbumInfoProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetAlbumInfoRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  GetAlbumInfoRequest get request;
 }
 
 class _GetAlbumInfoProviderElement
@@ -2233,10 +2053,10 @@ class _GetAlbumInfoProviderElement
   _GetAlbumInfoProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetAlbumInfoProvider).id;
+  GetAlbumInfoRequest get request => (origin as GetAlbumInfoProvider).request;
 }
 
-String _$getAlbumInfo2Hash() => r'3f781cf9fd681b53964997ad954591dd7a167c40';
+String _$getAlbumInfo2Hash() => r'00523aa6c0a6b13b2cd62b964e029a5b3af5d3b2';
 
 /// http://your-server/rest/getAlbumInfo2 Since 1.14.0
 /// Similar to getAlbumInfo, but organizes music according to ID3 tags.
@@ -2268,11 +2088,11 @@ class GetAlbumInfo2Family extends Family<AsyncValue<Response>> {
   /// @param id The album ID.
   ///
   /// Copied from [getAlbumInfo2].
-  GetAlbumInfo2Provider call({
-    required dynamic id,
-  }) {
+  GetAlbumInfo2Provider call(
+    GetAlbumInfo2Request request,
+  ) {
     return GetAlbumInfo2Provider(
-      id: id,
+      request,
     );
   }
 
@@ -2281,7 +2101,7 @@ class GetAlbumInfo2Family extends Family<AsyncValue<Response>> {
     covariant GetAlbumInfo2Provider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -2313,12 +2133,12 @@ class GetAlbumInfo2Provider extends AutoDisposeFutureProvider<Response> {
   /// @param id The album ID.
   ///
   /// Copied from [getAlbumInfo2].
-  GetAlbumInfo2Provider({
-    required dynamic id,
-  }) : this._internal(
+  GetAlbumInfo2Provider(
+    GetAlbumInfo2Request request,
+  ) : this._internal(
           (ref) => getAlbumInfo2(
             ref as GetAlbumInfo2Ref,
-            id: id,
+            request,
           ),
           from: getAlbumInfo2Provider,
           name: r'getAlbumInfo2Provider',
@@ -2329,7 +2149,7 @@ class GetAlbumInfo2Provider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetAlbumInfo2Family._dependencies,
           allTransitiveDependencies:
               GetAlbumInfo2Family._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   GetAlbumInfo2Provider._internal(
@@ -2339,10 +2159,10 @@ class GetAlbumInfo2Provider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final GetAlbumInfo2Request request;
 
   @override
   Override overrideWith(
@@ -2357,7 +2177,7 @@ class GetAlbumInfo2Provider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -2369,13 +2189,13 @@ class GetAlbumInfo2Provider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetAlbumInfo2Provider && other.id == id;
+    return other is GetAlbumInfo2Provider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -2384,8 +2204,8 @@ class GetAlbumInfo2Provider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetAlbumInfo2Ref on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  GetAlbumInfo2Request get request;
 }
 
 class _GetAlbumInfo2ProviderElement
@@ -2393,10 +2213,10 @@ class _GetAlbumInfo2ProviderElement
   _GetAlbumInfo2ProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetAlbumInfo2Provider).id;
+  GetAlbumInfo2Request get request => (origin as GetAlbumInfo2Provider).request;
 }
 
-String _$getSimilarSongsHash() => r'b506003bca7b7df495ef4299b3105e46ba637e95';
+String _$getSimilarSongsHash() => r'ee810f723b627ac78231c450d265b08244aa1d67';
 
 /// http://your-server/rest/getSimilarSongs Since 1.11.0
 /// Returns a random collection of songs from the given artist and similar artists, using data from last.fm. Typically used for artist radio features.
@@ -2432,13 +2252,11 @@ class GetSimilarSongsFamily extends Family<AsyncValue<Response>> {
   /// @param count Default(50) Max number of songs to return.
   ///
   /// Copied from [getSimilarSongs].
-  GetSimilarSongsProvider call({
-    required dynamic id,
-    dynamic count = 50,
-  }) {
+  GetSimilarSongsProvider call(
+    GetSimilarSongsRequest request,
+  ) {
     return GetSimilarSongsProvider(
-      id: id,
-      count: count,
+      request,
     );
   }
 
@@ -2447,8 +2265,7 @@ class GetSimilarSongsFamily extends Family<AsyncValue<Response>> {
     covariant GetSimilarSongsProvider provider,
   ) {
     return call(
-      id: provider.id,
-      count: provider.count,
+      provider.request,
     );
   }
 
@@ -2482,14 +2299,12 @@ class GetSimilarSongsProvider extends AutoDisposeFutureProvider<Response> {
   /// @param count Default(50) Max number of songs to return.
   ///
   /// Copied from [getSimilarSongs].
-  GetSimilarSongsProvider({
-    required dynamic id,
-    dynamic count = 50,
-  }) : this._internal(
+  GetSimilarSongsProvider(
+    GetSimilarSongsRequest request,
+  ) : this._internal(
           (ref) => getSimilarSongs(
             ref as GetSimilarSongsRef,
-            id: id,
-            count: count,
+            request,
           ),
           from: getSimilarSongsProvider,
           name: r'getSimilarSongsProvider',
@@ -2500,8 +2315,7 @@ class GetSimilarSongsProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetSimilarSongsFamily._dependencies,
           allTransitiveDependencies:
               GetSimilarSongsFamily._allTransitiveDependencies,
-          id: id,
-          count: count,
+          request: request,
         );
 
   GetSimilarSongsProvider._internal(
@@ -2511,12 +2325,10 @@ class GetSimilarSongsProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.count,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic count;
+  final GetSimilarSongsRequest request;
 
   @override
   Override overrideWith(
@@ -2531,8 +2343,7 @@ class GetSimilarSongsProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        count: count,
+        request: request,
       ),
     );
   }
@@ -2544,16 +2355,13 @@ class GetSimilarSongsProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetSimilarSongsProvider &&
-        other.id == id &&
-        other.count == count;
+    return other is GetSimilarSongsProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, count.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -2562,11 +2370,8 @@ class GetSimilarSongsProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetSimilarSongsRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `count` of this provider.
-  dynamic get count;
+  /// The parameter `request` of this provider.
+  GetSimilarSongsRequest get request;
 }
 
 class _GetSimilarSongsProviderElement
@@ -2574,12 +2379,11 @@ class _GetSimilarSongsProviderElement
   _GetSimilarSongsProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetSimilarSongsProvider).id;
-  @override
-  dynamic get count => (origin as GetSimilarSongsProvider).count;
+  GetSimilarSongsRequest get request =>
+      (origin as GetSimilarSongsProvider).request;
 }
 
-String _$getSimilarSongs2Hash() => r'f8f873ed471efc940d84f3d150f15131932864d0';
+String _$getSimilarSongs2Hash() => r'e2f93153d24cc78e9c62abfc4ea524ee41dfeadf';
 
 /// http://your-server/rest/getSimilarSongs2 Since 1.11.0
 /// Similar to getSimilarSongs, but organizes music according to ID3 tags.
@@ -2615,13 +2419,11 @@ class GetSimilarSongs2Family extends Family<AsyncValue<Response>> {
   /// @param count Default(50) Max number of songs to return.
   ///
   /// Copied from [getSimilarSongs2].
-  GetSimilarSongs2Provider call({
-    required dynamic id,
-    dynamic count = 50,
-  }) {
+  GetSimilarSongs2Provider call(
+    GetSimilarSongs2Request request,
+  ) {
     return GetSimilarSongs2Provider(
-      id: id,
-      count: count,
+      request,
     );
   }
 
@@ -2630,8 +2432,7 @@ class GetSimilarSongs2Family extends Family<AsyncValue<Response>> {
     covariant GetSimilarSongs2Provider provider,
   ) {
     return call(
-      id: provider.id,
-      count: provider.count,
+      provider.request,
     );
   }
 
@@ -2665,14 +2466,12 @@ class GetSimilarSongs2Provider extends AutoDisposeFutureProvider<Response> {
   /// @param count Default(50) Max number of songs to return.
   ///
   /// Copied from [getSimilarSongs2].
-  GetSimilarSongs2Provider({
-    required dynamic id,
-    dynamic count = 50,
-  }) : this._internal(
+  GetSimilarSongs2Provider(
+    GetSimilarSongs2Request request,
+  ) : this._internal(
           (ref) => getSimilarSongs2(
             ref as GetSimilarSongs2Ref,
-            id: id,
-            count: count,
+            request,
           ),
           from: getSimilarSongs2Provider,
           name: r'getSimilarSongs2Provider',
@@ -2683,8 +2482,7 @@ class GetSimilarSongs2Provider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetSimilarSongs2Family._dependencies,
           allTransitiveDependencies:
               GetSimilarSongs2Family._allTransitiveDependencies,
-          id: id,
-          count: count,
+          request: request,
         );
 
   GetSimilarSongs2Provider._internal(
@@ -2694,12 +2492,10 @@ class GetSimilarSongs2Provider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.count,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic count;
+  final GetSimilarSongs2Request request;
 
   @override
   Override overrideWith(
@@ -2714,8 +2510,7 @@ class GetSimilarSongs2Provider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        count: count,
+        request: request,
       ),
     );
   }
@@ -2727,16 +2522,13 @@ class GetSimilarSongs2Provider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetSimilarSongs2Provider &&
-        other.id == id &&
-        other.count == count;
+    return other is GetSimilarSongs2Provider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, count.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -2745,11 +2537,8 @@ class GetSimilarSongs2Provider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetSimilarSongs2Ref on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `count` of this provider.
-  dynamic get count;
+  /// The parameter `request` of this provider.
+  GetSimilarSongs2Request get request;
 }
 
 class _GetSimilarSongs2ProviderElement
@@ -2758,12 +2547,11 @@ class _GetSimilarSongs2ProviderElement
   _GetSimilarSongs2ProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetSimilarSongs2Provider).id;
-  @override
-  dynamic get count => (origin as GetSimilarSongs2Provider).count;
+  GetSimilarSongs2Request get request =>
+      (origin as GetSimilarSongs2Provider).request;
 }
 
-String _$getTopSongsHash() => r'6400c721a438fedb5e7493067098b4525b7b549e';
+String _$getTopSongsHash() => r'86e8f42a0d362a68e386193f079fc482b39887aa';
 
 /// http://your-server/rest/getTopSongs Since 1.13.0
 /// Returns top songs for the given artist, using data from last.fm.
@@ -2799,13 +2587,11 @@ class GetTopSongsFamily extends Family<AsyncValue<Response>> {
   /// @param count Default(50) Max number of songs to return.
   ///
   /// Copied from [getTopSongs].
-  GetTopSongsProvider call({
-    required dynamic artist,
-    dynamic count = 50,
-  }) {
+  GetTopSongsProvider call(
+    GetTopSongsRequest request,
+  ) {
     return GetTopSongsProvider(
-      artist: artist,
-      count: count,
+      request,
     );
   }
 
@@ -2814,8 +2600,7 @@ class GetTopSongsFamily extends Family<AsyncValue<Response>> {
     covariant GetTopSongsProvider provider,
   ) {
     return call(
-      artist: provider.artist,
-      count: provider.count,
+      provider.request,
     );
   }
 
@@ -2849,14 +2634,12 @@ class GetTopSongsProvider extends AutoDisposeFutureProvider<Response> {
   /// @param count Default(50) Max number of songs to return.
   ///
   /// Copied from [getTopSongs].
-  GetTopSongsProvider({
-    required dynamic artist,
-    dynamic count = 50,
-  }) : this._internal(
+  GetTopSongsProvider(
+    GetTopSongsRequest request,
+  ) : this._internal(
           (ref) => getTopSongs(
             ref as GetTopSongsRef,
-            artist: artist,
-            count: count,
+            request,
           ),
           from: getTopSongsProvider,
           name: r'getTopSongsProvider',
@@ -2867,8 +2650,7 @@ class GetTopSongsProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetTopSongsFamily._dependencies,
           allTransitiveDependencies:
               GetTopSongsFamily._allTransitiveDependencies,
-          artist: artist,
-          count: count,
+          request: request,
         );
 
   GetTopSongsProvider._internal(
@@ -2878,12 +2660,10 @@ class GetTopSongsProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.artist,
-    required this.count,
+    required this.request,
   }) : super.internal();
 
-  final dynamic artist;
-  final dynamic count;
+  final GetTopSongsRequest request;
 
   @override
   Override overrideWith(
@@ -2898,8 +2678,7 @@ class GetTopSongsProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        artist: artist,
-        count: count,
+        request: request,
       ),
     );
   }
@@ -2911,16 +2690,13 @@ class GetTopSongsProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetTopSongsProvider &&
-        other.artist == artist &&
-        other.count == count;
+    return other is GetTopSongsProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, artist.hashCode);
-    hash = _SystemHash.combine(hash, count.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -2929,11 +2705,8 @@ class GetTopSongsProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetTopSongsRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `artist` of this provider.
-  dynamic get artist;
-
-  /// The parameter `count` of this provider.
-  dynamic get count;
+  /// The parameter `request` of this provider.
+  GetTopSongsRequest get request;
 }
 
 class _GetTopSongsProviderElement
@@ -2941,12 +2714,10 @@ class _GetTopSongsProviderElement
   _GetTopSongsProviderElement(super.provider);
 
   @override
-  dynamic get artist => (origin as GetTopSongsProvider).artist;
-  @override
-  dynamic get count => (origin as GetTopSongsProvider).count;
+  GetTopSongsRequest get request => (origin as GetTopSongsProvider).request;
 }
 
-String _$getAlbumListHash() => r'8221692f83532be8c6dead7363013b23b736a1db';
+String _$getAlbumListHash() => r'1199fd8cdd55ab39a4eb6456ea263b79cb0e47fb';
 
 /// http://your-server/rest/getAlbumList Since 1.2.0
 /// Returns a list of random, newest, highest rated etc. albums. Similar to the album lists on the home page of the Subsonic web interface.
@@ -3002,23 +2773,11 @@ class GetAlbumListFamily extends Family<AsyncValue<Response>> {
   /// @param musicFolderId (Since 1.11.0) Only return albums in the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getAlbumList].
-  GetAlbumListProvider call({
-    required dynamic type,
-    dynamic size = 10,
-    dynamic offset = 0,
-    dynamic fromYear,
-    dynamic toYear,
-    dynamic genre,
-    dynamic musicFolderId,
-  }) {
+  GetAlbumListProvider call(
+    GetAlbumListRequest request,
+  ) {
     return GetAlbumListProvider(
-      type: type,
-      size: size,
-      offset: offset,
-      fromYear: fromYear,
-      toYear: toYear,
-      genre: genre,
-      musicFolderId: musicFolderId,
+      request,
     );
   }
 
@@ -3027,13 +2786,7 @@ class GetAlbumListFamily extends Family<AsyncValue<Response>> {
     covariant GetAlbumListProvider provider,
   ) {
     return call(
-      type: provider.type,
-      size: provider.size,
-      offset: provider.offset,
-      fromYear: provider.fromYear,
-      toYear: provider.toYear,
-      genre: provider.genre,
-      musicFolderId: provider.musicFolderId,
+      provider.request,
     );
   }
 
@@ -3077,24 +2830,12 @@ class GetAlbumListProvider extends AutoDisposeFutureProvider<Response> {
   /// @param musicFolderId (Since 1.11.0) Only return albums in the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getAlbumList].
-  GetAlbumListProvider({
-    required dynamic type,
-    dynamic size = 10,
-    dynamic offset = 0,
-    dynamic fromYear,
-    dynamic toYear,
-    dynamic genre,
-    dynamic musicFolderId,
-  }) : this._internal(
+  GetAlbumListProvider(
+    GetAlbumListRequest request,
+  ) : this._internal(
           (ref) => getAlbumList(
             ref as GetAlbumListRef,
-            type: type,
-            size: size,
-            offset: offset,
-            fromYear: fromYear,
-            toYear: toYear,
-            genre: genre,
-            musicFolderId: musicFolderId,
+            request,
           ),
           from: getAlbumListProvider,
           name: r'getAlbumListProvider',
@@ -3105,13 +2846,7 @@ class GetAlbumListProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetAlbumListFamily._dependencies,
           allTransitiveDependencies:
               GetAlbumListFamily._allTransitiveDependencies,
-          type: type,
-          size: size,
-          offset: offset,
-          fromYear: fromYear,
-          toYear: toYear,
-          genre: genre,
-          musicFolderId: musicFolderId,
+          request: request,
         );
 
   GetAlbumListProvider._internal(
@@ -3121,22 +2856,10 @@ class GetAlbumListProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.type,
-    required this.size,
-    required this.offset,
-    required this.fromYear,
-    required this.toYear,
-    required this.genre,
-    required this.musicFolderId,
+    required this.request,
   }) : super.internal();
 
-  final dynamic type;
-  final dynamic size;
-  final dynamic offset;
-  final dynamic fromYear;
-  final dynamic toYear;
-  final dynamic genre;
-  final dynamic musicFolderId;
+  final GetAlbumListRequest request;
 
   @override
   Override overrideWith(
@@ -3151,13 +2874,7 @@ class GetAlbumListProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        type: type,
-        size: size,
-        offset: offset,
-        fromYear: fromYear,
-        toYear: toYear,
-        genre: genre,
-        musicFolderId: musicFolderId,
+        request: request,
       ),
     );
   }
@@ -3169,26 +2886,13 @@ class GetAlbumListProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetAlbumListProvider &&
-        other.type == type &&
-        other.size == size &&
-        other.offset == offset &&
-        other.fromYear == fromYear &&
-        other.toYear == toYear &&
-        other.genre == genre &&
-        other.musicFolderId == musicFolderId;
+    return other is GetAlbumListProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, type.hashCode);
-    hash = _SystemHash.combine(hash, size.hashCode);
-    hash = _SystemHash.combine(hash, offset.hashCode);
-    hash = _SystemHash.combine(hash, fromYear.hashCode);
-    hash = _SystemHash.combine(hash, toYear.hashCode);
-    hash = _SystemHash.combine(hash, genre.hashCode);
-    hash = _SystemHash.combine(hash, musicFolderId.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -3197,26 +2901,8 @@ class GetAlbumListProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetAlbumListRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `type` of this provider.
-  dynamic get type;
-
-  /// The parameter `size` of this provider.
-  dynamic get size;
-
-  /// The parameter `offset` of this provider.
-  dynamic get offset;
-
-  /// The parameter `fromYear` of this provider.
-  dynamic get fromYear;
-
-  /// The parameter `toYear` of this provider.
-  dynamic get toYear;
-
-  /// The parameter `genre` of this provider.
-  dynamic get genre;
-
-  /// The parameter `musicFolderId` of this provider.
-  dynamic get musicFolderId;
+  /// The parameter `request` of this provider.
+  GetAlbumListRequest get request;
 }
 
 class _GetAlbumListProviderElement
@@ -3224,22 +2910,10 @@ class _GetAlbumListProviderElement
   _GetAlbumListProviderElement(super.provider);
 
   @override
-  dynamic get type => (origin as GetAlbumListProvider).type;
-  @override
-  dynamic get size => (origin as GetAlbumListProvider).size;
-  @override
-  dynamic get offset => (origin as GetAlbumListProvider).offset;
-  @override
-  dynamic get fromYear => (origin as GetAlbumListProvider).fromYear;
-  @override
-  dynamic get toYear => (origin as GetAlbumListProvider).toYear;
-  @override
-  dynamic get genre => (origin as GetAlbumListProvider).genre;
-  @override
-  dynamic get musicFolderId => (origin as GetAlbumListProvider).musicFolderId;
+  GetAlbumListRequest get request => (origin as GetAlbumListProvider).request;
 }
 
-String _$getAlbumList2Hash() => r'38558553597ea90f3ec93bb032279d3bbe0d3e8c';
+String _$getAlbumList2Hash() => r'ea8b397c1976b10b26a121444368f44db5954281';
 
 /// http://your-server/rest/getAlbumList2 Since 1.8.0
 /// Similar to getAlbumList, but organizes music according to ID3 tags.
@@ -3295,23 +2969,11 @@ class GetAlbumList2Family extends Family<AsyncValue<Response>> {
   /// @param musicFolderId (Since 1.12.0) Only return albums in the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getAlbumList2].
-  GetAlbumList2Provider call({
-    required dynamic type,
-    dynamic size = 10,
-    dynamic offset = 0,
-    dynamic fromYear,
-    dynamic toYear,
-    dynamic genre,
-    dynamic musicFolderId,
-  }) {
+  GetAlbumList2Provider call(
+    GetAlbumList2Request request,
+  ) {
     return GetAlbumList2Provider(
-      type: type,
-      size: size,
-      offset: offset,
-      fromYear: fromYear,
-      toYear: toYear,
-      genre: genre,
-      musicFolderId: musicFolderId,
+      request,
     );
   }
 
@@ -3320,13 +2982,7 @@ class GetAlbumList2Family extends Family<AsyncValue<Response>> {
     covariant GetAlbumList2Provider provider,
   ) {
     return call(
-      type: provider.type,
-      size: provider.size,
-      offset: provider.offset,
-      fromYear: provider.fromYear,
-      toYear: provider.toYear,
-      genre: provider.genre,
-      musicFolderId: provider.musicFolderId,
+      provider.request,
     );
   }
 
@@ -3370,24 +3026,12 @@ class GetAlbumList2Provider extends AutoDisposeFutureProvider<Response> {
   /// @param musicFolderId (Since 1.12.0) Only return albums in the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getAlbumList2].
-  GetAlbumList2Provider({
-    required dynamic type,
-    dynamic size = 10,
-    dynamic offset = 0,
-    dynamic fromYear,
-    dynamic toYear,
-    dynamic genre,
-    dynamic musicFolderId,
-  }) : this._internal(
+  GetAlbumList2Provider(
+    GetAlbumList2Request request,
+  ) : this._internal(
           (ref) => getAlbumList2(
             ref as GetAlbumList2Ref,
-            type: type,
-            size: size,
-            offset: offset,
-            fromYear: fromYear,
-            toYear: toYear,
-            genre: genre,
-            musicFolderId: musicFolderId,
+            request,
           ),
           from: getAlbumList2Provider,
           name: r'getAlbumList2Provider',
@@ -3398,13 +3042,7 @@ class GetAlbumList2Provider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetAlbumList2Family._dependencies,
           allTransitiveDependencies:
               GetAlbumList2Family._allTransitiveDependencies,
-          type: type,
-          size: size,
-          offset: offset,
-          fromYear: fromYear,
-          toYear: toYear,
-          genre: genre,
-          musicFolderId: musicFolderId,
+          request: request,
         );
 
   GetAlbumList2Provider._internal(
@@ -3414,22 +3052,10 @@ class GetAlbumList2Provider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.type,
-    required this.size,
-    required this.offset,
-    required this.fromYear,
-    required this.toYear,
-    required this.genre,
-    required this.musicFolderId,
+    required this.request,
   }) : super.internal();
 
-  final dynamic type;
-  final dynamic size;
-  final dynamic offset;
-  final dynamic fromYear;
-  final dynamic toYear;
-  final dynamic genre;
-  final dynamic musicFolderId;
+  final GetAlbumList2Request request;
 
   @override
   Override overrideWith(
@@ -3444,13 +3070,7 @@ class GetAlbumList2Provider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        type: type,
-        size: size,
-        offset: offset,
-        fromYear: fromYear,
-        toYear: toYear,
-        genre: genre,
-        musicFolderId: musicFolderId,
+        request: request,
       ),
     );
   }
@@ -3462,26 +3082,13 @@ class GetAlbumList2Provider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetAlbumList2Provider &&
-        other.type == type &&
-        other.size == size &&
-        other.offset == offset &&
-        other.fromYear == fromYear &&
-        other.toYear == toYear &&
-        other.genre == genre &&
-        other.musicFolderId == musicFolderId;
+    return other is GetAlbumList2Provider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, type.hashCode);
-    hash = _SystemHash.combine(hash, size.hashCode);
-    hash = _SystemHash.combine(hash, offset.hashCode);
-    hash = _SystemHash.combine(hash, fromYear.hashCode);
-    hash = _SystemHash.combine(hash, toYear.hashCode);
-    hash = _SystemHash.combine(hash, genre.hashCode);
-    hash = _SystemHash.combine(hash, musicFolderId.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -3490,26 +3097,8 @@ class GetAlbumList2Provider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetAlbumList2Ref on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `type` of this provider.
-  dynamic get type;
-
-  /// The parameter `size` of this provider.
-  dynamic get size;
-
-  /// The parameter `offset` of this provider.
-  dynamic get offset;
-
-  /// The parameter `fromYear` of this provider.
-  dynamic get fromYear;
-
-  /// The parameter `toYear` of this provider.
-  dynamic get toYear;
-
-  /// The parameter `genre` of this provider.
-  dynamic get genre;
-
-  /// The parameter `musicFolderId` of this provider.
-  dynamic get musicFolderId;
+  /// The parameter `request` of this provider.
+  GetAlbumList2Request get request;
 }
 
 class _GetAlbumList2ProviderElement
@@ -3517,22 +3106,10 @@ class _GetAlbumList2ProviderElement
   _GetAlbumList2ProviderElement(super.provider);
 
   @override
-  dynamic get type => (origin as GetAlbumList2Provider).type;
-  @override
-  dynamic get size => (origin as GetAlbumList2Provider).size;
-  @override
-  dynamic get offset => (origin as GetAlbumList2Provider).offset;
-  @override
-  dynamic get fromYear => (origin as GetAlbumList2Provider).fromYear;
-  @override
-  dynamic get toYear => (origin as GetAlbumList2Provider).toYear;
-  @override
-  dynamic get genre => (origin as GetAlbumList2Provider).genre;
-  @override
-  dynamic get musicFolderId => (origin as GetAlbumList2Provider).musicFolderId;
+  GetAlbumList2Request get request => (origin as GetAlbumList2Provider).request;
 }
 
-String _$getRandomSongsHash() => r'4e075c052bf2ae89b8c3dbc314047f8d9aa6df0b';
+String _$getRandomSongsHash() => r'189bd04b2bac9605d9d8f0088558baa1d0652f62';
 
 /// http://your-server/rest/getRandomSongs Since 1.2.0
 /// Returns random songs matching the given criteria.
@@ -3580,19 +3157,11 @@ class GetRandomSongsFamily extends Family<AsyncValue<Response>> {
   /// @param musicFolderId Only return songs in the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getRandomSongs].
-  GetRandomSongsProvider call({
-    dynamic size = 10,
-    dynamic genre,
-    dynamic fromYear,
-    dynamic toYear,
-    dynamic musicFolderId,
-  }) {
+  GetRandomSongsProvider call(
+    GetRandomSongsRequest request,
+  ) {
     return GetRandomSongsProvider(
-      size: size,
-      genre: genre,
-      fromYear: fromYear,
-      toYear: toYear,
-      musicFolderId: musicFolderId,
+      request,
     );
   }
 
@@ -3601,11 +3170,7 @@ class GetRandomSongsFamily extends Family<AsyncValue<Response>> {
     covariant GetRandomSongsProvider provider,
   ) {
     return call(
-      size: provider.size,
-      genre: provider.genre,
-      fromYear: provider.fromYear,
-      toYear: provider.toYear,
-      musicFolderId: provider.musicFolderId,
+      provider.request,
     );
   }
 
@@ -3645,20 +3210,12 @@ class GetRandomSongsProvider extends AutoDisposeFutureProvider<Response> {
   /// @param musicFolderId Only return songs in the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getRandomSongs].
-  GetRandomSongsProvider({
-    dynamic size = 10,
-    dynamic genre,
-    dynamic fromYear,
-    dynamic toYear,
-    dynamic musicFolderId,
-  }) : this._internal(
+  GetRandomSongsProvider(
+    GetRandomSongsRequest request,
+  ) : this._internal(
           (ref) => getRandomSongs(
             ref as GetRandomSongsRef,
-            size: size,
-            genre: genre,
-            fromYear: fromYear,
-            toYear: toYear,
-            musicFolderId: musicFolderId,
+            request,
           ),
           from: getRandomSongsProvider,
           name: r'getRandomSongsProvider',
@@ -3669,11 +3226,7 @@ class GetRandomSongsProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetRandomSongsFamily._dependencies,
           allTransitiveDependencies:
               GetRandomSongsFamily._allTransitiveDependencies,
-          size: size,
-          genre: genre,
-          fromYear: fromYear,
-          toYear: toYear,
-          musicFolderId: musicFolderId,
+          request: request,
         );
 
   GetRandomSongsProvider._internal(
@@ -3683,18 +3236,10 @@ class GetRandomSongsProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.size,
-    required this.genre,
-    required this.fromYear,
-    required this.toYear,
-    required this.musicFolderId,
+    required this.request,
   }) : super.internal();
 
-  final dynamic size;
-  final dynamic genre;
-  final dynamic fromYear;
-  final dynamic toYear;
-  final dynamic musicFolderId;
+  final GetRandomSongsRequest request;
 
   @override
   Override overrideWith(
@@ -3709,11 +3254,7 @@ class GetRandomSongsProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        size: size,
-        genre: genre,
-        fromYear: fromYear,
-        toYear: toYear,
-        musicFolderId: musicFolderId,
+        request: request,
       ),
     );
   }
@@ -3725,22 +3266,13 @@ class GetRandomSongsProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetRandomSongsProvider &&
-        other.size == size &&
-        other.genre == genre &&
-        other.fromYear == fromYear &&
-        other.toYear == toYear &&
-        other.musicFolderId == musicFolderId;
+    return other is GetRandomSongsProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, size.hashCode);
-    hash = _SystemHash.combine(hash, genre.hashCode);
-    hash = _SystemHash.combine(hash, fromYear.hashCode);
-    hash = _SystemHash.combine(hash, toYear.hashCode);
-    hash = _SystemHash.combine(hash, musicFolderId.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -3749,20 +3281,8 @@ class GetRandomSongsProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetRandomSongsRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `size` of this provider.
-  dynamic get size;
-
-  /// The parameter `genre` of this provider.
-  dynamic get genre;
-
-  /// The parameter `fromYear` of this provider.
-  dynamic get fromYear;
-
-  /// The parameter `toYear` of this provider.
-  dynamic get toYear;
-
-  /// The parameter `musicFolderId` of this provider.
-  dynamic get musicFolderId;
+  /// The parameter `request` of this provider.
+  GetRandomSongsRequest get request;
 }
 
 class _GetRandomSongsProviderElement
@@ -3770,18 +3290,11 @@ class _GetRandomSongsProviderElement
   _GetRandomSongsProviderElement(super.provider);
 
   @override
-  dynamic get size => (origin as GetRandomSongsProvider).size;
-  @override
-  dynamic get genre => (origin as GetRandomSongsProvider).genre;
-  @override
-  dynamic get fromYear => (origin as GetRandomSongsProvider).fromYear;
-  @override
-  dynamic get toYear => (origin as GetRandomSongsProvider).toYear;
-  @override
-  dynamic get musicFolderId => (origin as GetRandomSongsProvider).musicFolderId;
+  GetRandomSongsRequest get request =>
+      (origin as GetRandomSongsProvider).request;
 }
 
-String _$getSongsByGenreHash() => r'a0f3aa2b93a0c68c6b7a1a4edca5be55905b3f68';
+String _$getSongsByGenreHash() => r'2f4c6e8067a1072fb958c45b3ad5a188fe0bba1b';
 
 /// http://your-server/rest/getSongsByGenre Since 1.9.0
 /// Returns songs in a given genre.
@@ -3825,17 +3338,11 @@ class GetSongsByGenreFamily extends Family<AsyncValue<Response>> {
   /// @param musicFolderId (Since 1.12.0) Only return albums in the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getSongsByGenre].
-  GetSongsByGenreProvider call({
-    required dynamic genre,
-    dynamic count = 10,
-    dynamic offset = 0,
-    dynamic musicFolderId,
-  }) {
+  GetSongsByGenreProvider call(
+    GetSongsByGenreRequest request,
+  ) {
     return GetSongsByGenreProvider(
-      genre: genre,
-      count: count,
-      offset: offset,
-      musicFolderId: musicFolderId,
+      request,
     );
   }
 
@@ -3844,10 +3351,7 @@ class GetSongsByGenreFamily extends Family<AsyncValue<Response>> {
     covariant GetSongsByGenreProvider provider,
   ) {
     return call(
-      genre: provider.genre,
-      count: provider.count,
-      offset: provider.offset,
-      musicFolderId: provider.musicFolderId,
+      provider.request,
     );
   }
 
@@ -3885,18 +3389,12 @@ class GetSongsByGenreProvider extends AutoDisposeFutureProvider<Response> {
   /// @param musicFolderId (Since 1.12.0) Only return albums in the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getSongsByGenre].
-  GetSongsByGenreProvider({
-    required dynamic genre,
-    dynamic count = 10,
-    dynamic offset = 0,
-    dynamic musicFolderId,
-  }) : this._internal(
+  GetSongsByGenreProvider(
+    GetSongsByGenreRequest request,
+  ) : this._internal(
           (ref) => getSongsByGenre(
             ref as GetSongsByGenreRef,
-            genre: genre,
-            count: count,
-            offset: offset,
-            musicFolderId: musicFolderId,
+            request,
           ),
           from: getSongsByGenreProvider,
           name: r'getSongsByGenreProvider',
@@ -3907,10 +3405,7 @@ class GetSongsByGenreProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetSongsByGenreFamily._dependencies,
           allTransitiveDependencies:
               GetSongsByGenreFamily._allTransitiveDependencies,
-          genre: genre,
-          count: count,
-          offset: offset,
-          musicFolderId: musicFolderId,
+          request: request,
         );
 
   GetSongsByGenreProvider._internal(
@@ -3920,16 +3415,10 @@ class GetSongsByGenreProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.genre,
-    required this.count,
-    required this.offset,
-    required this.musicFolderId,
+    required this.request,
   }) : super.internal();
 
-  final dynamic genre;
-  final dynamic count;
-  final dynamic offset;
-  final dynamic musicFolderId;
+  final GetSongsByGenreRequest request;
 
   @override
   Override overrideWith(
@@ -3944,10 +3433,7 @@ class GetSongsByGenreProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        genre: genre,
-        count: count,
-        offset: offset,
-        musicFolderId: musicFolderId,
+        request: request,
       ),
     );
   }
@@ -3959,20 +3445,13 @@ class GetSongsByGenreProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetSongsByGenreProvider &&
-        other.genre == genre &&
-        other.count == count &&
-        other.offset == offset &&
-        other.musicFolderId == musicFolderId;
+    return other is GetSongsByGenreProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, genre.hashCode);
-    hash = _SystemHash.combine(hash, count.hashCode);
-    hash = _SystemHash.combine(hash, offset.hashCode);
-    hash = _SystemHash.combine(hash, musicFolderId.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -3981,17 +3460,8 @@ class GetSongsByGenreProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetSongsByGenreRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `genre` of this provider.
-  dynamic get genre;
-
-  /// The parameter `count` of this provider.
-  dynamic get count;
-
-  /// The parameter `offset` of this provider.
-  dynamic get offset;
-
-  /// The parameter `musicFolderId` of this provider.
-  dynamic get musicFolderId;
+  /// The parameter `request` of this provider.
+  GetSongsByGenreRequest get request;
 }
 
 class _GetSongsByGenreProviderElement
@@ -3999,17 +3469,11 @@ class _GetSongsByGenreProviderElement
   _GetSongsByGenreProviderElement(super.provider);
 
   @override
-  dynamic get genre => (origin as GetSongsByGenreProvider).genre;
-  @override
-  dynamic get count => (origin as GetSongsByGenreProvider).count;
-  @override
-  dynamic get offset => (origin as GetSongsByGenreProvider).offset;
-  @override
-  dynamic get musicFolderId =>
-      (origin as GetSongsByGenreProvider).musicFolderId;
+  GetSongsByGenreRequest get request =>
+      (origin as GetSongsByGenreProvider).request;
 }
 
-String _$getNowPlayingHash() => r'de3455550599a6b71a4856ca8e71fd4f1dc579a6';
+String _$getNowPlayingHash() => r'4b6303f2aa3611e5c82e2be3c67003c58f48a3a1';
 
 /// http://your-server/rest/getNowPlaying Since 1.0.0
 /// Returns what is currently being played by all users. Takes no extra parameters.
@@ -4030,7 +3494,7 @@ final getNowPlayingProvider = AutoDisposeFutureProvider<Response>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetNowPlayingRef = AutoDisposeFutureProviderRef<Response>;
-String _$getStarredHash() => r'6a06a18497ac54357897d328302d8baa93e41f92';
+String _$getStarredHash() => r'f7fa04641aa79059ad9328dc9da6e7adc5a7848e';
 
 /// http://your-server/rest/getStarred Since 1.8.0
 /// Returns starred songs, albums and artists.
@@ -4062,11 +3526,11 @@ class GetStarredFamily extends Family<AsyncValue<Response>> {
   /// @param musicFolderId (Since 1.12.0) Only return results from the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getStarred].
-  GetStarredProvider call({
-    dynamic musicFolderId,
-  }) {
+  GetStarredProvider call(
+    GetStarredRequest request,
+  ) {
     return GetStarredProvider(
-      musicFolderId: musicFolderId,
+      request,
     );
   }
 
@@ -4075,7 +3539,7 @@ class GetStarredFamily extends Family<AsyncValue<Response>> {
     covariant GetStarredProvider provider,
   ) {
     return call(
-      musicFolderId: provider.musicFolderId,
+      provider.request,
     );
   }
 
@@ -4107,12 +3571,12 @@ class GetStarredProvider extends AutoDisposeFutureProvider<Response> {
   /// @param musicFolderId (Since 1.12.0) Only return results from the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getStarred].
-  GetStarredProvider({
-    dynamic musicFolderId,
-  }) : this._internal(
+  GetStarredProvider(
+    GetStarredRequest request,
+  ) : this._internal(
           (ref) => getStarred(
             ref as GetStarredRef,
-            musicFolderId: musicFolderId,
+            request,
           ),
           from: getStarredProvider,
           name: r'getStarredProvider',
@@ -4123,7 +3587,7 @@ class GetStarredProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetStarredFamily._dependencies,
           allTransitiveDependencies:
               GetStarredFamily._allTransitiveDependencies,
-          musicFolderId: musicFolderId,
+          request: request,
         );
 
   GetStarredProvider._internal(
@@ -4133,10 +3597,10 @@ class GetStarredProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.musicFolderId,
+    required this.request,
   }) : super.internal();
 
-  final dynamic musicFolderId;
+  final GetStarredRequest request;
 
   @override
   Override overrideWith(
@@ -4151,7 +3615,7 @@ class GetStarredProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        musicFolderId: musicFolderId,
+        request: request,
       ),
     );
   }
@@ -4163,13 +3627,13 @@ class GetStarredProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetStarredProvider && other.musicFolderId == musicFolderId;
+    return other is GetStarredProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, musicFolderId.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -4178,8 +3642,8 @@ class GetStarredProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetStarredRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `musicFolderId` of this provider.
-  dynamic get musicFolderId;
+  /// The parameter `request` of this provider.
+  GetStarredRequest get request;
 }
 
 class _GetStarredProviderElement
@@ -4187,10 +3651,10 @@ class _GetStarredProviderElement
   _GetStarredProviderElement(super.provider);
 
   @override
-  dynamic get musicFolderId => (origin as GetStarredProvider).musicFolderId;
+  GetStarredRequest get request => (origin as GetStarredProvider).request;
 }
 
-String _$getStarred2Hash() => r'ef62f378e62294fb18b6e4caa1a590b811010415';
+String _$getStarred2Hash() => r'4f0edd10421649a1a7ccf3455460bcc641a9a861';
 
 /// http://your-server/rest/getStarred2 Since 1.8.0
 /// Similar to getStarred, but organizes music according to ID3 tags.
@@ -4222,11 +3686,11 @@ class GetStarred2Family extends Family<AsyncValue<Response>> {
   /// @param musicFolderId (Since 1.12.0) Only return results from the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getStarred2].
-  GetStarred2Provider call({
-    dynamic musicFolderId,
-  }) {
+  GetStarred2Provider call(
+    GetStarred2Request request,
+  ) {
     return GetStarred2Provider(
-      musicFolderId: musicFolderId,
+      request,
     );
   }
 
@@ -4235,7 +3699,7 @@ class GetStarred2Family extends Family<AsyncValue<Response>> {
     covariant GetStarred2Provider provider,
   ) {
     return call(
-      musicFolderId: provider.musicFolderId,
+      provider.request,
     );
   }
 
@@ -4267,12 +3731,12 @@ class GetStarred2Provider extends AutoDisposeFutureProvider<Response> {
   /// @param musicFolderId (Since 1.12.0) Only return results from the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [getStarred2].
-  GetStarred2Provider({
-    dynamic musicFolderId,
-  }) : this._internal(
+  GetStarred2Provider(
+    GetStarred2Request request,
+  ) : this._internal(
           (ref) => getStarred2(
             ref as GetStarred2Ref,
-            musicFolderId: musicFolderId,
+            request,
           ),
           from: getStarred2Provider,
           name: r'getStarred2Provider',
@@ -4283,7 +3747,7 @@ class GetStarred2Provider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetStarred2Family._dependencies,
           allTransitiveDependencies:
               GetStarred2Family._allTransitiveDependencies,
-          musicFolderId: musicFolderId,
+          request: request,
         );
 
   GetStarred2Provider._internal(
@@ -4293,10 +3757,10 @@ class GetStarred2Provider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.musicFolderId,
+    required this.request,
   }) : super.internal();
 
-  final dynamic musicFolderId;
+  final GetStarred2Request request;
 
   @override
   Override overrideWith(
@@ -4311,7 +3775,7 @@ class GetStarred2Provider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        musicFolderId: musicFolderId,
+        request: request,
       ),
     );
   }
@@ -4323,13 +3787,13 @@ class GetStarred2Provider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetStarred2Provider && other.musicFolderId == musicFolderId;
+    return other is GetStarred2Provider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, musicFolderId.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -4338,8 +3802,8 @@ class GetStarred2Provider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetStarred2Ref on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `musicFolderId` of this provider.
-  dynamic get musicFolderId;
+  /// The parameter `request` of this provider.
+  GetStarred2Request get request;
 }
 
 class _GetStarred2ProviderElement
@@ -4347,10 +3811,10 @@ class _GetStarred2ProviderElement
   _GetStarred2ProviderElement(super.provider);
 
   @override
-  dynamic get musicFolderId => (origin as GetStarred2Provider).musicFolderId;
+  GetStarred2Request get request => (origin as GetStarred2Provider).request;
 }
 
-String _$searchHash() => r'd4772820b2314e1f0df3a95e72a9a391e37cc021';
+String _$searchHash() => r'63e5d1aa8140378c9bf5bd93bd3b62b9cf1f0ddb';
 
 /// http://your-server/rest/search Since 1.0.0 Deprecated since 1.4.0, use search2 instead.
 /// Returns a listing of files matching the given search criteria. Supports paging through the result.
@@ -4406,23 +3870,11 @@ class SearchFamily extends Family<AsyncValue<Response>> {
   /// @param newerThan Only return matches that are newer than this. Given as milliseconds since 1970.
   ///
   /// Copied from [search].
-  SearchProvider call({
-    dynamic artist,
-    dynamic album,
-    dynamic title,
-    dynamic any,
-    dynamic count = 20,
-    dynamic offset = 0,
-    dynamic newerThan,
-  }) {
+  SearchProvider call(
+    SearchRequest request,
+  ) {
     return SearchProvider(
-      artist: artist,
-      album: album,
-      title: title,
-      any: any,
-      count: count,
-      offset: offset,
-      newerThan: newerThan,
+      request,
     );
   }
 
@@ -4431,13 +3883,7 @@ class SearchFamily extends Family<AsyncValue<Response>> {
     covariant SearchProvider provider,
   ) {
     return call(
-      artist: provider.artist,
-      album: provider.album,
-      title: provider.title,
-      any: provider.any,
-      count: provider.count,
-      offset: provider.offset,
-      newerThan: provider.newerThan,
+      provider.request,
     );
   }
 
@@ -4481,24 +3927,12 @@ class SearchProvider extends AutoDisposeFutureProvider<Response> {
   /// @param newerThan Only return matches that are newer than this. Given as milliseconds since 1970.
   ///
   /// Copied from [search].
-  SearchProvider({
-    dynamic artist,
-    dynamic album,
-    dynamic title,
-    dynamic any,
-    dynamic count = 20,
-    dynamic offset = 0,
-    dynamic newerThan,
-  }) : this._internal(
+  SearchProvider(
+    SearchRequest request,
+  ) : this._internal(
           (ref) => search(
             ref as SearchRef,
-            artist: artist,
-            album: album,
-            title: title,
-            any: any,
-            count: count,
-            offset: offset,
-            newerThan: newerThan,
+            request,
           ),
           from: searchProvider,
           name: r'searchProvider',
@@ -4508,13 +3942,7 @@ class SearchProvider extends AutoDisposeFutureProvider<Response> {
                   : _$searchHash,
           dependencies: SearchFamily._dependencies,
           allTransitiveDependencies: SearchFamily._allTransitiveDependencies,
-          artist: artist,
-          album: album,
-          title: title,
-          any: any,
-          count: count,
-          offset: offset,
-          newerThan: newerThan,
+          request: request,
         );
 
   SearchProvider._internal(
@@ -4524,22 +3952,10 @@ class SearchProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.artist,
-    required this.album,
-    required this.title,
-    required this.any,
-    required this.count,
-    required this.offset,
-    required this.newerThan,
+    required this.request,
   }) : super.internal();
 
-  final dynamic artist;
-  final dynamic album;
-  final dynamic title;
-  final dynamic any;
-  final dynamic count;
-  final dynamic offset;
-  final dynamic newerThan;
+  final SearchRequest request;
 
   @override
   Override overrideWith(
@@ -4554,13 +3970,7 @@ class SearchProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        artist: artist,
-        album: album,
-        title: title,
-        any: any,
-        count: count,
-        offset: offset,
-        newerThan: newerThan,
+        request: request,
       ),
     );
   }
@@ -4572,26 +3982,13 @@ class SearchProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is SearchProvider &&
-        other.artist == artist &&
-        other.album == album &&
-        other.title == title &&
-        other.any == any &&
-        other.count == count &&
-        other.offset == offset &&
-        other.newerThan == newerThan;
+    return other is SearchProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, artist.hashCode);
-    hash = _SystemHash.combine(hash, album.hashCode);
-    hash = _SystemHash.combine(hash, title.hashCode);
-    hash = _SystemHash.combine(hash, any.hashCode);
-    hash = _SystemHash.combine(hash, count.hashCode);
-    hash = _SystemHash.combine(hash, offset.hashCode);
-    hash = _SystemHash.combine(hash, newerThan.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -4600,26 +3997,8 @@ class SearchProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin SearchRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `artist` of this provider.
-  dynamic get artist;
-
-  /// The parameter `album` of this provider.
-  dynamic get album;
-
-  /// The parameter `title` of this provider.
-  dynamic get title;
-
-  /// The parameter `any` of this provider.
-  dynamic get any;
-
-  /// The parameter `count` of this provider.
-  dynamic get count;
-
-  /// The parameter `offset` of this provider.
-  dynamic get offset;
-
-  /// The parameter `newerThan` of this provider.
-  dynamic get newerThan;
+  /// The parameter `request` of this provider.
+  SearchRequest get request;
 }
 
 class _SearchProviderElement extends AutoDisposeFutureProviderElement<Response>
@@ -4627,22 +4006,10 @@ class _SearchProviderElement extends AutoDisposeFutureProviderElement<Response>
   _SearchProviderElement(super.provider);
 
   @override
-  dynamic get artist => (origin as SearchProvider).artist;
-  @override
-  dynamic get album => (origin as SearchProvider).album;
-  @override
-  dynamic get title => (origin as SearchProvider).title;
-  @override
-  dynamic get any => (origin as SearchProvider).any;
-  @override
-  dynamic get count => (origin as SearchProvider).count;
-  @override
-  dynamic get offset => (origin as SearchProvider).offset;
-  @override
-  dynamic get newerThan => (origin as SearchProvider).newerThan;
+  SearchRequest get request => (origin as SearchProvider).request;
 }
 
-String _$search2Hash() => r'96e13dc8e1f9efe2e5417f7314fa518982c2224a';
+String _$search2Hash() => r'a47a96467cfc2e8d5d63ffc43ebec3f9dde389a1';
 
 /// http://your-server/rest/search2 Since 1.4.0
 /// Returns albums, artists and songs matching the given search criteria. Supports paging through the result.
@@ -4702,25 +4069,11 @@ class Search2Family extends Family<AsyncValue<Response>> {
   /// @param musicFolderId (Since 1.12.0) Only return results from the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [search2].
-  Search2Provider call({
-    required dynamic query,
-    dynamic artistCount = 20,
-    dynamic artistOffset = 0,
-    dynamic albumCount = 20,
-    dynamic albumOffset = 0,
-    dynamic songCount = 20,
-    dynamic songOffset = 0,
-    dynamic musicFolderId,
-  }) {
+  Search2Provider call(
+    Search2Request request,
+  ) {
     return Search2Provider(
-      query: query,
-      artistCount: artistCount,
-      artistOffset: artistOffset,
-      albumCount: albumCount,
-      albumOffset: albumOffset,
-      songCount: songCount,
-      songOffset: songOffset,
-      musicFolderId: musicFolderId,
+      request,
     );
   }
 
@@ -4729,14 +4082,7 @@ class Search2Family extends Family<AsyncValue<Response>> {
     covariant Search2Provider provider,
   ) {
     return call(
-      query: provider.query,
-      artistCount: provider.artistCount,
-      artistOffset: provider.artistOffset,
-      albumCount: provider.albumCount,
-      albumOffset: provider.albumOffset,
-      songCount: provider.songCount,
-      songOffset: provider.songOffset,
-      musicFolderId: provider.musicFolderId,
+      provider.request,
     );
   }
 
@@ -4782,26 +4128,12 @@ class Search2Provider extends AutoDisposeFutureProvider<Response> {
   /// @param musicFolderId (Since 1.12.0) Only return results from the music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [search2].
-  Search2Provider({
-    required dynamic query,
-    dynamic artistCount = 20,
-    dynamic artistOffset = 0,
-    dynamic albumCount = 20,
-    dynamic albumOffset = 0,
-    dynamic songCount = 20,
-    dynamic songOffset = 0,
-    dynamic musicFolderId,
-  }) : this._internal(
+  Search2Provider(
+    Search2Request request,
+  ) : this._internal(
           (ref) => search2(
             ref as Search2Ref,
-            query: query,
-            artistCount: artistCount,
-            artistOffset: artistOffset,
-            albumCount: albumCount,
-            albumOffset: albumOffset,
-            songCount: songCount,
-            songOffset: songOffset,
-            musicFolderId: musicFolderId,
+            request,
           ),
           from: search2Provider,
           name: r'search2Provider',
@@ -4811,14 +4143,7 @@ class Search2Provider extends AutoDisposeFutureProvider<Response> {
                   : _$search2Hash,
           dependencies: Search2Family._dependencies,
           allTransitiveDependencies: Search2Family._allTransitiveDependencies,
-          query: query,
-          artistCount: artistCount,
-          artistOffset: artistOffset,
-          albumCount: albumCount,
-          albumOffset: albumOffset,
-          songCount: songCount,
-          songOffset: songOffset,
-          musicFolderId: musicFolderId,
+          request: request,
         );
 
   Search2Provider._internal(
@@ -4828,24 +4153,10 @@ class Search2Provider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.query,
-    required this.artistCount,
-    required this.artistOffset,
-    required this.albumCount,
-    required this.albumOffset,
-    required this.songCount,
-    required this.songOffset,
-    required this.musicFolderId,
+    required this.request,
   }) : super.internal();
 
-  final dynamic query;
-  final dynamic artistCount;
-  final dynamic artistOffset;
-  final dynamic albumCount;
-  final dynamic albumOffset;
-  final dynamic songCount;
-  final dynamic songOffset;
-  final dynamic musicFolderId;
+  final Search2Request request;
 
   @override
   Override overrideWith(
@@ -4860,14 +4171,7 @@ class Search2Provider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        query: query,
-        artistCount: artistCount,
-        artistOffset: artistOffset,
-        albumCount: albumCount,
-        albumOffset: albumOffset,
-        songCount: songCount,
-        songOffset: songOffset,
-        musicFolderId: musicFolderId,
+        request: request,
       ),
     );
   }
@@ -4879,28 +4183,13 @@ class Search2Provider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is Search2Provider &&
-        other.query == query &&
-        other.artistCount == artistCount &&
-        other.artistOffset == artistOffset &&
-        other.albumCount == albumCount &&
-        other.albumOffset == albumOffset &&
-        other.songCount == songCount &&
-        other.songOffset == songOffset &&
-        other.musicFolderId == musicFolderId;
+    return other is Search2Provider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, query.hashCode);
-    hash = _SystemHash.combine(hash, artistCount.hashCode);
-    hash = _SystemHash.combine(hash, artistOffset.hashCode);
-    hash = _SystemHash.combine(hash, albumCount.hashCode);
-    hash = _SystemHash.combine(hash, albumOffset.hashCode);
-    hash = _SystemHash.combine(hash, songCount.hashCode);
-    hash = _SystemHash.combine(hash, songOffset.hashCode);
-    hash = _SystemHash.combine(hash, musicFolderId.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -4909,29 +4198,8 @@ class Search2Provider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin Search2Ref on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `query` of this provider.
-  dynamic get query;
-
-  /// The parameter `artistCount` of this provider.
-  dynamic get artistCount;
-
-  /// The parameter `artistOffset` of this provider.
-  dynamic get artistOffset;
-
-  /// The parameter `albumCount` of this provider.
-  dynamic get albumCount;
-
-  /// The parameter `albumOffset` of this provider.
-  dynamic get albumOffset;
-
-  /// The parameter `songCount` of this provider.
-  dynamic get songCount;
-
-  /// The parameter `songOffset` of this provider.
-  dynamic get songOffset;
-
-  /// The parameter `musicFolderId` of this provider.
-  dynamic get musicFolderId;
+  /// The parameter `request` of this provider.
+  Search2Request get request;
 }
 
 class _Search2ProviderElement extends AutoDisposeFutureProviderElement<Response>
@@ -4939,24 +4207,10 @@ class _Search2ProviderElement extends AutoDisposeFutureProviderElement<Response>
   _Search2ProviderElement(super.provider);
 
   @override
-  dynamic get query => (origin as Search2Provider).query;
-  @override
-  dynamic get artistCount => (origin as Search2Provider).artistCount;
-  @override
-  dynamic get artistOffset => (origin as Search2Provider).artistOffset;
-  @override
-  dynamic get albumCount => (origin as Search2Provider).albumCount;
-  @override
-  dynamic get albumOffset => (origin as Search2Provider).albumOffset;
-  @override
-  dynamic get songCount => (origin as Search2Provider).songCount;
-  @override
-  dynamic get songOffset => (origin as Search2Provider).songOffset;
-  @override
-  dynamic get musicFolderId => (origin as Search2Provider).musicFolderId;
+  Search2Request get request => (origin as Search2Provider).request;
 }
 
-String _$search3Hash() => r'8b5c51461297dfe8009d1f9c58159bda8a1da4c7';
+String _$search3Hash() => r'8f66f0d71fda6b5971a9b2fd771cc54e71f51b38';
 
 /// http://your-server/rest/search3 Since 1.8.0
 /// Similar to search2, but organizes music according to ID3 tags.
@@ -5016,25 +4270,11 @@ class Search3Family extends Family<AsyncValue<Response>> {
   /// @param musicFolderId (Since 1.12.0) Only return results from music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [search3].
-  Search3Provider call({
-    required dynamic query,
-    dynamic artistCount = 20,
-    dynamic artistOffset = 0,
-    dynamic albumCount = 20,
-    dynamic albumOffset = 0,
-    dynamic songCount = 20,
-    dynamic songOffset = 0,
-    dynamic musicFolderId,
-  }) {
+  Search3Provider call(
+    Search3Request request,
+  ) {
     return Search3Provider(
-      query: query,
-      artistCount: artistCount,
-      artistOffset: artistOffset,
-      albumCount: albumCount,
-      albumOffset: albumOffset,
-      songCount: songCount,
-      songOffset: songOffset,
-      musicFolderId: musicFolderId,
+      request,
     );
   }
 
@@ -5043,14 +4283,7 @@ class Search3Family extends Family<AsyncValue<Response>> {
     covariant Search3Provider provider,
   ) {
     return call(
-      query: provider.query,
-      artistCount: provider.artistCount,
-      artistOffset: provider.artistOffset,
-      albumCount: provider.albumCount,
-      albumOffset: provider.albumOffset,
-      songCount: provider.songCount,
-      songOffset: provider.songOffset,
-      musicFolderId: provider.musicFolderId,
+      provider.request,
     );
   }
 
@@ -5096,26 +4329,12 @@ class Search3Provider extends AutoDisposeFutureProvider<Response> {
   /// @param musicFolderId (Since 1.12.0) Only return results from music folder with the given ID. See getMusicFolders.
   ///
   /// Copied from [search3].
-  Search3Provider({
-    required dynamic query,
-    dynamic artistCount = 20,
-    dynamic artistOffset = 0,
-    dynamic albumCount = 20,
-    dynamic albumOffset = 0,
-    dynamic songCount = 20,
-    dynamic songOffset = 0,
-    dynamic musicFolderId,
-  }) : this._internal(
+  Search3Provider(
+    Search3Request request,
+  ) : this._internal(
           (ref) => search3(
             ref as Search3Ref,
-            query: query,
-            artistCount: artistCount,
-            artistOffset: artistOffset,
-            albumCount: albumCount,
-            albumOffset: albumOffset,
-            songCount: songCount,
-            songOffset: songOffset,
-            musicFolderId: musicFolderId,
+            request,
           ),
           from: search3Provider,
           name: r'search3Provider',
@@ -5125,14 +4344,7 @@ class Search3Provider extends AutoDisposeFutureProvider<Response> {
                   : _$search3Hash,
           dependencies: Search3Family._dependencies,
           allTransitiveDependencies: Search3Family._allTransitiveDependencies,
-          query: query,
-          artistCount: artistCount,
-          artistOffset: artistOffset,
-          albumCount: albumCount,
-          albumOffset: albumOffset,
-          songCount: songCount,
-          songOffset: songOffset,
-          musicFolderId: musicFolderId,
+          request: request,
         );
 
   Search3Provider._internal(
@@ -5142,24 +4354,10 @@ class Search3Provider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.query,
-    required this.artistCount,
-    required this.artistOffset,
-    required this.albumCount,
-    required this.albumOffset,
-    required this.songCount,
-    required this.songOffset,
-    required this.musicFolderId,
+    required this.request,
   }) : super.internal();
 
-  final dynamic query;
-  final dynamic artistCount;
-  final dynamic artistOffset;
-  final dynamic albumCount;
-  final dynamic albumOffset;
-  final dynamic songCount;
-  final dynamic songOffset;
-  final dynamic musicFolderId;
+  final Search3Request request;
 
   @override
   Override overrideWith(
@@ -5174,14 +4372,7 @@ class Search3Provider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        query: query,
-        artistCount: artistCount,
-        artistOffset: artistOffset,
-        albumCount: albumCount,
-        albumOffset: albumOffset,
-        songCount: songCount,
-        songOffset: songOffset,
-        musicFolderId: musicFolderId,
+        request: request,
       ),
     );
   }
@@ -5193,28 +4384,13 @@ class Search3Provider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is Search3Provider &&
-        other.query == query &&
-        other.artistCount == artistCount &&
-        other.artistOffset == artistOffset &&
-        other.albumCount == albumCount &&
-        other.albumOffset == albumOffset &&
-        other.songCount == songCount &&
-        other.songOffset == songOffset &&
-        other.musicFolderId == musicFolderId;
+    return other is Search3Provider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, query.hashCode);
-    hash = _SystemHash.combine(hash, artistCount.hashCode);
-    hash = _SystemHash.combine(hash, artistOffset.hashCode);
-    hash = _SystemHash.combine(hash, albumCount.hashCode);
-    hash = _SystemHash.combine(hash, albumOffset.hashCode);
-    hash = _SystemHash.combine(hash, songCount.hashCode);
-    hash = _SystemHash.combine(hash, songOffset.hashCode);
-    hash = _SystemHash.combine(hash, musicFolderId.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -5223,29 +4399,8 @@ class Search3Provider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin Search3Ref on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `query` of this provider.
-  dynamic get query;
-
-  /// The parameter `artistCount` of this provider.
-  dynamic get artistCount;
-
-  /// The parameter `artistOffset` of this provider.
-  dynamic get artistOffset;
-
-  /// The parameter `albumCount` of this provider.
-  dynamic get albumCount;
-
-  /// The parameter `albumOffset` of this provider.
-  dynamic get albumOffset;
-
-  /// The parameter `songCount` of this provider.
-  dynamic get songCount;
-
-  /// The parameter `songOffset` of this provider.
-  dynamic get songOffset;
-
-  /// The parameter `musicFolderId` of this provider.
-  dynamic get musicFolderId;
+  /// The parameter `request` of this provider.
+  Search3Request get request;
 }
 
 class _Search3ProviderElement extends AutoDisposeFutureProviderElement<Response>
@@ -5253,24 +4408,10 @@ class _Search3ProviderElement extends AutoDisposeFutureProviderElement<Response>
   _Search3ProviderElement(super.provider);
 
   @override
-  dynamic get query => (origin as Search3Provider).query;
-  @override
-  dynamic get artistCount => (origin as Search3Provider).artistCount;
-  @override
-  dynamic get artistOffset => (origin as Search3Provider).artistOffset;
-  @override
-  dynamic get albumCount => (origin as Search3Provider).albumCount;
-  @override
-  dynamic get albumOffset => (origin as Search3Provider).albumOffset;
-  @override
-  dynamic get songCount => (origin as Search3Provider).songCount;
-  @override
-  dynamic get songOffset => (origin as Search3Provider).songOffset;
-  @override
-  dynamic get musicFolderId => (origin as Search3Provider).musicFolderId;
+  Search3Request get request => (origin as Search3Provider).request;
 }
 
-String _$getPlaylistsHash() => r'12c7ffad87947b5bee2b1d496569a92b29fc9a84';
+String _$getPlaylistsHash() => r'e6b2083de19e668094b73c83ae009e3d11e69447';
 
 /// http://your-server/rest/getPlaylists Since 1.0.0
 /// Returns all playlists a user is allowed to play.
@@ -5302,11 +4443,11 @@ class GetPlaylistsFamily extends Family<AsyncValue<Response>> {
   /// @param username (Since 1.8.0) If specified, return playlists for this user rather than for the authenticated user. The authenticated user must have admin role if this parameter is used.
   ///
   /// Copied from [getPlaylists].
-  GetPlaylistsProvider call({
-    dynamic username,
-  }) {
+  GetPlaylistsProvider call(
+    GetPlaylistsRequest request,
+  ) {
     return GetPlaylistsProvider(
-      username: username,
+      request,
     );
   }
 
@@ -5315,7 +4456,7 @@ class GetPlaylistsFamily extends Family<AsyncValue<Response>> {
     covariant GetPlaylistsProvider provider,
   ) {
     return call(
-      username: provider.username,
+      provider.request,
     );
   }
 
@@ -5347,12 +4488,12 @@ class GetPlaylistsProvider extends AutoDisposeFutureProvider<Response> {
   /// @param username (Since 1.8.0) If specified, return playlists for this user rather than for the authenticated user. The authenticated user must have admin role if this parameter is used.
   ///
   /// Copied from [getPlaylists].
-  GetPlaylistsProvider({
-    dynamic username,
-  }) : this._internal(
+  GetPlaylistsProvider(
+    GetPlaylistsRequest request,
+  ) : this._internal(
           (ref) => getPlaylists(
             ref as GetPlaylistsRef,
-            username: username,
+            request,
           ),
           from: getPlaylistsProvider,
           name: r'getPlaylistsProvider',
@@ -5363,7 +4504,7 @@ class GetPlaylistsProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetPlaylistsFamily._dependencies,
           allTransitiveDependencies:
               GetPlaylistsFamily._allTransitiveDependencies,
-          username: username,
+          request: request,
         );
 
   GetPlaylistsProvider._internal(
@@ -5373,10 +4514,10 @@ class GetPlaylistsProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.username,
+    required this.request,
   }) : super.internal();
 
-  final dynamic username;
+  final GetPlaylistsRequest request;
 
   @override
   Override overrideWith(
@@ -5391,7 +4532,7 @@ class GetPlaylistsProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        username: username,
+        request: request,
       ),
     );
   }
@@ -5403,13 +4544,13 @@ class GetPlaylistsProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetPlaylistsProvider && other.username == username;
+    return other is GetPlaylistsProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, username.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -5418,8 +4559,8 @@ class GetPlaylistsProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetPlaylistsRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `username` of this provider.
-  dynamic get username;
+  /// The parameter `request` of this provider.
+  GetPlaylistsRequest get request;
 }
 
 class _GetPlaylistsProviderElement
@@ -5427,10 +4568,10 @@ class _GetPlaylistsProviderElement
   _GetPlaylistsProviderElement(super.provider);
 
   @override
-  dynamic get username => (origin as GetPlaylistsProvider).username;
+  GetPlaylistsRequest get request => (origin as GetPlaylistsProvider).request;
 }
 
-String _$getPlaylistHash() => r'01edf20f28c28e4a875780a1e821718c8967bebc';
+String _$getPlaylistHash() => r'c29dc95a9835a5941b2c72f0f60fb6350c3c75e2';
 
 /// http://your-server/rest/getPlaylist Since 1.0.0
 /// Returns a listing of files in a saved playlist.
@@ -5462,11 +4603,11 @@ class GetPlaylistFamily extends Family<AsyncValue<Response>> {
   /// @param id ID of the playlist to return, as obtained by getPlaylists.
   ///
   /// Copied from [getPlaylist].
-  GetPlaylistProvider call({
-    required dynamic id,
-  }) {
+  GetPlaylistProvider call(
+    GetPlaylistRequest request,
+  ) {
     return GetPlaylistProvider(
-      id: id,
+      request,
     );
   }
 
@@ -5475,7 +4616,7 @@ class GetPlaylistFamily extends Family<AsyncValue<Response>> {
     covariant GetPlaylistProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -5507,12 +4648,12 @@ class GetPlaylistProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id ID of the playlist to return, as obtained by getPlaylists.
   ///
   /// Copied from [getPlaylist].
-  GetPlaylistProvider({
-    required dynamic id,
-  }) : this._internal(
+  GetPlaylistProvider(
+    GetPlaylistRequest request,
+  ) : this._internal(
           (ref) => getPlaylist(
             ref as GetPlaylistRef,
-            id: id,
+            request,
           ),
           from: getPlaylistProvider,
           name: r'getPlaylistProvider',
@@ -5523,7 +4664,7 @@ class GetPlaylistProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetPlaylistFamily._dependencies,
           allTransitiveDependencies:
               GetPlaylistFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   GetPlaylistProvider._internal(
@@ -5533,10 +4674,10 @@ class GetPlaylistProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final GetPlaylistRequest request;
 
   @override
   Override overrideWith(
@@ -5551,7 +4692,7 @@ class GetPlaylistProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -5563,13 +4704,13 @@ class GetPlaylistProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetPlaylistProvider && other.id == id;
+    return other is GetPlaylistProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -5578,8 +4719,8 @@ class GetPlaylistProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetPlaylistRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  GetPlaylistRequest get request;
 }
 
 class _GetPlaylistProviderElement
@@ -5587,10 +4728,10 @@ class _GetPlaylistProviderElement
   _GetPlaylistProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetPlaylistProvider).id;
+  GetPlaylistRequest get request => (origin as GetPlaylistProvider).request;
 }
 
-String _$createPlaylistHash() => r'c7bafdf33b3138199785d992d443d8f24a8edeff';
+String _$createPlaylistHash() => r'a98c6b1218fc9e2b2cf29e5c303966ea8e3f75a1';
 
 /// http://your-server/rest/createPlaylist Since 1.2.0
 /// Creates (or updates) a playlist.
@@ -5630,15 +4771,11 @@ class CreatePlaylistFamily extends Family<AsyncValue<Response>> {
   /// @param songId ID of a song in the playlist. Use one songId parameter for each song in the playlist.
   ///
   /// Copied from [createPlaylist].
-  CreatePlaylistProvider call({
-    dynamic playlistId,
-    dynamic name,
-    dynamic songId,
-  }) {
+  CreatePlaylistProvider call(
+    CreatePlaylistRequest request,
+  ) {
     return CreatePlaylistProvider(
-      playlistId: playlistId,
-      name: name,
-      songId: songId,
+      request,
     );
   }
 
@@ -5647,9 +4784,7 @@ class CreatePlaylistFamily extends Family<AsyncValue<Response>> {
     covariant CreatePlaylistProvider provider,
   ) {
     return call(
-      playlistId: provider.playlistId,
-      name: provider.name,
-      songId: provider.songId,
+      provider.request,
     );
   }
 
@@ -5685,16 +4820,12 @@ class CreatePlaylistProvider extends AutoDisposeFutureProvider<Response> {
   /// @param songId ID of a song in the playlist. Use one songId parameter for each song in the playlist.
   ///
   /// Copied from [createPlaylist].
-  CreatePlaylistProvider({
-    dynamic playlistId,
-    dynamic name,
-    dynamic songId,
-  }) : this._internal(
+  CreatePlaylistProvider(
+    CreatePlaylistRequest request,
+  ) : this._internal(
           (ref) => createPlaylist(
             ref as CreatePlaylistRef,
-            playlistId: playlistId,
-            name: name,
-            songId: songId,
+            request,
           ),
           from: createPlaylistProvider,
           name: r'createPlaylistProvider',
@@ -5705,9 +4836,7 @@ class CreatePlaylistProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: CreatePlaylistFamily._dependencies,
           allTransitiveDependencies:
               CreatePlaylistFamily._allTransitiveDependencies,
-          playlistId: playlistId,
-          name: name,
-          songId: songId,
+          request: request,
         );
 
   CreatePlaylistProvider._internal(
@@ -5717,14 +4846,10 @@ class CreatePlaylistProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.playlistId,
-    required this.name,
-    required this.songId,
+    required this.request,
   }) : super.internal();
 
-  final dynamic playlistId;
-  final dynamic name;
-  final dynamic songId;
+  final CreatePlaylistRequest request;
 
   @override
   Override overrideWith(
@@ -5739,9 +4864,7 @@ class CreatePlaylistProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        playlistId: playlistId,
-        name: name,
-        songId: songId,
+        request: request,
       ),
     );
   }
@@ -5753,18 +4876,13 @@ class CreatePlaylistProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is CreatePlaylistProvider &&
-        other.playlistId == playlistId &&
-        other.name == name &&
-        other.songId == songId;
+    return other is CreatePlaylistProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, playlistId.hashCode);
-    hash = _SystemHash.combine(hash, name.hashCode);
-    hash = _SystemHash.combine(hash, songId.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -5773,14 +4891,8 @@ class CreatePlaylistProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin CreatePlaylistRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `playlistId` of this provider.
-  dynamic get playlistId;
-
-  /// The parameter `name` of this provider.
-  dynamic get name;
-
-  /// The parameter `songId` of this provider.
-  dynamic get songId;
+  /// The parameter `request` of this provider.
+  CreatePlaylistRequest get request;
 }
 
 class _CreatePlaylistProviderElement
@@ -5788,14 +4900,11 @@ class _CreatePlaylistProviderElement
   _CreatePlaylistProviderElement(super.provider);
 
   @override
-  dynamic get playlistId => (origin as CreatePlaylistProvider).playlistId;
-  @override
-  dynamic get name => (origin as CreatePlaylistProvider).name;
-  @override
-  dynamic get songId => (origin as CreatePlaylistProvider).songId;
+  CreatePlaylistRequest get request =>
+      (origin as CreatePlaylistProvider).request;
 }
 
-String _$updatePlaylistHash() => r'b8fb71cafc2dd0fcfec5f69d8e65aeb6479685d5';
+String _$updatePlaylistHash() => r'1386c13e57117e5b7dbabddf84a9adb34db9c8ba';
 
 /// http://your-server/rest/updatePlaylist Since 1.8.0
 /// Updates a playlist. Only the owner of a playlist is allowed to update it.
@@ -5847,21 +4956,11 @@ class UpdatePlaylistFamily extends Family<AsyncValue<Response>> {
   /// @param songIndexToRemove Remove the song at this position in the playlist. Multiple parameters allowed.
   ///
   /// Copied from [updatePlaylist].
-  UpdatePlaylistProvider call({
-    required dynamic playlistId,
-    dynamic name,
-    dynamic comment,
-    dynamic public,
-    dynamic songIdToAdd,
-    dynamic songIndexToRemove,
-  }) {
+  UpdatePlaylistProvider call(
+    UpdatePlaylistRequest request,
+  ) {
     return UpdatePlaylistProvider(
-      playlistId: playlistId,
-      name: name,
-      comment: comment,
-      public: public,
-      songIdToAdd: songIdToAdd,
-      songIndexToRemove: songIndexToRemove,
+      request,
     );
   }
 
@@ -5870,12 +4969,7 @@ class UpdatePlaylistFamily extends Family<AsyncValue<Response>> {
     covariant UpdatePlaylistProvider provider,
   ) {
     return call(
-      playlistId: provider.playlistId,
-      name: provider.name,
-      comment: provider.comment,
-      public: provider.public,
-      songIdToAdd: provider.songIdToAdd,
-      songIndexToRemove: provider.songIndexToRemove,
+      provider.request,
     );
   }
 
@@ -5917,22 +5011,12 @@ class UpdatePlaylistProvider extends AutoDisposeFutureProvider<Response> {
   /// @param songIndexToRemove Remove the song at this position in the playlist. Multiple parameters allowed.
   ///
   /// Copied from [updatePlaylist].
-  UpdatePlaylistProvider({
-    required dynamic playlistId,
-    dynamic name,
-    dynamic comment,
-    dynamic public,
-    dynamic songIdToAdd,
-    dynamic songIndexToRemove,
-  }) : this._internal(
+  UpdatePlaylistProvider(
+    UpdatePlaylistRequest request,
+  ) : this._internal(
           (ref) => updatePlaylist(
             ref as UpdatePlaylistRef,
-            playlistId: playlistId,
-            name: name,
-            comment: comment,
-            public: public,
-            songIdToAdd: songIdToAdd,
-            songIndexToRemove: songIndexToRemove,
+            request,
           ),
           from: updatePlaylistProvider,
           name: r'updatePlaylistProvider',
@@ -5943,12 +5027,7 @@ class UpdatePlaylistProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: UpdatePlaylistFamily._dependencies,
           allTransitiveDependencies:
               UpdatePlaylistFamily._allTransitiveDependencies,
-          playlistId: playlistId,
-          name: name,
-          comment: comment,
-          public: public,
-          songIdToAdd: songIdToAdd,
-          songIndexToRemove: songIndexToRemove,
+          request: request,
         );
 
   UpdatePlaylistProvider._internal(
@@ -5958,20 +5037,10 @@ class UpdatePlaylistProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.playlistId,
-    required this.name,
-    required this.comment,
-    required this.public,
-    required this.songIdToAdd,
-    required this.songIndexToRemove,
+    required this.request,
   }) : super.internal();
 
-  final dynamic playlistId;
-  final dynamic name;
-  final dynamic comment;
-  final dynamic public;
-  final dynamic songIdToAdd;
-  final dynamic songIndexToRemove;
+  final UpdatePlaylistRequest request;
 
   @override
   Override overrideWith(
@@ -5986,12 +5055,7 @@ class UpdatePlaylistProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        playlistId: playlistId,
-        name: name,
-        comment: comment,
-        public: public,
-        songIdToAdd: songIdToAdd,
-        songIndexToRemove: songIndexToRemove,
+        request: request,
       ),
     );
   }
@@ -6003,24 +5067,13 @@ class UpdatePlaylistProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is UpdatePlaylistProvider &&
-        other.playlistId == playlistId &&
-        other.name == name &&
-        other.comment == comment &&
-        other.public == public &&
-        other.songIdToAdd == songIdToAdd &&
-        other.songIndexToRemove == songIndexToRemove;
+    return other is UpdatePlaylistProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, playlistId.hashCode);
-    hash = _SystemHash.combine(hash, name.hashCode);
-    hash = _SystemHash.combine(hash, comment.hashCode);
-    hash = _SystemHash.combine(hash, public.hashCode);
-    hash = _SystemHash.combine(hash, songIdToAdd.hashCode);
-    hash = _SystemHash.combine(hash, songIndexToRemove.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -6029,23 +5082,8 @@ class UpdatePlaylistProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin UpdatePlaylistRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `playlistId` of this provider.
-  dynamic get playlistId;
-
-  /// The parameter `name` of this provider.
-  dynamic get name;
-
-  /// The parameter `comment` of this provider.
-  dynamic get comment;
-
-  /// The parameter `public` of this provider.
-  dynamic get public;
-
-  /// The parameter `songIdToAdd` of this provider.
-  dynamic get songIdToAdd;
-
-  /// The parameter `songIndexToRemove` of this provider.
-  dynamic get songIndexToRemove;
+  /// The parameter `request` of this provider.
+  UpdatePlaylistRequest get request;
 }
 
 class _UpdatePlaylistProviderElement
@@ -6053,21 +5091,11 @@ class _UpdatePlaylistProviderElement
   _UpdatePlaylistProviderElement(super.provider);
 
   @override
-  dynamic get playlistId => (origin as UpdatePlaylistProvider).playlistId;
-  @override
-  dynamic get name => (origin as UpdatePlaylistProvider).name;
-  @override
-  dynamic get comment => (origin as UpdatePlaylistProvider).comment;
-  @override
-  dynamic get public => (origin as UpdatePlaylistProvider).public;
-  @override
-  dynamic get songIdToAdd => (origin as UpdatePlaylistProvider).songIdToAdd;
-  @override
-  dynamic get songIndexToRemove =>
-      (origin as UpdatePlaylistProvider).songIndexToRemove;
+  UpdatePlaylistRequest get request =>
+      (origin as UpdatePlaylistProvider).request;
 }
 
-String _$deletePlaylistHash() => r'1cd999bc94e38a78d857a841b6385ed2ad3a77f2';
+String _$deletePlaylistHash() => r'c7a9a62675c9453a34315d1ce7e64ff47fd8f56d';
 
 /// http://your-server/rest/deletePlaylist Since 1.2.0
 /// Deletes a saved playlist.
@@ -6099,11 +5127,11 @@ class DeletePlaylistFamily extends Family<AsyncValue<Response>> {
   /// @param id ID of the playlist to delete, as obtained by getPlaylists.
   ///
   /// Copied from [deletePlaylist].
-  DeletePlaylistProvider call({
-    required dynamic id,
-  }) {
+  DeletePlaylistProvider call(
+    DeletePlaylistRequest request,
+  ) {
     return DeletePlaylistProvider(
-      id: id,
+      request,
     );
   }
 
@@ -6112,7 +5140,7 @@ class DeletePlaylistFamily extends Family<AsyncValue<Response>> {
     covariant DeletePlaylistProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -6144,12 +5172,12 @@ class DeletePlaylistProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id ID of the playlist to delete, as obtained by getPlaylists.
   ///
   /// Copied from [deletePlaylist].
-  DeletePlaylistProvider({
-    required dynamic id,
-  }) : this._internal(
+  DeletePlaylistProvider(
+    DeletePlaylistRequest request,
+  ) : this._internal(
           (ref) => deletePlaylist(
             ref as DeletePlaylistRef,
-            id: id,
+            request,
           ),
           from: deletePlaylistProvider,
           name: r'deletePlaylistProvider',
@@ -6160,7 +5188,7 @@ class DeletePlaylistProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: DeletePlaylistFamily._dependencies,
           allTransitiveDependencies:
               DeletePlaylistFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   DeletePlaylistProvider._internal(
@@ -6170,10 +5198,10 @@ class DeletePlaylistProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final DeletePlaylistRequest request;
 
   @override
   Override overrideWith(
@@ -6188,7 +5216,7 @@ class DeletePlaylistProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -6200,13 +5228,13 @@ class DeletePlaylistProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is DeletePlaylistProvider && other.id == id;
+    return other is DeletePlaylistProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -6215,8 +5243,8 @@ class DeletePlaylistProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin DeletePlaylistRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  DeletePlaylistRequest get request;
 }
 
 class _DeletePlaylistProviderElement
@@ -6224,10 +5252,11 @@ class _DeletePlaylistProviderElement
   _DeletePlaylistProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as DeletePlaylistProvider).id;
+  DeletePlaylistRequest get request =>
+      (origin as DeletePlaylistProvider).request;
 }
 
-String _$streamHash() => r'531f8ea221b5252a08e4fdbd5b72a6c11692b559';
+String _$streamHash() => r'312eade5d1bdb411b076bebc409fa488958a4759';
 
 /// http://your-server/rest/stream Since 1.0.0
 /// Streams a given media file.
@@ -6256,7 +5285,7 @@ const streamProvider = StreamFamily();
 /// @param converted Default(false) (Since 1.14.0) Only applicable to video streaming. Subsonic can optimize videos for streaming by converting them to MP4. If a conversion exists for the video in question, then setting this parameter to "true" will cause the converted video to be returned instead of the original.
 ///
 /// Copied from [stream].
-class StreamFamily extends Family<AsyncValue<Response>> {
+class StreamFamily extends Family<String> {
   /// http://your-server/rest/stream Since 1.0.0
   /// Streams a given media file.
   /// Returns binary data on success, or an XML document on error (in which case the HTTP content type will start with "text/xml").
@@ -6283,23 +5312,11 @@ class StreamFamily extends Family<AsyncValue<Response>> {
   /// @param converted Default(false) (Since 1.14.0) Only applicable to video streaming. Subsonic can optimize videos for streaming by converting them to MP4. If a conversion exists for the video in question, then setting this parameter to "true" will cause the converted video to be returned instead of the original.
   ///
   /// Copied from [stream].
-  StreamProvider call({
-    required dynamic id,
-    dynamic maxBitRate,
-    dynamic format,
-    dynamic timeOffset,
-    dynamic size,
-    dynamic estimateContentLength = false,
-    dynamic converted = false,
-  }) {
+  StreamProvider call(
+    StreamRequest request,
+  ) {
     return StreamProvider(
-      id: id,
-      maxBitRate: maxBitRate,
-      format: format,
-      timeOffset: timeOffset,
-      size: size,
-      estimateContentLength: estimateContentLength,
-      converted: converted,
+      request,
     );
   }
 
@@ -6308,13 +5325,7 @@ class StreamFamily extends Family<AsyncValue<Response>> {
     covariant StreamProvider provider,
   ) {
     return call(
-      id: provider.id,
-      maxBitRate: provider.maxBitRate,
-      format: provider.format,
-      timeOffset: provider.timeOffset,
-      size: provider.size,
-      estimateContentLength: provider.estimateContentLength,
-      converted: provider.converted,
+      provider.request,
     );
   }
 
@@ -6345,7 +5356,7 @@ class StreamFamily extends Family<AsyncValue<Response>> {
 /// @param converted Default(false) (Since 1.14.0) Only applicable to video streaming. Subsonic can optimize videos for streaming by converting them to MP4. If a conversion exists for the video in question, then setting this parameter to "true" will cause the converted video to be returned instead of the original.
 ///
 /// Copied from [stream].
-class StreamProvider extends AutoDisposeFutureProvider<Response> {
+class StreamProvider extends AutoDisposeProvider<String> {
   /// http://your-server/rest/stream Since 1.0.0
   /// Streams a given media file.
   /// Returns binary data on success, or an XML document on error (in which case the HTTP content type will start with "text/xml").
@@ -6358,24 +5369,12 @@ class StreamProvider extends AutoDisposeFutureProvider<Response> {
   /// @param converted Default(false) (Since 1.14.0) Only applicable to video streaming. Subsonic can optimize videos for streaming by converting them to MP4. If a conversion exists for the video in question, then setting this parameter to "true" will cause the converted video to be returned instead of the original.
   ///
   /// Copied from [stream].
-  StreamProvider({
-    required dynamic id,
-    dynamic maxBitRate,
-    dynamic format,
-    dynamic timeOffset,
-    dynamic size,
-    dynamic estimateContentLength = false,
-    dynamic converted = false,
-  }) : this._internal(
+  StreamProvider(
+    StreamRequest request,
+  ) : this._internal(
           (ref) => stream(
             ref as StreamRef,
-            id: id,
-            maxBitRate: maxBitRate,
-            format: format,
-            timeOffset: timeOffset,
-            size: size,
-            estimateContentLength: estimateContentLength,
-            converted: converted,
+            request,
           ),
           from: streamProvider,
           name: r'streamProvider',
@@ -6385,13 +5384,7 @@ class StreamProvider extends AutoDisposeFutureProvider<Response> {
                   : _$streamHash,
           dependencies: StreamFamily._dependencies,
           allTransitiveDependencies: StreamFamily._allTransitiveDependencies,
-          id: id,
-          maxBitRate: maxBitRate,
-          format: format,
-          timeOffset: timeOffset,
-          size: size,
-          estimateContentLength: estimateContentLength,
-          converted: converted,
+          request: request,
         );
 
   StreamProvider._internal(
@@ -6401,26 +5394,14 @@ class StreamProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.maxBitRate,
-    required this.format,
-    required this.timeOffset,
-    required this.size,
-    required this.estimateContentLength,
-    required this.converted,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic maxBitRate;
-  final dynamic format;
-  final dynamic timeOffset;
-  final dynamic size;
-  final dynamic estimateContentLength;
-  final dynamic converted;
+  final StreamRequest request;
 
   @override
   Override overrideWith(
-    FutureOr<Response> Function(StreamRef provider) create,
+    String Function(StreamRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -6431,44 +5412,25 @@ class StreamProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        maxBitRate: maxBitRate,
-        format: format,
-        timeOffset: timeOffset,
-        size: size,
-        estimateContentLength: estimateContentLength,
-        converted: converted,
+        request: request,
       ),
     );
   }
 
   @override
-  AutoDisposeFutureProviderElement<Response> createElement() {
+  AutoDisposeProviderElement<String> createElement() {
     return _StreamProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is StreamProvider &&
-        other.id == id &&
-        other.maxBitRate == maxBitRate &&
-        other.format == format &&
-        other.timeOffset == timeOffset &&
-        other.size == size &&
-        other.estimateContentLength == estimateContentLength &&
-        other.converted == converted;
+    return other is StreamProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, maxBitRate.hashCode);
-    hash = _SystemHash.combine(hash, format.hashCode);
-    hash = _SystemHash.combine(hash, timeOffset.hashCode);
-    hash = _SystemHash.combine(hash, size.hashCode);
-    hash = _SystemHash.combine(hash, estimateContentLength.hashCode);
-    hash = _SystemHash.combine(hash, converted.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -6476,51 +5438,20 @@ class StreamProvider extends AutoDisposeFutureProvider<Response> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin StreamRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `maxBitRate` of this provider.
-  dynamic get maxBitRate;
-
-  /// The parameter `format` of this provider.
-  dynamic get format;
-
-  /// The parameter `timeOffset` of this provider.
-  dynamic get timeOffset;
-
-  /// The parameter `size` of this provider.
-  dynamic get size;
-
-  /// The parameter `estimateContentLength` of this provider.
-  dynamic get estimateContentLength;
-
-  /// The parameter `converted` of this provider.
-  dynamic get converted;
+mixin StreamRef on AutoDisposeProviderRef<String> {
+  /// The parameter `request` of this provider.
+  StreamRequest get request;
 }
 
-class _StreamProviderElement extends AutoDisposeFutureProviderElement<Response>
+class _StreamProviderElement extends AutoDisposeProviderElement<String>
     with StreamRef {
   _StreamProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as StreamProvider).id;
-  @override
-  dynamic get maxBitRate => (origin as StreamProvider).maxBitRate;
-  @override
-  dynamic get format => (origin as StreamProvider).format;
-  @override
-  dynamic get timeOffset => (origin as StreamProvider).timeOffset;
-  @override
-  dynamic get size => (origin as StreamProvider).size;
-  @override
-  dynamic get estimateContentLength =>
-      (origin as StreamProvider).estimateContentLength;
-  @override
-  dynamic get converted => (origin as StreamProvider).converted;
+  StreamRequest get request => (origin as StreamProvider).request;
 }
 
-String _$downloadHash() => r'3c715a29918a08a611c7a23bbb4e4b0884f00656';
+String _$downloadHash() => r'b61878c0df3118755c8539ecce5b50ef601019b2';
 
 /// http://your-server/rest/download Since 1.0.0
 /// Downloads a given media file. Similar to stream, but this method returns the original media data without transcoding or downsampling.
@@ -6552,11 +5483,11 @@ class DownloadFamily extends Family<AsyncValue<Response>> {
   /// @param id A string which uniquely identifies the file to download. Obtained by calls to getMusicDirectory.
   ///
   /// Copied from [download].
-  DownloadProvider call({
-    required dynamic id,
-  }) {
+  DownloadProvider call(
+    DownloadRequest request,
+  ) {
     return DownloadProvider(
-      id: id,
+      request,
     );
   }
 
@@ -6565,7 +5496,7 @@ class DownloadFamily extends Family<AsyncValue<Response>> {
     covariant DownloadProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -6597,12 +5528,12 @@ class DownloadProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id A string which uniquely identifies the file to download. Obtained by calls to getMusicDirectory.
   ///
   /// Copied from [download].
-  DownloadProvider({
-    required dynamic id,
-  }) : this._internal(
+  DownloadProvider(
+    DownloadRequest request,
+  ) : this._internal(
           (ref) => download(
             ref as DownloadRef,
-            id: id,
+            request,
           ),
           from: downloadProvider,
           name: r'downloadProvider',
@@ -6612,7 +5543,7 @@ class DownloadProvider extends AutoDisposeFutureProvider<Response> {
                   : _$downloadHash,
           dependencies: DownloadFamily._dependencies,
           allTransitiveDependencies: DownloadFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   DownloadProvider._internal(
@@ -6622,10 +5553,10 @@ class DownloadProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final DownloadRequest request;
 
   @override
   Override overrideWith(
@@ -6640,7 +5571,7 @@ class DownloadProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -6652,13 +5583,13 @@ class DownloadProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is DownloadProvider && other.id == id;
+    return other is DownloadProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -6667,8 +5598,8 @@ class DownloadProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin DownloadRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  DownloadRequest get request;
 }
 
 class _DownloadProviderElement
@@ -6676,10 +5607,10 @@ class _DownloadProviderElement
   _DownloadProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as DownloadProvider).id;
+  DownloadRequest get request => (origin as DownloadProvider).request;
 }
 
-String _$hlsHash() => r'86e320773beadd49b38c28244a72087568bc5e32';
+String _$hlsHash() => r'20e0c162673dd184dcc32cfd256052e6f7bc2929';
 
 /// http://your-server/rest/hls.m3u8 Since 1.8.0
 /// Creates an HLS (HTTP Live Streaming) playlist used for streaming video or audio. HLS is a streaming protocol implemented by Apple and works by breaking the overall stream into a sequence of small HTTP-based file downloads. It's supported by iOS and newer versions of Android. This method also supports adaptive bitrate streaming, see the bitRate parameter.
@@ -6719,15 +5650,11 @@ class HlsFamily extends Family<AsyncValue<Response>> {
   /// @param audioTrack The ID of the audio track to use. See getVideoInfo for how to get the list of available audio tracks for a video.
   ///
   /// Copied from [hls].
-  HlsProvider call({
-    required dynamic id,
-    dynamic bitRate,
-    dynamic audioTrack,
-  }) {
+  HlsProvider call(
+    HlsRequest request,
+  ) {
     return HlsProvider(
-      id: id,
-      bitRate: bitRate,
-      audioTrack: audioTrack,
+      request,
     );
   }
 
@@ -6736,9 +5663,7 @@ class HlsFamily extends Family<AsyncValue<Response>> {
     covariant HlsProvider provider,
   ) {
     return call(
-      id: provider.id,
-      bitRate: provider.bitRate,
-      audioTrack: provider.audioTrack,
+      provider.request,
     );
   }
 
@@ -6774,16 +5699,12 @@ class HlsProvider extends AutoDisposeFutureProvider<Response> {
   /// @param audioTrack The ID of the audio track to use. See getVideoInfo for how to get the list of available audio tracks for a video.
   ///
   /// Copied from [hls].
-  HlsProvider({
-    required dynamic id,
-    dynamic bitRate,
-    dynamic audioTrack,
-  }) : this._internal(
+  HlsProvider(
+    HlsRequest request,
+  ) : this._internal(
           (ref) => hls(
             ref as HlsRef,
-            id: id,
-            bitRate: bitRate,
-            audioTrack: audioTrack,
+            request,
           ),
           from: hlsProvider,
           name: r'hlsProvider',
@@ -6791,9 +5712,7 @@ class HlsProvider extends AutoDisposeFutureProvider<Response> {
               const bool.fromEnvironment('dart.vm.product') ? null : _$hlsHash,
           dependencies: HlsFamily._dependencies,
           allTransitiveDependencies: HlsFamily._allTransitiveDependencies,
-          id: id,
-          bitRate: bitRate,
-          audioTrack: audioTrack,
+          request: request,
         );
 
   HlsProvider._internal(
@@ -6803,14 +5722,10 @@ class HlsProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.bitRate,
-    required this.audioTrack,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic bitRate;
-  final dynamic audioTrack;
+  final HlsRequest request;
 
   @override
   Override overrideWith(
@@ -6825,9 +5740,7 @@ class HlsProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        bitRate: bitRate,
-        audioTrack: audioTrack,
+        request: request,
       ),
     );
   }
@@ -6839,18 +5752,13 @@ class HlsProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is HlsProvider &&
-        other.id == id &&
-        other.bitRate == bitRate &&
-        other.audioTrack == audioTrack;
+    return other is HlsProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, bitRate.hashCode);
-    hash = _SystemHash.combine(hash, audioTrack.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -6859,14 +5767,8 @@ class HlsProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin HlsRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `bitRate` of this provider.
-  dynamic get bitRate;
-
-  /// The parameter `audioTrack` of this provider.
-  dynamic get audioTrack;
+  /// The parameter `request` of this provider.
+  HlsRequest get request;
 }
 
 class _HlsProviderElement extends AutoDisposeFutureProviderElement<Response>
@@ -6874,14 +5776,10 @@ class _HlsProviderElement extends AutoDisposeFutureProviderElement<Response>
   _HlsProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as HlsProvider).id;
-  @override
-  dynamic get bitRate => (origin as HlsProvider).bitRate;
-  @override
-  dynamic get audioTrack => (origin as HlsProvider).audioTrack;
+  HlsRequest get request => (origin as HlsProvider).request;
 }
 
-String _$getCaptionsHash() => r'97083f6092c72b01d06ba57f07a133fca7f603fc';
+String _$getCaptionsHash() => r'a606d9e2262829d78f07dc8458ddaa1fd85f758c';
 
 /// http://your-server/rest/getCaptions Since 1.14.0
 /// Returns captions (subtitles) for a video. Use getVideoInfo to get a list of available captions.
@@ -6917,13 +5815,11 @@ class GetCaptionsFamily extends Family<AsyncValue<Response>> {
   /// @param format Preferred captions format ("srt" or "vtt").
   ///
   /// Copied from [getCaptions].
-  GetCaptionsProvider call({
-    required dynamic id,
-    dynamic format,
-  }) {
+  GetCaptionsProvider call(
+    GetCaptionsRequest request,
+  ) {
     return GetCaptionsProvider(
-      id: id,
-      format: format,
+      request,
     );
   }
 
@@ -6932,8 +5828,7 @@ class GetCaptionsFamily extends Family<AsyncValue<Response>> {
     covariant GetCaptionsProvider provider,
   ) {
     return call(
-      id: provider.id,
-      format: provider.format,
+      provider.request,
     );
   }
 
@@ -6967,14 +5862,12 @@ class GetCaptionsProvider extends AutoDisposeFutureProvider<Response> {
   /// @param format Preferred captions format ("srt" or "vtt").
   ///
   /// Copied from [getCaptions].
-  GetCaptionsProvider({
-    required dynamic id,
-    dynamic format,
-  }) : this._internal(
+  GetCaptionsProvider(
+    GetCaptionsRequest request,
+  ) : this._internal(
           (ref) => getCaptions(
             ref as GetCaptionsRef,
-            id: id,
-            format: format,
+            request,
           ),
           from: getCaptionsProvider,
           name: r'getCaptionsProvider',
@@ -6985,8 +5878,7 @@ class GetCaptionsProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetCaptionsFamily._dependencies,
           allTransitiveDependencies:
               GetCaptionsFamily._allTransitiveDependencies,
-          id: id,
-          format: format,
+          request: request,
         );
 
   GetCaptionsProvider._internal(
@@ -6996,12 +5888,10 @@ class GetCaptionsProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.format,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic format;
+  final GetCaptionsRequest request;
 
   @override
   Override overrideWith(
@@ -7016,8 +5906,7 @@ class GetCaptionsProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        format: format,
+        request: request,
       ),
     );
   }
@@ -7029,16 +5918,13 @@ class GetCaptionsProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetCaptionsProvider &&
-        other.id == id &&
-        other.format == format;
+    return other is GetCaptionsProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, format.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -7047,11 +5933,8 @@ class GetCaptionsProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetCaptionsRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `format` of this provider.
-  dynamic get format;
+  /// The parameter `request` of this provider.
+  GetCaptionsRequest get request;
 }
 
 class _GetCaptionsProviderElement
@@ -7059,12 +5942,10 @@ class _GetCaptionsProviderElement
   _GetCaptionsProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetCaptionsProvider).id;
-  @override
-  dynamic get format => (origin as GetCaptionsProvider).format;
+  GetCaptionsRequest get request => (origin as GetCaptionsProvider).request;
 }
 
-String _$getCoverArtHash() => r'17dd3e046f91113b83d1ab958551fc0ea8409fbf';
+String _$getCoverArtHash() => r'7f8214cb12004995198a65338fbfe5796fc5cd9d';
 
 /// http://your-server/rest/getCoverArt Since 1.0.0
 /// Returns a cover art image.
@@ -7083,7 +5964,7 @@ const getCoverArtProvider = GetCoverArtFamily();
 /// @param size If specified, scale image to this size.
 ///
 /// Copied from [getCoverArt].
-class GetCoverArtFamily extends Family<AsyncValue<Response>> {
+class GetCoverArtFamily extends Family<String> {
   /// http://your-server/rest/getCoverArt Since 1.0.0
   /// Returns a cover art image.
   /// Returns the cover art image in binary form.
@@ -7100,13 +5981,11 @@ class GetCoverArtFamily extends Family<AsyncValue<Response>> {
   /// @param size If specified, scale image to this size.
   ///
   /// Copied from [getCoverArt].
-  GetCoverArtProvider call({
-    required dynamic id,
-    dynamic size,
-  }) {
+  GetCoverArtProvider call(
+    GetCoverArtRequest request,
+  ) {
     return GetCoverArtProvider(
-      id: id,
-      size: size,
+      request,
     );
   }
 
@@ -7115,8 +5994,7 @@ class GetCoverArtFamily extends Family<AsyncValue<Response>> {
     covariant GetCoverArtProvider provider,
   ) {
     return call(
-      id: provider.id,
-      size: provider.size,
+      provider.request,
     );
   }
 
@@ -7142,7 +6020,7 @@ class GetCoverArtFamily extends Family<AsyncValue<Response>> {
 /// @param size If specified, scale image to this size.
 ///
 /// Copied from [getCoverArt].
-class GetCoverArtProvider extends AutoDisposeFutureProvider<Response> {
+class GetCoverArtProvider extends AutoDisposeProvider<String> {
   /// http://your-server/rest/getCoverArt Since 1.0.0
   /// Returns a cover art image.
   /// Returns the cover art image in binary form.
@@ -7150,14 +6028,12 @@ class GetCoverArtProvider extends AutoDisposeFutureProvider<Response> {
   /// @param size If specified, scale image to this size.
   ///
   /// Copied from [getCoverArt].
-  GetCoverArtProvider({
-    required dynamic id,
-    dynamic size,
-  }) : this._internal(
+  GetCoverArtProvider(
+    GetCoverArtRequest request,
+  ) : this._internal(
           (ref) => getCoverArt(
             ref as GetCoverArtRef,
-            id: id,
-            size: size,
+            request,
           ),
           from: getCoverArtProvider,
           name: r'getCoverArtProvider',
@@ -7168,8 +6044,7 @@ class GetCoverArtProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetCoverArtFamily._dependencies,
           allTransitiveDependencies:
               GetCoverArtFamily._allTransitiveDependencies,
-          id: id,
-          size: size,
+          request: request,
         );
 
   GetCoverArtProvider._internal(
@@ -7179,16 +6054,14 @@ class GetCoverArtProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.size,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic size;
+  final GetCoverArtRequest request;
 
   @override
   Override overrideWith(
-    FutureOr<Response> Function(GetCoverArtRef provider) create,
+    String Function(GetCoverArtRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -7199,27 +6072,25 @@ class GetCoverArtProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        size: size,
+        request: request,
       ),
     );
   }
 
   @override
-  AutoDisposeFutureProviderElement<Response> createElement() {
+  AutoDisposeProviderElement<String> createElement() {
     return _GetCoverArtProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is GetCoverArtProvider && other.id == id && other.size == size;
+    return other is GetCoverArtProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, size.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -7227,25 +6098,20 @@ class GetCoverArtProvider extends AutoDisposeFutureProvider<Response> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin GetCoverArtRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `size` of this provider.
-  dynamic get size;
+mixin GetCoverArtRef on AutoDisposeProviderRef<String> {
+  /// The parameter `request` of this provider.
+  GetCoverArtRequest get request;
 }
 
-class _GetCoverArtProviderElement
-    extends AutoDisposeFutureProviderElement<Response> with GetCoverArtRef {
+class _GetCoverArtProviderElement extends AutoDisposeProviderElement<String>
+    with GetCoverArtRef {
   _GetCoverArtProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as GetCoverArtProvider).id;
-  @override
-  dynamic get size => (origin as GetCoverArtProvider).size;
+  GetCoverArtRequest get request => (origin as GetCoverArtProvider).request;
 }
 
-String _$getLyricsHash() => r'2fe9240a3d6342f3e10e80a405627a608006d419';
+String _$getLyricsHash() => r'7a5bf2ef97b878acdd9fc64b8394b803c2aa1936';
 
 /// http://your-server/rest/getLyrics Since 1.2.0
 /// Searches for and returns lyrics for a given song.
@@ -7281,13 +6147,11 @@ class GetLyricsFamily extends Family<AsyncValue<Response>> {
   /// @param title The song title.
   ///
   /// Copied from [getLyrics].
-  GetLyricsProvider call({
-    dynamic artist,
-    dynamic title,
-  }) {
+  GetLyricsProvider call(
+    GetLyricsRequest request,
+  ) {
     return GetLyricsProvider(
-      artist: artist,
-      title: title,
+      request,
     );
   }
 
@@ -7296,8 +6160,7 @@ class GetLyricsFamily extends Family<AsyncValue<Response>> {
     covariant GetLyricsProvider provider,
   ) {
     return call(
-      artist: provider.artist,
-      title: provider.title,
+      provider.request,
     );
   }
 
@@ -7331,14 +6194,12 @@ class GetLyricsProvider extends AutoDisposeFutureProvider<Response> {
   /// @param title The song title.
   ///
   /// Copied from [getLyrics].
-  GetLyricsProvider({
-    dynamic artist,
-    dynamic title,
-  }) : this._internal(
+  GetLyricsProvider(
+    GetLyricsRequest request,
+  ) : this._internal(
           (ref) => getLyrics(
             ref as GetLyricsRef,
-            artist: artist,
-            title: title,
+            request,
           ),
           from: getLyricsProvider,
           name: r'getLyricsProvider',
@@ -7348,8 +6209,7 @@ class GetLyricsProvider extends AutoDisposeFutureProvider<Response> {
                   : _$getLyricsHash,
           dependencies: GetLyricsFamily._dependencies,
           allTransitiveDependencies: GetLyricsFamily._allTransitiveDependencies,
-          artist: artist,
-          title: title,
+          request: request,
         );
 
   GetLyricsProvider._internal(
@@ -7359,12 +6219,10 @@ class GetLyricsProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.artist,
-    required this.title,
+    required this.request,
   }) : super.internal();
 
-  final dynamic artist;
-  final dynamic title;
+  final GetLyricsRequest request;
 
   @override
   Override overrideWith(
@@ -7379,8 +6237,7 @@ class GetLyricsProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        artist: artist,
-        title: title,
+        request: request,
       ),
     );
   }
@@ -7392,16 +6249,13 @@ class GetLyricsProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetLyricsProvider &&
-        other.artist == artist &&
-        other.title == title;
+    return other is GetLyricsProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, artist.hashCode);
-    hash = _SystemHash.combine(hash, title.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -7410,11 +6264,8 @@ class GetLyricsProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetLyricsRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `artist` of this provider.
-  dynamic get artist;
-
-  /// The parameter `title` of this provider.
-  dynamic get title;
+  /// The parameter `request` of this provider.
+  GetLyricsRequest get request;
 }
 
 class _GetLyricsProviderElement
@@ -7422,12 +6273,10 @@ class _GetLyricsProviderElement
   _GetLyricsProviderElement(super.provider);
 
   @override
-  dynamic get artist => (origin as GetLyricsProvider).artist;
-  @override
-  dynamic get title => (origin as GetLyricsProvider).title;
+  GetLyricsRequest get request => (origin as GetLyricsProvider).request;
 }
 
-String _$getAvatarHash() => r'69336f36f070048962b282640202ecfc6343ad8c';
+String _$getAvatarHash() => r'6cdf65cec186d3e6008233034396ccd81697f565';
 
 /// http://your-server/rest/getAvatar Since 1.8.0
 /// Returns the avatar (personal image) for a user.
@@ -7459,11 +6308,11 @@ class GetAvatarFamily extends Family<AsyncValue<Response>> {
   /// @param username The user in question.
   ///
   /// Copied from [getAvatar].
-  GetAvatarProvider call({
-    required dynamic username,
-  }) {
+  GetAvatarProvider call(
+    GetAvatarRequest request,
+  ) {
     return GetAvatarProvider(
-      username: username,
+      request,
     );
   }
 
@@ -7472,7 +6321,7 @@ class GetAvatarFamily extends Family<AsyncValue<Response>> {
     covariant GetAvatarProvider provider,
   ) {
     return call(
-      username: provider.username,
+      provider.request,
     );
   }
 
@@ -7504,12 +6353,12 @@ class GetAvatarProvider extends AutoDisposeFutureProvider<Response> {
   /// @param username The user in question.
   ///
   /// Copied from [getAvatar].
-  GetAvatarProvider({
-    required dynamic username,
-  }) : this._internal(
+  GetAvatarProvider(
+    GetAvatarRequest request,
+  ) : this._internal(
           (ref) => getAvatar(
             ref as GetAvatarRef,
-            username: username,
+            request,
           ),
           from: getAvatarProvider,
           name: r'getAvatarProvider',
@@ -7519,7 +6368,7 @@ class GetAvatarProvider extends AutoDisposeFutureProvider<Response> {
                   : _$getAvatarHash,
           dependencies: GetAvatarFamily._dependencies,
           allTransitiveDependencies: GetAvatarFamily._allTransitiveDependencies,
-          username: username,
+          request: request,
         );
 
   GetAvatarProvider._internal(
@@ -7529,10 +6378,10 @@ class GetAvatarProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.username,
+    required this.request,
   }) : super.internal();
 
-  final dynamic username;
+  final GetAvatarRequest request;
 
   @override
   Override overrideWith(
@@ -7547,7 +6396,7 @@ class GetAvatarProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        username: username,
+        request: request,
       ),
     );
   }
@@ -7559,13 +6408,13 @@ class GetAvatarProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetAvatarProvider && other.username == username;
+    return other is GetAvatarProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, username.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -7574,8 +6423,8 @@ class GetAvatarProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetAvatarRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `username` of this provider.
-  dynamic get username;
+  /// The parameter `request` of this provider.
+  GetAvatarRequest get request;
 }
 
 class _GetAvatarProviderElement
@@ -7583,10 +6432,10 @@ class _GetAvatarProviderElement
   _GetAvatarProviderElement(super.provider);
 
   @override
-  dynamic get username => (origin as GetAvatarProvider).username;
+  GetAvatarRequest get request => (origin as GetAvatarProvider).request;
 }
 
-String _$starHash() => r'13f397c00e5bfd5ebef474b3032b645ef71787bf';
+String _$starHash() => r'2ee92dccd384771aeddc981b086607f29c708ba1';
 
 /// http://your-server/rest/star Since 1.8.0
 /// Attaches a star to a song, album or artist.
@@ -7626,15 +6475,11 @@ class StarFamily extends Family<AsyncValue<Response>> {
   /// @param artistId The ID of an artist to star. Use this rather than id if the client accesses the media collection according to ID3 tags rather than file structure. Multiple parameters allowed.
   ///
   /// Copied from [star].
-  StarProvider call({
-    dynamic id,
-    dynamic albumId,
-    dynamic artistId,
-  }) {
+  StarProvider call(
+    StarRequest request,
+  ) {
     return StarProvider(
-      id: id,
-      albumId: albumId,
-      artistId: artistId,
+      request,
     );
   }
 
@@ -7643,9 +6488,7 @@ class StarFamily extends Family<AsyncValue<Response>> {
     covariant StarProvider provider,
   ) {
     return call(
-      id: provider.id,
-      albumId: provider.albumId,
-      artistId: provider.artistId,
+      provider.request,
     );
   }
 
@@ -7681,16 +6524,12 @@ class StarProvider extends AutoDisposeFutureProvider<Response> {
   /// @param artistId The ID of an artist to star. Use this rather than id if the client accesses the media collection according to ID3 tags rather than file structure. Multiple parameters allowed.
   ///
   /// Copied from [star].
-  StarProvider({
-    dynamic id,
-    dynamic albumId,
-    dynamic artistId,
-  }) : this._internal(
+  StarProvider(
+    StarRequest request,
+  ) : this._internal(
           (ref) => star(
             ref as StarRef,
-            id: id,
-            albumId: albumId,
-            artistId: artistId,
+            request,
           ),
           from: starProvider,
           name: r'starProvider',
@@ -7698,9 +6537,7 @@ class StarProvider extends AutoDisposeFutureProvider<Response> {
               const bool.fromEnvironment('dart.vm.product') ? null : _$starHash,
           dependencies: StarFamily._dependencies,
           allTransitiveDependencies: StarFamily._allTransitiveDependencies,
-          id: id,
-          albumId: albumId,
-          artistId: artistId,
+          request: request,
         );
 
   StarProvider._internal(
@@ -7710,14 +6547,10 @@ class StarProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.albumId,
-    required this.artistId,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic albumId;
-  final dynamic artistId;
+  final StarRequest request;
 
   @override
   Override overrideWith(
@@ -7732,9 +6565,7 @@ class StarProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        albumId: albumId,
-        artistId: artistId,
+        request: request,
       ),
     );
   }
@@ -7746,18 +6577,13 @@ class StarProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is StarProvider &&
-        other.id == id &&
-        other.albumId == albumId &&
-        other.artistId == artistId;
+    return other is StarProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, albumId.hashCode);
-    hash = _SystemHash.combine(hash, artistId.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -7766,14 +6592,8 @@ class StarProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin StarRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `albumId` of this provider.
-  dynamic get albumId;
-
-  /// The parameter `artistId` of this provider.
-  dynamic get artistId;
+  /// The parameter `request` of this provider.
+  StarRequest get request;
 }
 
 class _StarProviderElement extends AutoDisposeFutureProviderElement<Response>
@@ -7781,14 +6601,10 @@ class _StarProviderElement extends AutoDisposeFutureProviderElement<Response>
   _StarProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as StarProvider).id;
-  @override
-  dynamic get albumId => (origin as StarProvider).albumId;
-  @override
-  dynamic get artistId => (origin as StarProvider).artistId;
+  StarRequest get request => (origin as StarProvider).request;
 }
 
-String _$unstarHash() => r'7fab59e3c3130b4002ec83f289eb2ca05a949ca4';
+String _$unstarHash() => r'19826ff4d08882c975db862554148557def003bf';
 
 /// http://your-server/rest/unstar Since 1.8.0
 /// Removes the star from a song, album or artist.
@@ -7828,15 +6644,11 @@ class UnstarFamily extends Family<AsyncValue<Response>> {
   /// @param artistId The ID of an artist to unstar. Use this rather than id if the client accesses the media collection according to ID3 tags rather than file structure. Multiple parameters allowed.
   ///
   /// Copied from [unstar].
-  UnstarProvider call({
-    dynamic id,
-    dynamic albumId,
-    dynamic artistId,
-  }) {
+  UnstarProvider call(
+    UnstarRequest request,
+  ) {
     return UnstarProvider(
-      id: id,
-      albumId: albumId,
-      artistId: artistId,
+      request,
     );
   }
 
@@ -7845,9 +6657,7 @@ class UnstarFamily extends Family<AsyncValue<Response>> {
     covariant UnstarProvider provider,
   ) {
     return call(
-      id: provider.id,
-      albumId: provider.albumId,
-      artistId: provider.artistId,
+      provider.request,
     );
   }
 
@@ -7883,16 +6693,12 @@ class UnstarProvider extends AutoDisposeFutureProvider<Response> {
   /// @param artistId The ID of an artist to unstar. Use this rather than id if the client accesses the media collection according to ID3 tags rather than file structure. Multiple parameters allowed.
   ///
   /// Copied from [unstar].
-  UnstarProvider({
-    dynamic id,
-    dynamic albumId,
-    dynamic artistId,
-  }) : this._internal(
+  UnstarProvider(
+    UnstarRequest request,
+  ) : this._internal(
           (ref) => unstar(
             ref as UnstarRef,
-            id: id,
-            albumId: albumId,
-            artistId: artistId,
+            request,
           ),
           from: unstarProvider,
           name: r'unstarProvider',
@@ -7902,9 +6708,7 @@ class UnstarProvider extends AutoDisposeFutureProvider<Response> {
                   : _$unstarHash,
           dependencies: UnstarFamily._dependencies,
           allTransitiveDependencies: UnstarFamily._allTransitiveDependencies,
-          id: id,
-          albumId: albumId,
-          artistId: artistId,
+          request: request,
         );
 
   UnstarProvider._internal(
@@ -7914,14 +6718,10 @@ class UnstarProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.albumId,
-    required this.artistId,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic albumId;
-  final dynamic artistId;
+  final UnstarRequest request;
 
   @override
   Override overrideWith(
@@ -7936,9 +6736,7 @@ class UnstarProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        albumId: albumId,
-        artistId: artistId,
+        request: request,
       ),
     );
   }
@@ -7950,18 +6748,13 @@ class UnstarProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is UnstarProvider &&
-        other.id == id &&
-        other.albumId == albumId &&
-        other.artistId == artistId;
+    return other is UnstarProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, albumId.hashCode);
-    hash = _SystemHash.combine(hash, artistId.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -7970,14 +6763,8 @@ class UnstarProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin UnstarRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `albumId` of this provider.
-  dynamic get albumId;
-
-  /// The parameter `artistId` of this provider.
-  dynamic get artistId;
+  /// The parameter `request` of this provider.
+  UnstarRequest get request;
 }
 
 class _UnstarProviderElement extends AutoDisposeFutureProviderElement<Response>
@@ -7985,14 +6772,10 @@ class _UnstarProviderElement extends AutoDisposeFutureProviderElement<Response>
   _UnstarProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as UnstarProvider).id;
-  @override
-  dynamic get albumId => (origin as UnstarProvider).albumId;
-  @override
-  dynamic get artistId => (origin as UnstarProvider).artistId;
+  UnstarRequest get request => (origin as UnstarProvider).request;
 }
 
-String _$setRatingHash() => r'bccbed6b415ac26a1115261689f7f62b00334b72';
+String _$setRatingHash() => r'f5c3220f43b51380eb5f50d4898c4fc28737de53';
 
 /// http://your-server/rest/setRating Since 1.6.0
 /// Sets the rating for a music file.
@@ -8028,13 +6811,11 @@ class SetRatingFamily extends Family<AsyncValue<Response>> {
   /// @param rating The rating between 1 and 5 (inclusive), or 0 to remove the rating.
   ///
   /// Copied from [setRating].
-  SetRatingProvider call({
-    required dynamic id,
-    required dynamic rating,
-  }) {
+  SetRatingProvider call(
+    SetRatingRequest request,
+  ) {
     return SetRatingProvider(
-      id: id,
-      rating: rating,
+      request,
     );
   }
 
@@ -8043,8 +6824,7 @@ class SetRatingFamily extends Family<AsyncValue<Response>> {
     covariant SetRatingProvider provider,
   ) {
     return call(
-      id: provider.id,
-      rating: provider.rating,
+      provider.request,
     );
   }
 
@@ -8078,14 +6858,12 @@ class SetRatingProvider extends AutoDisposeFutureProvider<Response> {
   /// @param rating The rating between 1 and 5 (inclusive), or 0 to remove the rating.
   ///
   /// Copied from [setRating].
-  SetRatingProvider({
-    required dynamic id,
-    required dynamic rating,
-  }) : this._internal(
+  SetRatingProvider(
+    SetRatingRequest request,
+  ) : this._internal(
           (ref) => setRating(
             ref as SetRatingRef,
-            id: id,
-            rating: rating,
+            request,
           ),
           from: setRatingProvider,
           name: r'setRatingProvider',
@@ -8095,8 +6873,7 @@ class SetRatingProvider extends AutoDisposeFutureProvider<Response> {
                   : _$setRatingHash,
           dependencies: SetRatingFamily._dependencies,
           allTransitiveDependencies: SetRatingFamily._allTransitiveDependencies,
-          id: id,
-          rating: rating,
+          request: request,
         );
 
   SetRatingProvider._internal(
@@ -8106,12 +6883,10 @@ class SetRatingProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.rating,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic rating;
+  final SetRatingRequest request;
 
   @override
   Override overrideWith(
@@ -8126,8 +6901,7 @@ class SetRatingProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        rating: rating,
+        request: request,
       ),
     );
   }
@@ -8139,16 +6913,13 @@ class SetRatingProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is SetRatingProvider &&
-        other.id == id &&
-        other.rating == rating;
+    return other is SetRatingProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, rating.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -8157,11 +6928,8 @@ class SetRatingProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin SetRatingRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `rating` of this provider.
-  dynamic get rating;
+  /// The parameter `request` of this provider.
+  SetRatingRequest get request;
 }
 
 class _SetRatingProviderElement
@@ -8169,12 +6937,10 @@ class _SetRatingProviderElement
   _SetRatingProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as SetRatingProvider).id;
-  @override
-  dynamic get rating => (origin as SetRatingProvider).rating;
+  SetRatingRequest get request => (origin as SetRatingProvider).request;
 }
 
-String _$scrobbleHash() => r'ab911679bbf1dadd8d9064eaad0ca7369a5a1231';
+String _$scrobbleHash() => r'3c762d3ee186a7ccb805c569c8ca7194d2b848b9';
 
 /// http://your-server/rest/scrobble Since 1.5.0
 /// Registers the local playback of one or more media files. Typically used when playing media that is cached on the client. This operation includes the following:
@@ -8218,15 +6984,11 @@ class ScrobbleFamily extends Family<AsyncValue<Response>> {
   /// @param submission Default(True) Whether this is a "submission" or a "now playing" notification.
   ///
   /// Copied from [scrobble].
-  ScrobbleProvider call({
-    required dynamic id,
-    dynamic time,
-    dynamic submission = "True",
-  }) {
+  ScrobbleProvider call(
+    ScrobbleRequest request,
+  ) {
     return ScrobbleProvider(
-      id: id,
-      time: time,
-      submission: submission,
+      request,
     );
   }
 
@@ -8235,9 +6997,7 @@ class ScrobbleFamily extends Family<AsyncValue<Response>> {
     covariant ScrobbleProvider provider,
   ) {
     return call(
-      id: provider.id,
-      time: provider.time,
-      submission: provider.submission,
+      provider.request,
     );
   }
 
@@ -8275,16 +7035,12 @@ class ScrobbleProvider extends AutoDisposeFutureProvider<Response> {
   /// @param submission Default(True) Whether this is a "submission" or a "now playing" notification.
   ///
   /// Copied from [scrobble].
-  ScrobbleProvider({
-    required dynamic id,
-    dynamic time,
-    dynamic submission = "True",
-  }) : this._internal(
+  ScrobbleProvider(
+    ScrobbleRequest request,
+  ) : this._internal(
           (ref) => scrobble(
             ref as ScrobbleRef,
-            id: id,
-            time: time,
-            submission: submission,
+            request,
           ),
           from: scrobbleProvider,
           name: r'scrobbleProvider',
@@ -8294,9 +7050,7 @@ class ScrobbleProvider extends AutoDisposeFutureProvider<Response> {
                   : _$scrobbleHash,
           dependencies: ScrobbleFamily._dependencies,
           allTransitiveDependencies: ScrobbleFamily._allTransitiveDependencies,
-          id: id,
-          time: time,
-          submission: submission,
+          request: request,
         );
 
   ScrobbleProvider._internal(
@@ -8306,14 +7060,10 @@ class ScrobbleProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.time,
-    required this.submission,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic time;
-  final dynamic submission;
+  final ScrobbleRequest request;
 
   @override
   Override overrideWith(
@@ -8328,9 +7078,7 @@ class ScrobbleProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        time: time,
-        submission: submission,
+        request: request,
       ),
     );
   }
@@ -8342,18 +7090,13 @@ class ScrobbleProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is ScrobbleProvider &&
-        other.id == id &&
-        other.time == time &&
-        other.submission == submission;
+    return other is ScrobbleProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, time.hashCode);
-    hash = _SystemHash.combine(hash, submission.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -8362,14 +7105,8 @@ class ScrobbleProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin ScrobbleRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `time` of this provider.
-  dynamic get time;
-
-  /// The parameter `submission` of this provider.
-  dynamic get submission;
+  /// The parameter `request` of this provider.
+  ScrobbleRequest get request;
 }
 
 class _ScrobbleProviderElement
@@ -8377,14 +7114,10 @@ class _ScrobbleProviderElement
   _ScrobbleProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as ScrobbleProvider).id;
-  @override
-  dynamic get time => (origin as ScrobbleProvider).time;
-  @override
-  dynamic get submission => (origin as ScrobbleProvider).submission;
+  ScrobbleRequest get request => (origin as ScrobbleProvider).request;
 }
 
-String _$getSharesHash() => r'8dd3e7a48fbd59f3707bfb1ebacffbd99bdbe525';
+String _$getSharesHash() => r'663ec7b57320c309a470cd940ef97e621475c036';
 
 /// http://your-server/rest/getShares Since 1.6.0
 /// Returns information about shared media this user is allowed to manage. Takes no extra parameters.
@@ -8404,7 +7137,7 @@ final getSharesProvider = AutoDisposeFutureProvider<Response>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetSharesRef = AutoDisposeFutureProviderRef<Response>;
-String _$createShareHash() => r'2db83b8e8a564d15413da56f6d1e9e84629e162c';
+String _$createShareHash() => r'c39eddad2dfc6206503fb63c2fb5e823966a91aa';
 
 /// http://your-server/rest/createShare Since 1.6.0
 /// Creates a public URL that can be used by anyone to stream music or video from the Subsonic server. The URL is short and suitable for posting on Facebook, Twitter etc. Note: The user must be authorized to share (see Settings > Users > User is allowed to share files with anyone).
@@ -8444,15 +7177,11 @@ class CreateShareFamily extends Family<AsyncValue<Response>> {
   /// @param expires The time at which the share expires. Given as milliseconds since 1970.
   ///
   /// Copied from [createShare].
-  CreateShareProvider call({
-    required dynamic id,
-    dynamic description,
-    dynamic expires,
-  }) {
+  CreateShareProvider call(
+    CreateShareRequest request,
+  ) {
     return CreateShareProvider(
-      id: id,
-      description: description,
-      expires: expires,
+      request,
     );
   }
 
@@ -8461,9 +7190,7 @@ class CreateShareFamily extends Family<AsyncValue<Response>> {
     covariant CreateShareProvider provider,
   ) {
     return call(
-      id: provider.id,
-      description: provider.description,
-      expires: provider.expires,
+      provider.request,
     );
   }
 
@@ -8499,16 +7226,12 @@ class CreateShareProvider extends AutoDisposeFutureProvider<Response> {
   /// @param expires The time at which the share expires. Given as milliseconds since 1970.
   ///
   /// Copied from [createShare].
-  CreateShareProvider({
-    required dynamic id,
-    dynamic description,
-    dynamic expires,
-  }) : this._internal(
+  CreateShareProvider(
+    CreateShareRequest request,
+  ) : this._internal(
           (ref) => createShare(
             ref as CreateShareRef,
-            id: id,
-            description: description,
-            expires: expires,
+            request,
           ),
           from: createShareProvider,
           name: r'createShareProvider',
@@ -8519,9 +7242,7 @@ class CreateShareProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: CreateShareFamily._dependencies,
           allTransitiveDependencies:
               CreateShareFamily._allTransitiveDependencies,
-          id: id,
-          description: description,
-          expires: expires,
+          request: request,
         );
 
   CreateShareProvider._internal(
@@ -8531,14 +7252,10 @@ class CreateShareProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.description,
-    required this.expires,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic description;
-  final dynamic expires;
+  final CreateShareRequest request;
 
   @override
   Override overrideWith(
@@ -8553,9 +7270,7 @@ class CreateShareProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        description: description,
-        expires: expires,
+        request: request,
       ),
     );
   }
@@ -8567,18 +7282,13 @@ class CreateShareProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is CreateShareProvider &&
-        other.id == id &&
-        other.description == description &&
-        other.expires == expires;
+    return other is CreateShareProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, description.hashCode);
-    hash = _SystemHash.combine(hash, expires.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -8587,14 +7297,8 @@ class CreateShareProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin CreateShareRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `description` of this provider.
-  dynamic get description;
-
-  /// The parameter `expires` of this provider.
-  dynamic get expires;
+  /// The parameter `request` of this provider.
+  CreateShareRequest get request;
 }
 
 class _CreateShareProviderElement
@@ -8602,14 +7306,10 @@ class _CreateShareProviderElement
   _CreateShareProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as CreateShareProvider).id;
-  @override
-  dynamic get description => (origin as CreateShareProvider).description;
-  @override
-  dynamic get expires => (origin as CreateShareProvider).expires;
+  CreateShareRequest get request => (origin as CreateShareProvider).request;
 }
 
-String _$updateShareHash() => r'dfd4cadc032d0ac79e164dc89faa970621af4144';
+String _$updateShareHash() => r'11fa55cc93fbc4f5911753479ec7a590f6dac138';
 
 /// http://your-server/rest/updateShare Since 1.6.0
 /// Updates the description and/or expiration date for an existing share.
@@ -8649,15 +7349,11 @@ class UpdateShareFamily extends Family<AsyncValue<Response>> {
   /// @param expires The time at which the share expires. Given as milliseconds since 1970, or zero to remove the expiration.
   ///
   /// Copied from [updateShare].
-  UpdateShareProvider call({
-    required dynamic id,
-    dynamic description,
-    dynamic expires,
-  }) {
+  UpdateShareProvider call(
+    UpdateShareRequest request,
+  ) {
     return UpdateShareProvider(
-      id: id,
-      description: description,
-      expires: expires,
+      request,
     );
   }
 
@@ -8666,9 +7362,7 @@ class UpdateShareFamily extends Family<AsyncValue<Response>> {
     covariant UpdateShareProvider provider,
   ) {
     return call(
-      id: provider.id,
-      description: provider.description,
-      expires: provider.expires,
+      provider.request,
     );
   }
 
@@ -8704,16 +7398,12 @@ class UpdateShareProvider extends AutoDisposeFutureProvider<Response> {
   /// @param expires The time at which the share expires. Given as milliseconds since 1970, or zero to remove the expiration.
   ///
   /// Copied from [updateShare].
-  UpdateShareProvider({
-    required dynamic id,
-    dynamic description,
-    dynamic expires,
-  }) : this._internal(
+  UpdateShareProvider(
+    UpdateShareRequest request,
+  ) : this._internal(
           (ref) => updateShare(
             ref as UpdateShareRef,
-            id: id,
-            description: description,
-            expires: expires,
+            request,
           ),
           from: updateShareProvider,
           name: r'updateShareProvider',
@@ -8724,9 +7414,7 @@ class UpdateShareProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: UpdateShareFamily._dependencies,
           allTransitiveDependencies:
               UpdateShareFamily._allTransitiveDependencies,
-          id: id,
-          description: description,
-          expires: expires,
+          request: request,
         );
 
   UpdateShareProvider._internal(
@@ -8736,14 +7424,10 @@ class UpdateShareProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.description,
-    required this.expires,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic description;
-  final dynamic expires;
+  final UpdateShareRequest request;
 
   @override
   Override overrideWith(
@@ -8758,9 +7442,7 @@ class UpdateShareProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        description: description,
-        expires: expires,
+        request: request,
       ),
     );
   }
@@ -8772,18 +7454,13 @@ class UpdateShareProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is UpdateShareProvider &&
-        other.id == id &&
-        other.description == description &&
-        other.expires == expires;
+    return other is UpdateShareProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, description.hashCode);
-    hash = _SystemHash.combine(hash, expires.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -8792,14 +7469,8 @@ class UpdateShareProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin UpdateShareRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `description` of this provider.
-  dynamic get description;
-
-  /// The parameter `expires` of this provider.
-  dynamic get expires;
+  /// The parameter `request` of this provider.
+  UpdateShareRequest get request;
 }
 
 class _UpdateShareProviderElement
@@ -8807,14 +7478,10 @@ class _UpdateShareProviderElement
   _UpdateShareProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as UpdateShareProvider).id;
-  @override
-  dynamic get description => (origin as UpdateShareProvider).description;
-  @override
-  dynamic get expires => (origin as UpdateShareProvider).expires;
+  UpdateShareRequest get request => (origin as UpdateShareProvider).request;
 }
 
-String _$deleteShareHash() => r'3c3500a14798dd5769b1392b3df390073359cf42';
+String _$deleteShareHash() => r'9af584bb7224de68c98f33e7ccc3dca2b1e1831e';
 
 /// http://your-server/rest/deleteShare Since 1.6.0
 /// Deletes an existing share.
@@ -8846,11 +7513,11 @@ class DeleteShareFamily extends Family<AsyncValue<Response>> {
   /// @param id ID of the share to delete.
   ///
   /// Copied from [deleteShare].
-  DeleteShareProvider call({
-    required dynamic id,
-  }) {
+  DeleteShareProvider call(
+    DeleteShareRequest request,
+  ) {
     return DeleteShareProvider(
-      id: id,
+      request,
     );
   }
 
@@ -8859,7 +7526,7 @@ class DeleteShareFamily extends Family<AsyncValue<Response>> {
     covariant DeleteShareProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -8891,12 +7558,12 @@ class DeleteShareProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id ID of the share to delete.
   ///
   /// Copied from [deleteShare].
-  DeleteShareProvider({
-    required dynamic id,
-  }) : this._internal(
+  DeleteShareProvider(
+    DeleteShareRequest request,
+  ) : this._internal(
           (ref) => deleteShare(
             ref as DeleteShareRef,
-            id: id,
+            request,
           ),
           from: deleteShareProvider,
           name: r'deleteShareProvider',
@@ -8907,7 +7574,7 @@ class DeleteShareProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: DeleteShareFamily._dependencies,
           allTransitiveDependencies:
               DeleteShareFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   DeleteShareProvider._internal(
@@ -8917,10 +7584,10 @@ class DeleteShareProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final DeleteShareRequest request;
 
   @override
   Override overrideWith(
@@ -8935,7 +7602,7 @@ class DeleteShareProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -8947,13 +7614,13 @@ class DeleteShareProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is DeleteShareProvider && other.id == id;
+    return other is DeleteShareProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -8962,8 +7629,8 @@ class DeleteShareProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin DeleteShareRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  DeleteShareRequest get request;
 }
 
 class _DeleteShareProviderElement
@@ -8971,10 +7638,10 @@ class _DeleteShareProviderElement
   _DeleteShareProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as DeleteShareProvider).id;
+  DeleteShareRequest get request => (origin as DeleteShareProvider).request;
 }
 
-String _$getPodcastsHash() => r'37269fded864ac68b2fc3a6da13ea027025e9935';
+String _$getPodcastsHash() => r'86cc4391fe4944a3a94a65fc145ac25bf4f702fe';
 
 /// http://your-server/rest/getPodcasts Since 1.6.0
 /// Returns all Podcast channels the server subscribes to, and (optionally) their episodes. This method can also be used to return details for only one channel - refer to the id parameter. A typical use case for this method would be to first retrieve all channels without episodes, and then retrieve all episodes for the single channel the user selects.
@@ -9010,13 +7677,11 @@ class GetPodcastsFamily extends Family<AsyncValue<Response>> {
   /// @param id (Since 1.9.0) If specified, only return the Podcast channel with this ID.
   ///
   /// Copied from [getPodcasts].
-  GetPodcastsProvider call({
-    dynamic includeEpisodes = true,
-    dynamic id,
-  }) {
+  GetPodcastsProvider call(
+    GetPodcastsRequest request,
+  ) {
     return GetPodcastsProvider(
-      includeEpisodes: includeEpisodes,
-      id: id,
+      request,
     );
   }
 
@@ -9025,8 +7690,7 @@ class GetPodcastsFamily extends Family<AsyncValue<Response>> {
     covariant GetPodcastsProvider provider,
   ) {
     return call(
-      includeEpisodes: provider.includeEpisodes,
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -9060,14 +7724,12 @@ class GetPodcastsProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id (Since 1.9.0) If specified, only return the Podcast channel with this ID.
   ///
   /// Copied from [getPodcasts].
-  GetPodcastsProvider({
-    dynamic includeEpisodes = true,
-    dynamic id,
-  }) : this._internal(
+  GetPodcastsProvider(
+    GetPodcastsRequest request,
+  ) : this._internal(
           (ref) => getPodcasts(
             ref as GetPodcastsRef,
-            includeEpisodes: includeEpisodes,
-            id: id,
+            request,
           ),
           from: getPodcastsProvider,
           name: r'getPodcastsProvider',
@@ -9078,8 +7740,7 @@ class GetPodcastsProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetPodcastsFamily._dependencies,
           allTransitiveDependencies:
               GetPodcastsFamily._allTransitiveDependencies,
-          includeEpisodes: includeEpisodes,
-          id: id,
+          request: request,
         );
 
   GetPodcastsProvider._internal(
@@ -9089,12 +7750,10 @@ class GetPodcastsProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.includeEpisodes,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic includeEpisodes;
-  final dynamic id;
+  final GetPodcastsRequest request;
 
   @override
   Override overrideWith(
@@ -9109,8 +7768,7 @@ class GetPodcastsProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        includeEpisodes: includeEpisodes,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -9122,16 +7780,13 @@ class GetPodcastsProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetPodcastsProvider &&
-        other.includeEpisodes == includeEpisodes &&
-        other.id == id;
+    return other is GetPodcastsProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, includeEpisodes.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -9140,11 +7795,8 @@ class GetPodcastsProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetPodcastsRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `includeEpisodes` of this provider.
-  dynamic get includeEpisodes;
-
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  GetPodcastsRequest get request;
 }
 
 class _GetPodcastsProviderElement
@@ -9152,13 +7804,10 @@ class _GetPodcastsProviderElement
   _GetPodcastsProviderElement(super.provider);
 
   @override
-  dynamic get includeEpisodes =>
-      (origin as GetPodcastsProvider).includeEpisodes;
-  @override
-  dynamic get id => (origin as GetPodcastsProvider).id;
+  GetPodcastsRequest get request => (origin as GetPodcastsProvider).request;
 }
 
-String _$getNewestPodcastsHash() => r'3bab05cfd886d8665edadb20aa272b1af3d4990a';
+String _$getNewestPodcastsHash() => r'fbbc6066650605873c1cbced76da28928dfde672';
 
 /// http://your-server/rest/getNewestPodcasts Since 1.13.0
 /// Returns the most recently published Podcast episodes.
@@ -9190,11 +7839,11 @@ class GetNewestPodcastsFamily extends Family<AsyncValue<Response>> {
   /// @param count Default(20) The maximum number of episodes to return.
   ///
   /// Copied from [getNewestPodcasts].
-  GetNewestPodcastsProvider call({
-    dynamic count = 20,
-  }) {
+  GetNewestPodcastsProvider call(
+    GetNewestPodcastsRequest request,
+  ) {
     return GetNewestPodcastsProvider(
-      count: count,
+      request,
     );
   }
 
@@ -9203,7 +7852,7 @@ class GetNewestPodcastsFamily extends Family<AsyncValue<Response>> {
     covariant GetNewestPodcastsProvider provider,
   ) {
     return call(
-      count: provider.count,
+      provider.request,
     );
   }
 
@@ -9235,12 +7884,12 @@ class GetNewestPodcastsProvider extends AutoDisposeFutureProvider<Response> {
   /// @param count Default(20) The maximum number of episodes to return.
   ///
   /// Copied from [getNewestPodcasts].
-  GetNewestPodcastsProvider({
-    dynamic count = 20,
-  }) : this._internal(
+  GetNewestPodcastsProvider(
+    GetNewestPodcastsRequest request,
+  ) : this._internal(
           (ref) => getNewestPodcasts(
             ref as GetNewestPodcastsRef,
-            count: count,
+            request,
           ),
           from: getNewestPodcastsProvider,
           name: r'getNewestPodcastsProvider',
@@ -9251,7 +7900,7 @@ class GetNewestPodcastsProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetNewestPodcastsFamily._dependencies,
           allTransitiveDependencies:
               GetNewestPodcastsFamily._allTransitiveDependencies,
-          count: count,
+          request: request,
         );
 
   GetNewestPodcastsProvider._internal(
@@ -9261,10 +7910,10 @@ class GetNewestPodcastsProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.count,
+    required this.request,
   }) : super.internal();
 
-  final dynamic count;
+  final GetNewestPodcastsRequest request;
 
   @override
   Override overrideWith(
@@ -9279,7 +7928,7 @@ class GetNewestPodcastsProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        count: count,
+        request: request,
       ),
     );
   }
@@ -9291,13 +7940,13 @@ class GetNewestPodcastsProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetNewestPodcastsProvider && other.count == count;
+    return other is GetNewestPodcastsProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, count.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -9306,8 +7955,8 @@ class GetNewestPodcastsProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetNewestPodcastsRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `count` of this provider.
-  dynamic get count;
+  /// The parameter `request` of this provider.
+  GetNewestPodcastsRequest get request;
 }
 
 class _GetNewestPodcastsProviderElement
@@ -9316,10 +7965,11 @@ class _GetNewestPodcastsProviderElement
   _GetNewestPodcastsProviderElement(super.provider);
 
   @override
-  dynamic get count => (origin as GetNewestPodcastsProvider).count;
+  GetNewestPodcastsRequest get request =>
+      (origin as GetNewestPodcastsProvider).request;
 }
 
-String _$refreshPodcastsHash() => r'a38d76f2f7658f9462ff146d5bcbc0230668a426';
+String _$refreshPodcastsHash() => r'42f8f5ff666455a2678e13c79b86d4de45b392dd';
 
 /// http://your-server/rest/refreshPodcasts Since 1.9.0
 /// Requests the server to check for new Podcast episodes. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).
@@ -9341,7 +7991,7 @@ final refreshPodcastsProvider = AutoDisposeFutureProvider<Response>.internal(
 // ignore: unused_element
 typedef RefreshPodcastsRef = AutoDisposeFutureProviderRef<Response>;
 String _$createPodcastChannelHash() =>
-    r'3f29a8e00127af3eee906a81c2f6160f047edcbe';
+    r'6370dee665131c670d1d463eaf47217ba1f3b1bc';
 
 /// http://your-server/rest/createPodcastChannel Since 1.9.0
 /// Adds a new Podcast channel. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).
@@ -9373,11 +8023,11 @@ class CreatePodcastChannelFamily extends Family<AsyncValue<Response>> {
   /// @param url The URL of the Podcast to add.
   ///
   /// Copied from [createPodcastChannel].
-  CreatePodcastChannelProvider call({
-    required dynamic url,
-  }) {
+  CreatePodcastChannelProvider call(
+    CreatePodcastChannelRequest request,
+  ) {
     return CreatePodcastChannelProvider(
-      url: url,
+      request,
     );
   }
 
@@ -9386,7 +8036,7 @@ class CreatePodcastChannelFamily extends Family<AsyncValue<Response>> {
     covariant CreatePodcastChannelProvider provider,
   ) {
     return call(
-      url: provider.url,
+      provider.request,
     );
   }
 
@@ -9418,12 +8068,12 @@ class CreatePodcastChannelProvider extends AutoDisposeFutureProvider<Response> {
   /// @param url The URL of the Podcast to add.
   ///
   /// Copied from [createPodcastChannel].
-  CreatePodcastChannelProvider({
-    required dynamic url,
-  }) : this._internal(
+  CreatePodcastChannelProvider(
+    CreatePodcastChannelRequest request,
+  ) : this._internal(
           (ref) => createPodcastChannel(
             ref as CreatePodcastChannelRef,
-            url: url,
+            request,
           ),
           from: createPodcastChannelProvider,
           name: r'createPodcastChannelProvider',
@@ -9434,7 +8084,7 @@ class CreatePodcastChannelProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: CreatePodcastChannelFamily._dependencies,
           allTransitiveDependencies:
               CreatePodcastChannelFamily._allTransitiveDependencies,
-          url: url,
+          request: request,
         );
 
   CreatePodcastChannelProvider._internal(
@@ -9444,10 +8094,10 @@ class CreatePodcastChannelProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.url,
+    required this.request,
   }) : super.internal();
 
-  final dynamic url;
+  final CreatePodcastChannelRequest request;
 
   @override
   Override overrideWith(
@@ -9462,7 +8112,7 @@ class CreatePodcastChannelProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        url: url,
+        request: request,
       ),
     );
   }
@@ -9474,13 +8124,13 @@ class CreatePodcastChannelProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is CreatePodcastChannelProvider && other.url == url;
+    return other is CreatePodcastChannelProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, url.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -9489,8 +8139,8 @@ class CreatePodcastChannelProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin CreatePodcastChannelRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `url` of this provider.
-  dynamic get url;
+  /// The parameter `request` of this provider.
+  CreatePodcastChannelRequest get request;
 }
 
 class _CreatePodcastChannelProviderElement
@@ -9499,11 +8149,12 @@ class _CreatePodcastChannelProviderElement
   _CreatePodcastChannelProviderElement(super.provider);
 
   @override
-  dynamic get url => (origin as CreatePodcastChannelProvider).url;
+  CreatePodcastChannelRequest get request =>
+      (origin as CreatePodcastChannelProvider).request;
 }
 
 String _$deletePodcastChannelHash() =>
-    r'c9e20495bc351bcd7955c402e085ceb89f16c072';
+    r'887c4b64714abee8315d31b9e156f18b820f38b1';
 
 /// http://your-server/rest/deletePodcastChannel Since 1.9.0
 /// Deletes a Podcast channel. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).
@@ -9535,11 +8186,11 @@ class DeletePodcastChannelFamily extends Family<AsyncValue<Response>> {
   /// @param id The ID of the Podcast channel to delete.
   ///
   /// Copied from [deletePodcastChannel].
-  DeletePodcastChannelProvider call({
-    required dynamic id,
-  }) {
+  DeletePodcastChannelProvider call(
+    DeletePodcastChannelRequest request,
+  ) {
     return DeletePodcastChannelProvider(
-      id: id,
+      request,
     );
   }
 
@@ -9548,7 +8199,7 @@ class DeletePodcastChannelFamily extends Family<AsyncValue<Response>> {
     covariant DeletePodcastChannelProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -9580,12 +8231,12 @@ class DeletePodcastChannelProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id The ID of the Podcast channel to delete.
   ///
   /// Copied from [deletePodcastChannel].
-  DeletePodcastChannelProvider({
-    required dynamic id,
-  }) : this._internal(
+  DeletePodcastChannelProvider(
+    DeletePodcastChannelRequest request,
+  ) : this._internal(
           (ref) => deletePodcastChannel(
             ref as DeletePodcastChannelRef,
-            id: id,
+            request,
           ),
           from: deletePodcastChannelProvider,
           name: r'deletePodcastChannelProvider',
@@ -9596,7 +8247,7 @@ class DeletePodcastChannelProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: DeletePodcastChannelFamily._dependencies,
           allTransitiveDependencies:
               DeletePodcastChannelFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   DeletePodcastChannelProvider._internal(
@@ -9606,10 +8257,10 @@ class DeletePodcastChannelProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final DeletePodcastChannelRequest request;
 
   @override
   Override overrideWith(
@@ -9624,7 +8275,7 @@ class DeletePodcastChannelProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -9636,13 +8287,13 @@ class DeletePodcastChannelProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is DeletePodcastChannelProvider && other.id == id;
+    return other is DeletePodcastChannelProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -9651,8 +8302,8 @@ class DeletePodcastChannelProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin DeletePodcastChannelRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  DeletePodcastChannelRequest get request;
 }
 
 class _DeletePodcastChannelProviderElement
@@ -9661,11 +8312,12 @@ class _DeletePodcastChannelProviderElement
   _DeletePodcastChannelProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as DeletePodcastChannelProvider).id;
+  DeletePodcastChannelRequest get request =>
+      (origin as DeletePodcastChannelProvider).request;
 }
 
 String _$deletePodcastEpisodeHash() =>
-    r'26c73887b4d73c401f08e724eb1d5a64418ea568';
+    r'032943680eaa0cdc1cb0171be42e6f59642d4e04';
 
 /// http://your-server/rest/deletePodcastEpisode Since 1.9.0
 /// Deletes a Podcast episode. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).
@@ -9697,11 +8349,11 @@ class DeletePodcastEpisodeFamily extends Family<AsyncValue<Response>> {
   /// @param id The ID of the Podcast episode to delete.
   ///
   /// Copied from [deletePodcastEpisode].
-  DeletePodcastEpisodeProvider call({
-    required dynamic id,
-  }) {
+  DeletePodcastEpisodeProvider call(
+    DeletePodcastEpisodeRequest request,
+  ) {
     return DeletePodcastEpisodeProvider(
-      id: id,
+      request,
     );
   }
 
@@ -9710,7 +8362,7 @@ class DeletePodcastEpisodeFamily extends Family<AsyncValue<Response>> {
     covariant DeletePodcastEpisodeProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -9742,12 +8394,12 @@ class DeletePodcastEpisodeProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id The ID of the Podcast episode to delete.
   ///
   /// Copied from [deletePodcastEpisode].
-  DeletePodcastEpisodeProvider({
-    required dynamic id,
-  }) : this._internal(
+  DeletePodcastEpisodeProvider(
+    DeletePodcastEpisodeRequest request,
+  ) : this._internal(
           (ref) => deletePodcastEpisode(
             ref as DeletePodcastEpisodeRef,
-            id: id,
+            request,
           ),
           from: deletePodcastEpisodeProvider,
           name: r'deletePodcastEpisodeProvider',
@@ -9758,7 +8410,7 @@ class DeletePodcastEpisodeProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: DeletePodcastEpisodeFamily._dependencies,
           allTransitiveDependencies:
               DeletePodcastEpisodeFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   DeletePodcastEpisodeProvider._internal(
@@ -9768,10 +8420,10 @@ class DeletePodcastEpisodeProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final DeletePodcastEpisodeRequest request;
 
   @override
   Override overrideWith(
@@ -9786,7 +8438,7 @@ class DeletePodcastEpisodeProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -9798,13 +8450,13 @@ class DeletePodcastEpisodeProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is DeletePodcastEpisodeProvider && other.id == id;
+    return other is DeletePodcastEpisodeProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -9813,8 +8465,8 @@ class DeletePodcastEpisodeProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin DeletePodcastEpisodeRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  DeletePodcastEpisodeRequest get request;
 }
 
 class _DeletePodcastEpisodeProviderElement
@@ -9823,11 +8475,12 @@ class _DeletePodcastEpisodeProviderElement
   _DeletePodcastEpisodeProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as DeletePodcastEpisodeProvider).id;
+  DeletePodcastEpisodeRequest get request =>
+      (origin as DeletePodcastEpisodeProvider).request;
 }
 
 String _$downloadPodcastEpisodeHash() =>
-    r'565089b81ce068a45f4473cac070dad4d74a0c3d';
+    r'3e2ec503658496672099ab8491bf42c39ac9ba04';
 
 /// http://your-server/rest/downloadPodcastEpisode Since 1.9.0
 /// Request the server to start downloading a given Podcast episode. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).
@@ -9859,11 +8512,11 @@ class DownloadPodcastEpisodeFamily extends Family<AsyncValue<Response>> {
   /// @param id The ID of the Podcast episode to download.
   ///
   /// Copied from [downloadPodcastEpisode].
-  DownloadPodcastEpisodeProvider call({
-    required dynamic id,
-  }) {
+  DownloadPodcastEpisodeProvider call(
+    DownloadPodcastEpisodeRequest request,
+  ) {
     return DownloadPodcastEpisodeProvider(
-      id: id,
+      request,
     );
   }
 
@@ -9872,7 +8525,7 @@ class DownloadPodcastEpisodeFamily extends Family<AsyncValue<Response>> {
     covariant DownloadPodcastEpisodeProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -9905,12 +8558,12 @@ class DownloadPodcastEpisodeProvider
   /// @param id The ID of the Podcast episode to download.
   ///
   /// Copied from [downloadPodcastEpisode].
-  DownloadPodcastEpisodeProvider({
-    required dynamic id,
-  }) : this._internal(
+  DownloadPodcastEpisodeProvider(
+    DownloadPodcastEpisodeRequest request,
+  ) : this._internal(
           (ref) => downloadPodcastEpisode(
             ref as DownloadPodcastEpisodeRef,
-            id: id,
+            request,
           ),
           from: downloadPodcastEpisodeProvider,
           name: r'downloadPodcastEpisodeProvider',
@@ -9921,7 +8574,7 @@ class DownloadPodcastEpisodeProvider
           dependencies: DownloadPodcastEpisodeFamily._dependencies,
           allTransitiveDependencies:
               DownloadPodcastEpisodeFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   DownloadPodcastEpisodeProvider._internal(
@@ -9931,10 +8584,10 @@ class DownloadPodcastEpisodeProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final DownloadPodcastEpisodeRequest request;
 
   @override
   Override overrideWith(
@@ -9949,7 +8602,7 @@ class DownloadPodcastEpisodeProvider
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -9961,13 +8614,13 @@ class DownloadPodcastEpisodeProvider
 
   @override
   bool operator ==(Object other) {
-    return other is DownloadPodcastEpisodeProvider && other.id == id;
+    return other is DownloadPodcastEpisodeProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -9976,8 +8629,8 @@ class DownloadPodcastEpisodeProvider
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin DownloadPodcastEpisodeRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  DownloadPodcastEpisodeRequest get request;
 }
 
 class _DownloadPodcastEpisodeProviderElement
@@ -9986,10 +8639,11 @@ class _DownloadPodcastEpisodeProviderElement
   _DownloadPodcastEpisodeProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as DownloadPodcastEpisodeProvider).id;
+  DownloadPodcastEpisodeRequest get request =>
+      (origin as DownloadPodcastEpisodeProvider).request;
 }
 
-String _$jukeboxControlHash() => r'56d5ee92029c4666669f67d1c63bcd690d9e94d6';
+String _$jukeboxControlHash() => r'c6f32b086bc49b6a273ad39a35fca0e149f8a359';
 
 /// http://your-server/rest/jukeboxControl Since 1.2.0
 /// Controls the jukebox, i.e., playback directly on the server's audio hardware. Note: The user must be authorized to control the jukebox (see Settings > Users > User is allowed to play files in jukebox mode).
@@ -10037,19 +8691,11 @@ class JukeboxControlFamily extends Family<AsyncValue<Response>> {
   /// @param gain Used by setGain to control the playback volume. A float value between 0.0 and 1.0.
   ///
   /// Copied from [jukeboxControl].
-  JukeboxControlProvider call({
-    required dynamic action,
-    dynamic index,
-    dynamic offset,
-    dynamic id,
-    dynamic gain,
-  }) {
+  JukeboxControlProvider call(
+    JukeboxControlRequest request,
+  ) {
     return JukeboxControlProvider(
-      action: action,
-      index: index,
-      offset: offset,
-      id: id,
-      gain: gain,
+      request,
     );
   }
 
@@ -10058,11 +8704,7 @@ class JukeboxControlFamily extends Family<AsyncValue<Response>> {
     covariant JukeboxControlProvider provider,
   ) {
     return call(
-      action: provider.action,
-      index: provider.index,
-      offset: provider.offset,
-      id: provider.id,
-      gain: provider.gain,
+      provider.request,
     );
   }
 
@@ -10102,20 +8744,12 @@ class JukeboxControlProvider extends AutoDisposeFutureProvider<Response> {
   /// @param gain Used by setGain to control the playback volume. A float value between 0.0 and 1.0.
   ///
   /// Copied from [jukeboxControl].
-  JukeboxControlProvider({
-    required dynamic action,
-    dynamic index,
-    dynamic offset,
-    dynamic id,
-    dynamic gain,
-  }) : this._internal(
+  JukeboxControlProvider(
+    JukeboxControlRequest request,
+  ) : this._internal(
           (ref) => jukeboxControl(
             ref as JukeboxControlRef,
-            action: action,
-            index: index,
-            offset: offset,
-            id: id,
-            gain: gain,
+            request,
           ),
           from: jukeboxControlProvider,
           name: r'jukeboxControlProvider',
@@ -10126,11 +8760,7 @@ class JukeboxControlProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: JukeboxControlFamily._dependencies,
           allTransitiveDependencies:
               JukeboxControlFamily._allTransitiveDependencies,
-          action: action,
-          index: index,
-          offset: offset,
-          id: id,
-          gain: gain,
+          request: request,
         );
 
   JukeboxControlProvider._internal(
@@ -10140,18 +8770,10 @@ class JukeboxControlProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.action,
-    required this.index,
-    required this.offset,
-    required this.id,
-    required this.gain,
+    required this.request,
   }) : super.internal();
 
-  final dynamic action;
-  final dynamic index;
-  final dynamic offset;
-  final dynamic id;
-  final dynamic gain;
+  final JukeboxControlRequest request;
 
   @override
   Override overrideWith(
@@ -10166,11 +8788,7 @@ class JukeboxControlProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        action: action,
-        index: index,
-        offset: offset,
-        id: id,
-        gain: gain,
+        request: request,
       ),
     );
   }
@@ -10182,22 +8800,13 @@ class JukeboxControlProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is JukeboxControlProvider &&
-        other.action == action &&
-        other.index == index &&
-        other.offset == offset &&
-        other.id == id &&
-        other.gain == gain;
+    return other is JukeboxControlProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, action.hashCode);
-    hash = _SystemHash.combine(hash, index.hashCode);
-    hash = _SystemHash.combine(hash, offset.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, gain.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -10206,20 +8815,8 @@ class JukeboxControlProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin JukeboxControlRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `action` of this provider.
-  dynamic get action;
-
-  /// The parameter `index` of this provider.
-  dynamic get index;
-
-  /// The parameter `offset` of this provider.
-  dynamic get offset;
-
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `gain` of this provider.
-  dynamic get gain;
+  /// The parameter `request` of this provider.
+  JukeboxControlRequest get request;
 }
 
 class _JukeboxControlProviderElement
@@ -10227,19 +8824,12 @@ class _JukeboxControlProviderElement
   _JukeboxControlProviderElement(super.provider);
 
   @override
-  dynamic get action => (origin as JukeboxControlProvider).action;
-  @override
-  dynamic get index => (origin as JukeboxControlProvider).index;
-  @override
-  dynamic get offset => (origin as JukeboxControlProvider).offset;
-  @override
-  dynamic get id => (origin as JukeboxControlProvider).id;
-  @override
-  dynamic get gain => (origin as JukeboxControlProvider).gain;
+  JukeboxControlRequest get request =>
+      (origin as JukeboxControlProvider).request;
 }
 
 String _$getInternetRadioStationsHash() =>
-    r'd6aab3d8063f07ac89a0052b69250aa6cd285755';
+    r'f3f37f45b94fcb93f71938f9627893e6b278b406';
 
 /// http://your-server/rest/getInternetRadioStations Since 1.9.0
 /// Returns all internet radio stations. Takes no extra parameters.
@@ -10262,7 +8852,7 @@ final getInternetRadioStationsProvider =
 // ignore: unused_element
 typedef GetInternetRadioStationsRef = AutoDisposeFutureProviderRef<Response>;
 String _$createInternetRadioStationHash() =>
-    r'300d88d6098cde9cdc940a2599e66bdc7873c8d3';
+    r'd8a984cd628c3a9b98a426eabf0f4a8272e338ed';
 
 /// http://your-server/rest/createInternetRadioStation Since 1.16.0
 /// Adds a new internet radio station. Only users with admin privileges are allowed to call this method.
@@ -10302,15 +8892,11 @@ class CreateInternetRadioStationFamily extends Family<AsyncValue<Response>> {
   /// @param homepageUrl The home page URL for the station.
   ///
   /// Copied from [createInternetRadioStation].
-  CreateInternetRadioStationProvider call({
-    required dynamic streamUrl,
-    required dynamic name,
-    dynamic homepageUrl,
-  }) {
+  CreateInternetRadioStationProvider call(
+    CreateInternetRadioStationRequest request,
+  ) {
     return CreateInternetRadioStationProvider(
-      streamUrl: streamUrl,
-      name: name,
-      homepageUrl: homepageUrl,
+      request,
     );
   }
 
@@ -10319,9 +8905,7 @@ class CreateInternetRadioStationFamily extends Family<AsyncValue<Response>> {
     covariant CreateInternetRadioStationProvider provider,
   ) {
     return call(
-      streamUrl: provider.streamUrl,
-      name: provider.name,
-      homepageUrl: provider.homepageUrl,
+      provider.request,
     );
   }
 
@@ -10358,16 +8942,12 @@ class CreateInternetRadioStationProvider
   /// @param homepageUrl The home page URL for the station.
   ///
   /// Copied from [createInternetRadioStation].
-  CreateInternetRadioStationProvider({
-    required dynamic streamUrl,
-    required dynamic name,
-    dynamic homepageUrl,
-  }) : this._internal(
+  CreateInternetRadioStationProvider(
+    CreateInternetRadioStationRequest request,
+  ) : this._internal(
           (ref) => createInternetRadioStation(
             ref as CreateInternetRadioStationRef,
-            streamUrl: streamUrl,
-            name: name,
-            homepageUrl: homepageUrl,
+            request,
           ),
           from: createInternetRadioStationProvider,
           name: r'createInternetRadioStationProvider',
@@ -10378,9 +8958,7 @@ class CreateInternetRadioStationProvider
           dependencies: CreateInternetRadioStationFamily._dependencies,
           allTransitiveDependencies:
               CreateInternetRadioStationFamily._allTransitiveDependencies,
-          streamUrl: streamUrl,
-          name: name,
-          homepageUrl: homepageUrl,
+          request: request,
         );
 
   CreateInternetRadioStationProvider._internal(
@@ -10390,14 +8968,10 @@ class CreateInternetRadioStationProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.streamUrl,
-    required this.name,
-    required this.homepageUrl,
+    required this.request,
   }) : super.internal();
 
-  final dynamic streamUrl;
-  final dynamic name;
-  final dynamic homepageUrl;
+  final CreateInternetRadioStationRequest request;
 
   @override
   Override overrideWith(
@@ -10412,9 +8986,7 @@ class CreateInternetRadioStationProvider
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        streamUrl: streamUrl,
-        name: name,
-        homepageUrl: homepageUrl,
+        request: request,
       ),
     );
   }
@@ -10427,17 +8999,13 @@ class CreateInternetRadioStationProvider
   @override
   bool operator ==(Object other) {
     return other is CreateInternetRadioStationProvider &&
-        other.streamUrl == streamUrl &&
-        other.name == name &&
-        other.homepageUrl == homepageUrl;
+        other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, streamUrl.hashCode);
-    hash = _SystemHash.combine(hash, name.hashCode);
-    hash = _SystemHash.combine(hash, homepageUrl.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -10446,14 +9014,8 @@ class CreateInternetRadioStationProvider
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin CreateInternetRadioStationRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `streamUrl` of this provider.
-  dynamic get streamUrl;
-
-  /// The parameter `name` of this provider.
-  dynamic get name;
-
-  /// The parameter `homepageUrl` of this provider.
-  dynamic get homepageUrl;
+  /// The parameter `request` of this provider.
+  CreateInternetRadioStationRequest get request;
 }
 
 class _CreateInternetRadioStationProviderElement
@@ -10462,17 +9024,12 @@ class _CreateInternetRadioStationProviderElement
   _CreateInternetRadioStationProviderElement(super.provider);
 
   @override
-  dynamic get streamUrl =>
-      (origin as CreateInternetRadioStationProvider).streamUrl;
-  @override
-  dynamic get name => (origin as CreateInternetRadioStationProvider).name;
-  @override
-  dynamic get homepageUrl =>
-      (origin as CreateInternetRadioStationProvider).homepageUrl;
+  CreateInternetRadioStationRequest get request =>
+      (origin as CreateInternetRadioStationProvider).request;
 }
 
 String _$updateInternetRadioStationHash() =>
-    r'283dca4d2a16bd150b38f00bf2288a11135b371b';
+    r'6c0de5f1f2d516714c7289c944876d5772746f34';
 
 /// http://your-server/rest/updateInternetRadioStation Since 1.16.0
 /// Updates an existing internet radio station. Only users with admin privileges are allowed to call this method.
@@ -10516,17 +9073,11 @@ class UpdateInternetRadioStationFamily extends Family<AsyncValue<Response>> {
   /// @param homepageUrl The home page URL for the station.
   ///
   /// Copied from [updateInternetRadioStation].
-  UpdateInternetRadioStationProvider call({
-    required dynamic id,
-    required dynamic streamUrl,
-    required dynamic name,
-    dynamic homepageUrl,
-  }) {
+  UpdateInternetRadioStationProvider call(
+    UpdateInternetRadioStationRequest request,
+  ) {
     return UpdateInternetRadioStationProvider(
-      id: id,
-      streamUrl: streamUrl,
-      name: name,
-      homepageUrl: homepageUrl,
+      request,
     );
   }
 
@@ -10535,10 +9086,7 @@ class UpdateInternetRadioStationFamily extends Family<AsyncValue<Response>> {
     covariant UpdateInternetRadioStationProvider provider,
   ) {
     return call(
-      id: provider.id,
-      streamUrl: provider.streamUrl,
-      name: provider.name,
-      homepageUrl: provider.homepageUrl,
+      provider.request,
     );
   }
 
@@ -10577,18 +9125,12 @@ class UpdateInternetRadioStationProvider
   /// @param homepageUrl The home page URL for the station.
   ///
   /// Copied from [updateInternetRadioStation].
-  UpdateInternetRadioStationProvider({
-    required dynamic id,
-    required dynamic streamUrl,
-    required dynamic name,
-    dynamic homepageUrl,
-  }) : this._internal(
+  UpdateInternetRadioStationProvider(
+    UpdateInternetRadioStationRequest request,
+  ) : this._internal(
           (ref) => updateInternetRadioStation(
             ref as UpdateInternetRadioStationRef,
-            id: id,
-            streamUrl: streamUrl,
-            name: name,
-            homepageUrl: homepageUrl,
+            request,
           ),
           from: updateInternetRadioStationProvider,
           name: r'updateInternetRadioStationProvider',
@@ -10599,10 +9141,7 @@ class UpdateInternetRadioStationProvider
           dependencies: UpdateInternetRadioStationFamily._dependencies,
           allTransitiveDependencies:
               UpdateInternetRadioStationFamily._allTransitiveDependencies,
-          id: id,
-          streamUrl: streamUrl,
-          name: name,
-          homepageUrl: homepageUrl,
+          request: request,
         );
 
   UpdateInternetRadioStationProvider._internal(
@@ -10612,16 +9151,10 @@ class UpdateInternetRadioStationProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.streamUrl,
-    required this.name,
-    required this.homepageUrl,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic streamUrl;
-  final dynamic name;
-  final dynamic homepageUrl;
+  final UpdateInternetRadioStationRequest request;
 
   @override
   Override overrideWith(
@@ -10636,10 +9169,7 @@ class UpdateInternetRadioStationProvider
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        streamUrl: streamUrl,
-        name: name,
-        homepageUrl: homepageUrl,
+        request: request,
       ),
     );
   }
@@ -10652,19 +9182,13 @@ class UpdateInternetRadioStationProvider
   @override
   bool operator ==(Object other) {
     return other is UpdateInternetRadioStationProvider &&
-        other.id == id &&
-        other.streamUrl == streamUrl &&
-        other.name == name &&
-        other.homepageUrl == homepageUrl;
+        other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, streamUrl.hashCode);
-    hash = _SystemHash.combine(hash, name.hashCode);
-    hash = _SystemHash.combine(hash, homepageUrl.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -10673,17 +9197,8 @@ class UpdateInternetRadioStationProvider
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin UpdateInternetRadioStationRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `streamUrl` of this provider.
-  dynamic get streamUrl;
-
-  /// The parameter `name` of this provider.
-  dynamic get name;
-
-  /// The parameter `homepageUrl` of this provider.
-  dynamic get homepageUrl;
+  /// The parameter `request` of this provider.
+  UpdateInternetRadioStationRequest get request;
 }
 
 class _UpdateInternetRadioStationProviderElement
@@ -10692,19 +9207,12 @@ class _UpdateInternetRadioStationProviderElement
   _UpdateInternetRadioStationProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as UpdateInternetRadioStationProvider).id;
-  @override
-  dynamic get streamUrl =>
-      (origin as UpdateInternetRadioStationProvider).streamUrl;
-  @override
-  dynamic get name => (origin as UpdateInternetRadioStationProvider).name;
-  @override
-  dynamic get homepageUrl =>
-      (origin as UpdateInternetRadioStationProvider).homepageUrl;
+  UpdateInternetRadioStationRequest get request =>
+      (origin as UpdateInternetRadioStationProvider).request;
 }
 
 String _$deleteInternetRadioStationHash() =>
-    r'c2e67dadecb234e428c77947602abe60f048c72e';
+    r'2eda83eb8571e9ec118f974cfdcd71ecd7847710';
 
 /// http://your-server/rest/deleteInternetRadioStation Since 1.16.0
 /// Deletes an existing internet radio station. Only users with admin privileges are allowed to call this method.
@@ -10736,11 +9244,11 @@ class DeleteInternetRadioStationFamily extends Family<AsyncValue<Response>> {
   /// @param id The ID for the station.
   ///
   /// Copied from [deleteInternetRadioStation].
-  DeleteInternetRadioStationProvider call({
-    required dynamic id,
-  }) {
+  DeleteInternetRadioStationProvider call(
+    DeleteInternetRadioStationRequest request,
+  ) {
     return DeleteInternetRadioStationProvider(
-      id: id,
+      request,
     );
   }
 
@@ -10749,7 +9257,7 @@ class DeleteInternetRadioStationFamily extends Family<AsyncValue<Response>> {
     covariant DeleteInternetRadioStationProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -10782,12 +9290,12 @@ class DeleteInternetRadioStationProvider
   /// @param id The ID for the station.
   ///
   /// Copied from [deleteInternetRadioStation].
-  DeleteInternetRadioStationProvider({
-    required dynamic id,
-  }) : this._internal(
+  DeleteInternetRadioStationProvider(
+    DeleteInternetRadioStationRequest request,
+  ) : this._internal(
           (ref) => deleteInternetRadioStation(
             ref as DeleteInternetRadioStationRef,
-            id: id,
+            request,
           ),
           from: deleteInternetRadioStationProvider,
           name: r'deleteInternetRadioStationProvider',
@@ -10798,7 +9306,7 @@ class DeleteInternetRadioStationProvider
           dependencies: DeleteInternetRadioStationFamily._dependencies,
           allTransitiveDependencies:
               DeleteInternetRadioStationFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   DeleteInternetRadioStationProvider._internal(
@@ -10808,10 +9316,10 @@ class DeleteInternetRadioStationProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final DeleteInternetRadioStationRequest request;
 
   @override
   Override overrideWith(
@@ -10826,7 +9334,7 @@ class DeleteInternetRadioStationProvider
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -10838,13 +9346,14 @@ class DeleteInternetRadioStationProvider
 
   @override
   bool operator ==(Object other) {
-    return other is DeleteInternetRadioStationProvider && other.id == id;
+    return other is DeleteInternetRadioStationProvider &&
+        other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -10853,8 +9362,8 @@ class DeleteInternetRadioStationProvider
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin DeleteInternetRadioStationRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  DeleteInternetRadioStationRequest get request;
 }
 
 class _DeleteInternetRadioStationProviderElement
@@ -10863,10 +9372,11 @@ class _DeleteInternetRadioStationProviderElement
   _DeleteInternetRadioStationProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as DeleteInternetRadioStationProvider).id;
+  DeleteInternetRadioStationRequest get request =>
+      (origin as DeleteInternetRadioStationProvider).request;
 }
 
-String _$getChatMessagesHash() => r'1d9b8fbba4ce0c8e7662cd9959297af4527014a4';
+String _$getChatMessagesHash() => r'ade647159b40492525ba4698c83fd9e13e07005a';
 
 /// http://your-server/rest/getChatMessages Since 1.2.0
 /// Returns the current visible (non-expired) chat messages.
@@ -10898,11 +9408,11 @@ class GetChatMessagesFamily extends Family<AsyncValue<Response>> {
   /// @param since Only return messages newer than this time (in millis since Jan 1 1970).
   ///
   /// Copied from [getChatMessages].
-  GetChatMessagesProvider call({
-    dynamic since,
-  }) {
+  GetChatMessagesProvider call(
+    GetChatMessagesRequest request,
+  ) {
     return GetChatMessagesProvider(
-      since: since,
+      request,
     );
   }
 
@@ -10911,7 +9421,7 @@ class GetChatMessagesFamily extends Family<AsyncValue<Response>> {
     covariant GetChatMessagesProvider provider,
   ) {
     return call(
-      since: provider.since,
+      provider.request,
     );
   }
 
@@ -10943,12 +9453,12 @@ class GetChatMessagesProvider extends AutoDisposeFutureProvider<Response> {
   /// @param since Only return messages newer than this time (in millis since Jan 1 1970).
   ///
   /// Copied from [getChatMessages].
-  GetChatMessagesProvider({
-    dynamic since,
-  }) : this._internal(
+  GetChatMessagesProvider(
+    GetChatMessagesRequest request,
+  ) : this._internal(
           (ref) => getChatMessages(
             ref as GetChatMessagesRef,
-            since: since,
+            request,
           ),
           from: getChatMessagesProvider,
           name: r'getChatMessagesProvider',
@@ -10959,7 +9469,7 @@ class GetChatMessagesProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: GetChatMessagesFamily._dependencies,
           allTransitiveDependencies:
               GetChatMessagesFamily._allTransitiveDependencies,
-          since: since,
+          request: request,
         );
 
   GetChatMessagesProvider._internal(
@@ -10969,10 +9479,10 @@ class GetChatMessagesProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.since,
+    required this.request,
   }) : super.internal();
 
-  final dynamic since;
+  final GetChatMessagesRequest request;
 
   @override
   Override overrideWith(
@@ -10987,7 +9497,7 @@ class GetChatMessagesProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        since: since,
+        request: request,
       ),
     );
   }
@@ -10999,13 +9509,13 @@ class GetChatMessagesProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetChatMessagesProvider && other.since == since;
+    return other is GetChatMessagesProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, since.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -11014,8 +9524,8 @@ class GetChatMessagesProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetChatMessagesRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `since` of this provider.
-  dynamic get since;
+  /// The parameter `request` of this provider.
+  GetChatMessagesRequest get request;
 }
 
 class _GetChatMessagesProviderElement
@@ -11023,10 +9533,11 @@ class _GetChatMessagesProviderElement
   _GetChatMessagesProviderElement(super.provider);
 
   @override
-  dynamic get since => (origin as GetChatMessagesProvider).since;
+  GetChatMessagesRequest get request =>
+      (origin as GetChatMessagesProvider).request;
 }
 
-String _$addChatMessageHash() => r'e533eefb870132408df91532d8571e1300da540e';
+String _$addChatMessageHash() => r'a5bedeab0972cd6435cbaefeba8b5c0d0b64147c';
 
 /// http://your-server/rest/addChatMessage Since 1.2.0
 /// Adds a message to the chat log.
@@ -11058,11 +9569,11 @@ class AddChatMessageFamily extends Family<AsyncValue<Response>> {
   /// @param message The chat message.
   ///
   /// Copied from [addChatMessage].
-  AddChatMessageProvider call({
-    required dynamic message,
-  }) {
+  AddChatMessageProvider call(
+    AddChatMessageRequest request,
+  ) {
     return AddChatMessageProvider(
-      message: message,
+      request,
     );
   }
 
@@ -11071,7 +9582,7 @@ class AddChatMessageFamily extends Family<AsyncValue<Response>> {
     covariant AddChatMessageProvider provider,
   ) {
     return call(
-      message: provider.message,
+      provider.request,
     );
   }
 
@@ -11103,12 +9614,12 @@ class AddChatMessageProvider extends AutoDisposeFutureProvider<Response> {
   /// @param message The chat message.
   ///
   /// Copied from [addChatMessage].
-  AddChatMessageProvider({
-    required dynamic message,
-  }) : this._internal(
+  AddChatMessageProvider(
+    AddChatMessageRequest request,
+  ) : this._internal(
           (ref) => addChatMessage(
             ref as AddChatMessageRef,
-            message: message,
+            request,
           ),
           from: addChatMessageProvider,
           name: r'addChatMessageProvider',
@@ -11119,7 +9630,7 @@ class AddChatMessageProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: AddChatMessageFamily._dependencies,
           allTransitiveDependencies:
               AddChatMessageFamily._allTransitiveDependencies,
-          message: message,
+          request: request,
         );
 
   AddChatMessageProvider._internal(
@@ -11129,10 +9640,10 @@ class AddChatMessageProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.message,
+    required this.request,
   }) : super.internal();
 
-  final dynamic message;
+  final AddChatMessageRequest request;
 
   @override
   Override overrideWith(
@@ -11147,7 +9658,7 @@ class AddChatMessageProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        message: message,
+        request: request,
       ),
     );
   }
@@ -11159,13 +9670,13 @@ class AddChatMessageProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is AddChatMessageProvider && other.message == message;
+    return other is AddChatMessageProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, message.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -11174,8 +9685,8 @@ class AddChatMessageProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin AddChatMessageRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `message` of this provider.
-  dynamic get message;
+  /// The parameter `request` of this provider.
+  AddChatMessageRequest get request;
 }
 
 class _AddChatMessageProviderElement
@@ -11183,10 +9694,11 @@ class _AddChatMessageProviderElement
   _AddChatMessageProviderElement(super.provider);
 
   @override
-  dynamic get message => (origin as AddChatMessageProvider).message;
+  AddChatMessageRequest get request =>
+      (origin as AddChatMessageProvider).request;
 }
 
-String _$getUserHash() => r'986289674d23bfc762f64bdb7e968845b63733f1';
+String _$getUserHash() => r'7f43354d3d7b1f0a81dcf919b9053e5fc535c534';
 
 /// http://your-server/rest/getUser Since 1.3.0
 /// Get details about a given user, including which authorization roles and folder access it has. Can be used to enable/disable certain features in the client, such as jukebox control.
@@ -11218,11 +9730,11 @@ class GetUserFamily extends Family<AsyncValue<Response>> {
   /// @param username The name of the user to retrieve. You can only retrieve your own user unless you have admin privileges.
   ///
   /// Copied from [getUser].
-  GetUserProvider call({
-    required dynamic username,
-  }) {
+  GetUserProvider call(
+    GetUserRequest request,
+  ) {
     return GetUserProvider(
-      username: username,
+      request,
     );
   }
 
@@ -11231,7 +9743,7 @@ class GetUserFamily extends Family<AsyncValue<Response>> {
     covariant GetUserProvider provider,
   ) {
     return call(
-      username: provider.username,
+      provider.request,
     );
   }
 
@@ -11263,12 +9775,12 @@ class GetUserProvider extends AutoDisposeFutureProvider<Response> {
   /// @param username The name of the user to retrieve. You can only retrieve your own user unless you have admin privileges.
   ///
   /// Copied from [getUser].
-  GetUserProvider({
-    required dynamic username,
-  }) : this._internal(
+  GetUserProvider(
+    GetUserRequest request,
+  ) : this._internal(
           (ref) => getUser(
             ref as GetUserRef,
-            username: username,
+            request,
           ),
           from: getUserProvider,
           name: r'getUserProvider',
@@ -11278,7 +9790,7 @@ class GetUserProvider extends AutoDisposeFutureProvider<Response> {
                   : _$getUserHash,
           dependencies: GetUserFamily._dependencies,
           allTransitiveDependencies: GetUserFamily._allTransitiveDependencies,
-          username: username,
+          request: request,
         );
 
   GetUserProvider._internal(
@@ -11288,10 +9800,10 @@ class GetUserProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.username,
+    required this.request,
   }) : super.internal();
 
-  final dynamic username;
+  final GetUserRequest request;
 
   @override
   Override overrideWith(
@@ -11306,7 +9818,7 @@ class GetUserProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        username: username,
+        request: request,
       ),
     );
   }
@@ -11318,13 +9830,13 @@ class GetUserProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetUserProvider && other.username == username;
+    return other is GetUserProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, username.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -11333,8 +9845,8 @@ class GetUserProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin GetUserRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `username` of this provider.
-  dynamic get username;
+  /// The parameter `request` of this provider.
+  GetUserRequest get request;
 }
 
 class _GetUserProviderElement extends AutoDisposeFutureProviderElement<Response>
@@ -11342,10 +9854,10 @@ class _GetUserProviderElement extends AutoDisposeFutureProviderElement<Response>
   _GetUserProviderElement(super.provider);
 
   @override
-  dynamic get username => (origin as GetUserProvider).username;
+  GetUserRequest get request => (origin as GetUserProvider).request;
 }
 
-String _$getUsersHash() => r'3710ca5625ae925b07acdeb7fac0cdc795a89033';
+String _$getUsersHash() => r'82de4b889bc81d6ac3b267d1b492608c0d37230f';
 
 /// http://your-server/rest/getUsers Since 1.8.0
 /// Get details about all users, including which authorization roles and folder access they have. Only users with admin privileges are allowed to call this method.
@@ -11365,7 +9877,7 @@ final getUsersProvider = AutoDisposeFutureProvider<Response>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetUsersRef = AutoDisposeFutureProviderRef<Response>;
-String _$createUserHash() => r'8114ed51978a443ffda5abac59813981a04b1e9c';
+String _$createUserHash() => r'f1b6fc5e17df8f525bf1ba3e5d312dfa75fccb7d';
 
 /// http://your-server/rest/createUser Since 1.1.0
 /// Creates a new Subsonic user, using the following parameters:
@@ -11461,43 +9973,11 @@ class CreateUserFamily extends Family<AsyncValue<Response>> {
   /// @param musicFolderId Default(All folders) (Since 1.12.0) IDs of the music folders the user is allowed access to. Include the parameter once for each folder.
   ///
   /// Copied from [createUser].
-  CreateUserProvider call({
-    required dynamic username,
-    required dynamic password,
-    required dynamic email,
-    dynamic ldapAuthenticated = false,
-    dynamic adminRole = false,
-    dynamic settingsRole = true,
-    dynamic streamRole = true,
-    dynamic jukeboxRole = false,
-    dynamic downloadRole = false,
-    dynamic uploadRole = false,
-    dynamic playlistRole = false,
-    dynamic coverArtRole = false,
-    dynamic commentRole = false,
-    dynamic podcastRole = false,
-    dynamic shareRole = false,
-    dynamic videoConversionRole = false,
-    dynamic musicFolderId = "All folders",
-  }) {
+  CreateUserProvider call(
+    CreateUserRequest request,
+  ) {
     return CreateUserProvider(
-      username: username,
-      password: password,
-      email: email,
-      ldapAuthenticated: ldapAuthenticated,
-      adminRole: adminRole,
-      settingsRole: settingsRole,
-      streamRole: streamRole,
-      jukeboxRole: jukeboxRole,
-      downloadRole: downloadRole,
-      uploadRole: uploadRole,
-      playlistRole: playlistRole,
-      coverArtRole: coverArtRole,
-      commentRole: commentRole,
-      podcastRole: podcastRole,
-      shareRole: shareRole,
-      videoConversionRole: videoConversionRole,
-      musicFolderId: musicFolderId,
+      request,
     );
   }
 
@@ -11506,23 +9986,7 @@ class CreateUserFamily extends Family<AsyncValue<Response>> {
     covariant CreateUserProvider provider,
   ) {
     return call(
-      username: provider.username,
-      password: provider.password,
-      email: provider.email,
-      ldapAuthenticated: provider.ldapAuthenticated,
-      adminRole: provider.adminRole,
-      settingsRole: provider.settingsRole,
-      streamRole: provider.streamRole,
-      jukeboxRole: provider.jukeboxRole,
-      downloadRole: provider.downloadRole,
-      uploadRole: provider.uploadRole,
-      playlistRole: provider.playlistRole,
-      coverArtRole: provider.coverArtRole,
-      commentRole: provider.commentRole,
-      podcastRole: provider.podcastRole,
-      shareRole: provider.shareRole,
-      videoConversionRole: provider.videoConversionRole,
-      musicFolderId: provider.musicFolderId,
+      provider.request,
     );
   }
 
@@ -11586,44 +10050,12 @@ class CreateUserProvider extends AutoDisposeFutureProvider<Response> {
   /// @param musicFolderId Default(All folders) (Since 1.12.0) IDs of the music folders the user is allowed access to. Include the parameter once for each folder.
   ///
   /// Copied from [createUser].
-  CreateUserProvider({
-    required dynamic username,
-    required dynamic password,
-    required dynamic email,
-    dynamic ldapAuthenticated = false,
-    dynamic adminRole = false,
-    dynamic settingsRole = true,
-    dynamic streamRole = true,
-    dynamic jukeboxRole = false,
-    dynamic downloadRole = false,
-    dynamic uploadRole = false,
-    dynamic playlistRole = false,
-    dynamic coverArtRole = false,
-    dynamic commentRole = false,
-    dynamic podcastRole = false,
-    dynamic shareRole = false,
-    dynamic videoConversionRole = false,
-    dynamic musicFolderId = "All folders",
-  }) : this._internal(
+  CreateUserProvider(
+    CreateUserRequest request,
+  ) : this._internal(
           (ref) => createUser(
             ref as CreateUserRef,
-            username: username,
-            password: password,
-            email: email,
-            ldapAuthenticated: ldapAuthenticated,
-            adminRole: adminRole,
-            settingsRole: settingsRole,
-            streamRole: streamRole,
-            jukeboxRole: jukeboxRole,
-            downloadRole: downloadRole,
-            uploadRole: uploadRole,
-            playlistRole: playlistRole,
-            coverArtRole: coverArtRole,
-            commentRole: commentRole,
-            podcastRole: podcastRole,
-            shareRole: shareRole,
-            videoConversionRole: videoConversionRole,
-            musicFolderId: musicFolderId,
+            request,
           ),
           from: createUserProvider,
           name: r'createUserProvider',
@@ -11634,23 +10066,7 @@ class CreateUserProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: CreateUserFamily._dependencies,
           allTransitiveDependencies:
               CreateUserFamily._allTransitiveDependencies,
-          username: username,
-          password: password,
-          email: email,
-          ldapAuthenticated: ldapAuthenticated,
-          adminRole: adminRole,
-          settingsRole: settingsRole,
-          streamRole: streamRole,
-          jukeboxRole: jukeboxRole,
-          downloadRole: downloadRole,
-          uploadRole: uploadRole,
-          playlistRole: playlistRole,
-          coverArtRole: coverArtRole,
-          commentRole: commentRole,
-          podcastRole: podcastRole,
-          shareRole: shareRole,
-          videoConversionRole: videoConversionRole,
-          musicFolderId: musicFolderId,
+          request: request,
         );
 
   CreateUserProvider._internal(
@@ -11660,42 +10076,10 @@ class CreateUserProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.username,
-    required this.password,
-    required this.email,
-    required this.ldapAuthenticated,
-    required this.adminRole,
-    required this.settingsRole,
-    required this.streamRole,
-    required this.jukeboxRole,
-    required this.downloadRole,
-    required this.uploadRole,
-    required this.playlistRole,
-    required this.coverArtRole,
-    required this.commentRole,
-    required this.podcastRole,
-    required this.shareRole,
-    required this.videoConversionRole,
-    required this.musicFolderId,
+    required this.request,
   }) : super.internal();
 
-  final dynamic username;
-  final dynamic password;
-  final dynamic email;
-  final dynamic ldapAuthenticated;
-  final dynamic adminRole;
-  final dynamic settingsRole;
-  final dynamic streamRole;
-  final dynamic jukeboxRole;
-  final dynamic downloadRole;
-  final dynamic uploadRole;
-  final dynamic playlistRole;
-  final dynamic coverArtRole;
-  final dynamic commentRole;
-  final dynamic podcastRole;
-  final dynamic shareRole;
-  final dynamic videoConversionRole;
-  final dynamic musicFolderId;
+  final CreateUserRequest request;
 
   @override
   Override overrideWith(
@@ -11710,23 +10094,7 @@ class CreateUserProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        username: username,
-        password: password,
-        email: email,
-        ldapAuthenticated: ldapAuthenticated,
-        adminRole: adminRole,
-        settingsRole: settingsRole,
-        streamRole: streamRole,
-        jukeboxRole: jukeboxRole,
-        downloadRole: downloadRole,
-        uploadRole: uploadRole,
-        playlistRole: playlistRole,
-        coverArtRole: coverArtRole,
-        commentRole: commentRole,
-        podcastRole: podcastRole,
-        shareRole: shareRole,
-        videoConversionRole: videoConversionRole,
-        musicFolderId: musicFolderId,
+        request: request,
       ),
     );
   }
@@ -11738,46 +10106,13 @@ class CreateUserProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is CreateUserProvider &&
-        other.username == username &&
-        other.password == password &&
-        other.email == email &&
-        other.ldapAuthenticated == ldapAuthenticated &&
-        other.adminRole == adminRole &&
-        other.settingsRole == settingsRole &&
-        other.streamRole == streamRole &&
-        other.jukeboxRole == jukeboxRole &&
-        other.downloadRole == downloadRole &&
-        other.uploadRole == uploadRole &&
-        other.playlistRole == playlistRole &&
-        other.coverArtRole == coverArtRole &&
-        other.commentRole == commentRole &&
-        other.podcastRole == podcastRole &&
-        other.shareRole == shareRole &&
-        other.videoConversionRole == videoConversionRole &&
-        other.musicFolderId == musicFolderId;
+    return other is CreateUserProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, username.hashCode);
-    hash = _SystemHash.combine(hash, password.hashCode);
-    hash = _SystemHash.combine(hash, email.hashCode);
-    hash = _SystemHash.combine(hash, ldapAuthenticated.hashCode);
-    hash = _SystemHash.combine(hash, adminRole.hashCode);
-    hash = _SystemHash.combine(hash, settingsRole.hashCode);
-    hash = _SystemHash.combine(hash, streamRole.hashCode);
-    hash = _SystemHash.combine(hash, jukeboxRole.hashCode);
-    hash = _SystemHash.combine(hash, downloadRole.hashCode);
-    hash = _SystemHash.combine(hash, uploadRole.hashCode);
-    hash = _SystemHash.combine(hash, playlistRole.hashCode);
-    hash = _SystemHash.combine(hash, coverArtRole.hashCode);
-    hash = _SystemHash.combine(hash, commentRole.hashCode);
-    hash = _SystemHash.combine(hash, podcastRole.hashCode);
-    hash = _SystemHash.combine(hash, shareRole.hashCode);
-    hash = _SystemHash.combine(hash, videoConversionRole.hashCode);
-    hash = _SystemHash.combine(hash, musicFolderId.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -11786,56 +10121,8 @@ class CreateUserProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin CreateUserRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `username` of this provider.
-  dynamic get username;
-
-  /// The parameter `password` of this provider.
-  dynamic get password;
-
-  /// The parameter `email` of this provider.
-  dynamic get email;
-
-  /// The parameter `ldapAuthenticated` of this provider.
-  dynamic get ldapAuthenticated;
-
-  /// The parameter `adminRole` of this provider.
-  dynamic get adminRole;
-
-  /// The parameter `settingsRole` of this provider.
-  dynamic get settingsRole;
-
-  /// The parameter `streamRole` of this provider.
-  dynamic get streamRole;
-
-  /// The parameter `jukeboxRole` of this provider.
-  dynamic get jukeboxRole;
-
-  /// The parameter `downloadRole` of this provider.
-  dynamic get downloadRole;
-
-  /// The parameter `uploadRole` of this provider.
-  dynamic get uploadRole;
-
-  /// The parameter `playlistRole` of this provider.
-  dynamic get playlistRole;
-
-  /// The parameter `coverArtRole` of this provider.
-  dynamic get coverArtRole;
-
-  /// The parameter `commentRole` of this provider.
-  dynamic get commentRole;
-
-  /// The parameter `podcastRole` of this provider.
-  dynamic get podcastRole;
-
-  /// The parameter `shareRole` of this provider.
-  dynamic get shareRole;
-
-  /// The parameter `videoConversionRole` of this provider.
-  dynamic get videoConversionRole;
-
-  /// The parameter `musicFolderId` of this provider.
-  dynamic get musicFolderId;
+  /// The parameter `request` of this provider.
+  CreateUserRequest get request;
 }
 
 class _CreateUserProviderElement
@@ -11843,44 +10130,10 @@ class _CreateUserProviderElement
   _CreateUserProviderElement(super.provider);
 
   @override
-  dynamic get username => (origin as CreateUserProvider).username;
-  @override
-  dynamic get password => (origin as CreateUserProvider).password;
-  @override
-  dynamic get email => (origin as CreateUserProvider).email;
-  @override
-  dynamic get ldapAuthenticated =>
-      (origin as CreateUserProvider).ldapAuthenticated;
-  @override
-  dynamic get adminRole => (origin as CreateUserProvider).adminRole;
-  @override
-  dynamic get settingsRole => (origin as CreateUserProvider).settingsRole;
-  @override
-  dynamic get streamRole => (origin as CreateUserProvider).streamRole;
-  @override
-  dynamic get jukeboxRole => (origin as CreateUserProvider).jukeboxRole;
-  @override
-  dynamic get downloadRole => (origin as CreateUserProvider).downloadRole;
-  @override
-  dynamic get uploadRole => (origin as CreateUserProvider).uploadRole;
-  @override
-  dynamic get playlistRole => (origin as CreateUserProvider).playlistRole;
-  @override
-  dynamic get coverArtRole => (origin as CreateUserProvider).coverArtRole;
-  @override
-  dynamic get commentRole => (origin as CreateUserProvider).commentRole;
-  @override
-  dynamic get podcastRole => (origin as CreateUserProvider).podcastRole;
-  @override
-  dynamic get shareRole => (origin as CreateUserProvider).shareRole;
-  @override
-  dynamic get videoConversionRole =>
-      (origin as CreateUserProvider).videoConversionRole;
-  @override
-  dynamic get musicFolderId => (origin as CreateUserProvider).musicFolderId;
+  CreateUserRequest get request => (origin as CreateUserProvider).request;
 }
 
-String _$updateUserHash() => r'9c4fc63adecf1ad946521ca5adf3467bfd0f83cb';
+String _$updateUserHash() => r'55e208e0ba70e61e4564c929d7bd96dd44e77423';
 
 /// http://your-server/rest/updateUser Since 1.10.1
 /// Modifies an existing Subsonic user, using the following parameters:
@@ -11976,43 +10229,11 @@ class UpdateUserFamily extends Family<AsyncValue<Response>> {
   /// @param maxBitRate (Since 1.13.0) The maximum bit rate (in Kbps) for the user. Audio streams of higher bit rates are automatically downsampled to this bit rate. Legal values: 0 (no limit), 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320.
   ///
   /// Copied from [updateUser].
-  UpdateUserProvider call({
-    required dynamic username,
-    dynamic password,
-    dynamic email,
-    dynamic ldapAuthenticated,
-    dynamic adminRole,
-    dynamic settingsRole,
-    dynamic streamRole,
-    dynamic jukeboxRole,
-    dynamic downloadRole,
-    dynamic uploadRole,
-    dynamic coverArtRole,
-    dynamic commentRole,
-    dynamic podcastRole,
-    dynamic shareRole,
-    dynamic videoConversionRole = false,
-    dynamic musicFolderId,
-    dynamic maxBitRate,
-  }) {
+  UpdateUserProvider call(
+    UpdateUserRequest request,
+  ) {
     return UpdateUserProvider(
-      username: username,
-      password: password,
-      email: email,
-      ldapAuthenticated: ldapAuthenticated,
-      adminRole: adminRole,
-      settingsRole: settingsRole,
-      streamRole: streamRole,
-      jukeboxRole: jukeboxRole,
-      downloadRole: downloadRole,
-      uploadRole: uploadRole,
-      coverArtRole: coverArtRole,
-      commentRole: commentRole,
-      podcastRole: podcastRole,
-      shareRole: shareRole,
-      videoConversionRole: videoConversionRole,
-      musicFolderId: musicFolderId,
-      maxBitRate: maxBitRate,
+      request,
     );
   }
 
@@ -12021,23 +10242,7 @@ class UpdateUserFamily extends Family<AsyncValue<Response>> {
     covariant UpdateUserProvider provider,
   ) {
     return call(
-      username: provider.username,
-      password: provider.password,
-      email: provider.email,
-      ldapAuthenticated: provider.ldapAuthenticated,
-      adminRole: provider.adminRole,
-      settingsRole: provider.settingsRole,
-      streamRole: provider.streamRole,
-      jukeboxRole: provider.jukeboxRole,
-      downloadRole: provider.downloadRole,
-      uploadRole: provider.uploadRole,
-      coverArtRole: provider.coverArtRole,
-      commentRole: provider.commentRole,
-      podcastRole: provider.podcastRole,
-      shareRole: provider.shareRole,
-      videoConversionRole: provider.videoConversionRole,
-      musicFolderId: provider.musicFolderId,
-      maxBitRate: provider.maxBitRate,
+      provider.request,
     );
   }
 
@@ -12101,44 +10306,12 @@ class UpdateUserProvider extends AutoDisposeFutureProvider<Response> {
   /// @param maxBitRate (Since 1.13.0) The maximum bit rate (in Kbps) for the user. Audio streams of higher bit rates are automatically downsampled to this bit rate. Legal values: 0 (no limit), 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320.
   ///
   /// Copied from [updateUser].
-  UpdateUserProvider({
-    required dynamic username,
-    dynamic password,
-    dynamic email,
-    dynamic ldapAuthenticated,
-    dynamic adminRole,
-    dynamic settingsRole,
-    dynamic streamRole,
-    dynamic jukeboxRole,
-    dynamic downloadRole,
-    dynamic uploadRole,
-    dynamic coverArtRole,
-    dynamic commentRole,
-    dynamic podcastRole,
-    dynamic shareRole,
-    dynamic videoConversionRole = false,
-    dynamic musicFolderId,
-    dynamic maxBitRate,
-  }) : this._internal(
+  UpdateUserProvider(
+    UpdateUserRequest request,
+  ) : this._internal(
           (ref) => updateUser(
             ref as UpdateUserRef,
-            username: username,
-            password: password,
-            email: email,
-            ldapAuthenticated: ldapAuthenticated,
-            adminRole: adminRole,
-            settingsRole: settingsRole,
-            streamRole: streamRole,
-            jukeboxRole: jukeboxRole,
-            downloadRole: downloadRole,
-            uploadRole: uploadRole,
-            coverArtRole: coverArtRole,
-            commentRole: commentRole,
-            podcastRole: podcastRole,
-            shareRole: shareRole,
-            videoConversionRole: videoConversionRole,
-            musicFolderId: musicFolderId,
-            maxBitRate: maxBitRate,
+            request,
           ),
           from: updateUserProvider,
           name: r'updateUserProvider',
@@ -12149,23 +10322,7 @@ class UpdateUserProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: UpdateUserFamily._dependencies,
           allTransitiveDependencies:
               UpdateUserFamily._allTransitiveDependencies,
-          username: username,
-          password: password,
-          email: email,
-          ldapAuthenticated: ldapAuthenticated,
-          adminRole: adminRole,
-          settingsRole: settingsRole,
-          streamRole: streamRole,
-          jukeboxRole: jukeboxRole,
-          downloadRole: downloadRole,
-          uploadRole: uploadRole,
-          coverArtRole: coverArtRole,
-          commentRole: commentRole,
-          podcastRole: podcastRole,
-          shareRole: shareRole,
-          videoConversionRole: videoConversionRole,
-          musicFolderId: musicFolderId,
-          maxBitRate: maxBitRate,
+          request: request,
         );
 
   UpdateUserProvider._internal(
@@ -12175,42 +10332,10 @@ class UpdateUserProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.username,
-    required this.password,
-    required this.email,
-    required this.ldapAuthenticated,
-    required this.adminRole,
-    required this.settingsRole,
-    required this.streamRole,
-    required this.jukeboxRole,
-    required this.downloadRole,
-    required this.uploadRole,
-    required this.coverArtRole,
-    required this.commentRole,
-    required this.podcastRole,
-    required this.shareRole,
-    required this.videoConversionRole,
-    required this.musicFolderId,
-    required this.maxBitRate,
+    required this.request,
   }) : super.internal();
 
-  final dynamic username;
-  final dynamic password;
-  final dynamic email;
-  final dynamic ldapAuthenticated;
-  final dynamic adminRole;
-  final dynamic settingsRole;
-  final dynamic streamRole;
-  final dynamic jukeboxRole;
-  final dynamic downloadRole;
-  final dynamic uploadRole;
-  final dynamic coverArtRole;
-  final dynamic commentRole;
-  final dynamic podcastRole;
-  final dynamic shareRole;
-  final dynamic videoConversionRole;
-  final dynamic musicFolderId;
-  final dynamic maxBitRate;
+  final UpdateUserRequest request;
 
   @override
   Override overrideWith(
@@ -12225,23 +10350,7 @@ class UpdateUserProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        username: username,
-        password: password,
-        email: email,
-        ldapAuthenticated: ldapAuthenticated,
-        adminRole: adminRole,
-        settingsRole: settingsRole,
-        streamRole: streamRole,
-        jukeboxRole: jukeboxRole,
-        downloadRole: downloadRole,
-        uploadRole: uploadRole,
-        coverArtRole: coverArtRole,
-        commentRole: commentRole,
-        podcastRole: podcastRole,
-        shareRole: shareRole,
-        videoConversionRole: videoConversionRole,
-        musicFolderId: musicFolderId,
-        maxBitRate: maxBitRate,
+        request: request,
       ),
     );
   }
@@ -12253,46 +10362,13 @@ class UpdateUserProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is UpdateUserProvider &&
-        other.username == username &&
-        other.password == password &&
-        other.email == email &&
-        other.ldapAuthenticated == ldapAuthenticated &&
-        other.adminRole == adminRole &&
-        other.settingsRole == settingsRole &&
-        other.streamRole == streamRole &&
-        other.jukeboxRole == jukeboxRole &&
-        other.downloadRole == downloadRole &&
-        other.uploadRole == uploadRole &&
-        other.coverArtRole == coverArtRole &&
-        other.commentRole == commentRole &&
-        other.podcastRole == podcastRole &&
-        other.shareRole == shareRole &&
-        other.videoConversionRole == videoConversionRole &&
-        other.musicFolderId == musicFolderId &&
-        other.maxBitRate == maxBitRate;
+    return other is UpdateUserProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, username.hashCode);
-    hash = _SystemHash.combine(hash, password.hashCode);
-    hash = _SystemHash.combine(hash, email.hashCode);
-    hash = _SystemHash.combine(hash, ldapAuthenticated.hashCode);
-    hash = _SystemHash.combine(hash, adminRole.hashCode);
-    hash = _SystemHash.combine(hash, settingsRole.hashCode);
-    hash = _SystemHash.combine(hash, streamRole.hashCode);
-    hash = _SystemHash.combine(hash, jukeboxRole.hashCode);
-    hash = _SystemHash.combine(hash, downloadRole.hashCode);
-    hash = _SystemHash.combine(hash, uploadRole.hashCode);
-    hash = _SystemHash.combine(hash, coverArtRole.hashCode);
-    hash = _SystemHash.combine(hash, commentRole.hashCode);
-    hash = _SystemHash.combine(hash, podcastRole.hashCode);
-    hash = _SystemHash.combine(hash, shareRole.hashCode);
-    hash = _SystemHash.combine(hash, videoConversionRole.hashCode);
-    hash = _SystemHash.combine(hash, musicFolderId.hashCode);
-    hash = _SystemHash.combine(hash, maxBitRate.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -12301,56 +10377,8 @@ class UpdateUserProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin UpdateUserRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `username` of this provider.
-  dynamic get username;
-
-  /// The parameter `password` of this provider.
-  dynamic get password;
-
-  /// The parameter `email` of this provider.
-  dynamic get email;
-
-  /// The parameter `ldapAuthenticated` of this provider.
-  dynamic get ldapAuthenticated;
-
-  /// The parameter `adminRole` of this provider.
-  dynamic get adminRole;
-
-  /// The parameter `settingsRole` of this provider.
-  dynamic get settingsRole;
-
-  /// The parameter `streamRole` of this provider.
-  dynamic get streamRole;
-
-  /// The parameter `jukeboxRole` of this provider.
-  dynamic get jukeboxRole;
-
-  /// The parameter `downloadRole` of this provider.
-  dynamic get downloadRole;
-
-  /// The parameter `uploadRole` of this provider.
-  dynamic get uploadRole;
-
-  /// The parameter `coverArtRole` of this provider.
-  dynamic get coverArtRole;
-
-  /// The parameter `commentRole` of this provider.
-  dynamic get commentRole;
-
-  /// The parameter `podcastRole` of this provider.
-  dynamic get podcastRole;
-
-  /// The parameter `shareRole` of this provider.
-  dynamic get shareRole;
-
-  /// The parameter `videoConversionRole` of this provider.
-  dynamic get videoConversionRole;
-
-  /// The parameter `musicFolderId` of this provider.
-  dynamic get musicFolderId;
-
-  /// The parameter `maxBitRate` of this provider.
-  dynamic get maxBitRate;
+  /// The parameter `request` of this provider.
+  UpdateUserRequest get request;
 }
 
 class _UpdateUserProviderElement
@@ -12358,44 +10386,10 @@ class _UpdateUserProviderElement
   _UpdateUserProviderElement(super.provider);
 
   @override
-  dynamic get username => (origin as UpdateUserProvider).username;
-  @override
-  dynamic get password => (origin as UpdateUserProvider).password;
-  @override
-  dynamic get email => (origin as UpdateUserProvider).email;
-  @override
-  dynamic get ldapAuthenticated =>
-      (origin as UpdateUserProvider).ldapAuthenticated;
-  @override
-  dynamic get adminRole => (origin as UpdateUserProvider).adminRole;
-  @override
-  dynamic get settingsRole => (origin as UpdateUserProvider).settingsRole;
-  @override
-  dynamic get streamRole => (origin as UpdateUserProvider).streamRole;
-  @override
-  dynamic get jukeboxRole => (origin as UpdateUserProvider).jukeboxRole;
-  @override
-  dynamic get downloadRole => (origin as UpdateUserProvider).downloadRole;
-  @override
-  dynamic get uploadRole => (origin as UpdateUserProvider).uploadRole;
-  @override
-  dynamic get coverArtRole => (origin as UpdateUserProvider).coverArtRole;
-  @override
-  dynamic get commentRole => (origin as UpdateUserProvider).commentRole;
-  @override
-  dynamic get podcastRole => (origin as UpdateUserProvider).podcastRole;
-  @override
-  dynamic get shareRole => (origin as UpdateUserProvider).shareRole;
-  @override
-  dynamic get videoConversionRole =>
-      (origin as UpdateUserProvider).videoConversionRole;
-  @override
-  dynamic get musicFolderId => (origin as UpdateUserProvider).musicFolderId;
-  @override
-  dynamic get maxBitRate => (origin as UpdateUserProvider).maxBitRate;
+  UpdateUserRequest get request => (origin as UpdateUserProvider).request;
 }
 
-String _$deleteUserHash() => r'8138781922a10a0ef17d06d760215c5eb98b7578';
+String _$deleteUserHash() => r'9e9708d297be81ae9758270cd9ea543187c6680a';
 
 /// http://your-server/rest/deleteUser Since 1.3.0
 /// Deletes an existing Subsonic user, using the following parameters:
@@ -12427,11 +10421,11 @@ class DeleteUserFamily extends Family<AsyncValue<Response>> {
   /// @param username The name of the user to delete.
   ///
   /// Copied from [deleteUser].
-  DeleteUserProvider call({
-    required dynamic username,
-  }) {
+  DeleteUserProvider call(
+    DeleteUserRequest request,
+  ) {
     return DeleteUserProvider(
-      username: username,
+      request,
     );
   }
 
@@ -12440,7 +10434,7 @@ class DeleteUserFamily extends Family<AsyncValue<Response>> {
     covariant DeleteUserProvider provider,
   ) {
     return call(
-      username: provider.username,
+      provider.request,
     );
   }
 
@@ -12472,12 +10466,12 @@ class DeleteUserProvider extends AutoDisposeFutureProvider<Response> {
   /// @param username The name of the user to delete.
   ///
   /// Copied from [deleteUser].
-  DeleteUserProvider({
-    required dynamic username,
-  }) : this._internal(
+  DeleteUserProvider(
+    DeleteUserRequest request,
+  ) : this._internal(
           (ref) => deleteUser(
             ref as DeleteUserRef,
-            username: username,
+            request,
           ),
           from: deleteUserProvider,
           name: r'deleteUserProvider',
@@ -12488,7 +10482,7 @@ class DeleteUserProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: DeleteUserFamily._dependencies,
           allTransitiveDependencies:
               DeleteUserFamily._allTransitiveDependencies,
-          username: username,
+          request: request,
         );
 
   DeleteUserProvider._internal(
@@ -12498,10 +10492,10 @@ class DeleteUserProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.username,
+    required this.request,
   }) : super.internal();
 
-  final dynamic username;
+  final DeleteUserRequest request;
 
   @override
   Override overrideWith(
@@ -12516,7 +10510,7 @@ class DeleteUserProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        username: username,
+        request: request,
       ),
     );
   }
@@ -12528,13 +10522,13 @@ class DeleteUserProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is DeleteUserProvider && other.username == username;
+    return other is DeleteUserProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, username.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -12543,8 +10537,8 @@ class DeleteUserProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin DeleteUserRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `username` of this provider.
-  dynamic get username;
+  /// The parameter `request` of this provider.
+  DeleteUserRequest get request;
 }
 
 class _DeleteUserProviderElement
@@ -12552,10 +10546,10 @@ class _DeleteUserProviderElement
   _DeleteUserProviderElement(super.provider);
 
   @override
-  dynamic get username => (origin as DeleteUserProvider).username;
+  DeleteUserRequest get request => (origin as DeleteUserProvider).request;
 }
 
-String _$changePasswordHash() => r'e3c912f32b6e848c25ae4389fbb2001d122a8438';
+String _$changePasswordHash() => r'e077de0659520141fb9cf2ddbdbf71baed51b908';
 
 /// http://your-server/rest/changePassword Since 1.1.0
 /// Changes the password of an existing Subsonic user, using the following parameters. You can only change your own password unless you have admin privileges.
@@ -12591,13 +10585,11 @@ class ChangePasswordFamily extends Family<AsyncValue<Response>> {
   /// @param password The new password of the new user, either in clear text of hex-encoded (see above).
   ///
   /// Copied from [changePassword].
-  ChangePasswordProvider call({
-    required dynamic username,
-    required dynamic password,
-  }) {
+  ChangePasswordProvider call(
+    ChangePasswordRequest request,
+  ) {
     return ChangePasswordProvider(
-      username: username,
-      password: password,
+      request,
     );
   }
 
@@ -12606,8 +10598,7 @@ class ChangePasswordFamily extends Family<AsyncValue<Response>> {
     covariant ChangePasswordProvider provider,
   ) {
     return call(
-      username: provider.username,
-      password: provider.password,
+      provider.request,
     );
   }
 
@@ -12641,14 +10632,12 @@ class ChangePasswordProvider extends AutoDisposeFutureProvider<Response> {
   /// @param password The new password of the new user, either in clear text of hex-encoded (see above).
   ///
   /// Copied from [changePassword].
-  ChangePasswordProvider({
-    required dynamic username,
-    required dynamic password,
-  }) : this._internal(
+  ChangePasswordProvider(
+    ChangePasswordRequest request,
+  ) : this._internal(
           (ref) => changePassword(
             ref as ChangePasswordRef,
-            username: username,
-            password: password,
+            request,
           ),
           from: changePasswordProvider,
           name: r'changePasswordProvider',
@@ -12659,8 +10648,7 @@ class ChangePasswordProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: ChangePasswordFamily._dependencies,
           allTransitiveDependencies:
               ChangePasswordFamily._allTransitiveDependencies,
-          username: username,
-          password: password,
+          request: request,
         );
 
   ChangePasswordProvider._internal(
@@ -12670,12 +10658,10 @@ class ChangePasswordProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.username,
-    required this.password,
+    required this.request,
   }) : super.internal();
 
-  final dynamic username;
-  final dynamic password;
+  final ChangePasswordRequest request;
 
   @override
   Override overrideWith(
@@ -12690,8 +10676,7 @@ class ChangePasswordProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        username: username,
-        password: password,
+        request: request,
       ),
     );
   }
@@ -12703,16 +10688,13 @@ class ChangePasswordProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is ChangePasswordProvider &&
-        other.username == username &&
-        other.password == password;
+    return other is ChangePasswordProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, username.hashCode);
-    hash = _SystemHash.combine(hash, password.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -12721,11 +10703,8 @@ class ChangePasswordProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin ChangePasswordRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `username` of this provider.
-  dynamic get username;
-
-  /// The parameter `password` of this provider.
-  dynamic get password;
+  /// The parameter `request` of this provider.
+  ChangePasswordRequest get request;
 }
 
 class _ChangePasswordProviderElement
@@ -12733,12 +10712,11 @@ class _ChangePasswordProviderElement
   _ChangePasswordProviderElement(super.provider);
 
   @override
-  dynamic get username => (origin as ChangePasswordProvider).username;
-  @override
-  dynamic get password => (origin as ChangePasswordProvider).password;
+  ChangePasswordRequest get request =>
+      (origin as ChangePasswordProvider).request;
 }
 
-String _$getBookmarksHash() => r'34258daeb9a97441680fae2404218a55a799825c';
+String _$getBookmarksHash() => r'0a6f4c3954e8ac31bd8c62c959ebd858e760dd60';
 
 /// http://your-server/rest/getBookmarks Since 1.9.0
 /// Returns all bookmarks for this user. A bookmark is a position within a certain media file.
@@ -12758,7 +10736,7 @@ final getBookmarksProvider = AutoDisposeFutureProvider<Response>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetBookmarksRef = AutoDisposeFutureProviderRef<Response>;
-String _$createBookmarkHash() => r'38f7804cebb738299c5effb6aec16262820923d1';
+String _$createBookmarkHash() => r'906c699f7ceb35474f89d1f8ad56280b66703f2f';
 
 /// http://your-server/rest/createBookmark Since 1.9.0
 /// Creates or updates a bookmark (a position within a media file). Bookmarks are personal and not visible to other users.
@@ -12798,15 +10776,11 @@ class CreateBookmarkFamily extends Family<AsyncValue<Response>> {
   /// @param comment A user-defined comment.
   ///
   /// Copied from [createBookmark].
-  CreateBookmarkProvider call({
-    required dynamic id,
-    required dynamic position,
-    dynamic comment,
-  }) {
+  CreateBookmarkProvider call(
+    CreateBookmarkRequest request,
+  ) {
     return CreateBookmarkProvider(
-      id: id,
-      position: position,
-      comment: comment,
+      request,
     );
   }
 
@@ -12815,9 +10789,7 @@ class CreateBookmarkFamily extends Family<AsyncValue<Response>> {
     covariant CreateBookmarkProvider provider,
   ) {
     return call(
-      id: provider.id,
-      position: provider.position,
-      comment: provider.comment,
+      provider.request,
     );
   }
 
@@ -12853,16 +10825,12 @@ class CreateBookmarkProvider extends AutoDisposeFutureProvider<Response> {
   /// @param comment A user-defined comment.
   ///
   /// Copied from [createBookmark].
-  CreateBookmarkProvider({
-    required dynamic id,
-    required dynamic position,
-    dynamic comment,
-  }) : this._internal(
+  CreateBookmarkProvider(
+    CreateBookmarkRequest request,
+  ) : this._internal(
           (ref) => createBookmark(
             ref as CreateBookmarkRef,
-            id: id,
-            position: position,
-            comment: comment,
+            request,
           ),
           from: createBookmarkProvider,
           name: r'createBookmarkProvider',
@@ -12873,9 +10841,7 @@ class CreateBookmarkProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: CreateBookmarkFamily._dependencies,
           allTransitiveDependencies:
               CreateBookmarkFamily._allTransitiveDependencies,
-          id: id,
-          position: position,
-          comment: comment,
+          request: request,
         );
 
   CreateBookmarkProvider._internal(
@@ -12885,14 +10851,10 @@ class CreateBookmarkProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.position,
-    required this.comment,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic position;
-  final dynamic comment;
+  final CreateBookmarkRequest request;
 
   @override
   Override overrideWith(
@@ -12907,9 +10869,7 @@ class CreateBookmarkProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        position: position,
-        comment: comment,
+        request: request,
       ),
     );
   }
@@ -12921,18 +10881,13 @@ class CreateBookmarkProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is CreateBookmarkProvider &&
-        other.id == id &&
-        other.position == position &&
-        other.comment == comment;
+    return other is CreateBookmarkProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, position.hashCode);
-    hash = _SystemHash.combine(hash, comment.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -12941,14 +10896,8 @@ class CreateBookmarkProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin CreateBookmarkRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `position` of this provider.
-  dynamic get position;
-
-  /// The parameter `comment` of this provider.
-  dynamic get comment;
+  /// The parameter `request` of this provider.
+  CreateBookmarkRequest get request;
 }
 
 class _CreateBookmarkProviderElement
@@ -12956,14 +10905,11 @@ class _CreateBookmarkProviderElement
   _CreateBookmarkProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as CreateBookmarkProvider).id;
-  @override
-  dynamic get position => (origin as CreateBookmarkProvider).position;
-  @override
-  dynamic get comment => (origin as CreateBookmarkProvider).comment;
+  CreateBookmarkRequest get request =>
+      (origin as CreateBookmarkProvider).request;
 }
 
-String _$deleteBookmarkHash() => r'687e6fa9db5e0715112119fed02baa7365c9ab0e';
+String _$deleteBookmarkHash() => r'adc2e110c281fe93442327fc50fe2b2e206f463d';
 
 /// http://your-server/rest/deleteBookmark Since 1.9.0
 /// Deletes the bookmark for a given file.
@@ -12995,11 +10941,11 @@ class DeleteBookmarkFamily extends Family<AsyncValue<Response>> {
   /// @param id ID of the media file for which to delete the bookmark. Other users' bookmarks are not affected.
   ///
   /// Copied from [deleteBookmark].
-  DeleteBookmarkProvider call({
-    required dynamic id,
-  }) {
+  DeleteBookmarkProvider call(
+    DeleteBookmarkRequest request,
+  ) {
     return DeleteBookmarkProvider(
-      id: id,
+      request,
     );
   }
 
@@ -13008,7 +10954,7 @@ class DeleteBookmarkFamily extends Family<AsyncValue<Response>> {
     covariant DeleteBookmarkProvider provider,
   ) {
     return call(
-      id: provider.id,
+      provider.request,
     );
   }
 
@@ -13040,12 +10986,12 @@ class DeleteBookmarkProvider extends AutoDisposeFutureProvider<Response> {
   /// @param id ID of the media file for which to delete the bookmark. Other users' bookmarks are not affected.
   ///
   /// Copied from [deleteBookmark].
-  DeleteBookmarkProvider({
-    required dynamic id,
-  }) : this._internal(
+  DeleteBookmarkProvider(
+    DeleteBookmarkRequest request,
+  ) : this._internal(
           (ref) => deleteBookmark(
             ref as DeleteBookmarkRef,
-            id: id,
+            request,
           ),
           from: deleteBookmarkProvider,
           name: r'deleteBookmarkProvider',
@@ -13056,7 +11002,7 @@ class DeleteBookmarkProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: DeleteBookmarkFamily._dependencies,
           allTransitiveDependencies:
               DeleteBookmarkFamily._allTransitiveDependencies,
-          id: id,
+          request: request,
         );
 
   DeleteBookmarkProvider._internal(
@@ -13066,10 +11012,10 @@ class DeleteBookmarkProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
+  final DeleteBookmarkRequest request;
 
   @override
   Override overrideWith(
@@ -13084,7 +11030,7 @@ class DeleteBookmarkProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        request: request,
       ),
     );
   }
@@ -13096,13 +11042,13 @@ class DeleteBookmarkProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is DeleteBookmarkProvider && other.id == id;
+    return other is DeleteBookmarkProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -13111,8 +11057,8 @@ class DeleteBookmarkProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin DeleteBookmarkRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
+  /// The parameter `request` of this provider.
+  DeleteBookmarkRequest get request;
 }
 
 class _DeleteBookmarkProviderElement
@@ -13120,10 +11066,11 @@ class _DeleteBookmarkProviderElement
   _DeleteBookmarkProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as DeleteBookmarkProvider).id;
+  DeleteBookmarkRequest get request =>
+      (origin as DeleteBookmarkProvider).request;
 }
 
-String _$getPlayQueueHash() => r'517758616e9313fe3240a34e2519e1415ca486fb';
+String _$getPlayQueueHash() => r'10e31d396540854103980df793c7eb113221c361';
 
 /// http://your-server/rest/getPlayQueue Since 1.12.0
 /// Returns the state of the play queue for this user (as set by savePlayQueue). This includes the tracks in the play queue, the currently playing track, and the position within this track. Typically used to allow a user to move between different clients/apps while retaining the same play queue (for instance when listening to an audio book).
@@ -13143,7 +11090,7 @@ final getPlayQueueProvider = AutoDisposeFutureProvider<Response>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetPlayQueueRef = AutoDisposeFutureProviderRef<Response>;
-String _$savePlayQueueHash() => r'c1feff6779cc1021a2dbe0d7e1254b09d4e405f2';
+String _$savePlayQueueHash() => r'c2ddbaff383294a9a92044fc98a2e0d56a2aa053';
 
 /// http://your-server/rest/savePlayQueue Since 1.12.0
 /// Saves the state of the play queue for this user. This includes the tracks in the play queue, the currently playing track, and the position within this track. Typically used to allow a user to move between different clients/apps while retaining the same play queue (for instance when listening to an audio book).
@@ -13183,15 +11130,11 @@ class SavePlayQueueFamily extends Family<AsyncValue<Response>> {
   /// @param position The position in milliseconds within the currently playing song.
   ///
   /// Copied from [savePlayQueue].
-  SavePlayQueueProvider call({
-    required dynamic id,
-    dynamic current,
-    dynamic position,
-  }) {
+  SavePlayQueueProvider call(
+    SavePlayQueueRequest request,
+  ) {
     return SavePlayQueueProvider(
-      id: id,
-      current: current,
-      position: position,
+      request,
     );
   }
 
@@ -13200,9 +11143,7 @@ class SavePlayQueueFamily extends Family<AsyncValue<Response>> {
     covariant SavePlayQueueProvider provider,
   ) {
     return call(
-      id: provider.id,
-      current: provider.current,
-      position: provider.position,
+      provider.request,
     );
   }
 
@@ -13238,16 +11179,12 @@ class SavePlayQueueProvider extends AutoDisposeFutureProvider<Response> {
   /// @param position The position in milliseconds within the currently playing song.
   ///
   /// Copied from [savePlayQueue].
-  SavePlayQueueProvider({
-    required dynamic id,
-    dynamic current,
-    dynamic position,
-  }) : this._internal(
+  SavePlayQueueProvider(
+    SavePlayQueueRequest request,
+  ) : this._internal(
           (ref) => savePlayQueue(
             ref as SavePlayQueueRef,
-            id: id,
-            current: current,
-            position: position,
+            request,
           ),
           from: savePlayQueueProvider,
           name: r'savePlayQueueProvider',
@@ -13258,9 +11195,7 @@ class SavePlayQueueProvider extends AutoDisposeFutureProvider<Response> {
           dependencies: SavePlayQueueFamily._dependencies,
           allTransitiveDependencies:
               SavePlayQueueFamily._allTransitiveDependencies,
-          id: id,
-          current: current,
-          position: position,
+          request: request,
         );
 
   SavePlayQueueProvider._internal(
@@ -13270,14 +11205,10 @@ class SavePlayQueueProvider extends AutoDisposeFutureProvider<Response> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.current,
-    required this.position,
+    required this.request,
   }) : super.internal();
 
-  final dynamic id;
-  final dynamic current;
-  final dynamic position;
+  final SavePlayQueueRequest request;
 
   @override
   Override overrideWith(
@@ -13292,9 +11223,7 @@ class SavePlayQueueProvider extends AutoDisposeFutureProvider<Response> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        current: current,
-        position: position,
+        request: request,
       ),
     );
   }
@@ -13306,18 +11235,13 @@ class SavePlayQueueProvider extends AutoDisposeFutureProvider<Response> {
 
   @override
   bool operator ==(Object other) {
-    return other is SavePlayQueueProvider &&
-        other.id == id &&
-        other.current == current &&
-        other.position == position;
+    return other is SavePlayQueueProvider && other.request == request;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, current.hashCode);
-    hash = _SystemHash.combine(hash, position.hashCode);
+    hash = _SystemHash.combine(hash, request.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -13326,14 +11250,8 @@ class SavePlayQueueProvider extends AutoDisposeFutureProvider<Response> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin SavePlayQueueRef on AutoDisposeFutureProviderRef<Response> {
-  /// The parameter `id` of this provider.
-  dynamic get id;
-
-  /// The parameter `current` of this provider.
-  dynamic get current;
-
-  /// The parameter `position` of this provider.
-  dynamic get position;
+  /// The parameter `request` of this provider.
+  SavePlayQueueRequest get request;
 }
 
 class _SavePlayQueueProviderElement
@@ -13341,14 +11259,10 @@ class _SavePlayQueueProviderElement
   _SavePlayQueueProviderElement(super.provider);
 
   @override
-  dynamic get id => (origin as SavePlayQueueProvider).id;
-  @override
-  dynamic get current => (origin as SavePlayQueueProvider).current;
-  @override
-  dynamic get position => (origin as SavePlayQueueProvider).position;
+  SavePlayQueueRequest get request => (origin as SavePlayQueueProvider).request;
 }
 
-String _$getScanStatusHash() => r'4bda265f08e0e5369518bb6700ebadf1df43c7c6';
+String _$getScanStatusHash() => r'd3196ce3e1e78972bacd5940a7b1965539c949c2';
 
 /// http://your-server/rest/getScanStatus Since 1.15.0
 /// Returns the current status for media library scanning. Takes no extra parameters.
@@ -13369,7 +11283,7 @@ final getScanStatusProvider = AutoDisposeFutureProvider<Response>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetScanStatusRef = AutoDisposeFutureProviderRef<Response>;
-String _$startScanHash() => r'96dff17a670eab108b78e8333bb184df54e0c13d';
+String _$startScanHash() => r'9480eda829df52eb8366e3f74c3e13c8d4972954';
 
 /// http://your-server/rest/startScan Since 1.15.0
 /// Initiates a rescan of the media libraries. Takes no extra parameters.

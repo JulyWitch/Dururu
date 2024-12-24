@@ -117,6 +117,7 @@
     <xs:complexType name="Genre" mixed="true">
         <xs:attribute name="songCount" type="xs:int" use="required"/>  <!-- Added in 1.10.2 -->
         <xs:attribute name="albumCount" type="xs:int" use="required"/> <!-- Added in 1.10.2 -->
+        <xs:attribute name="value" type="xs:string" use="required"/>
     </xs:complexType>
 
     <xs:complexType name="ArtistsID3">

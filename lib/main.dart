@@ -1,5 +1,10 @@
-import 'package:dururu/presentation/home.dart';
+import 'package:dururu/presentation/album.dart';
+import 'package:dururu/presentation/album_list.dart';
+import 'package:dururu/presentation/artist.dart';
+import 'package:dururu/presentation/genre.dart';
 import 'package:dururu/presentation/login.dart';
+import 'package:dururu/presentation/main.dart';
+import 'package:dururu/presentation/widgets/player_bar.dart';
 import 'package:dururu/providers/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,16 +25,49 @@ class _MyAppState extends ConsumerState<MyApp> {
   late final _router = GoRouter(
     routes: [
       GoRoute(
-        path: '/',
-        builder: (context, state) => const HomePage(),
-        redirect: (context, state) async {
-          if ((await ref.read(authProvider.future)) == null) return '/login';
-          return null;
-        },
-      ),
-      GoRoute(
         path: '/login',
         builder: (context, state) => const LoginPage(),
+      ),
+      ShellRoute(
+        builder: (context, state, child) => PlayerBarShellLayout(child: child),
+        routes: [
+          GoRoute(
+            path: '/',
+            builder: (context, state) => const MainPage(),
+            redirect: (context, state) async {
+              if ((await ref.read(authProvider.future)) == null) {
+                return '/login';
+              }
+              return null;
+            },
+          ),
+          GoRoute(
+            path: '/albums/:albumId',
+            builder: (context, state) => AlbumPage(
+              albumId: state.pathParameters['albumId']!,
+            ),
+          ),
+          GoRoute(
+            path: '/genres/:genre',
+            builder: (context, state) => GenrePage(
+              genre: state.pathParameters['genre']!,
+            ),
+          ),
+          GoRoute(
+            path: '/artists/:artistId',
+            builder: (context, state) => ArtistPage(
+              id: state.pathParameters['artistId']!,
+              name: state.extra as String,
+            ),
+          ),
+          GoRoute(
+            path: '/albums',
+            builder: (context, state) => AlbumListPage(
+              type: state.uri.queryParameters['type']!,
+              title: state.uri.queryParameters['title']!,
+            ),
+          ),
+        ],
       ),
     ],
   );

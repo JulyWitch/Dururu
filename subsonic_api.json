@@ -31,22 +31,26 @@
         "required": false,
         "default": "xml"
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "ping",
     "comment": "http://your-server/rest/ping Since 1.0.0\nUsed to test connectivity with the server. Takes no extra parameters.\nReturns an empty <subsonic-response> element on success. Example.",
-    "args": {}
+    "args": {},
+    "response": "json"
   },
   {
     "method": "getLicense",
     "comment": "http://your-server/rest/getLicense Since 1.0.0\nGet details about the software license. Takes no extra parameters. Please note that access to the REST API requires that the server has a valid license (after a 30-day trial period). To get a license key you must upgrade to Subsonic Premium.\nReturns a <subsonic-response> element with a nested <license> element on success. Example.",
-    "args": {}
+    "args": {},
+    "response": "json"
   },
   {
     "method": "getMusicFolders",
     "comment": "http://your-server/rest/getMusicFolders Since 1.0.0\nReturns all configured top-level music folders. Takes no extra parameters.\nReturns a <subsonic-response> element with a nested <musicFolders> element on success. Example.",
-    "args": {}
+    "args": {},
+    "response": "json"
   },
   {
     "method": "getIndexes",
@@ -60,7 +64,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getMusicDirectory",
@@ -70,12 +75,14 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getGenres",
     "comment": "http://your-server/rest/getGenres Since 1.9.0\nReturns all genres.\nReturns a <subsonic-response> element with a nested <genres> element on success. Example.",
-    "args": {}
+    "args": {},
+    "response": "json"
   },
   {
     "method": "getArtists",
@@ -85,7 +92,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getArtist",
@@ -95,7 +103,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getAlbum",
@@ -105,7 +114,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getSong",
@@ -115,12 +125,14 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getVideos",
     "comment": "http://your-server/rest/getVideos Since 1.8.0\nReturns all video files.\nReturns a <subsonic-response> element with a nested <videos> element on success. Example.",
-    "args": {}
+    "args": {},
+    "response": "json"
   },
   {
     "method": "getVideoInfo",
@@ -130,7 +142,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getArtistInfo",
@@ -148,7 +161,8 @@
         "required": false,
         "default": false
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getArtistInfo2",
@@ -166,7 +180,8 @@
         "required": false,
         "default": false
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getAlbumInfo",
@@ -176,7 +191,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getAlbumInfo2",
@@ -186,7 +202,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getSimilarSongs",
@@ -200,7 +217,8 @@
         "required": false,
         "default": 50
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getSimilarSongs2",
@@ -214,7 +232,8 @@
         "required": false,
         "default": 50
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getTopSongs",
@@ -228,7 +247,8 @@
         "required": false,
         "default": 50
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getAlbumList",
@@ -262,7 +282,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getAlbumList2",
@@ -296,7 +317,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getRandomSongs",
@@ -322,7 +344,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getSongsByGenre",
@@ -344,12 +367,14 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getNowPlaying",
     "comment": "http://your-server/rest/getNowPlaying Since 1.0.0\nReturns what is currently being played by all users. Takes no extra parameters.\nReturns a <subsonic-response> element with a nested <nowPlaying> element on success. Example.",
-    "args": {}
+    "args": {},
+    "response": "json"
   },
   {
     "method": "getStarred",
@@ -359,7 +384,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getStarred2",
@@ -369,7 +395,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "search",
@@ -403,7 +430,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "search2",
@@ -441,7 +469,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "search3",
@@ -479,7 +508,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getPlaylists",
@@ -489,7 +519,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getPlaylist",
@@ -499,7 +530,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "createPlaylist",
@@ -517,7 +549,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "updatePlaylist",
@@ -547,7 +580,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "deletePlaylist",
@@ -557,7 +591,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "stream",
@@ -591,7 +626,8 @@
         "required": false,
         "default": false
       }
-    }
+    },
+    "response": "string"
   },
   {
     "method": "download",
@@ -601,7 +637,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "hls",
@@ -619,7 +656,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getCaptions",
@@ -633,7 +671,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getCoverArt",
@@ -647,7 +686,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "string"
   },
   {
     "method": "getLyrics",
@@ -661,7 +701,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getAvatar",
@@ -671,7 +712,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "star",
@@ -689,7 +731,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "unstar",
@@ -707,7 +750,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "setRating",
@@ -721,7 +765,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "scrobble",
@@ -739,12 +784,14 @@
         "required": false,
         "default": "True"
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getShares",
     "comment": "http://your-server/rest/getShares Since 1.6.0\nReturns information about shared media this user is allowed to manage. Takes no extra parameters.\nReturns a <subsonic-response> element with a nested <shares> element on success. Example.",
-    "args": {}
+    "args": {},
+    "response": "json"
   },
   {
     "method": "createShare",
@@ -762,7 +809,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "updateShare",
@@ -780,7 +828,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "deleteShare",
@@ -790,7 +839,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getPodcasts",
@@ -804,7 +854,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getNewestPodcasts",
@@ -814,12 +865,14 @@
         "required": false,
         "default": 20
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "refreshPodcasts",
     "comment": "http://your-server/rest/refreshPodcasts Since 1.9.0\nRequests the server to check for new Podcast episodes. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).\nReturns an empty <subsonic-response> element on success.",
-    "args": {}
+    "args": {},
+    "response": "json"
   },
   {
     "method": "createPodcastChannel",
@@ -829,7 +882,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "deletePodcastChannel",
@@ -839,7 +893,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "deletePodcastEpisode",
@@ -849,7 +904,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "downloadPodcastEpisode",
@@ -859,7 +915,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "jukeboxControl",
@@ -885,12 +942,14 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getInternetRadioStations",
     "comment": "http://your-server/rest/getInternetRadioStations Since 1.9.0\nReturns all internet radio stations. Takes no extra parameters.\nReturns a <subsonic-response> element with a nested <internetRadioStations> element on success. Example.",
-    "args": {}
+    "args": {},
+    "response": "json"
   },
   {
     "method": "createInternetRadioStation",
@@ -908,7 +967,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "updateInternetRadioStation",
@@ -930,7 +990,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "deleteInternetRadioStation",
@@ -940,7 +1001,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getChatMessages",
@@ -950,7 +1012,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "addChatMessage",
@@ -960,7 +1023,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getUser",
@@ -970,12 +1034,14 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getUsers",
     "comment": "http://your-server/rest/getUsers Since 1.8.0\nGet details about all users, including which authorization roles and folder access they have. Only users with admin privileges are allowed to call this method.\nReturns a <subsonic-response> element with a nested <users> element on success. Example.",
-    "args": {}
+    "args": {},
+    "response": "json"
   },
   {
     "method": "createUser",
@@ -1049,7 +1115,8 @@
         "required": false,
         "default": "All folders"
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "updateUser",
@@ -1123,7 +1190,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "deleteUser",
@@ -1133,7 +1201,8 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "changePassword",
@@ -1147,12 +1216,14 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getBookmarks",
     "comment": "http://your-server/rest/getBookmarks Since 1.9.0\nReturns all bookmarks for this user. A bookmark is a position within a certain media file.\nReturns a <subsonic-response> element with a nested <bookmarks> element on success. Example.",
-    "args": {}
+    "args": {},
+    "response": "json"
   },
   {
     "method": "createBookmark",
@@ -1170,7 +1241,8 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "deleteBookmark",
@@ -1180,12 +1252,14 @@
         "required": true,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getPlayQueue",
     "comment": "http://your-server/rest/getPlayQueue Since 1.12.0\nReturns the state of the play queue for this user (as set by savePlayQueue). This includes the tracks in the play queue, the currently playing track, and the position within this track. Typically used to allow a user to move between different clients/apps while retaining the same play queue (for instance when listening to an audio book).\nReturns a <subsonic-response> element with a nested <playQueue> element on success, or an empty <subsonic-response> if no play queue has been saved. Example.",
-    "args": {}
+    "args": {},
+    "response": "json"
   },
   {
     "method": "savePlayQueue",
@@ -1203,16 +1277,19 @@
         "required": false,
         "default": null
       }
-    }
+    },
+    "response": "json"
   },
   {
     "method": "getScanStatus",
     "comment": "http://your-server/rest/getScanStatus Since 1.15.0\nReturns the current status for media library scanning. Takes no extra parameters.\nReturns a <subsonic-response> element with a nested <scanStatus> element on success. Example.",
-    "args": {}
+    "args": {},
+    "response": "json"
   },
   {
     "method": "startScan",
     "comment": "http://your-server/rest/startScan Since 1.15.0\nInitiates a rescan of the media libraries. Takes no extra parameters.\nReturns a <subsonic-response> element with a nested <scanStatus> element on success. Example.",
-    "args": {}
+    "args": {},
+    "response": "json"
   }
 ]

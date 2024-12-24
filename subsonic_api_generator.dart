@@ -52,7 +52,7 @@ part 'subsonic.freezed.dart';
   for (final complexType in schema.findAllElements('xs:complexType')) {
     final typeName = complexType.getAttribute('name');
     if (typeName != null) {
-      buffer.writeln(processComplexType(complexType, typeName));
+      buffer.writeln(processComplexType(schema, complexType, typeName));
     }
   }
 
@@ -129,22 +129,33 @@ String toEnumConstant(String value) {
   return sanitized;
 }
 
-String processComplexType(XmlElement type, String typeName) {
+String processComplexType(XmlElement doc, XmlElement type, String typeName) {
   final buffer = StringBuffer();
   final className = toPascalCase(typeName);
 
   // Check for inheritance
-  final baseType = type.getAttribute('extends')?.replaceFirst('sub:', '');
-  if (baseType != null) {
-    buffer.writeln('// Extends $baseType');
-  }
+  final baseType = type
+      .getElement('xs:complexContent')
+      ?.getElement('xs:extension')
+      ?.getAttribute('base')
+      ?.replaceAll('sub:', '');
 
   buffer.writeln('@freezed');
   buffer.writeln('class $className with _\$$className {');
   buffer.writeln('  const factory $className({');
 
+  final baseTypeElementIndex =
+      doc.children.indexWhere((test) => test.getAttribute('name') == baseType);
+  final baseTypeElement =
+      baseTypeElementIndex > 0 ? doc.children[baseTypeElementIndex] : null;
+
+  final elements = [
+    ...type.findAllElements('xs:attribute'),
+    if (baseTypeElement != null)
+      ...baseTypeElement.findAllElements('xs:attribute'),
+  ];
   // Process attributes
-  for (final attribute in type.findAllElements('xs:attribute')) {
+  for (final attribute in elements) {
     final attrName = attribute.getAttribute('name')!;
     final attrType = attribute.getAttribute('type')!;
     final required = attribute.getAttribute('use') == 'required';
@@ -170,7 +181,13 @@ String processComplexType(XmlElement type, String typeName) {
   }
   // Process elements
   final sequence = type.findAllElements('xs:sequence').firstOrNull;
-  if (sequence != null) {
+  final baseTypeSequence =
+      baseTypeElement?.findAllElements('xs:sequence').firstOrNull;
+  final sequences = <XmlElement>[];
+  if (sequence != null) sequences.add(sequence);
+  if (baseTypeSequence != null) sequences.add(baseTypeSequence);
+
+  for (final sequence in sequences) {
     for (final element in sequence.findAllElements('xs:element')) {
       final elemName = element.getAttribute('name')!;
       final elemType = element.getAttribute('type')!.replaceFirst('sub:', '');
@@ -278,6 +295,8 @@ Future<void> generateApiDocsJson(File file, File output) async {
       'method': methodName,
       'comment': comment,
       'args': <String, Map<String, dynamic>>{},
+      'response':
+          ['getCoverArt', 'stream'].contains(methodName) ? 'string' : 'json',
     };
 
     // Find parameter table
@@ -332,13 +351,16 @@ Future<void> generateProviders(File file, File output) async {
 
   // Write imports
   buffer.writeln('''
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import 'package:dururu/providers/auth.dart';
 import 'package:dururu/providers/dio.dart';
 import 'package:dururu/models/subsonic.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'subsonic_apis.g.dart';
+part 'subsonic_apis.freezed.dart';
 ''');
 
   // Process each API endpoint
@@ -346,28 +368,42 @@ part 'subsonic_apis.g.dart';
     final method = api['method'] as String;
     final comment = (api['comment'] as String).replaceAll('\n', '\n/// ');
     final args = api['args'] as Map<String, dynamic>;
+    final response = api['response'];
 
     // Convert method name to camelCase
     final methodName = _toCamelCase(method);
 
     // Generate function parameters
-    final parameters = _generateParameters(args);
     final queryParameters = _generateQueryParameters(args);
 
+    final requestClassName = toPascalCase("${methodName}_Request");
+    final requestClass = _generateRequestClass(args, requestClassName);
+    final responseClassName =
+        response == 'json' ? 'Future<Response>' : 'String';
     // Generate the API function
     buffer.writeln('''
+$requestClass
+
 /// $comment
 @riverpod
-Future<Response> $methodName(Ref ref${parameters.isNotEmpty ? ', $parameters' : ''}) async {
-  return ref.read(dioProvider).get(
+$responseClassName $methodName(Ref ref${args.isNotEmpty ? ', $requestClassName request' : ''}) ${response.toString().startsWith('Future<') ? 'async ' : ''}{
+  ${response == 'json' ? '''return ref.read(dioProvider).get(
     '\${ref.read(authProvider).value!.serverUrl}/rest/$method',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
       $queryParameters
     },
   ).then(
-    (value) => Response.fromJson(value.data as Map<String, dynamic>),
-  );
+    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
+    );''' : '''final params = {
+    ...ref.read(authProvider.notifier).getAuthorization(),
+    $queryParameters
+  };
+  final url =
+      '\${ref.read(authProvider).value!.serverUrl}/rest/$method?\${params.entries.map((entry) => '\${entry.key}=\${entry.value}').join('&')}';
+
+  return Uri.encodeFull(url);
+ '''}
 }
 ''');
   }
@@ -380,31 +416,30 @@ String _toCamelCase(String input) {
   return input[0].toLowerCase() + input.substring(1);
 }
 
-String _generateParameters(Map<String, dynamic> args) {
-  final requiredParams = <String>[];
-  final optionalParams = <String>[];
+String _generateRequestClass(Map<String, dynamic> args, requestClassName) {
+  final params = <String>[];
 
   args.forEach((key, value) {
     if (value is Map<String, dynamic>) {
-      const type = 'var';
+      const type = 'dynamic';
       final required = value['required'] as bool?;
       final defaultValue = value['default'] is String
           ? '"${value['default']}"'
           : value['default'];
 
-      if (required == true) {
-        requiredParams.add('required $type $key');
-      } else {
-        final defaultStr = defaultValue != null ? ' = $defaultValue' : '';
-        optionalParams.add('$type $key$defaultStr');
-      }
+      if (defaultValue != null) params.add('@Default($defaultValue)');
+      params.add('   ${required ?? false ? ' required ' : ' '}$type $key,');
     }
   });
-
-  final allParams = [...requiredParams, ...optionalParams];
-  if (allParams.isEmpty) return '';
-
-  return '{${allParams.join(', ')}}';
+  if (params.isEmpty) return '';
+  return '''
+@freezed
+class $requestClassName with _\$$requestClassName {
+  const factory $requestClassName({
+${params.join('\n')}
+  }) = _$requestClassName;
+}
+''';
 }
 
 String _generateQueryParameters(Map<String, dynamic> args) {
@@ -414,9 +449,9 @@ String _generateQueryParameters(Map<String, dynamic> args) {
     if (value is Map<String, dynamic>) {
       final required = value['required'] as bool?;
       if (required == true) {
-        params.add("'$key': $key");
+        params.add("'$key': request.$key");
       } else {
-        params.add("if ($key != null) '$key': $key");
+        params.add("if (request.$key != null) '$key': request.$key");
       }
     }
   });

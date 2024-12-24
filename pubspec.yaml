@@ -24,6 +24,7 @@ dependencies:
   animated_snack_bar: ^0.4.0
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:

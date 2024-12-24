@@ -258,6 +258,8 @@ class Genre with _$Genre {
     required int songCount,
     @JsonKey(name: 'albumCount')
     required int albumCount,
+    @JsonKey(name: 'value')
+    required String value,
   }) = _Genre;
 
   factory Genre.fromJson(Map<String, dynamic> json) =>
@@ -318,6 +320,18 @@ class ArtistId3 with _$ArtistId3 {
 @freezed
 class ArtistWithAlbumsId3 with _$ArtistWithAlbumsId3 {
   const factory ArtistWithAlbumsId3({
+    @JsonKey(name: 'id')
+    required String id,
+    @JsonKey(name: 'name')
+    required String name,
+    @JsonKey(name: 'coverArt')
+    String? coverArt,
+    @JsonKey(name: 'artistImageUrl')
+    String? artistImageUrl,
+    @JsonKey(name: 'albumCount')
+    required int albumCount,
+    @JsonKey(name: 'starred')
+    DateTime? starred,
     @JsonKey(name: 'album')
     List<AlbumId3>? album,
   }) = _ArtistWithAlbumsId3;
@@ -364,6 +378,30 @@ class AlbumId3 with _$AlbumId3 {
 @freezed
 class AlbumWithSongsId3 with _$AlbumWithSongsId3 {
   const factory AlbumWithSongsId3({
+    @JsonKey(name: 'id')
+    required String id,
+    @JsonKey(name: 'name')
+    required String name,
+    @JsonKey(name: 'artist')
+    String? artist,
+    @JsonKey(name: 'artistId')
+    String? artistId,
+    @JsonKey(name: 'coverArt')
+    String? coverArt,
+    @JsonKey(name: 'songCount')
+    required int songCount,
+    @JsonKey(name: 'duration')
+    required int duration,
+    @JsonKey(name: 'playCount')
+    int? playCount,
+    @JsonKey(name: 'created')
+    required DateTime created,
+    @JsonKey(name: 'starred')
+    DateTime? starred,
+    @JsonKey(name: 'year')
+    int? year,
+    @JsonKey(name: 'genre')
+    String? genre,
     @JsonKey(name: 'song')
     List<Child>? song,
   }) = _AlbumWithSongsId3;
@@ -570,6 +608,68 @@ class NowPlayingEntry with _$NowPlayingEntry {
     required int playerId,
     @JsonKey(name: 'playerName')
     String? playerName,
+    @JsonKey(name: 'id')
+    required String id,
+    @JsonKey(name: 'parent')
+    String? parent,
+    @JsonKey(name: 'isDir')
+    required bool isDir,
+    @JsonKey(name: 'title')
+    required String title,
+    @JsonKey(name: 'album')
+    String? album,
+    @JsonKey(name: 'artist')
+    String? artist,
+    @JsonKey(name: 'track')
+    int? track,
+    @JsonKey(name: 'year')
+    int? year,
+    @JsonKey(name: 'genre')
+    String? genre,
+    @JsonKey(name: 'coverArt')
+    String? coverArt,
+    @JsonKey(name: 'size')
+    int? size,
+    @JsonKey(name: 'contentType')
+    String? contentType,
+    @JsonKey(name: 'suffix')
+    String? suffix,
+    @JsonKey(name: 'transcodedContentType')
+    String? transcodedContentType,
+    @JsonKey(name: 'transcodedSuffix')
+    String? transcodedSuffix,
+    @JsonKey(name: 'duration')
+    int? duration,
+    @JsonKey(name: 'bitRate')
+    int? bitRate,
+    @JsonKey(name: 'path')
+    String? path,
+    @JsonKey(name: 'isVideo')
+    bool? isVideo,
+    @JsonKey(name: 'userRating')
+    UserRating? userRating,
+    @JsonKey(name: 'averageRating')
+    AverageRating? averageRating,
+    @JsonKey(name: 'playCount')
+    int? playCount,
+    @JsonKey(name: 'discNumber')
+    int? discNumber,
+    @JsonKey(name: 'created')
+    DateTime? created,
+    @JsonKey(name: 'starred')
+    DateTime? starred,
+    @JsonKey(name: 'albumId')
+    String? albumId,
+    @JsonKey(name: 'artistId')
+    String? artistId,
+    @JsonKey(name: 'type')
+    MediaType? type,
+    @JsonKey(name: 'bookmarkPosition')
+    int? bookmarkPosition,
+    @JsonKey(name: 'originalWidth')
+    int? originalWidth,
+    @JsonKey(name: 'originalHeight')
+    int? originalHeight,
   }) = _NowPlayingEntry;
 
   factory NowPlayingEntry.fromJson(Map<String, dynamic> json) =>
@@ -672,6 +772,26 @@ class Playlist with _$Playlist {
 @freezed
 class PlaylistWithSongs with _$PlaylistWithSongs {
   const factory PlaylistWithSongs({
+    @JsonKey(name: 'id')
+    required String id,
+    @JsonKey(name: 'name')
+    required String name,
+    @JsonKey(name: 'comment')
+    String? comment,
+    @JsonKey(name: 'owner')
+    String? owner,
+    @JsonKey(name: 'public')
+    bool? public,
+    @JsonKey(name: 'songCount')
+    required int songCount,
+    @JsonKey(name: 'duration')
+    required int duration,
+    @JsonKey(name: 'created')
+    required DateTime created,
+    @JsonKey(name: 'changed')
+    required DateTime changed,
+    @JsonKey(name: 'coverArt')
+    String? coverArt,
     @JsonKey(name: 'entry')
     List<Child>? entry,
   }) = _PlaylistWithSongs;
@@ -702,6 +822,14 @@ class JukeboxStatus with _$JukeboxStatus {
 @freezed
 class JukeboxPlaylist with _$JukeboxPlaylist {
   const factory JukeboxPlaylist({
+    @JsonKey(name: 'currentIndex')
+    required int currentIndex,
+    @JsonKey(name: 'playing')
+    required bool playing,
+    @JsonKey(name: 'gain')
+    required double gain,
+    @JsonKey(name: 'position')
+    int? position,
     @JsonKey(name: 'entry')
     List<Child>? entry,
   }) = _JukeboxPlaylist;
@@ -854,6 +982,68 @@ class PodcastEpisode with _$PodcastEpisode {
     required PodcastStatus status,
     @JsonKey(name: 'publishDate')
     DateTime? publishDate,
+    @JsonKey(name: 'id')
+    required String id,
+    @JsonKey(name: 'parent')
+    String? parent,
+    @JsonKey(name: 'isDir')
+    required bool isDir,
+    @JsonKey(name: 'title')
+    required String title,
+    @JsonKey(name: 'album')
+    String? album,
+    @JsonKey(name: 'artist')
+    String? artist,
+    @JsonKey(name: 'track')
+    int? track,
+    @JsonKey(name: 'year')
+    int? year,
+    @JsonKey(name: 'genre')
+    String? genre,
+    @JsonKey(name: 'coverArt')
+    String? coverArt,
+    @JsonKey(name: 'size')
+    int? size,
+    @JsonKey(name: 'contentType')
+    String? contentType,
+    @JsonKey(name: 'suffix')
+    String? suffix,
+    @JsonKey(name: 'transcodedContentType')
+    String? transcodedContentType,
+    @JsonKey(name: 'transcodedSuffix')
+    String? transcodedSuffix,
+    @JsonKey(name: 'duration')
+    int? duration,
+    @JsonKey(name: 'bitRate')
+    int? bitRate,
+    @JsonKey(name: 'path')
+    String? path,
+    @JsonKey(name: 'isVideo')
+    bool? isVideo,
+    @JsonKey(name: 'userRating')
+    UserRating? userRating,
+    @JsonKey(name: 'averageRating')
+    AverageRating? averageRating,
+    @JsonKey(name: 'playCount')
+    int? playCount,
+    @JsonKey(name: 'discNumber')
+    int? discNumber,
+    @JsonKey(name: 'created')
+    DateTime? created,
+    @JsonKey(name: 'starred')
+    DateTime? starred,
+    @JsonKey(name: 'albumId')
+    String? albumId,
+    @JsonKey(name: 'artistId')
+    String? artistId,
+    @JsonKey(name: 'type')
+    MediaType? type,
+    @JsonKey(name: 'bookmarkPosition')
+    int? bookmarkPosition,
+    @JsonKey(name: 'originalWidth')
+    int? originalWidth,
+    @JsonKey(name: 'originalHeight')
+    int? originalHeight,
   }) = _PodcastEpisode;
 
   factory PodcastEpisode.fromJson(Map<String, dynamic> json) =>

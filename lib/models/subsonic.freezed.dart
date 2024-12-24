@@ -3237,6 +3237,8 @@ mixin _$Genre {
   int get songCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'albumCount')
   int get albumCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'value')
+  String get value => throw _privateConstructorUsedError;
 
   /// Serializes this Genre to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -3254,7 +3256,8 @@ abstract class $GenreCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'songCount') int songCount,
-      @JsonKey(name: 'albumCount') int albumCount});
+      @JsonKey(name: 'albumCount') int albumCount,
+      @JsonKey(name: 'value') String value});
 }
 
 /// @nodoc
@@ -3274,6 +3277,7 @@ class _$GenreCopyWithImpl<$Res, $Val extends Genre>
   $Res call({
     Object? songCount = null,
     Object? albumCount = null,
+    Object? value = null,
   }) {
     return _then(_value.copyWith(
       songCount: null == songCount
@@ -3284,6 +3288,10 @@ class _$GenreCopyWithImpl<$Res, $Val extends Genre>
           ? _value.albumCount
           : albumCount // ignore: cast_nullable_to_non_nullable
               as int,
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -3297,7 +3305,8 @@ abstract class _$$GenreImplCopyWith<$Res> implements $GenreCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'songCount') int songCount,
-      @JsonKey(name: 'albumCount') int albumCount});
+      @JsonKey(name: 'albumCount') int albumCount,
+      @JsonKey(name: 'value') String value});
 }
 
 /// @nodoc
@@ -3315,6 +3324,7 @@ class __$$GenreImplCopyWithImpl<$Res>
   $Res call({
     Object? songCount = null,
     Object? albumCount = null,
+    Object? value = null,
   }) {
     return _then(_$GenreImpl(
       songCount: null == songCount
@@ -3325,6 +3335,10 @@ class __$$GenreImplCopyWithImpl<$Res>
           ? _value.albumCount
           : albumCount // ignore: cast_nullable_to_non_nullable
               as int,
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -3334,7 +3348,8 @@ class __$$GenreImplCopyWithImpl<$Res>
 class _$GenreImpl implements _Genre {
   const _$GenreImpl(
       {@JsonKey(name: 'songCount') required this.songCount,
-      @JsonKey(name: 'albumCount') required this.albumCount});
+      @JsonKey(name: 'albumCount') required this.albumCount,
+      @JsonKey(name: 'value') required this.value});
 
   factory _$GenreImpl.fromJson(Map<String, dynamic> json) =>
       _$$GenreImplFromJson(json);
@@ -3345,10 +3360,13 @@ class _$GenreImpl implements _Genre {
   @override
   @JsonKey(name: 'albumCount')
   final int albumCount;
+  @override
+  @JsonKey(name: 'value')
+  final String value;
 
   @override
   String toString() {
-    return 'Genre(songCount: $songCount, albumCount: $albumCount)';
+    return 'Genre(songCount: $songCount, albumCount: $albumCount, value: $value)';
   }
 
   @override
@@ -3359,12 +3377,13 @@ class _$GenreImpl implements _Genre {
             (identical(other.songCount, songCount) ||
                 other.songCount == songCount) &&
             (identical(other.albumCount, albumCount) ||
-                other.albumCount == albumCount));
+                other.albumCount == albumCount) &&
+            (identical(other.value, value) || other.value == value));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, songCount, albumCount);
+  int get hashCode => Object.hash(runtimeType, songCount, albumCount, value);
 
   /// Create a copy of Genre
   /// with the given fields replaced by the non-null parameter values.
@@ -3384,9 +3403,9 @@ class _$GenreImpl implements _Genre {
 
 abstract class _Genre implements Genre {
   const factory _Genre(
-          {@JsonKey(name: 'songCount') required final int songCount,
-          @JsonKey(name: 'albumCount') required final int albumCount}) =
-      _$GenreImpl;
+      {@JsonKey(name: 'songCount') required final int songCount,
+      @JsonKey(name: 'albumCount') required final int albumCount,
+      @JsonKey(name: 'value') required final String value}) = _$GenreImpl;
 
   factory _Genre.fromJson(Map<String, dynamic> json) = _$GenreImpl.fromJson;
 
@@ -3396,6 +3415,9 @@ abstract class _Genre implements Genre {
   @override
   @JsonKey(name: 'albumCount')
   int get albumCount;
+  @override
+  @JsonKey(name: 'value')
+  String get value;
 
   /// Create a copy of Genre
   /// with the given fields replaced by the non-null parameter values.
@@ -4061,6 +4083,18 @@ ArtistWithAlbumsId3 _$ArtistWithAlbumsId3FromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ArtistWithAlbumsId3 {
+  @JsonKey(name: 'id')
+  String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'coverArt')
+  String? get coverArt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'artistImageUrl')
+  String? get artistImageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'albumCount')
+  int get albumCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'starred')
+  DateTime? get starred => throw _privateConstructorUsedError;
   @JsonKey(name: 'album')
   List<AlbumId3>? get album => throw _privateConstructorUsedError;
 
@@ -4080,7 +4114,14 @@ abstract class $ArtistWithAlbumsId3CopyWith<$Res> {
           ArtistWithAlbumsId3 value, $Res Function(ArtistWithAlbumsId3) then) =
       _$ArtistWithAlbumsId3CopyWithImpl<$Res, ArtistWithAlbumsId3>;
   @useResult
-  $Res call({@JsonKey(name: 'album') List<AlbumId3>? album});
+  $Res call(
+      {@JsonKey(name: 'id') String id,
+      @JsonKey(name: 'name') String name,
+      @JsonKey(name: 'coverArt') String? coverArt,
+      @JsonKey(name: 'artistImageUrl') String? artistImageUrl,
+      @JsonKey(name: 'albumCount') int albumCount,
+      @JsonKey(name: 'starred') DateTime? starred,
+      @JsonKey(name: 'album') List<AlbumId3>? album});
 }
 
 /// @nodoc
@@ -4098,9 +4139,39 @@ class _$ArtistWithAlbumsId3CopyWithImpl<$Res, $Val extends ArtistWithAlbumsId3>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? coverArt = freezed,
+    Object? artistImageUrl = freezed,
+    Object? albumCount = null,
+    Object? starred = freezed,
     Object? album = freezed,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      coverArt: freezed == coverArt
+          ? _value.coverArt
+          : coverArt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      artistImageUrl: freezed == artistImageUrl
+          ? _value.artistImageUrl
+          : artistImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      albumCount: null == albumCount
+          ? _value.albumCount
+          : albumCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      starred: freezed == starred
+          ? _value.starred
+          : starred // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       album: freezed == album
           ? _value.album
           : album // ignore: cast_nullable_to_non_nullable
@@ -4117,7 +4188,14 @@ abstract class _$$ArtistWithAlbumsId3ImplCopyWith<$Res>
       __$$ArtistWithAlbumsId3ImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'album') List<AlbumId3>? album});
+  $Res call(
+      {@JsonKey(name: 'id') String id,
+      @JsonKey(name: 'name') String name,
+      @JsonKey(name: 'coverArt') String? coverArt,
+      @JsonKey(name: 'artistImageUrl') String? artistImageUrl,
+      @JsonKey(name: 'albumCount') int albumCount,
+      @JsonKey(name: 'starred') DateTime? starred,
+      @JsonKey(name: 'album') List<AlbumId3>? album});
 }
 
 /// @nodoc
@@ -4133,9 +4211,39 @@ class __$$ArtistWithAlbumsId3ImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? coverArt = freezed,
+    Object? artistImageUrl = freezed,
+    Object? albumCount = null,
+    Object? starred = freezed,
     Object? album = freezed,
   }) {
     return _then(_$ArtistWithAlbumsId3Impl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      coverArt: freezed == coverArt
+          ? _value.coverArt
+          : coverArt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      artistImageUrl: freezed == artistImageUrl
+          ? _value.artistImageUrl
+          : artistImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      albumCount: null == albumCount
+          ? _value.albumCount
+          : albumCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      starred: freezed == starred
+          ? _value.starred
+          : starred // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       album: freezed == album
           ? _value._album
           : album // ignore: cast_nullable_to_non_nullable
@@ -4148,12 +4256,36 @@ class __$$ArtistWithAlbumsId3ImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ArtistWithAlbumsId3Impl implements _ArtistWithAlbumsId3 {
   const _$ArtistWithAlbumsId3Impl(
-      {@JsonKey(name: 'album') final List<AlbumId3>? album})
+      {@JsonKey(name: 'id') required this.id,
+      @JsonKey(name: 'name') required this.name,
+      @JsonKey(name: 'coverArt') this.coverArt,
+      @JsonKey(name: 'artistImageUrl') this.artistImageUrl,
+      @JsonKey(name: 'albumCount') required this.albumCount,
+      @JsonKey(name: 'starred') this.starred,
+      @JsonKey(name: 'album') final List<AlbumId3>? album})
       : _album = album;
 
   factory _$ArtistWithAlbumsId3Impl.fromJson(Map<String, dynamic> json) =>
       _$$ArtistWithAlbumsId3ImplFromJson(json);
 
+  @override
+  @JsonKey(name: 'id')
+  final String id;
+  @override
+  @JsonKey(name: 'name')
+  final String name;
+  @override
+  @JsonKey(name: 'coverArt')
+  final String? coverArt;
+  @override
+  @JsonKey(name: 'artistImageUrl')
+  final String? artistImageUrl;
+  @override
+  @JsonKey(name: 'albumCount')
+  final int albumCount;
+  @override
+  @JsonKey(name: 'starred')
+  final DateTime? starred;
   final List<AlbumId3>? _album;
   @override
   @JsonKey(name: 'album')
@@ -4167,7 +4299,7 @@ class _$ArtistWithAlbumsId3Impl implements _ArtistWithAlbumsId3 {
 
   @override
   String toString() {
-    return 'ArtistWithAlbumsId3(album: $album)';
+    return 'ArtistWithAlbumsId3(id: $id, name: $name, coverArt: $coverArt, artistImageUrl: $artistImageUrl, albumCount: $albumCount, starred: $starred, album: $album)';
   }
 
   @override
@@ -4175,13 +4307,29 @@ class _$ArtistWithAlbumsId3Impl implements _ArtistWithAlbumsId3 {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ArtistWithAlbumsId3Impl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.coverArt, coverArt) ||
+                other.coverArt == coverArt) &&
+            (identical(other.artistImageUrl, artistImageUrl) ||
+                other.artistImageUrl == artistImageUrl) &&
+            (identical(other.albumCount, albumCount) ||
+                other.albumCount == albumCount) &&
+            (identical(other.starred, starred) || other.starred == starred) &&
             const DeepCollectionEquality().equals(other._album, _album));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_album));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      coverArt,
+      artistImageUrl,
+      albumCount,
+      starred,
+      const DeepCollectionEquality().hash(_album));
 
   /// Create a copy of ArtistWithAlbumsId3
   /// with the given fields replaced by the non-null parameter values.
@@ -4202,12 +4350,36 @@ class _$ArtistWithAlbumsId3Impl implements _ArtistWithAlbumsId3 {
 
 abstract class _ArtistWithAlbumsId3 implements ArtistWithAlbumsId3 {
   const factory _ArtistWithAlbumsId3(
-          {@JsonKey(name: 'album') final List<AlbumId3>? album}) =
+          {@JsonKey(name: 'id') required final String id,
+          @JsonKey(name: 'name') required final String name,
+          @JsonKey(name: 'coverArt') final String? coverArt,
+          @JsonKey(name: 'artistImageUrl') final String? artistImageUrl,
+          @JsonKey(name: 'albumCount') required final int albumCount,
+          @JsonKey(name: 'starred') final DateTime? starred,
+          @JsonKey(name: 'album') final List<AlbumId3>? album}) =
       _$ArtistWithAlbumsId3Impl;
 
   factory _ArtistWithAlbumsId3.fromJson(Map<String, dynamic> json) =
       _$ArtistWithAlbumsId3Impl.fromJson;
 
+  @override
+  @JsonKey(name: 'id')
+  String get id;
+  @override
+  @JsonKey(name: 'name')
+  String get name;
+  @override
+  @JsonKey(name: 'coverArt')
+  String? get coverArt;
+  @override
+  @JsonKey(name: 'artistImageUrl')
+  String? get artistImageUrl;
+  @override
+  @JsonKey(name: 'albumCount')
+  int get albumCount;
+  @override
+  @JsonKey(name: 'starred')
+  DateTime? get starred;
   @override
   @JsonKey(name: 'album')
   List<AlbumId3>? get album;
@@ -4640,6 +4812,30 @@ AlbumWithSongsId3 _$AlbumWithSongsId3FromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AlbumWithSongsId3 {
+  @JsonKey(name: 'id')
+  String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'artist')
+  String? get artist => throw _privateConstructorUsedError;
+  @JsonKey(name: 'artistId')
+  String? get artistId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'coverArt')
+  String? get coverArt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'songCount')
+  int get songCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'duration')
+  int get duration => throw _privateConstructorUsedError;
+  @JsonKey(name: 'playCount')
+  int? get playCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created')
+  DateTime get created => throw _privateConstructorUsedError;
+  @JsonKey(name: 'starred')
+  DateTime? get starred => throw _privateConstructorUsedError;
+  @JsonKey(name: 'year')
+  int? get year => throw _privateConstructorUsedError;
+  @JsonKey(name: 'genre')
+  String? get genre => throw _privateConstructorUsedError;
   @JsonKey(name: 'song')
   List<Child>? get song => throw _privateConstructorUsedError;
 
@@ -4659,7 +4855,20 @@ abstract class $AlbumWithSongsId3CopyWith<$Res> {
           AlbumWithSongsId3 value, $Res Function(AlbumWithSongsId3) then) =
       _$AlbumWithSongsId3CopyWithImpl<$Res, AlbumWithSongsId3>;
   @useResult
-  $Res call({@JsonKey(name: 'song') List<Child>? song});
+  $Res call(
+      {@JsonKey(name: 'id') String id,
+      @JsonKey(name: 'name') String name,
+      @JsonKey(name: 'artist') String? artist,
+      @JsonKey(name: 'artistId') String? artistId,
+      @JsonKey(name: 'coverArt') String? coverArt,
+      @JsonKey(name: 'songCount') int songCount,
+      @JsonKey(name: 'duration') int duration,
+      @JsonKey(name: 'playCount') int? playCount,
+      @JsonKey(name: 'created') DateTime created,
+      @JsonKey(name: 'starred') DateTime? starred,
+      @JsonKey(name: 'year') int? year,
+      @JsonKey(name: 'genre') String? genre,
+      @JsonKey(name: 'song') List<Child>? song});
 }
 
 /// @nodoc
@@ -4677,9 +4886,69 @@ class _$AlbumWithSongsId3CopyWithImpl<$Res, $Val extends AlbumWithSongsId3>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? artist = freezed,
+    Object? artistId = freezed,
+    Object? coverArt = freezed,
+    Object? songCount = null,
+    Object? duration = null,
+    Object? playCount = freezed,
+    Object? created = null,
+    Object? starred = freezed,
+    Object? year = freezed,
+    Object? genre = freezed,
     Object? song = freezed,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      artist: freezed == artist
+          ? _value.artist
+          : artist // ignore: cast_nullable_to_non_nullable
+              as String?,
+      artistId: freezed == artistId
+          ? _value.artistId
+          : artistId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      coverArt: freezed == coverArt
+          ? _value.coverArt
+          : coverArt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      songCount: null == songCount
+          ? _value.songCount
+          : songCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int,
+      playCount: freezed == playCount
+          ? _value.playCount
+          : playCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      created: null == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      starred: freezed == starred
+          ? _value.starred
+          : starred // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      year: freezed == year
+          ? _value.year
+          : year // ignore: cast_nullable_to_non_nullable
+              as int?,
+      genre: freezed == genre
+          ? _value.genre
+          : genre // ignore: cast_nullable_to_non_nullable
+              as String?,
       song: freezed == song
           ? _value.song
           : song // ignore: cast_nullable_to_non_nullable
@@ -4696,7 +4965,20 @@ abstract class _$$AlbumWithSongsId3ImplCopyWith<$Res>
       __$$AlbumWithSongsId3ImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'song') List<Child>? song});
+  $Res call(
+      {@JsonKey(name: 'id') String id,
+      @JsonKey(name: 'name') String name,
+      @JsonKey(name: 'artist') String? artist,
+      @JsonKey(name: 'artistId') String? artistId,
+      @JsonKey(name: 'coverArt') String? coverArt,
+      @JsonKey(name: 'songCount') int songCount,
+      @JsonKey(name: 'duration') int duration,
+      @JsonKey(name: 'playCount') int? playCount,
+      @JsonKey(name: 'created') DateTime created,
+      @JsonKey(name: 'starred') DateTime? starred,
+      @JsonKey(name: 'year') int? year,
+      @JsonKey(name: 'genre') String? genre,
+      @JsonKey(name: 'song') List<Child>? song});
 }
 
 /// @nodoc
@@ -4712,9 +4994,69 @@ class __$$AlbumWithSongsId3ImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? artist = freezed,
+    Object? artistId = freezed,
+    Object? coverArt = freezed,
+    Object? songCount = null,
+    Object? duration = null,
+    Object? playCount = freezed,
+    Object? created = null,
+    Object? starred = freezed,
+    Object? year = freezed,
+    Object? genre = freezed,
     Object? song = freezed,
   }) {
     return _then(_$AlbumWithSongsId3Impl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      artist: freezed == artist
+          ? _value.artist
+          : artist // ignore: cast_nullable_to_non_nullable
+              as String?,
+      artistId: freezed == artistId
+          ? _value.artistId
+          : artistId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      coverArt: freezed == coverArt
+          ? _value.coverArt
+          : coverArt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      songCount: null == songCount
+          ? _value.songCount
+          : songCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int,
+      playCount: freezed == playCount
+          ? _value.playCount
+          : playCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      created: null == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      starred: freezed == starred
+          ? _value.starred
+          : starred // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      year: freezed == year
+          ? _value.year
+          : year // ignore: cast_nullable_to_non_nullable
+              as int?,
+      genre: freezed == genre
+          ? _value.genre
+          : genre // ignore: cast_nullable_to_non_nullable
+              as String?,
       song: freezed == song
           ? _value._song
           : song // ignore: cast_nullable_to_non_nullable
@@ -4727,12 +5069,60 @@ class __$$AlbumWithSongsId3ImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AlbumWithSongsId3Impl implements _AlbumWithSongsId3 {
   const _$AlbumWithSongsId3Impl(
-      {@JsonKey(name: 'song') final List<Child>? song})
+      {@JsonKey(name: 'id') required this.id,
+      @JsonKey(name: 'name') required this.name,
+      @JsonKey(name: 'artist') this.artist,
+      @JsonKey(name: 'artistId') this.artistId,
+      @JsonKey(name: 'coverArt') this.coverArt,
+      @JsonKey(name: 'songCount') required this.songCount,
+      @JsonKey(name: 'duration') required this.duration,
+      @JsonKey(name: 'playCount') this.playCount,
+      @JsonKey(name: 'created') required this.created,
+      @JsonKey(name: 'starred') this.starred,
+      @JsonKey(name: 'year') this.year,
+      @JsonKey(name: 'genre') this.genre,
+      @JsonKey(name: 'song') final List<Child>? song})
       : _song = song;
 
   factory _$AlbumWithSongsId3Impl.fromJson(Map<String, dynamic> json) =>
       _$$AlbumWithSongsId3ImplFromJson(json);
 
+  @override
+  @JsonKey(name: 'id')
+  final String id;
+  @override
+  @JsonKey(name: 'name')
+  final String name;
+  @override
+  @JsonKey(name: 'artist')
+  final String? artist;
+  @override
+  @JsonKey(name: 'artistId')
+  final String? artistId;
+  @override
+  @JsonKey(name: 'coverArt')
+  final String? coverArt;
+  @override
+  @JsonKey(name: 'songCount')
+  final int songCount;
+  @override
+  @JsonKey(name: 'duration')
+  final int duration;
+  @override
+  @JsonKey(name: 'playCount')
+  final int? playCount;
+  @override
+  @JsonKey(name: 'created')
+  final DateTime created;
+  @override
+  @JsonKey(name: 'starred')
+  final DateTime? starred;
+  @override
+  @JsonKey(name: 'year')
+  final int? year;
+  @override
+  @JsonKey(name: 'genre')
+  final String? genre;
   final List<Child>? _song;
   @override
   @JsonKey(name: 'song')
@@ -4746,7 +5136,7 @@ class _$AlbumWithSongsId3Impl implements _AlbumWithSongsId3 {
 
   @override
   String toString() {
-    return 'AlbumWithSongsId3(song: $song)';
+    return 'AlbumWithSongsId3(id: $id, name: $name, artist: $artist, artistId: $artistId, coverArt: $coverArt, songCount: $songCount, duration: $duration, playCount: $playCount, created: $created, starred: $starred, year: $year, genre: $genre, song: $song)';
   }
 
   @override
@@ -4754,13 +5144,43 @@ class _$AlbumWithSongsId3Impl implements _AlbumWithSongsId3 {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AlbumWithSongsId3Impl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.artist, artist) || other.artist == artist) &&
+            (identical(other.artistId, artistId) ||
+                other.artistId == artistId) &&
+            (identical(other.coverArt, coverArt) ||
+                other.coverArt == coverArt) &&
+            (identical(other.songCount, songCount) ||
+                other.songCount == songCount) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.playCount, playCount) ||
+                other.playCount == playCount) &&
+            (identical(other.created, created) || other.created == created) &&
+            (identical(other.starred, starred) || other.starred == starred) &&
+            (identical(other.year, year) || other.year == year) &&
+            (identical(other.genre, genre) || other.genre == genre) &&
             const DeepCollectionEquality().equals(other._song, _song));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_song));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      artist,
+      artistId,
+      coverArt,
+      songCount,
+      duration,
+      playCount,
+      created,
+      starred,
+      year,
+      genre,
+      const DeepCollectionEquality().hash(_song));
 
   /// Create a copy of AlbumWithSongsId3
   /// with the given fields replaced by the non-null parameter values.
@@ -4781,12 +5201,60 @@ class _$AlbumWithSongsId3Impl implements _AlbumWithSongsId3 {
 
 abstract class _AlbumWithSongsId3 implements AlbumWithSongsId3 {
   const factory _AlbumWithSongsId3(
-          {@JsonKey(name: 'song') final List<Child>? song}) =
+          {@JsonKey(name: 'id') required final String id,
+          @JsonKey(name: 'name') required final String name,
+          @JsonKey(name: 'artist') final String? artist,
+          @JsonKey(name: 'artistId') final String? artistId,
+          @JsonKey(name: 'coverArt') final String? coverArt,
+          @JsonKey(name: 'songCount') required final int songCount,
+          @JsonKey(name: 'duration') required final int duration,
+          @JsonKey(name: 'playCount') final int? playCount,
+          @JsonKey(name: 'created') required final DateTime created,
+          @JsonKey(name: 'starred') final DateTime? starred,
+          @JsonKey(name: 'year') final int? year,
+          @JsonKey(name: 'genre') final String? genre,
+          @JsonKey(name: 'song') final List<Child>? song}) =
       _$AlbumWithSongsId3Impl;
 
   factory _AlbumWithSongsId3.fromJson(Map<String, dynamic> json) =
       _$AlbumWithSongsId3Impl.fromJson;
 
+  @override
+  @JsonKey(name: 'id')
+  String get id;
+  @override
+  @JsonKey(name: 'name')
+  String get name;
+  @override
+  @JsonKey(name: 'artist')
+  String? get artist;
+  @override
+  @JsonKey(name: 'artistId')
+  String? get artistId;
+  @override
+  @JsonKey(name: 'coverArt')
+  String? get coverArt;
+  @override
+  @JsonKey(name: 'songCount')
+  int get songCount;
+  @override
+  @JsonKey(name: 'duration')
+  int get duration;
+  @override
+  @JsonKey(name: 'playCount')
+  int? get playCount;
+  @override
+  @JsonKey(name: 'created')
+  DateTime get created;
+  @override
+  @JsonKey(name: 'starred')
+  DateTime? get starred;
+  @override
+  @JsonKey(name: 'year')
+  int? get year;
+  @override
+  @JsonKey(name: 'genre')
+  String? get genre;
   @override
   @JsonKey(name: 'song')
   List<Child>? get song;
@@ -7204,6 +7672,68 @@ mixin _$NowPlayingEntry {
   int get playerId => throw _privateConstructorUsedError;
   @JsonKey(name: 'playerName')
   String? get playerName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'id')
+  String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'parent')
+  String? get parent => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isDir')
+  bool get isDir => throw _privateConstructorUsedError;
+  @JsonKey(name: 'title')
+  String get title => throw _privateConstructorUsedError;
+  @JsonKey(name: 'album')
+  String? get album => throw _privateConstructorUsedError;
+  @JsonKey(name: 'artist')
+  String? get artist => throw _privateConstructorUsedError;
+  @JsonKey(name: 'track')
+  int? get track => throw _privateConstructorUsedError;
+  @JsonKey(name: 'year')
+  int? get year => throw _privateConstructorUsedError;
+  @JsonKey(name: 'genre')
+  String? get genre => throw _privateConstructorUsedError;
+  @JsonKey(name: 'coverArt')
+  String? get coverArt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'size')
+  int? get size => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contentType')
+  String? get contentType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'suffix')
+  String? get suffix => throw _privateConstructorUsedError;
+  @JsonKey(name: 'transcodedContentType')
+  String? get transcodedContentType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'transcodedSuffix')
+  String? get transcodedSuffix => throw _privateConstructorUsedError;
+  @JsonKey(name: 'duration')
+  int? get duration => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bitRate')
+  int? get bitRate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'path')
+  String? get path => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isVideo')
+  bool? get isVideo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'userRating')
+  int? get userRating => throw _privateConstructorUsedError;
+  @JsonKey(name: 'averageRating')
+  double? get averageRating => throw _privateConstructorUsedError;
+  @JsonKey(name: 'playCount')
+  int? get playCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'discNumber')
+  int? get discNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created')
+  DateTime? get created => throw _privateConstructorUsedError;
+  @JsonKey(name: 'starred')
+  DateTime? get starred => throw _privateConstructorUsedError;
+  @JsonKey(name: 'albumId')
+  String? get albumId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'artistId')
+  String? get artistId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'type')
+  MediaType? get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bookmarkPosition')
+  int? get bookmarkPosition => throw _privateConstructorUsedError;
+  @JsonKey(name: 'originalWidth')
+  int? get originalWidth => throw _privateConstructorUsedError;
+  @JsonKey(name: 'originalHeight')
+  int? get originalHeight => throw _privateConstructorUsedError;
 
   /// Serializes this NowPlayingEntry to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -7225,7 +7755,38 @@ abstract class $NowPlayingEntryCopyWith<$Res> {
       {@JsonKey(name: 'username') String username,
       @JsonKey(name: 'minutesAgo') int minutesAgo,
       @JsonKey(name: 'playerId') int playerId,
-      @JsonKey(name: 'playerName') String? playerName});
+      @JsonKey(name: 'playerName') String? playerName,
+      @JsonKey(name: 'id') String id,
+      @JsonKey(name: 'parent') String? parent,
+      @JsonKey(name: 'isDir') bool isDir,
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'album') String? album,
+      @JsonKey(name: 'artist') String? artist,
+      @JsonKey(name: 'track') int? track,
+      @JsonKey(name: 'year') int? year,
+      @JsonKey(name: 'genre') String? genre,
+      @JsonKey(name: 'coverArt') String? coverArt,
+      @JsonKey(name: 'size') int? size,
+      @JsonKey(name: 'contentType') String? contentType,
+      @JsonKey(name: 'suffix') String? suffix,
+      @JsonKey(name: 'transcodedContentType') String? transcodedContentType,
+      @JsonKey(name: 'transcodedSuffix') String? transcodedSuffix,
+      @JsonKey(name: 'duration') int? duration,
+      @JsonKey(name: 'bitRate') int? bitRate,
+      @JsonKey(name: 'path') String? path,
+      @JsonKey(name: 'isVideo') bool? isVideo,
+      @JsonKey(name: 'userRating') int? userRating,
+      @JsonKey(name: 'averageRating') double? averageRating,
+      @JsonKey(name: 'playCount') int? playCount,
+      @JsonKey(name: 'discNumber') int? discNumber,
+      @JsonKey(name: 'created') DateTime? created,
+      @JsonKey(name: 'starred') DateTime? starred,
+      @JsonKey(name: 'albumId') String? albumId,
+      @JsonKey(name: 'artistId') String? artistId,
+      @JsonKey(name: 'type') MediaType? type,
+      @JsonKey(name: 'bookmarkPosition') int? bookmarkPosition,
+      @JsonKey(name: 'originalWidth') int? originalWidth,
+      @JsonKey(name: 'originalHeight') int? originalHeight});
 }
 
 /// @nodoc
@@ -7247,6 +7808,37 @@ class _$NowPlayingEntryCopyWithImpl<$Res, $Val extends NowPlayingEntry>
     Object? minutesAgo = null,
     Object? playerId = null,
     Object? playerName = freezed,
+    Object? id = null,
+    Object? parent = freezed,
+    Object? isDir = null,
+    Object? title = null,
+    Object? album = freezed,
+    Object? artist = freezed,
+    Object? track = freezed,
+    Object? year = freezed,
+    Object? genre = freezed,
+    Object? coverArt = freezed,
+    Object? size = freezed,
+    Object? contentType = freezed,
+    Object? suffix = freezed,
+    Object? transcodedContentType = freezed,
+    Object? transcodedSuffix = freezed,
+    Object? duration = freezed,
+    Object? bitRate = freezed,
+    Object? path = freezed,
+    Object? isVideo = freezed,
+    Object? userRating = freezed,
+    Object? averageRating = freezed,
+    Object? playCount = freezed,
+    Object? discNumber = freezed,
+    Object? created = freezed,
+    Object? starred = freezed,
+    Object? albumId = freezed,
+    Object? artistId = freezed,
+    Object? type = freezed,
+    Object? bookmarkPosition = freezed,
+    Object? originalWidth = freezed,
+    Object? originalHeight = freezed,
   }) {
     return _then(_value.copyWith(
       username: null == username
@@ -7265,6 +7857,130 @@ class _$NowPlayingEntryCopyWithImpl<$Res, $Val extends NowPlayingEntry>
           ? _value.playerName
           : playerName // ignore: cast_nullable_to_non_nullable
               as String?,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      parent: freezed == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isDir: null == isDir
+          ? _value.isDir
+          : isDir // ignore: cast_nullable_to_non_nullable
+              as bool,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      album: freezed == album
+          ? _value.album
+          : album // ignore: cast_nullable_to_non_nullable
+              as String?,
+      artist: freezed == artist
+          ? _value.artist
+          : artist // ignore: cast_nullable_to_non_nullable
+              as String?,
+      track: freezed == track
+          ? _value.track
+          : track // ignore: cast_nullable_to_non_nullable
+              as int?,
+      year: freezed == year
+          ? _value.year
+          : year // ignore: cast_nullable_to_non_nullable
+              as int?,
+      genre: freezed == genre
+          ? _value.genre
+          : genre // ignore: cast_nullable_to_non_nullable
+              as String?,
+      coverArt: freezed == coverArt
+          ? _value.coverArt
+          : coverArt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      size: freezed == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as int?,
+      contentType: freezed == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      suffix: freezed == suffix
+          ? _value.suffix
+          : suffix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      transcodedContentType: freezed == transcodedContentType
+          ? _value.transcodedContentType
+          : transcodedContentType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      transcodedSuffix: freezed == transcodedSuffix
+          ? _value.transcodedSuffix
+          : transcodedSuffix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int?,
+      bitRate: freezed == bitRate
+          ? _value.bitRate
+          : bitRate // ignore: cast_nullable_to_non_nullable
+              as int?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isVideo: freezed == isVideo
+          ? _value.isVideo
+          : isVideo // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      userRating: freezed == userRating
+          ? _value.userRating
+          : userRating // ignore: cast_nullable_to_non_nullable
+              as int?,
+      averageRating: freezed == averageRating
+          ? _value.averageRating
+          : averageRating // ignore: cast_nullable_to_non_nullable
+              as double?,
+      playCount: freezed == playCount
+          ? _value.playCount
+          : playCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      discNumber: freezed == discNumber
+          ? _value.discNumber
+          : discNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      created: freezed == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      starred: freezed == starred
+          ? _value.starred
+          : starred // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      albumId: freezed == albumId
+          ? _value.albumId
+          : albumId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      artistId: freezed == artistId
+          ? _value.artistId
+          : artistId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MediaType?,
+      bookmarkPosition: freezed == bookmarkPosition
+          ? _value.bookmarkPosition
+          : bookmarkPosition // ignore: cast_nullable_to_non_nullable
+              as int?,
+      originalWidth: freezed == originalWidth
+          ? _value.originalWidth
+          : originalWidth // ignore: cast_nullable_to_non_nullable
+              as int?,
+      originalHeight: freezed == originalHeight
+          ? _value.originalHeight
+          : originalHeight // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -7281,7 +7997,38 @@ abstract class _$$NowPlayingEntryImplCopyWith<$Res>
       {@JsonKey(name: 'username') String username,
       @JsonKey(name: 'minutesAgo') int minutesAgo,
       @JsonKey(name: 'playerId') int playerId,
-      @JsonKey(name: 'playerName') String? playerName});
+      @JsonKey(name: 'playerName') String? playerName,
+      @JsonKey(name: 'id') String id,
+      @JsonKey(name: 'parent') String? parent,
+      @JsonKey(name: 'isDir') bool isDir,
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'album') String? album,
+      @JsonKey(name: 'artist') String? artist,
+      @JsonKey(name: 'track') int? track,
+      @JsonKey(name: 'year') int? year,
+      @JsonKey(name: 'genre') String? genre,
+      @JsonKey(name: 'coverArt') String? coverArt,
+      @JsonKey(name: 'size') int? size,
+      @JsonKey(name: 'contentType') String? contentType,
+      @JsonKey(name: 'suffix') String? suffix,
+      @JsonKey(name: 'transcodedContentType') String? transcodedContentType,
+      @JsonKey(name: 'transcodedSuffix') String? transcodedSuffix,
+      @JsonKey(name: 'duration') int? duration,
+      @JsonKey(name: 'bitRate') int? bitRate,
+      @JsonKey(name: 'path') String? path,
+      @JsonKey(name: 'isVideo') bool? isVideo,
+      @JsonKey(name: 'userRating') int? userRating,
+      @JsonKey(name: 'averageRating') double? averageRating,
+      @JsonKey(name: 'playCount') int? playCount,
+      @JsonKey(name: 'discNumber') int? discNumber,
+      @JsonKey(name: 'created') DateTime? created,
+      @JsonKey(name: 'starred') DateTime? starred,
+      @JsonKey(name: 'albumId') String? albumId,
+      @JsonKey(name: 'artistId') String? artistId,
+      @JsonKey(name: 'type') MediaType? type,
+      @JsonKey(name: 'bookmarkPosition') int? bookmarkPosition,
+      @JsonKey(name: 'originalWidth') int? originalWidth,
+      @JsonKey(name: 'originalHeight') int? originalHeight});
 }
 
 /// @nodoc
@@ -7301,6 +8048,37 @@ class __$$NowPlayingEntryImplCopyWithImpl<$Res>
     Object? minutesAgo = null,
     Object? playerId = null,
     Object? playerName = freezed,
+    Object? id = null,
+    Object? parent = freezed,
+    Object? isDir = null,
+    Object? title = null,
+    Object? album = freezed,
+    Object? artist = freezed,
+    Object? track = freezed,
+    Object? year = freezed,
+    Object? genre = freezed,
+    Object? coverArt = freezed,
+    Object? size = freezed,
+    Object? contentType = freezed,
+    Object? suffix = freezed,
+    Object? transcodedContentType = freezed,
+    Object? transcodedSuffix = freezed,
+    Object? duration = freezed,
+    Object? bitRate = freezed,
+    Object? path = freezed,
+    Object? isVideo = freezed,
+    Object? userRating = freezed,
+    Object? averageRating = freezed,
+    Object? playCount = freezed,
+    Object? discNumber = freezed,
+    Object? created = freezed,
+    Object? starred = freezed,
+    Object? albumId = freezed,
+    Object? artistId = freezed,
+    Object? type = freezed,
+    Object? bookmarkPosition = freezed,
+    Object? originalWidth = freezed,
+    Object? originalHeight = freezed,
   }) {
     return _then(_$NowPlayingEntryImpl(
       username: null == username
@@ -7319,6 +8097,130 @@ class __$$NowPlayingEntryImplCopyWithImpl<$Res>
           ? _value.playerName
           : playerName // ignore: cast_nullable_to_non_nullable
               as String?,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      parent: freezed == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isDir: null == isDir
+          ? _value.isDir
+          : isDir // ignore: cast_nullable_to_non_nullable
+              as bool,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      album: freezed == album
+          ? _value.album
+          : album // ignore: cast_nullable_to_non_nullable
+              as String?,
+      artist: freezed == artist
+          ? _value.artist
+          : artist // ignore: cast_nullable_to_non_nullable
+              as String?,
+      track: freezed == track
+          ? _value.track
+          : track // ignore: cast_nullable_to_non_nullable
+              as int?,
+      year: freezed == year
+          ? _value.year
+          : year // ignore: cast_nullable_to_non_nullable
+              as int?,
+      genre: freezed == genre
+          ? _value.genre
+          : genre // ignore: cast_nullable_to_non_nullable
+              as String?,
+      coverArt: freezed == coverArt
+          ? _value.coverArt
+          : coverArt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      size: freezed == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as int?,
+      contentType: freezed == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      suffix: freezed == suffix
+          ? _value.suffix
+          : suffix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      transcodedContentType: freezed == transcodedContentType
+          ? _value.transcodedContentType
+          : transcodedContentType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      transcodedSuffix: freezed == transcodedSuffix
+          ? _value.transcodedSuffix
+          : transcodedSuffix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int?,
+      bitRate: freezed == bitRate
+          ? _value.bitRate
+          : bitRate // ignore: cast_nullable_to_non_nullable
+              as int?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isVideo: freezed == isVideo
+          ? _value.isVideo
+          : isVideo // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      userRating: freezed == userRating
+          ? _value.userRating
+          : userRating // ignore: cast_nullable_to_non_nullable
+              as int?,
+      averageRating: freezed == averageRating
+          ? _value.averageRating
+          : averageRating // ignore: cast_nullable_to_non_nullable
+              as double?,
+      playCount: freezed == playCount
+          ? _value.playCount
+          : playCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      discNumber: freezed == discNumber
+          ? _value.discNumber
+          : discNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      created: freezed == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      starred: freezed == starred
+          ? _value.starred
+          : starred // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      albumId: freezed == albumId
+          ? _value.albumId
+          : albumId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      artistId: freezed == artistId
+          ? _value.artistId
+          : artistId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MediaType?,
+      bookmarkPosition: freezed == bookmarkPosition
+          ? _value.bookmarkPosition
+          : bookmarkPosition // ignore: cast_nullable_to_non_nullable
+              as int?,
+      originalWidth: freezed == originalWidth
+          ? _value.originalWidth
+          : originalWidth // ignore: cast_nullable_to_non_nullable
+              as int?,
+      originalHeight: freezed == originalHeight
+          ? _value.originalHeight
+          : originalHeight // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -7330,7 +8232,38 @@ class _$NowPlayingEntryImpl implements _NowPlayingEntry {
       {@JsonKey(name: 'username') required this.username,
       @JsonKey(name: 'minutesAgo') required this.minutesAgo,
       @JsonKey(name: 'playerId') required this.playerId,
-      @JsonKey(name: 'playerName') this.playerName});
+      @JsonKey(name: 'playerName') this.playerName,
+      @JsonKey(name: 'id') required this.id,
+      @JsonKey(name: 'parent') this.parent,
+      @JsonKey(name: 'isDir') required this.isDir,
+      @JsonKey(name: 'title') required this.title,
+      @JsonKey(name: 'album') this.album,
+      @JsonKey(name: 'artist') this.artist,
+      @JsonKey(name: 'track') this.track,
+      @JsonKey(name: 'year') this.year,
+      @JsonKey(name: 'genre') this.genre,
+      @JsonKey(name: 'coverArt') this.coverArt,
+      @JsonKey(name: 'size') this.size,
+      @JsonKey(name: 'contentType') this.contentType,
+      @JsonKey(name: 'suffix') this.suffix,
+      @JsonKey(name: 'transcodedContentType') this.transcodedContentType,
+      @JsonKey(name: 'transcodedSuffix') this.transcodedSuffix,
+      @JsonKey(name: 'duration') this.duration,
+      @JsonKey(name: 'bitRate') this.bitRate,
+      @JsonKey(name: 'path') this.path,
+      @JsonKey(name: 'isVideo') this.isVideo,
+      @JsonKey(name: 'userRating') this.userRating,
+      @JsonKey(name: 'averageRating') this.averageRating,
+      @JsonKey(name: 'playCount') this.playCount,
+      @JsonKey(name: 'discNumber') this.discNumber,
+      @JsonKey(name: 'created') this.created,
+      @JsonKey(name: 'starred') this.starred,
+      @JsonKey(name: 'albumId') this.albumId,
+      @JsonKey(name: 'artistId') this.artistId,
+      @JsonKey(name: 'type') this.type,
+      @JsonKey(name: 'bookmarkPosition') this.bookmarkPosition,
+      @JsonKey(name: 'originalWidth') this.originalWidth,
+      @JsonKey(name: 'originalHeight') this.originalHeight});
 
   factory _$NowPlayingEntryImpl.fromJson(Map<String, dynamic> json) =>
       _$$NowPlayingEntryImplFromJson(json);
@@ -7347,10 +8280,103 @@ class _$NowPlayingEntryImpl implements _NowPlayingEntry {
   @override
   @JsonKey(name: 'playerName')
   final String? playerName;
+  @override
+  @JsonKey(name: 'id')
+  final String id;
+  @override
+  @JsonKey(name: 'parent')
+  final String? parent;
+  @override
+  @JsonKey(name: 'isDir')
+  final bool isDir;
+  @override
+  @JsonKey(name: 'title')
+  final String title;
+  @override
+  @JsonKey(name: 'album')
+  final String? album;
+  @override
+  @JsonKey(name: 'artist')
+  final String? artist;
+  @override
+  @JsonKey(name: 'track')
+  final int? track;
+  @override
+  @JsonKey(name: 'year')
+  final int? year;
+  @override
+  @JsonKey(name: 'genre')
+  final String? genre;
+  @override
+  @JsonKey(name: 'coverArt')
+  final String? coverArt;
+  @override
+  @JsonKey(name: 'size')
+  final int? size;
+  @override
+  @JsonKey(name: 'contentType')
+  final String? contentType;
+  @override
+  @JsonKey(name: 'suffix')
+  final String? suffix;
+  @override
+  @JsonKey(name: 'transcodedContentType')
+  final String? transcodedContentType;
+  @override
+  @JsonKey(name: 'transcodedSuffix')
+  final String? transcodedSuffix;
+  @override
+  @JsonKey(name: 'duration')
+  final int? duration;
+  @override
+  @JsonKey(name: 'bitRate')
+  final int? bitRate;
+  @override
+  @JsonKey(name: 'path')
+  final String? path;
+  @override
+  @JsonKey(name: 'isVideo')
+  final bool? isVideo;
+  @override
+  @JsonKey(name: 'userRating')
+  final int? userRating;
+  @override
+  @JsonKey(name: 'averageRating')
+  final double? averageRating;
+  @override
+  @JsonKey(name: 'playCount')
+  final int? playCount;
+  @override
+  @JsonKey(name: 'discNumber')
+  final int? discNumber;
+  @override
+  @JsonKey(name: 'created')
+  final DateTime? created;
+  @override
+  @JsonKey(name: 'starred')
+  final DateTime? starred;
+  @override
+  @JsonKey(name: 'albumId')
+  final String? albumId;
+  @override
+  @JsonKey(name: 'artistId')
+  final String? artistId;
+  @override
+  @JsonKey(name: 'type')
+  final MediaType? type;
+  @override
+  @JsonKey(name: 'bookmarkPosition')
+  final int? bookmarkPosition;
+  @override
+  @JsonKey(name: 'originalWidth')
+  final int? originalWidth;
+  @override
+  @JsonKey(name: 'originalHeight')
+  final int? originalHeight;
 
   @override
   String toString() {
-    return 'NowPlayingEntry(username: $username, minutesAgo: $minutesAgo, playerId: $playerId, playerName: $playerName)';
+    return 'NowPlayingEntry(username: $username, minutesAgo: $minutesAgo, playerId: $playerId, playerName: $playerName, id: $id, parent: $parent, isDir: $isDir, title: $title, album: $album, artist: $artist, track: $track, year: $year, genre: $genre, coverArt: $coverArt, size: $size, contentType: $contentType, suffix: $suffix, transcodedContentType: $transcodedContentType, transcodedSuffix: $transcodedSuffix, duration: $duration, bitRate: $bitRate, path: $path, isVideo: $isVideo, userRating: $userRating, averageRating: $averageRating, playCount: $playCount, discNumber: $discNumber, created: $created, starred: $starred, albumId: $albumId, artistId: $artistId, type: $type, bookmarkPosition: $bookmarkPosition, originalWidth: $originalWidth, originalHeight: $originalHeight)';
   }
 
   @override
@@ -7365,13 +8391,93 @@ class _$NowPlayingEntryImpl implements _NowPlayingEntry {
             (identical(other.playerId, playerId) ||
                 other.playerId == playerId) &&
             (identical(other.playerName, playerName) ||
-                other.playerName == playerName));
+                other.playerName == playerName) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.parent, parent) || other.parent == parent) &&
+            (identical(other.isDir, isDir) || other.isDir == isDir) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.album, album) || other.album == album) &&
+            (identical(other.artist, artist) || other.artist == artist) &&
+            (identical(other.track, track) || other.track == track) &&
+            (identical(other.year, year) || other.year == year) &&
+            (identical(other.genre, genre) || other.genre == genre) &&
+            (identical(other.coverArt, coverArt) ||
+                other.coverArt == coverArt) &&
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.contentType, contentType) ||
+                other.contentType == contentType) &&
+            (identical(other.suffix, suffix) || other.suffix == suffix) &&
+            (identical(other.transcodedContentType, transcodedContentType) ||
+                other.transcodedContentType == transcodedContentType) &&
+            (identical(other.transcodedSuffix, transcodedSuffix) ||
+                other.transcodedSuffix == transcodedSuffix) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.bitRate, bitRate) || other.bitRate == bitRate) &&
+            (identical(other.path, path) || other.path == path) &&
+            (identical(other.isVideo, isVideo) || other.isVideo == isVideo) &&
+            (identical(other.userRating, userRating) ||
+                other.userRating == userRating) &&
+            (identical(other.averageRating, averageRating) ||
+                other.averageRating == averageRating) &&
+            (identical(other.playCount, playCount) ||
+                other.playCount == playCount) &&
+            (identical(other.discNumber, discNumber) ||
+                other.discNumber == discNumber) &&
+            (identical(other.created, created) || other.created == created) &&
+            (identical(other.starred, starred) || other.starred == starred) &&
+            (identical(other.albumId, albumId) || other.albumId == albumId) &&
+            (identical(other.artistId, artistId) ||
+                other.artistId == artistId) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.bookmarkPosition, bookmarkPosition) ||
+                other.bookmarkPosition == bookmarkPosition) &&
+            (identical(other.originalWidth, originalWidth) ||
+                other.originalWidth == originalWidth) &&
+            (identical(other.originalHeight, originalHeight) ||
+                other.originalHeight == originalHeight));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, username, minutesAgo, playerId, playerName);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        username,
+        minutesAgo,
+        playerId,
+        playerName,
+        id,
+        parent,
+        isDir,
+        title,
+        album,
+        artist,
+        track,
+        year,
+        genre,
+        coverArt,
+        size,
+        contentType,
+        suffix,
+        transcodedContentType,
+        transcodedSuffix,
+        duration,
+        bitRate,
+        path,
+        isVideo,
+        userRating,
+        averageRating,
+        playCount,
+        discNumber,
+        created,
+        starred,
+        albumId,
+        artistId,
+        type,
+        bookmarkPosition,
+        originalWidth,
+        originalHeight
+      ]);
 
   /// Create a copy of NowPlayingEntry
   /// with the given fields replaced by the non-null parameter values.
@@ -7395,7 +8501,39 @@ abstract class _NowPlayingEntry implements NowPlayingEntry {
           {@JsonKey(name: 'username') required final String username,
           @JsonKey(name: 'minutesAgo') required final int minutesAgo,
           @JsonKey(name: 'playerId') required final int playerId,
-          @JsonKey(name: 'playerName') final String? playerName}) =
+          @JsonKey(name: 'playerName') final String? playerName,
+          @JsonKey(name: 'id') required final String id,
+          @JsonKey(name: 'parent') final String? parent,
+          @JsonKey(name: 'isDir') required final bool isDir,
+          @JsonKey(name: 'title') required final String title,
+          @JsonKey(name: 'album') final String? album,
+          @JsonKey(name: 'artist') final String? artist,
+          @JsonKey(name: 'track') final int? track,
+          @JsonKey(name: 'year') final int? year,
+          @JsonKey(name: 'genre') final String? genre,
+          @JsonKey(name: 'coverArt') final String? coverArt,
+          @JsonKey(name: 'size') final int? size,
+          @JsonKey(name: 'contentType') final String? contentType,
+          @JsonKey(name: 'suffix') final String? suffix,
+          @JsonKey(name: 'transcodedContentType')
+          final String? transcodedContentType,
+          @JsonKey(name: 'transcodedSuffix') final String? transcodedSuffix,
+          @JsonKey(name: 'duration') final int? duration,
+          @JsonKey(name: 'bitRate') final int? bitRate,
+          @JsonKey(name: 'path') final String? path,
+          @JsonKey(name: 'isVideo') final bool? isVideo,
+          @JsonKey(name: 'userRating') final int? userRating,
+          @JsonKey(name: 'averageRating') final double? averageRating,
+          @JsonKey(name: 'playCount') final int? playCount,
+          @JsonKey(name: 'discNumber') final int? discNumber,
+          @JsonKey(name: 'created') final DateTime? created,
+          @JsonKey(name: 'starred') final DateTime? starred,
+          @JsonKey(name: 'albumId') final String? albumId,
+          @JsonKey(name: 'artistId') final String? artistId,
+          @JsonKey(name: 'type') final MediaType? type,
+          @JsonKey(name: 'bookmarkPosition') final int? bookmarkPosition,
+          @JsonKey(name: 'originalWidth') final int? originalWidth,
+          @JsonKey(name: 'originalHeight') final int? originalHeight}) =
       _$NowPlayingEntryImpl;
 
   factory _NowPlayingEntry.fromJson(Map<String, dynamic> json) =
@@ -7413,6 +8551,99 @@ abstract class _NowPlayingEntry implements NowPlayingEntry {
   @override
   @JsonKey(name: 'playerName')
   String? get playerName;
+  @override
+  @JsonKey(name: 'id')
+  String get id;
+  @override
+  @JsonKey(name: 'parent')
+  String? get parent;
+  @override
+  @JsonKey(name: 'isDir')
+  bool get isDir;
+  @override
+  @JsonKey(name: 'title')
+  String get title;
+  @override
+  @JsonKey(name: 'album')
+  String? get album;
+  @override
+  @JsonKey(name: 'artist')
+  String? get artist;
+  @override
+  @JsonKey(name: 'track')
+  int? get track;
+  @override
+  @JsonKey(name: 'year')
+  int? get year;
+  @override
+  @JsonKey(name: 'genre')
+  String? get genre;
+  @override
+  @JsonKey(name: 'coverArt')
+  String? get coverArt;
+  @override
+  @JsonKey(name: 'size')
+  int? get size;
+  @override
+  @JsonKey(name: 'contentType')
+  String? get contentType;
+  @override
+  @JsonKey(name: 'suffix')
+  String? get suffix;
+  @override
+  @JsonKey(name: 'transcodedContentType')
+  String? get transcodedContentType;
+  @override
+  @JsonKey(name: 'transcodedSuffix')
+  String? get transcodedSuffix;
+  @override
+  @JsonKey(name: 'duration')
+  int? get duration;
+  @override
+  @JsonKey(name: 'bitRate')
+  int? get bitRate;
+  @override
+  @JsonKey(name: 'path')
+  String? get path;
+  @override
+  @JsonKey(name: 'isVideo')
+  bool? get isVideo;
+  @override
+  @JsonKey(name: 'userRating')
+  int? get userRating;
+  @override
+  @JsonKey(name: 'averageRating')
+  double? get averageRating;
+  @override
+  @JsonKey(name: 'playCount')
+  int? get playCount;
+  @override
+  @JsonKey(name: 'discNumber')
+  int? get discNumber;
+  @override
+  @JsonKey(name: 'created')
+  DateTime? get created;
+  @override
+  @JsonKey(name: 'starred')
+  DateTime? get starred;
+  @override
+  @JsonKey(name: 'albumId')
+  String? get albumId;
+  @override
+  @JsonKey(name: 'artistId')
+  String? get artistId;
+  @override
+  @JsonKey(name: 'type')
+  MediaType? get type;
+  @override
+  @JsonKey(name: 'bookmarkPosition')
+  int? get bookmarkPosition;
+  @override
+  @JsonKey(name: 'originalWidth')
+  int? get originalWidth;
+  @override
+  @JsonKey(name: 'originalHeight')
+  int? get originalHeight;
 
   /// Create a copy of NowPlayingEntry
   /// with the given fields replaced by the non-null parameter values.
@@ -8677,8 +9908,30 @@ PlaylistWithSongs _$PlaylistWithSongsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PlaylistWithSongs {
+  @JsonKey(name: 'id')
+  String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'comment')
+  String? get comment => throw _privateConstructorUsedError;
+  @JsonKey(name: 'owner')
+  String? get owner => throw _privateConstructorUsedError;
+  @JsonKey(name: 'public')
+  bool? get public => throw _privateConstructorUsedError;
+  @JsonKey(name: 'songCount')
+  int get songCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'duration')
+  int get duration => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created')
+  DateTime get created => throw _privateConstructorUsedError;
+  @JsonKey(name: 'changed')
+  DateTime get changed => throw _privateConstructorUsedError;
+  @JsonKey(name: 'coverArt')
+  String? get coverArt => throw _privateConstructorUsedError;
   @JsonKey(name: 'entry')
   List<Child>? get entry => throw _privateConstructorUsedError;
+  @JsonKey(name: 'allowedUser')
+  List<String>? get allowedUser => throw _privateConstructorUsedError;
 
   /// Serializes this PlaylistWithSongs to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -8696,7 +9949,19 @@ abstract class $PlaylistWithSongsCopyWith<$Res> {
           PlaylistWithSongs value, $Res Function(PlaylistWithSongs) then) =
       _$PlaylistWithSongsCopyWithImpl<$Res, PlaylistWithSongs>;
   @useResult
-  $Res call({@JsonKey(name: 'entry') List<Child>? entry});
+  $Res call(
+      {@JsonKey(name: 'id') String id,
+      @JsonKey(name: 'name') String name,
+      @JsonKey(name: 'comment') String? comment,
+      @JsonKey(name: 'owner') String? owner,
+      @JsonKey(name: 'public') bool? public,
+      @JsonKey(name: 'songCount') int songCount,
+      @JsonKey(name: 'duration') int duration,
+      @JsonKey(name: 'created') DateTime created,
+      @JsonKey(name: 'changed') DateTime changed,
+      @JsonKey(name: 'coverArt') String? coverArt,
+      @JsonKey(name: 'entry') List<Child>? entry,
+      @JsonKey(name: 'allowedUser') List<String>? allowedUser});
 }
 
 /// @nodoc
@@ -8714,13 +9979,68 @@ class _$PlaylistWithSongsCopyWithImpl<$Res, $Val extends PlaylistWithSongs>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? comment = freezed,
+    Object? owner = freezed,
+    Object? public = freezed,
+    Object? songCount = null,
+    Object? duration = null,
+    Object? created = null,
+    Object? changed = null,
+    Object? coverArt = freezed,
     Object? entry = freezed,
+    Object? allowedUser = freezed,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      owner: freezed == owner
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as String?,
+      public: freezed == public
+          ? _value.public
+          : public // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      songCount: null == songCount
+          ? _value.songCount
+          : songCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int,
+      created: null == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      changed: null == changed
+          ? _value.changed
+          : changed // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      coverArt: freezed == coverArt
+          ? _value.coverArt
+          : coverArt // ignore: cast_nullable_to_non_nullable
+              as String?,
       entry: freezed == entry
           ? _value.entry
           : entry // ignore: cast_nullable_to_non_nullable
               as List<Child>?,
+      allowedUser: freezed == allowedUser
+          ? _value.allowedUser
+          : allowedUser // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -8733,7 +10053,19 @@ abstract class _$$PlaylistWithSongsImplCopyWith<$Res>
       __$$PlaylistWithSongsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'entry') List<Child>? entry});
+  $Res call(
+      {@JsonKey(name: 'id') String id,
+      @JsonKey(name: 'name') String name,
+      @JsonKey(name: 'comment') String? comment,
+      @JsonKey(name: 'owner') String? owner,
+      @JsonKey(name: 'public') bool? public,
+      @JsonKey(name: 'songCount') int songCount,
+      @JsonKey(name: 'duration') int duration,
+      @JsonKey(name: 'created') DateTime created,
+      @JsonKey(name: 'changed') DateTime changed,
+      @JsonKey(name: 'coverArt') String? coverArt,
+      @JsonKey(name: 'entry') List<Child>? entry,
+      @JsonKey(name: 'allowedUser') List<String>? allowedUser});
 }
 
 /// @nodoc
@@ -8749,13 +10081,68 @@ class __$$PlaylistWithSongsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? comment = freezed,
+    Object? owner = freezed,
+    Object? public = freezed,
+    Object? songCount = null,
+    Object? duration = null,
+    Object? created = null,
+    Object? changed = null,
+    Object? coverArt = freezed,
     Object? entry = freezed,
+    Object? allowedUser = freezed,
   }) {
     return _then(_$PlaylistWithSongsImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      owner: freezed == owner
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as String?,
+      public: freezed == public
+          ? _value.public
+          : public // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      songCount: null == songCount
+          ? _value.songCount
+          : songCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int,
+      created: null == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      changed: null == changed
+          ? _value.changed
+          : changed // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      coverArt: freezed == coverArt
+          ? _value.coverArt
+          : coverArt // ignore: cast_nullable_to_non_nullable
+              as String?,
       entry: freezed == entry
           ? _value._entry
           : entry // ignore: cast_nullable_to_non_nullable
               as List<Child>?,
+      allowedUser: freezed == allowedUser
+          ? _value._allowedUser
+          : allowedUser // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -8764,12 +10151,54 @@ class __$$PlaylistWithSongsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PlaylistWithSongsImpl implements _PlaylistWithSongs {
   const _$PlaylistWithSongsImpl(
-      {@JsonKey(name: 'entry') final List<Child>? entry})
-      : _entry = entry;
+      {@JsonKey(name: 'id') required this.id,
+      @JsonKey(name: 'name') required this.name,
+      @JsonKey(name: 'comment') this.comment,
+      @JsonKey(name: 'owner') this.owner,
+      @JsonKey(name: 'public') this.public,
+      @JsonKey(name: 'songCount') required this.songCount,
+      @JsonKey(name: 'duration') required this.duration,
+      @JsonKey(name: 'created') required this.created,
+      @JsonKey(name: 'changed') required this.changed,
+      @JsonKey(name: 'coverArt') this.coverArt,
+      @JsonKey(name: 'entry') final List<Child>? entry,
+      @JsonKey(name: 'allowedUser') final List<String>? allowedUser})
+      : _entry = entry,
+        _allowedUser = allowedUser;
 
   factory _$PlaylistWithSongsImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlaylistWithSongsImplFromJson(json);
 
+  @override
+  @JsonKey(name: 'id')
+  final String id;
+  @override
+  @JsonKey(name: 'name')
+  final String name;
+  @override
+  @JsonKey(name: 'comment')
+  final String? comment;
+  @override
+  @JsonKey(name: 'owner')
+  final String? owner;
+  @override
+  @JsonKey(name: 'public')
+  final bool? public;
+  @override
+  @JsonKey(name: 'songCount')
+  final int songCount;
+  @override
+  @JsonKey(name: 'duration')
+  final int duration;
+  @override
+  @JsonKey(name: 'created')
+  final DateTime created;
+  @override
+  @JsonKey(name: 'changed')
+  final DateTime changed;
+  @override
+  @JsonKey(name: 'coverArt')
+  final String? coverArt;
   final List<Child>? _entry;
   @override
   @JsonKey(name: 'entry')
@@ -8781,9 +10210,20 @@ class _$PlaylistWithSongsImpl implements _PlaylistWithSongs {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<String>? _allowedUser;
+  @override
+  @JsonKey(name: 'allowedUser')
+  List<String>? get allowedUser {
+    final value = _allowedUser;
+    if (value == null) return null;
+    if (_allowedUser is EqualUnmodifiableListView) return _allowedUser;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'PlaylistWithSongs(entry: $entry)';
+    return 'PlaylistWithSongs(id: $id, name: $name, comment: $comment, owner: $owner, public: $public, songCount: $songCount, duration: $duration, created: $created, changed: $changed, coverArt: $coverArt, entry: $entry, allowedUser: $allowedUser)';
   }
 
   @override
@@ -8791,13 +10231,40 @@ class _$PlaylistWithSongsImpl implements _PlaylistWithSongs {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PlaylistWithSongsImpl &&
-            const DeepCollectionEquality().equals(other._entry, _entry));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.owner, owner) || other.owner == owner) &&
+            (identical(other.public, public) || other.public == public) &&
+            (identical(other.songCount, songCount) ||
+                other.songCount == songCount) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.created, created) || other.created == created) &&
+            (identical(other.changed, changed) || other.changed == changed) &&
+            (identical(other.coverArt, coverArt) ||
+                other.coverArt == coverArt) &&
+            const DeepCollectionEquality().equals(other._entry, _entry) &&
+            const DeepCollectionEquality()
+                .equals(other._allowedUser, _allowedUser));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_entry));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      comment,
+      owner,
+      public,
+      songCount,
+      duration,
+      created,
+      changed,
+      coverArt,
+      const DeepCollectionEquality().hash(_entry),
+      const DeepCollectionEquality().hash(_allowedUser));
 
   /// Create a copy of PlaylistWithSongs
   /// with the given fields replaced by the non-null parameter values.
@@ -8818,15 +10285,59 @@ class _$PlaylistWithSongsImpl implements _PlaylistWithSongs {
 
 abstract class _PlaylistWithSongs implements PlaylistWithSongs {
   const factory _PlaylistWithSongs(
-          {@JsonKey(name: 'entry') final List<Child>? entry}) =
+          {@JsonKey(name: 'id') required final String id,
+          @JsonKey(name: 'name') required final String name,
+          @JsonKey(name: 'comment') final String? comment,
+          @JsonKey(name: 'owner') final String? owner,
+          @JsonKey(name: 'public') final bool? public,
+          @JsonKey(name: 'songCount') required final int songCount,
+          @JsonKey(name: 'duration') required final int duration,
+          @JsonKey(name: 'created') required final DateTime created,
+          @JsonKey(name: 'changed') required final DateTime changed,
+          @JsonKey(name: 'coverArt') final String? coverArt,
+          @JsonKey(name: 'entry') final List<Child>? entry,
+          @JsonKey(name: 'allowedUser') final List<String>? allowedUser}) =
       _$PlaylistWithSongsImpl;
 
   factory _PlaylistWithSongs.fromJson(Map<String, dynamic> json) =
       _$PlaylistWithSongsImpl.fromJson;
 
   @override
+  @JsonKey(name: 'id')
+  String get id;
+  @override
+  @JsonKey(name: 'name')
+  String get name;
+  @override
+  @JsonKey(name: 'comment')
+  String? get comment;
+  @override
+  @JsonKey(name: 'owner')
+  String? get owner;
+  @override
+  @JsonKey(name: 'public')
+  bool? get public;
+  @override
+  @JsonKey(name: 'songCount')
+  int get songCount;
+  @override
+  @JsonKey(name: 'duration')
+  int get duration;
+  @override
+  @JsonKey(name: 'created')
+  DateTime get created;
+  @override
+  @JsonKey(name: 'changed')
+  DateTime get changed;
+  @override
+  @JsonKey(name: 'coverArt')
+  String? get coverArt;
+  @override
   @JsonKey(name: 'entry')
   List<Child>? get entry;
+  @override
+  @JsonKey(name: 'allowedUser')
+  List<String>? get allowedUser;
 
   /// Create a copy of PlaylistWithSongs
   /// with the given fields replaced by the non-null parameter values.
@@ -9070,6 +10581,14 @@ JukeboxPlaylist _$JukeboxPlaylistFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$JukeboxPlaylist {
+  @JsonKey(name: 'currentIndex')
+  int get currentIndex => throw _privateConstructorUsedError;
+  @JsonKey(name: 'playing')
+  bool get playing => throw _privateConstructorUsedError;
+  @JsonKey(name: 'gain')
+  double get gain => throw _privateConstructorUsedError;
+  @JsonKey(name: 'position')
+  int? get position => throw _privateConstructorUsedError;
   @JsonKey(name: 'entry')
   List<Child>? get entry => throw _privateConstructorUsedError;
 
@@ -9089,7 +10608,12 @@ abstract class $JukeboxPlaylistCopyWith<$Res> {
           JukeboxPlaylist value, $Res Function(JukeboxPlaylist) then) =
       _$JukeboxPlaylistCopyWithImpl<$Res, JukeboxPlaylist>;
   @useResult
-  $Res call({@JsonKey(name: 'entry') List<Child>? entry});
+  $Res call(
+      {@JsonKey(name: 'currentIndex') int currentIndex,
+      @JsonKey(name: 'playing') bool playing,
+      @JsonKey(name: 'gain') double gain,
+      @JsonKey(name: 'position') int? position,
+      @JsonKey(name: 'entry') List<Child>? entry});
 }
 
 /// @nodoc
@@ -9107,9 +10631,29 @@ class _$JukeboxPlaylistCopyWithImpl<$Res, $Val extends JukeboxPlaylist>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? currentIndex = null,
+    Object? playing = null,
+    Object? gain = null,
+    Object? position = freezed,
     Object? entry = freezed,
   }) {
     return _then(_value.copyWith(
+      currentIndex: null == currentIndex
+          ? _value.currentIndex
+          : currentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      playing: null == playing
+          ? _value.playing
+          : playing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      gain: null == gain
+          ? _value.gain
+          : gain // ignore: cast_nullable_to_non_nullable
+              as double,
+      position: freezed == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as int?,
       entry: freezed == entry
           ? _value.entry
           : entry // ignore: cast_nullable_to_non_nullable
@@ -9126,7 +10670,12 @@ abstract class _$$JukeboxPlaylistImplCopyWith<$Res>
       __$$JukeboxPlaylistImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'entry') List<Child>? entry});
+  $Res call(
+      {@JsonKey(name: 'currentIndex') int currentIndex,
+      @JsonKey(name: 'playing') bool playing,
+      @JsonKey(name: 'gain') double gain,
+      @JsonKey(name: 'position') int? position,
+      @JsonKey(name: 'entry') List<Child>? entry});
 }
 
 /// @nodoc
@@ -9142,9 +10691,29 @@ class __$$JukeboxPlaylistImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? currentIndex = null,
+    Object? playing = null,
+    Object? gain = null,
+    Object? position = freezed,
     Object? entry = freezed,
   }) {
     return _then(_$JukeboxPlaylistImpl(
+      currentIndex: null == currentIndex
+          ? _value.currentIndex
+          : currentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      playing: null == playing
+          ? _value.playing
+          : playing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      gain: null == gain
+          ? _value.gain
+          : gain // ignore: cast_nullable_to_non_nullable
+              as double,
+      position: freezed == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as int?,
       entry: freezed == entry
           ? _value._entry
           : entry // ignore: cast_nullable_to_non_nullable
@@ -9157,12 +10726,28 @@ class __$$JukeboxPlaylistImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$JukeboxPlaylistImpl implements _JukeboxPlaylist {
   const _$JukeboxPlaylistImpl(
-      {@JsonKey(name: 'entry') final List<Child>? entry})
+      {@JsonKey(name: 'currentIndex') required this.currentIndex,
+      @JsonKey(name: 'playing') required this.playing,
+      @JsonKey(name: 'gain') required this.gain,
+      @JsonKey(name: 'position') this.position,
+      @JsonKey(name: 'entry') final List<Child>? entry})
       : _entry = entry;
 
   factory _$JukeboxPlaylistImpl.fromJson(Map<String, dynamic> json) =>
       _$$JukeboxPlaylistImplFromJson(json);
 
+  @override
+  @JsonKey(name: 'currentIndex')
+  final int currentIndex;
+  @override
+  @JsonKey(name: 'playing')
+  final bool playing;
+  @override
+  @JsonKey(name: 'gain')
+  final double gain;
+  @override
+  @JsonKey(name: 'position')
+  final int? position;
   final List<Child>? _entry;
   @override
   @JsonKey(name: 'entry')
@@ -9176,7 +10761,7 @@ class _$JukeboxPlaylistImpl implements _JukeboxPlaylist {
 
   @override
   String toString() {
-    return 'JukeboxPlaylist(entry: $entry)';
+    return 'JukeboxPlaylist(currentIndex: $currentIndex, playing: $playing, gain: $gain, position: $position, entry: $entry)';
   }
 
   @override
@@ -9184,13 +10769,19 @@ class _$JukeboxPlaylistImpl implements _JukeboxPlaylist {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$JukeboxPlaylistImpl &&
+            (identical(other.currentIndex, currentIndex) ||
+                other.currentIndex == currentIndex) &&
+            (identical(other.playing, playing) || other.playing == playing) &&
+            (identical(other.gain, gain) || other.gain == gain) &&
+            (identical(other.position, position) ||
+                other.position == position) &&
             const DeepCollectionEquality().equals(other._entry, _entry));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_entry));
+  int get hashCode => Object.hash(runtimeType, currentIndex, playing, gain,
+      position, const DeepCollectionEquality().hash(_entry));
 
   /// Create a copy of JukeboxPlaylist
   /// with the given fields replaced by the non-null parameter values.
@@ -9211,12 +10802,28 @@ class _$JukeboxPlaylistImpl implements _JukeboxPlaylist {
 
 abstract class _JukeboxPlaylist implements JukeboxPlaylist {
   const factory _JukeboxPlaylist(
-          {@JsonKey(name: 'entry') final List<Child>? entry}) =
+          {@JsonKey(name: 'currentIndex') required final int currentIndex,
+          @JsonKey(name: 'playing') required final bool playing,
+          @JsonKey(name: 'gain') required final double gain,
+          @JsonKey(name: 'position') final int? position,
+          @JsonKey(name: 'entry') final List<Child>? entry}) =
       _$JukeboxPlaylistImpl;
 
   factory _JukeboxPlaylist.fromJson(Map<String, dynamic> json) =
       _$JukeboxPlaylistImpl.fromJson;
 
+  @override
+  @JsonKey(name: 'currentIndex')
+  int get currentIndex;
+  @override
+  @JsonKey(name: 'playing')
+  bool get playing;
+  @override
+  @JsonKey(name: 'gain')
+  double get gain;
+  @override
+  @JsonKey(name: 'position')
+  int? get position;
   @override
   @JsonKey(name: 'entry')
   List<Child>? get entry;
@@ -10962,6 +12569,68 @@ mixin _$PodcastEpisode {
   PodcastStatus get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'publishDate')
   DateTime? get publishDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'id')
+  String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'parent')
+  String? get parent => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isDir')
+  bool get isDir => throw _privateConstructorUsedError;
+  @JsonKey(name: 'title')
+  String get title => throw _privateConstructorUsedError;
+  @JsonKey(name: 'album')
+  String? get album => throw _privateConstructorUsedError;
+  @JsonKey(name: 'artist')
+  String? get artist => throw _privateConstructorUsedError;
+  @JsonKey(name: 'track')
+  int? get track => throw _privateConstructorUsedError;
+  @JsonKey(name: 'year')
+  int? get year => throw _privateConstructorUsedError;
+  @JsonKey(name: 'genre')
+  String? get genre => throw _privateConstructorUsedError;
+  @JsonKey(name: 'coverArt')
+  String? get coverArt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'size')
+  int? get size => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contentType')
+  String? get contentType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'suffix')
+  String? get suffix => throw _privateConstructorUsedError;
+  @JsonKey(name: 'transcodedContentType')
+  String? get transcodedContentType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'transcodedSuffix')
+  String? get transcodedSuffix => throw _privateConstructorUsedError;
+  @JsonKey(name: 'duration')
+  int? get duration => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bitRate')
+  int? get bitRate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'path')
+  String? get path => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isVideo')
+  bool? get isVideo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'userRating')
+  int? get userRating => throw _privateConstructorUsedError;
+  @JsonKey(name: 'averageRating')
+  double? get averageRating => throw _privateConstructorUsedError;
+  @JsonKey(name: 'playCount')
+  int? get playCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'discNumber')
+  int? get discNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created')
+  DateTime? get created => throw _privateConstructorUsedError;
+  @JsonKey(name: 'starred')
+  DateTime? get starred => throw _privateConstructorUsedError;
+  @JsonKey(name: 'albumId')
+  String? get albumId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'artistId')
+  String? get artistId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'type')
+  MediaType? get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bookmarkPosition')
+  int? get bookmarkPosition => throw _privateConstructorUsedError;
+  @JsonKey(name: 'originalWidth')
+  int? get originalWidth => throw _privateConstructorUsedError;
+  @JsonKey(name: 'originalHeight')
+  int? get originalHeight => throw _privateConstructorUsedError;
 
   /// Serializes this PodcastEpisode to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -10984,7 +12653,38 @@ abstract class $PodcastEpisodeCopyWith<$Res> {
       @JsonKey(name: 'channelId') String channelId,
       @JsonKey(name: 'description') String? description,
       @JsonKey(name: 'status') PodcastStatus status,
-      @JsonKey(name: 'publishDate') DateTime? publishDate});
+      @JsonKey(name: 'publishDate') DateTime? publishDate,
+      @JsonKey(name: 'id') String id,
+      @JsonKey(name: 'parent') String? parent,
+      @JsonKey(name: 'isDir') bool isDir,
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'album') String? album,
+      @JsonKey(name: 'artist') String? artist,
+      @JsonKey(name: 'track') int? track,
+      @JsonKey(name: 'year') int? year,
+      @JsonKey(name: 'genre') String? genre,
+      @JsonKey(name: 'coverArt') String? coverArt,
+      @JsonKey(name: 'size') int? size,
+      @JsonKey(name: 'contentType') String? contentType,
+      @JsonKey(name: 'suffix') String? suffix,
+      @JsonKey(name: 'transcodedContentType') String? transcodedContentType,
+      @JsonKey(name: 'transcodedSuffix') String? transcodedSuffix,
+      @JsonKey(name: 'duration') int? duration,
+      @JsonKey(name: 'bitRate') int? bitRate,
+      @JsonKey(name: 'path') String? path,
+      @JsonKey(name: 'isVideo') bool? isVideo,
+      @JsonKey(name: 'userRating') int? userRating,
+      @JsonKey(name: 'averageRating') double? averageRating,
+      @JsonKey(name: 'playCount') int? playCount,
+      @JsonKey(name: 'discNumber') int? discNumber,
+      @JsonKey(name: 'created') DateTime? created,
+      @JsonKey(name: 'starred') DateTime? starred,
+      @JsonKey(name: 'albumId') String? albumId,
+      @JsonKey(name: 'artistId') String? artistId,
+      @JsonKey(name: 'type') MediaType? type,
+      @JsonKey(name: 'bookmarkPosition') int? bookmarkPosition,
+      @JsonKey(name: 'originalWidth') int? originalWidth,
+      @JsonKey(name: 'originalHeight') int? originalHeight});
 }
 
 /// @nodoc
@@ -11007,6 +12707,37 @@ class _$PodcastEpisodeCopyWithImpl<$Res, $Val extends PodcastEpisode>
     Object? description = freezed,
     Object? status = null,
     Object? publishDate = freezed,
+    Object? id = null,
+    Object? parent = freezed,
+    Object? isDir = null,
+    Object? title = null,
+    Object? album = freezed,
+    Object? artist = freezed,
+    Object? track = freezed,
+    Object? year = freezed,
+    Object? genre = freezed,
+    Object? coverArt = freezed,
+    Object? size = freezed,
+    Object? contentType = freezed,
+    Object? suffix = freezed,
+    Object? transcodedContentType = freezed,
+    Object? transcodedSuffix = freezed,
+    Object? duration = freezed,
+    Object? bitRate = freezed,
+    Object? path = freezed,
+    Object? isVideo = freezed,
+    Object? userRating = freezed,
+    Object? averageRating = freezed,
+    Object? playCount = freezed,
+    Object? discNumber = freezed,
+    Object? created = freezed,
+    Object? starred = freezed,
+    Object? albumId = freezed,
+    Object? artistId = freezed,
+    Object? type = freezed,
+    Object? bookmarkPosition = freezed,
+    Object? originalWidth = freezed,
+    Object? originalHeight = freezed,
   }) {
     return _then(_value.copyWith(
       streamId: freezed == streamId
@@ -11029,6 +12760,130 @@ class _$PodcastEpisodeCopyWithImpl<$Res, $Val extends PodcastEpisode>
           ? _value.publishDate
           : publishDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      parent: freezed == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isDir: null == isDir
+          ? _value.isDir
+          : isDir // ignore: cast_nullable_to_non_nullable
+              as bool,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      album: freezed == album
+          ? _value.album
+          : album // ignore: cast_nullable_to_non_nullable
+              as String?,
+      artist: freezed == artist
+          ? _value.artist
+          : artist // ignore: cast_nullable_to_non_nullable
+              as String?,
+      track: freezed == track
+          ? _value.track
+          : track // ignore: cast_nullable_to_non_nullable
+              as int?,
+      year: freezed == year
+          ? _value.year
+          : year // ignore: cast_nullable_to_non_nullable
+              as int?,
+      genre: freezed == genre
+          ? _value.genre
+          : genre // ignore: cast_nullable_to_non_nullable
+              as String?,
+      coverArt: freezed == coverArt
+          ? _value.coverArt
+          : coverArt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      size: freezed == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as int?,
+      contentType: freezed == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      suffix: freezed == suffix
+          ? _value.suffix
+          : suffix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      transcodedContentType: freezed == transcodedContentType
+          ? _value.transcodedContentType
+          : transcodedContentType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      transcodedSuffix: freezed == transcodedSuffix
+          ? _value.transcodedSuffix
+          : transcodedSuffix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int?,
+      bitRate: freezed == bitRate
+          ? _value.bitRate
+          : bitRate // ignore: cast_nullable_to_non_nullable
+              as int?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isVideo: freezed == isVideo
+          ? _value.isVideo
+          : isVideo // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      userRating: freezed == userRating
+          ? _value.userRating
+          : userRating // ignore: cast_nullable_to_non_nullable
+              as int?,
+      averageRating: freezed == averageRating
+          ? _value.averageRating
+          : averageRating // ignore: cast_nullable_to_non_nullable
+              as double?,
+      playCount: freezed == playCount
+          ? _value.playCount
+          : playCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      discNumber: freezed == discNumber
+          ? _value.discNumber
+          : discNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      created: freezed == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      starred: freezed == starred
+          ? _value.starred
+          : starred // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      albumId: freezed == albumId
+          ? _value.albumId
+          : albumId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      artistId: freezed == artistId
+          ? _value.artistId
+          : artistId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MediaType?,
+      bookmarkPosition: freezed == bookmarkPosition
+          ? _value.bookmarkPosition
+          : bookmarkPosition // ignore: cast_nullable_to_non_nullable
+              as int?,
+      originalWidth: freezed == originalWidth
+          ? _value.originalWidth
+          : originalWidth // ignore: cast_nullable_to_non_nullable
+              as int?,
+      originalHeight: freezed == originalHeight
+          ? _value.originalHeight
+          : originalHeight // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -11046,7 +12901,38 @@ abstract class _$$PodcastEpisodeImplCopyWith<$Res>
       @JsonKey(name: 'channelId') String channelId,
       @JsonKey(name: 'description') String? description,
       @JsonKey(name: 'status') PodcastStatus status,
-      @JsonKey(name: 'publishDate') DateTime? publishDate});
+      @JsonKey(name: 'publishDate') DateTime? publishDate,
+      @JsonKey(name: 'id') String id,
+      @JsonKey(name: 'parent') String? parent,
+      @JsonKey(name: 'isDir') bool isDir,
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'album') String? album,
+      @JsonKey(name: 'artist') String? artist,
+      @JsonKey(name: 'track') int? track,
+      @JsonKey(name: 'year') int? year,
+      @JsonKey(name: 'genre') String? genre,
+      @JsonKey(name: 'coverArt') String? coverArt,
+      @JsonKey(name: 'size') int? size,
+      @JsonKey(name: 'contentType') String? contentType,
+      @JsonKey(name: 'suffix') String? suffix,
+      @JsonKey(name: 'transcodedContentType') String? transcodedContentType,
+      @JsonKey(name: 'transcodedSuffix') String? transcodedSuffix,
+      @JsonKey(name: 'duration') int? duration,
+      @JsonKey(name: 'bitRate') int? bitRate,
+      @JsonKey(name: 'path') String? path,
+      @JsonKey(name: 'isVideo') bool? isVideo,
+      @JsonKey(name: 'userRating') int? userRating,
+      @JsonKey(name: 'averageRating') double? averageRating,
+      @JsonKey(name: 'playCount') int? playCount,
+      @JsonKey(name: 'discNumber') int? discNumber,
+      @JsonKey(name: 'created') DateTime? created,
+      @JsonKey(name: 'starred') DateTime? starred,
+      @JsonKey(name: 'albumId') String? albumId,
+      @JsonKey(name: 'artistId') String? artistId,
+      @JsonKey(name: 'type') MediaType? type,
+      @JsonKey(name: 'bookmarkPosition') int? bookmarkPosition,
+      @JsonKey(name: 'originalWidth') int? originalWidth,
+      @JsonKey(name: 'originalHeight') int? originalHeight});
 }
 
 /// @nodoc
@@ -11067,6 +12953,37 @@ class __$$PodcastEpisodeImplCopyWithImpl<$Res>
     Object? description = freezed,
     Object? status = null,
     Object? publishDate = freezed,
+    Object? id = null,
+    Object? parent = freezed,
+    Object? isDir = null,
+    Object? title = null,
+    Object? album = freezed,
+    Object? artist = freezed,
+    Object? track = freezed,
+    Object? year = freezed,
+    Object? genre = freezed,
+    Object? coverArt = freezed,
+    Object? size = freezed,
+    Object? contentType = freezed,
+    Object? suffix = freezed,
+    Object? transcodedContentType = freezed,
+    Object? transcodedSuffix = freezed,
+    Object? duration = freezed,
+    Object? bitRate = freezed,
+    Object? path = freezed,
+    Object? isVideo = freezed,
+    Object? userRating = freezed,
+    Object? averageRating = freezed,
+    Object? playCount = freezed,
+    Object? discNumber = freezed,
+    Object? created = freezed,
+    Object? starred = freezed,
+    Object? albumId = freezed,
+    Object? artistId = freezed,
+    Object? type = freezed,
+    Object? bookmarkPosition = freezed,
+    Object? originalWidth = freezed,
+    Object? originalHeight = freezed,
   }) {
     return _then(_$PodcastEpisodeImpl(
       streamId: freezed == streamId
@@ -11089,6 +13006,130 @@ class __$$PodcastEpisodeImplCopyWithImpl<$Res>
           ? _value.publishDate
           : publishDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      parent: freezed == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isDir: null == isDir
+          ? _value.isDir
+          : isDir // ignore: cast_nullable_to_non_nullable
+              as bool,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      album: freezed == album
+          ? _value.album
+          : album // ignore: cast_nullable_to_non_nullable
+              as String?,
+      artist: freezed == artist
+          ? _value.artist
+          : artist // ignore: cast_nullable_to_non_nullable
+              as String?,
+      track: freezed == track
+          ? _value.track
+          : track // ignore: cast_nullable_to_non_nullable
+              as int?,
+      year: freezed == year
+          ? _value.year
+          : year // ignore: cast_nullable_to_non_nullable
+              as int?,
+      genre: freezed == genre
+          ? _value.genre
+          : genre // ignore: cast_nullable_to_non_nullable
+              as String?,
+      coverArt: freezed == coverArt
+          ? _value.coverArt
+          : coverArt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      size: freezed == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as int?,
+      contentType: freezed == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      suffix: freezed == suffix
+          ? _value.suffix
+          : suffix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      transcodedContentType: freezed == transcodedContentType
+          ? _value.transcodedContentType
+          : transcodedContentType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      transcodedSuffix: freezed == transcodedSuffix
+          ? _value.transcodedSuffix
+          : transcodedSuffix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int?,
+      bitRate: freezed == bitRate
+          ? _value.bitRate
+          : bitRate // ignore: cast_nullable_to_non_nullable
+              as int?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isVideo: freezed == isVideo
+          ? _value.isVideo
+          : isVideo // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      userRating: freezed == userRating
+          ? _value.userRating
+          : userRating // ignore: cast_nullable_to_non_nullable
+              as int?,
+      averageRating: freezed == averageRating
+          ? _value.averageRating
+          : averageRating // ignore: cast_nullable_to_non_nullable
+              as double?,
+      playCount: freezed == playCount
+          ? _value.playCount
+          : playCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      discNumber: freezed == discNumber
+          ? _value.discNumber
+          : discNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      created: freezed == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      starred: freezed == starred
+          ? _value.starred
+          : starred // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      albumId: freezed == albumId
+          ? _value.albumId
+          : albumId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      artistId: freezed == artistId
+          ? _value.artistId
+          : artistId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MediaType?,
+      bookmarkPosition: freezed == bookmarkPosition
+          ? _value.bookmarkPosition
+          : bookmarkPosition // ignore: cast_nullable_to_non_nullable
+              as int?,
+      originalWidth: freezed == originalWidth
+          ? _value.originalWidth
+          : originalWidth // ignore: cast_nullable_to_non_nullable
+              as int?,
+      originalHeight: freezed == originalHeight
+          ? _value.originalHeight
+          : originalHeight // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -11101,7 +13142,38 @@ class _$PodcastEpisodeImpl implements _PodcastEpisode {
       @JsonKey(name: 'channelId') required this.channelId,
       @JsonKey(name: 'description') this.description,
       @JsonKey(name: 'status') required this.status,
-      @JsonKey(name: 'publishDate') this.publishDate});
+      @JsonKey(name: 'publishDate') this.publishDate,
+      @JsonKey(name: 'id') required this.id,
+      @JsonKey(name: 'parent') this.parent,
+      @JsonKey(name: 'isDir') required this.isDir,
+      @JsonKey(name: 'title') required this.title,
+      @JsonKey(name: 'album') this.album,
+      @JsonKey(name: 'artist') this.artist,
+      @JsonKey(name: 'track') this.track,
+      @JsonKey(name: 'year') this.year,
+      @JsonKey(name: 'genre') this.genre,
+      @JsonKey(name: 'coverArt') this.coverArt,
+      @JsonKey(name: 'size') this.size,
+      @JsonKey(name: 'contentType') this.contentType,
+      @JsonKey(name: 'suffix') this.suffix,
+      @JsonKey(name: 'transcodedContentType') this.transcodedContentType,
+      @JsonKey(name: 'transcodedSuffix') this.transcodedSuffix,
+      @JsonKey(name: 'duration') this.duration,
+      @JsonKey(name: 'bitRate') this.bitRate,
+      @JsonKey(name: 'path') this.path,
+      @JsonKey(name: 'isVideo') this.isVideo,
+      @JsonKey(name: 'userRating') this.userRating,
+      @JsonKey(name: 'averageRating') this.averageRating,
+      @JsonKey(name: 'playCount') this.playCount,
+      @JsonKey(name: 'discNumber') this.discNumber,
+      @JsonKey(name: 'created') this.created,
+      @JsonKey(name: 'starred') this.starred,
+      @JsonKey(name: 'albumId') this.albumId,
+      @JsonKey(name: 'artistId') this.artistId,
+      @JsonKey(name: 'type') this.type,
+      @JsonKey(name: 'bookmarkPosition') this.bookmarkPosition,
+      @JsonKey(name: 'originalWidth') this.originalWidth,
+      @JsonKey(name: 'originalHeight') this.originalHeight});
 
   factory _$PodcastEpisodeImpl.fromJson(Map<String, dynamic> json) =>
       _$$PodcastEpisodeImplFromJson(json);
@@ -11121,10 +13193,103 @@ class _$PodcastEpisodeImpl implements _PodcastEpisode {
   @override
   @JsonKey(name: 'publishDate')
   final DateTime? publishDate;
+  @override
+  @JsonKey(name: 'id')
+  final String id;
+  @override
+  @JsonKey(name: 'parent')
+  final String? parent;
+  @override
+  @JsonKey(name: 'isDir')
+  final bool isDir;
+  @override
+  @JsonKey(name: 'title')
+  final String title;
+  @override
+  @JsonKey(name: 'album')
+  final String? album;
+  @override
+  @JsonKey(name: 'artist')
+  final String? artist;
+  @override
+  @JsonKey(name: 'track')
+  final int? track;
+  @override
+  @JsonKey(name: 'year')
+  final int? year;
+  @override
+  @JsonKey(name: 'genre')
+  final String? genre;
+  @override
+  @JsonKey(name: 'coverArt')
+  final String? coverArt;
+  @override
+  @JsonKey(name: 'size')
+  final int? size;
+  @override
+  @JsonKey(name: 'contentType')
+  final String? contentType;
+  @override
+  @JsonKey(name: 'suffix')
+  final String? suffix;
+  @override
+  @JsonKey(name: 'transcodedContentType')
+  final String? transcodedContentType;
+  @override
+  @JsonKey(name: 'transcodedSuffix')
+  final String? transcodedSuffix;
+  @override
+  @JsonKey(name: 'duration')
+  final int? duration;
+  @override
+  @JsonKey(name: 'bitRate')
+  final int? bitRate;
+  @override
+  @JsonKey(name: 'path')
+  final String? path;
+  @override
+  @JsonKey(name: 'isVideo')
+  final bool? isVideo;
+  @override
+  @JsonKey(name: 'userRating')
+  final int? userRating;
+  @override
+  @JsonKey(name: 'averageRating')
+  final double? averageRating;
+  @override
+  @JsonKey(name: 'playCount')
+  final int? playCount;
+  @override
+  @JsonKey(name: 'discNumber')
+  final int? discNumber;
+  @override
+  @JsonKey(name: 'created')
+  final DateTime? created;
+  @override
+  @JsonKey(name: 'starred')
+  final DateTime? starred;
+  @override
+  @JsonKey(name: 'albumId')
+  final String? albumId;
+  @override
+  @JsonKey(name: 'artistId')
+  final String? artistId;
+  @override
+  @JsonKey(name: 'type')
+  final MediaType? type;
+  @override
+  @JsonKey(name: 'bookmarkPosition')
+  final int? bookmarkPosition;
+  @override
+  @JsonKey(name: 'originalWidth')
+  final int? originalWidth;
+  @override
+  @JsonKey(name: 'originalHeight')
+  final int? originalHeight;
 
   @override
   String toString() {
-    return 'PodcastEpisode(streamId: $streamId, channelId: $channelId, description: $description, status: $status, publishDate: $publishDate)';
+    return 'PodcastEpisode(streamId: $streamId, channelId: $channelId, description: $description, status: $status, publishDate: $publishDate, id: $id, parent: $parent, isDir: $isDir, title: $title, album: $album, artist: $artist, track: $track, year: $year, genre: $genre, coverArt: $coverArt, size: $size, contentType: $contentType, suffix: $suffix, transcodedContentType: $transcodedContentType, transcodedSuffix: $transcodedSuffix, duration: $duration, bitRate: $bitRate, path: $path, isVideo: $isVideo, userRating: $userRating, averageRating: $averageRating, playCount: $playCount, discNumber: $discNumber, created: $created, starred: $starred, albumId: $albumId, artistId: $artistId, type: $type, bookmarkPosition: $bookmarkPosition, originalWidth: $originalWidth, originalHeight: $originalHeight)';
   }
 
   @override
@@ -11140,13 +13305,94 @@ class _$PodcastEpisodeImpl implements _PodcastEpisode {
                 other.description == description) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.publishDate, publishDate) ||
-                other.publishDate == publishDate));
+                other.publishDate == publishDate) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.parent, parent) || other.parent == parent) &&
+            (identical(other.isDir, isDir) || other.isDir == isDir) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.album, album) || other.album == album) &&
+            (identical(other.artist, artist) || other.artist == artist) &&
+            (identical(other.track, track) || other.track == track) &&
+            (identical(other.year, year) || other.year == year) &&
+            (identical(other.genre, genre) || other.genre == genre) &&
+            (identical(other.coverArt, coverArt) ||
+                other.coverArt == coverArt) &&
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.contentType, contentType) ||
+                other.contentType == contentType) &&
+            (identical(other.suffix, suffix) || other.suffix == suffix) &&
+            (identical(other.transcodedContentType, transcodedContentType) ||
+                other.transcodedContentType == transcodedContentType) &&
+            (identical(other.transcodedSuffix, transcodedSuffix) ||
+                other.transcodedSuffix == transcodedSuffix) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.bitRate, bitRate) || other.bitRate == bitRate) &&
+            (identical(other.path, path) || other.path == path) &&
+            (identical(other.isVideo, isVideo) || other.isVideo == isVideo) &&
+            (identical(other.userRating, userRating) ||
+                other.userRating == userRating) &&
+            (identical(other.averageRating, averageRating) ||
+                other.averageRating == averageRating) &&
+            (identical(other.playCount, playCount) ||
+                other.playCount == playCount) &&
+            (identical(other.discNumber, discNumber) ||
+                other.discNumber == discNumber) &&
+            (identical(other.created, created) || other.created == created) &&
+            (identical(other.starred, starred) || other.starred == starred) &&
+            (identical(other.albumId, albumId) || other.albumId == albumId) &&
+            (identical(other.artistId, artistId) ||
+                other.artistId == artistId) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.bookmarkPosition, bookmarkPosition) ||
+                other.bookmarkPosition == bookmarkPosition) &&
+            (identical(other.originalWidth, originalWidth) ||
+                other.originalWidth == originalWidth) &&
+            (identical(other.originalHeight, originalHeight) ||
+                other.originalHeight == originalHeight));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, streamId, channelId, description, status, publishDate);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        streamId,
+        channelId,
+        description,
+        status,
+        publishDate,
+        id,
+        parent,
+        isDir,
+        title,
+        album,
+        artist,
+        track,
+        year,
+        genre,
+        coverArt,
+        size,
+        contentType,
+        suffix,
+        transcodedContentType,
+        transcodedSuffix,
+        duration,
+        bitRate,
+        path,
+        isVideo,
+        userRating,
+        averageRating,
+        playCount,
+        discNumber,
+        created,
+        starred,
+        albumId,
+        artistId,
+        type,
+        bookmarkPosition,
+        originalWidth,
+        originalHeight
+      ]);
 
   /// Create a copy of PodcastEpisode
   /// with the given fields replaced by the non-null parameter values.
@@ -11171,7 +13417,39 @@ abstract class _PodcastEpisode implements PodcastEpisode {
           @JsonKey(name: 'channelId') required final String channelId,
           @JsonKey(name: 'description') final String? description,
           @JsonKey(name: 'status') required final PodcastStatus status,
-          @JsonKey(name: 'publishDate') final DateTime? publishDate}) =
+          @JsonKey(name: 'publishDate') final DateTime? publishDate,
+          @JsonKey(name: 'id') required final String id,
+          @JsonKey(name: 'parent') final String? parent,
+          @JsonKey(name: 'isDir') required final bool isDir,
+          @JsonKey(name: 'title') required final String title,
+          @JsonKey(name: 'album') final String? album,
+          @JsonKey(name: 'artist') final String? artist,
+          @JsonKey(name: 'track') final int? track,
+          @JsonKey(name: 'year') final int? year,
+          @JsonKey(name: 'genre') final String? genre,
+          @JsonKey(name: 'coverArt') final String? coverArt,
+          @JsonKey(name: 'size') final int? size,
+          @JsonKey(name: 'contentType') final String? contentType,
+          @JsonKey(name: 'suffix') final String? suffix,
+          @JsonKey(name: 'transcodedContentType')
+          final String? transcodedContentType,
+          @JsonKey(name: 'transcodedSuffix') final String? transcodedSuffix,
+          @JsonKey(name: 'duration') final int? duration,
+          @JsonKey(name: 'bitRate') final int? bitRate,
+          @JsonKey(name: 'path') final String? path,
+          @JsonKey(name: 'isVideo') final bool? isVideo,
+          @JsonKey(name: 'userRating') final int? userRating,
+          @JsonKey(name: 'averageRating') final double? averageRating,
+          @JsonKey(name: 'playCount') final int? playCount,
+          @JsonKey(name: 'discNumber') final int? discNumber,
+          @JsonKey(name: 'created') final DateTime? created,
+          @JsonKey(name: 'starred') final DateTime? starred,
+          @JsonKey(name: 'albumId') final String? albumId,
+          @JsonKey(name: 'artistId') final String? artistId,
+          @JsonKey(name: 'type') final MediaType? type,
+          @JsonKey(name: 'bookmarkPosition') final int? bookmarkPosition,
+          @JsonKey(name: 'originalWidth') final int? originalWidth,
+          @JsonKey(name: 'originalHeight') final int? originalHeight}) =
       _$PodcastEpisodeImpl;
 
   factory _PodcastEpisode.fromJson(Map<String, dynamic> json) =
@@ -11192,6 +13470,99 @@ abstract class _PodcastEpisode implements PodcastEpisode {
   @override
   @JsonKey(name: 'publishDate')
   DateTime? get publishDate;
+  @override
+  @JsonKey(name: 'id')
+  String get id;
+  @override
+  @JsonKey(name: 'parent')
+  String? get parent;
+  @override
+  @JsonKey(name: 'isDir')
+  bool get isDir;
+  @override
+  @JsonKey(name: 'title')
+  String get title;
+  @override
+  @JsonKey(name: 'album')
+  String? get album;
+  @override
+  @JsonKey(name: 'artist')
+  String? get artist;
+  @override
+  @JsonKey(name: 'track')
+  int? get track;
+  @override
+  @JsonKey(name: 'year')
+  int? get year;
+  @override
+  @JsonKey(name: 'genre')
+  String? get genre;
+  @override
+  @JsonKey(name: 'coverArt')
+  String? get coverArt;
+  @override
+  @JsonKey(name: 'size')
+  int? get size;
+  @override
+  @JsonKey(name: 'contentType')
+  String? get contentType;
+  @override
+  @JsonKey(name: 'suffix')
+  String? get suffix;
+  @override
+  @JsonKey(name: 'transcodedContentType')
+  String? get transcodedContentType;
+  @override
+  @JsonKey(name: 'transcodedSuffix')
+  String? get transcodedSuffix;
+  @override
+  @JsonKey(name: 'duration')
+  int? get duration;
+  @override
+  @JsonKey(name: 'bitRate')
+  int? get bitRate;
+  @override
+  @JsonKey(name: 'path')
+  String? get path;
+  @override
+  @JsonKey(name: 'isVideo')
+  bool? get isVideo;
+  @override
+  @JsonKey(name: 'userRating')
+  int? get userRating;
+  @override
+  @JsonKey(name: 'averageRating')
+  double? get averageRating;
+  @override
+  @JsonKey(name: 'playCount')
+  int? get playCount;
+  @override
+  @JsonKey(name: 'discNumber')
+  int? get discNumber;
+  @override
+  @JsonKey(name: 'created')
+  DateTime? get created;
+  @override
+  @JsonKey(name: 'starred')
+  DateTime? get starred;
+  @override
+  @JsonKey(name: 'albumId')
+  String? get albumId;
+  @override
+  @JsonKey(name: 'artistId')
+  String? get artistId;
+  @override
+  @JsonKey(name: 'type')
+  MediaType? get type;
+  @override
+  @JsonKey(name: 'bookmarkPosition')
+  int? get bookmarkPosition;
+  @override
+  @JsonKey(name: 'originalWidth')
+  int? get originalWidth;
+  @override
+  @JsonKey(name: 'originalHeight')
+  int? get originalHeight;
 
   /// Create a copy of PodcastEpisode
   /// with the given fields replaced by the non-null parameter values.
@@ -13653,6 +16024,18 @@ ArtistInfo _$ArtistInfoFromJson(Map<String, dynamic> json) {
 mixin _$ArtistInfo {
   @JsonKey(name: 'similarArtist')
   List<Artist>? get similarArtist => throw _privateConstructorUsedError;
+  @JsonKey(name: 'biography')
+  String? get biography => throw _privateConstructorUsedError;
+  @JsonKey(name: 'musicBrainzId')
+  String? get musicBrainzId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'lastFmUrl')
+  String? get lastFmUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'smallImageUrl')
+  String? get smallImageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'mediumImageUrl')
+  String? get mediumImageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'largeImageUrl')
+  String? get largeImageUrl => throw _privateConstructorUsedError;
 
   /// Serializes this ArtistInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -13670,7 +16053,14 @@ abstract class $ArtistInfoCopyWith<$Res> {
           ArtistInfo value, $Res Function(ArtistInfo) then) =
       _$ArtistInfoCopyWithImpl<$Res, ArtistInfo>;
   @useResult
-  $Res call({@JsonKey(name: 'similarArtist') List<Artist>? similarArtist});
+  $Res call(
+      {@JsonKey(name: 'similarArtist') List<Artist>? similarArtist,
+      @JsonKey(name: 'biography') String? biography,
+      @JsonKey(name: 'musicBrainzId') String? musicBrainzId,
+      @JsonKey(name: 'lastFmUrl') String? lastFmUrl,
+      @JsonKey(name: 'smallImageUrl') String? smallImageUrl,
+      @JsonKey(name: 'mediumImageUrl') String? mediumImageUrl,
+      @JsonKey(name: 'largeImageUrl') String? largeImageUrl});
 }
 
 /// @nodoc
@@ -13689,12 +16079,42 @@ class _$ArtistInfoCopyWithImpl<$Res, $Val extends ArtistInfo>
   @override
   $Res call({
     Object? similarArtist = freezed,
+    Object? biography = freezed,
+    Object? musicBrainzId = freezed,
+    Object? lastFmUrl = freezed,
+    Object? smallImageUrl = freezed,
+    Object? mediumImageUrl = freezed,
+    Object? largeImageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       similarArtist: freezed == similarArtist
           ? _value.similarArtist
           : similarArtist // ignore: cast_nullable_to_non_nullable
               as List<Artist>?,
+      biography: freezed == biography
+          ? _value.biography
+          : biography // ignore: cast_nullable_to_non_nullable
+              as String?,
+      musicBrainzId: freezed == musicBrainzId
+          ? _value.musicBrainzId
+          : musicBrainzId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastFmUrl: freezed == lastFmUrl
+          ? _value.lastFmUrl
+          : lastFmUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      smallImageUrl: freezed == smallImageUrl
+          ? _value.smallImageUrl
+          : smallImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mediumImageUrl: freezed == mediumImageUrl
+          ? _value.mediumImageUrl
+          : mediumImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      largeImageUrl: freezed == largeImageUrl
+          ? _value.largeImageUrl
+          : largeImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -13707,7 +16127,14 @@ abstract class _$$ArtistInfoImplCopyWith<$Res>
       __$$ArtistInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'similarArtist') List<Artist>? similarArtist});
+  $Res call(
+      {@JsonKey(name: 'similarArtist') List<Artist>? similarArtist,
+      @JsonKey(name: 'biography') String? biography,
+      @JsonKey(name: 'musicBrainzId') String? musicBrainzId,
+      @JsonKey(name: 'lastFmUrl') String? lastFmUrl,
+      @JsonKey(name: 'smallImageUrl') String? smallImageUrl,
+      @JsonKey(name: 'mediumImageUrl') String? mediumImageUrl,
+      @JsonKey(name: 'largeImageUrl') String? largeImageUrl});
 }
 
 /// @nodoc
@@ -13724,12 +16151,42 @@ class __$$ArtistInfoImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? similarArtist = freezed,
+    Object? biography = freezed,
+    Object? musicBrainzId = freezed,
+    Object? lastFmUrl = freezed,
+    Object? smallImageUrl = freezed,
+    Object? mediumImageUrl = freezed,
+    Object? largeImageUrl = freezed,
   }) {
     return _then(_$ArtistInfoImpl(
       similarArtist: freezed == similarArtist
           ? _value._similarArtist
           : similarArtist // ignore: cast_nullable_to_non_nullable
               as List<Artist>?,
+      biography: freezed == biography
+          ? _value.biography
+          : biography // ignore: cast_nullable_to_non_nullable
+              as String?,
+      musicBrainzId: freezed == musicBrainzId
+          ? _value.musicBrainzId
+          : musicBrainzId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastFmUrl: freezed == lastFmUrl
+          ? _value.lastFmUrl
+          : lastFmUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      smallImageUrl: freezed == smallImageUrl
+          ? _value.smallImageUrl
+          : smallImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mediumImageUrl: freezed == mediumImageUrl
+          ? _value.mediumImageUrl
+          : mediumImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      largeImageUrl: freezed == largeImageUrl
+          ? _value.largeImageUrl
+          : largeImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -13738,7 +16195,13 @@ class __$$ArtistInfoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ArtistInfoImpl implements _ArtistInfo {
   const _$ArtistInfoImpl(
-      {@JsonKey(name: 'similarArtist') final List<Artist>? similarArtist})
+      {@JsonKey(name: 'similarArtist') final List<Artist>? similarArtist,
+      @JsonKey(name: 'biography') this.biography,
+      @JsonKey(name: 'musicBrainzId') this.musicBrainzId,
+      @JsonKey(name: 'lastFmUrl') this.lastFmUrl,
+      @JsonKey(name: 'smallImageUrl') this.smallImageUrl,
+      @JsonKey(name: 'mediumImageUrl') this.mediumImageUrl,
+      @JsonKey(name: 'largeImageUrl') this.largeImageUrl})
       : _similarArtist = similarArtist;
 
   factory _$ArtistInfoImpl.fromJson(Map<String, dynamic> json) =>
@@ -13756,8 +16219,27 @@ class _$ArtistInfoImpl implements _ArtistInfo {
   }
 
   @override
+  @JsonKey(name: 'biography')
+  final String? biography;
+  @override
+  @JsonKey(name: 'musicBrainzId')
+  final String? musicBrainzId;
+  @override
+  @JsonKey(name: 'lastFmUrl')
+  final String? lastFmUrl;
+  @override
+  @JsonKey(name: 'smallImageUrl')
+  final String? smallImageUrl;
+  @override
+  @JsonKey(name: 'mediumImageUrl')
+  final String? mediumImageUrl;
+  @override
+  @JsonKey(name: 'largeImageUrl')
+  final String? largeImageUrl;
+
+  @override
   String toString() {
-    return 'ArtistInfo(similarArtist: $similarArtist)';
+    return 'ArtistInfo(similarArtist: $similarArtist, biography: $biography, musicBrainzId: $musicBrainzId, lastFmUrl: $lastFmUrl, smallImageUrl: $smallImageUrl, mediumImageUrl: $mediumImageUrl, largeImageUrl: $largeImageUrl)';
   }
 
   @override
@@ -13766,13 +16248,32 @@ class _$ArtistInfoImpl implements _ArtistInfo {
         (other.runtimeType == runtimeType &&
             other is _$ArtistInfoImpl &&
             const DeepCollectionEquality()
-                .equals(other._similarArtist, _similarArtist));
+                .equals(other._similarArtist, _similarArtist) &&
+            (identical(other.biography, biography) ||
+                other.biography == biography) &&
+            (identical(other.musicBrainzId, musicBrainzId) ||
+                other.musicBrainzId == musicBrainzId) &&
+            (identical(other.lastFmUrl, lastFmUrl) ||
+                other.lastFmUrl == lastFmUrl) &&
+            (identical(other.smallImageUrl, smallImageUrl) ||
+                other.smallImageUrl == smallImageUrl) &&
+            (identical(other.mediumImageUrl, mediumImageUrl) ||
+                other.mediumImageUrl == mediumImageUrl) &&
+            (identical(other.largeImageUrl, largeImageUrl) ||
+                other.largeImageUrl == largeImageUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_similarArtist));
+      runtimeType,
+      const DeepCollectionEquality().hash(_similarArtist),
+      biography,
+      musicBrainzId,
+      lastFmUrl,
+      smallImageUrl,
+      mediumImageUrl,
+      largeImageUrl);
 
   /// Create a copy of ArtistInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -13792,7 +16293,13 @@ class _$ArtistInfoImpl implements _ArtistInfo {
 
 abstract class _ArtistInfo implements ArtistInfo {
   const factory _ArtistInfo(
-          {@JsonKey(name: 'similarArtist') final List<Artist>? similarArtist}) =
+          {@JsonKey(name: 'similarArtist') final List<Artist>? similarArtist,
+          @JsonKey(name: 'biography') final String? biography,
+          @JsonKey(name: 'musicBrainzId') final String? musicBrainzId,
+          @JsonKey(name: 'lastFmUrl') final String? lastFmUrl,
+          @JsonKey(name: 'smallImageUrl') final String? smallImageUrl,
+          @JsonKey(name: 'mediumImageUrl') final String? mediumImageUrl,
+          @JsonKey(name: 'largeImageUrl') final String? largeImageUrl}) =
       _$ArtistInfoImpl;
 
   factory _ArtistInfo.fromJson(Map<String, dynamic> json) =
@@ -13801,6 +16308,24 @@ abstract class _ArtistInfo implements ArtistInfo {
   @override
   @JsonKey(name: 'similarArtist')
   List<Artist>? get similarArtist;
+  @override
+  @JsonKey(name: 'biography')
+  String? get biography;
+  @override
+  @JsonKey(name: 'musicBrainzId')
+  String? get musicBrainzId;
+  @override
+  @JsonKey(name: 'lastFmUrl')
+  String? get lastFmUrl;
+  @override
+  @JsonKey(name: 'smallImageUrl')
+  String? get smallImageUrl;
+  @override
+  @JsonKey(name: 'mediumImageUrl')
+  String? get mediumImageUrl;
+  @override
+  @JsonKey(name: 'largeImageUrl')
+  String? get largeImageUrl;
 
   /// Create a copy of ArtistInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -13818,6 +16343,18 @@ ArtistInfo2 _$ArtistInfo2FromJson(Map<String, dynamic> json) {
 mixin _$ArtistInfo2 {
   @JsonKey(name: 'similarArtist')
   List<ArtistId3>? get similarArtist => throw _privateConstructorUsedError;
+  @JsonKey(name: 'biography')
+  String? get biography => throw _privateConstructorUsedError;
+  @JsonKey(name: 'musicBrainzId')
+  String? get musicBrainzId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'lastFmUrl')
+  String? get lastFmUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'smallImageUrl')
+  String? get smallImageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'mediumImageUrl')
+  String? get mediumImageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'largeImageUrl')
+  String? get largeImageUrl => throw _privateConstructorUsedError;
 
   /// Serializes this ArtistInfo2 to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -13835,7 +16372,14 @@ abstract class $ArtistInfo2CopyWith<$Res> {
           ArtistInfo2 value, $Res Function(ArtistInfo2) then) =
       _$ArtistInfo2CopyWithImpl<$Res, ArtistInfo2>;
   @useResult
-  $Res call({@JsonKey(name: 'similarArtist') List<ArtistId3>? similarArtist});
+  $Res call(
+      {@JsonKey(name: 'similarArtist') List<ArtistId3>? similarArtist,
+      @JsonKey(name: 'biography') String? biography,
+      @JsonKey(name: 'musicBrainzId') String? musicBrainzId,
+      @JsonKey(name: 'lastFmUrl') String? lastFmUrl,
+      @JsonKey(name: 'smallImageUrl') String? smallImageUrl,
+      @JsonKey(name: 'mediumImageUrl') String? mediumImageUrl,
+      @JsonKey(name: 'largeImageUrl') String? largeImageUrl});
 }
 
 /// @nodoc
@@ -13854,12 +16398,42 @@ class _$ArtistInfo2CopyWithImpl<$Res, $Val extends ArtistInfo2>
   @override
   $Res call({
     Object? similarArtist = freezed,
+    Object? biography = freezed,
+    Object? musicBrainzId = freezed,
+    Object? lastFmUrl = freezed,
+    Object? smallImageUrl = freezed,
+    Object? mediumImageUrl = freezed,
+    Object? largeImageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       similarArtist: freezed == similarArtist
           ? _value.similarArtist
           : similarArtist // ignore: cast_nullable_to_non_nullable
               as List<ArtistId3>?,
+      biography: freezed == biography
+          ? _value.biography
+          : biography // ignore: cast_nullable_to_non_nullable
+              as String?,
+      musicBrainzId: freezed == musicBrainzId
+          ? _value.musicBrainzId
+          : musicBrainzId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastFmUrl: freezed == lastFmUrl
+          ? _value.lastFmUrl
+          : lastFmUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      smallImageUrl: freezed == smallImageUrl
+          ? _value.smallImageUrl
+          : smallImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mediumImageUrl: freezed == mediumImageUrl
+          ? _value.mediumImageUrl
+          : mediumImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      largeImageUrl: freezed == largeImageUrl
+          ? _value.largeImageUrl
+          : largeImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -13872,7 +16446,14 @@ abstract class _$$ArtistInfo2ImplCopyWith<$Res>
       __$$ArtistInfo2ImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'similarArtist') List<ArtistId3>? similarArtist});
+  $Res call(
+      {@JsonKey(name: 'similarArtist') List<ArtistId3>? similarArtist,
+      @JsonKey(name: 'biography') String? biography,
+      @JsonKey(name: 'musicBrainzId') String? musicBrainzId,
+      @JsonKey(name: 'lastFmUrl') String? lastFmUrl,
+      @JsonKey(name: 'smallImageUrl') String? smallImageUrl,
+      @JsonKey(name: 'mediumImageUrl') String? mediumImageUrl,
+      @JsonKey(name: 'largeImageUrl') String? largeImageUrl});
 }
 
 /// @nodoc
@@ -13889,12 +16470,42 @@ class __$$ArtistInfo2ImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? similarArtist = freezed,
+    Object? biography = freezed,
+    Object? musicBrainzId = freezed,
+    Object? lastFmUrl = freezed,
+    Object? smallImageUrl = freezed,
+    Object? mediumImageUrl = freezed,
+    Object? largeImageUrl = freezed,
   }) {
     return _then(_$ArtistInfo2Impl(
       similarArtist: freezed == similarArtist
           ? _value._similarArtist
           : similarArtist // ignore: cast_nullable_to_non_nullable
               as List<ArtistId3>?,
+      biography: freezed == biography
+          ? _value.biography
+          : biography // ignore: cast_nullable_to_non_nullable
+              as String?,
+      musicBrainzId: freezed == musicBrainzId
+          ? _value.musicBrainzId
+          : musicBrainzId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastFmUrl: freezed == lastFmUrl
+          ? _value.lastFmUrl
+          : lastFmUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      smallImageUrl: freezed == smallImageUrl
+          ? _value.smallImageUrl
+          : smallImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mediumImageUrl: freezed == mediumImageUrl
+          ? _value.mediumImageUrl
+          : mediumImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      largeImageUrl: freezed == largeImageUrl
+          ? _value.largeImageUrl
+          : largeImageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -13903,7 +16514,13 @@ class __$$ArtistInfo2ImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ArtistInfo2Impl implements _ArtistInfo2 {
   const _$ArtistInfo2Impl(
-      {@JsonKey(name: 'similarArtist') final List<ArtistId3>? similarArtist})
+      {@JsonKey(name: 'similarArtist') final List<ArtistId3>? similarArtist,
+      @JsonKey(name: 'biography') this.biography,
+      @JsonKey(name: 'musicBrainzId') this.musicBrainzId,
+      @JsonKey(name: 'lastFmUrl') this.lastFmUrl,
+      @JsonKey(name: 'smallImageUrl') this.smallImageUrl,
+      @JsonKey(name: 'mediumImageUrl') this.mediumImageUrl,
+      @JsonKey(name: 'largeImageUrl') this.largeImageUrl})
       : _similarArtist = similarArtist;
 
   factory _$ArtistInfo2Impl.fromJson(Map<String, dynamic> json) =>
@@ -13921,8 +16538,27 @@ class _$ArtistInfo2Impl implements _ArtistInfo2 {
   }
 
   @override
+  @JsonKey(name: 'biography')
+  final String? biography;
+  @override
+  @JsonKey(name: 'musicBrainzId')
+  final String? musicBrainzId;
+  @override
+  @JsonKey(name: 'lastFmUrl')
+  final String? lastFmUrl;
+  @override
+  @JsonKey(name: 'smallImageUrl')
+  final String? smallImageUrl;
+  @override
+  @JsonKey(name: 'mediumImageUrl')
+  final String? mediumImageUrl;
+  @override
+  @JsonKey(name: 'largeImageUrl')
+  final String? largeImageUrl;
+
+  @override
   String toString() {
-    return 'ArtistInfo2(similarArtist: $similarArtist)';
+    return 'ArtistInfo2(similarArtist: $similarArtist, biography: $biography, musicBrainzId: $musicBrainzId, lastFmUrl: $lastFmUrl, smallImageUrl: $smallImageUrl, mediumImageUrl: $mediumImageUrl, largeImageUrl: $largeImageUrl)';
   }
 
   @override
@@ -13931,13 +16567,32 @@ class _$ArtistInfo2Impl implements _ArtistInfo2 {
         (other.runtimeType == runtimeType &&
             other is _$ArtistInfo2Impl &&
             const DeepCollectionEquality()
-                .equals(other._similarArtist, _similarArtist));
+                .equals(other._similarArtist, _similarArtist) &&
+            (identical(other.biography, biography) ||
+                other.biography == biography) &&
+            (identical(other.musicBrainzId, musicBrainzId) ||
+                other.musicBrainzId == musicBrainzId) &&
+            (identical(other.lastFmUrl, lastFmUrl) ||
+                other.lastFmUrl == lastFmUrl) &&
+            (identical(other.smallImageUrl, smallImageUrl) ||
+                other.smallImageUrl == smallImageUrl) &&
+            (identical(other.mediumImageUrl, mediumImageUrl) ||
+                other.mediumImageUrl == mediumImageUrl) &&
+            (identical(other.largeImageUrl, largeImageUrl) ||
+                other.largeImageUrl == largeImageUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_similarArtist));
+      runtimeType,
+      const DeepCollectionEquality().hash(_similarArtist),
+      biography,
+      musicBrainzId,
+      lastFmUrl,
+      smallImageUrl,
+      mediumImageUrl,
+      largeImageUrl);
 
   /// Create a copy of ArtistInfo2
   /// with the given fields replaced by the non-null parameter values.
@@ -13957,8 +16612,14 @@ class _$ArtistInfo2Impl implements _ArtistInfo2 {
 
 abstract class _ArtistInfo2 implements ArtistInfo2 {
   const factory _ArtistInfo2(
-      {@JsonKey(name: 'similarArtist')
-      final List<ArtistId3>? similarArtist}) = _$ArtistInfo2Impl;
+          {@JsonKey(name: 'similarArtist') final List<ArtistId3>? similarArtist,
+          @JsonKey(name: 'biography') final String? biography,
+          @JsonKey(name: 'musicBrainzId') final String? musicBrainzId,
+          @JsonKey(name: 'lastFmUrl') final String? lastFmUrl,
+          @JsonKey(name: 'smallImageUrl') final String? smallImageUrl,
+          @JsonKey(name: 'mediumImageUrl') final String? mediumImageUrl,
+          @JsonKey(name: 'largeImageUrl') final String? largeImageUrl}) =
+      _$ArtistInfo2Impl;
 
   factory _ArtistInfo2.fromJson(Map<String, dynamic> json) =
       _$ArtistInfo2Impl.fromJson;
@@ -13966,6 +16627,24 @@ abstract class _ArtistInfo2 implements ArtistInfo2 {
   @override
   @JsonKey(name: 'similarArtist')
   List<ArtistId3>? get similarArtist;
+  @override
+  @JsonKey(name: 'biography')
+  String? get biography;
+  @override
+  @JsonKey(name: 'musicBrainzId')
+  String? get musicBrainzId;
+  @override
+  @JsonKey(name: 'lastFmUrl')
+  String? get lastFmUrl;
+  @override
+  @JsonKey(name: 'smallImageUrl')
+  String? get smallImageUrl;
+  @override
+  @JsonKey(name: 'mediumImageUrl')
+  String? get mediumImageUrl;
+  @override
+  @JsonKey(name: 'largeImageUrl')
+  String? get largeImageUrl;
 
   /// Create a copy of ArtistInfo2
   /// with the given fields replaced by the non-null parameter values.

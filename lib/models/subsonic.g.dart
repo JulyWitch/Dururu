@@ -300,12 +300,14 @@ Map<String, dynamic> _$$GenresImplToJson(_$GenresImpl instance) =>
 _$GenreImpl _$$GenreImplFromJson(Map<String, dynamic> json) => _$GenreImpl(
       songCount: (json['songCount'] as num).toInt(),
       albumCount: (json['albumCount'] as num).toInt(),
+      value: json['value'] as String,
     );
 
 Map<String, dynamic> _$$GenreImplToJson(_$GenreImpl instance) =>
     <String, dynamic>{
       'songCount': instance.songCount,
       'albumCount': instance.albumCount,
+      'value': instance.value,
     };
 
 _$ArtistsId3Impl _$$ArtistsId3ImplFromJson(Map<String, dynamic> json) =>
@@ -361,6 +363,14 @@ Map<String, dynamic> _$$ArtistId3ImplToJson(_$ArtistId3Impl instance) =>
 _$ArtistWithAlbumsId3Impl _$$ArtistWithAlbumsId3ImplFromJson(
         Map<String, dynamic> json) =>
     _$ArtistWithAlbumsId3Impl(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      coverArt: json['coverArt'] as String?,
+      artistImageUrl: json['artistImageUrl'] as String?,
+      albumCount: (json['albumCount'] as num).toInt(),
+      starred: json['starred'] == null
+          ? null
+          : DateTime.parse(json['starred'] as String),
       album: (json['album'] as List<dynamic>?)
           ?.map((e) => AlbumId3.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -369,6 +379,12 @@ _$ArtistWithAlbumsId3Impl _$$ArtistWithAlbumsId3ImplFromJson(
 Map<String, dynamic> _$$ArtistWithAlbumsId3ImplToJson(
         _$ArtistWithAlbumsId3Impl instance) =>
     <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'coverArt': instance.coverArt,
+      'artistImageUrl': instance.artistImageUrl,
+      'albumCount': instance.albumCount,
+      'starred': instance.starred?.toIso8601String(),
       'album': instance.album,
     };
 
@@ -409,6 +425,20 @@ Map<String, dynamic> _$$AlbumId3ImplToJson(_$AlbumId3Impl instance) =>
 _$AlbumWithSongsId3Impl _$$AlbumWithSongsId3ImplFromJson(
         Map<String, dynamic> json) =>
     _$AlbumWithSongsId3Impl(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      artist: json['artist'] as String?,
+      artistId: json['artistId'] as String?,
+      coverArt: json['coverArt'] as String?,
+      songCount: (json['songCount'] as num).toInt(),
+      duration: (json['duration'] as num).toInt(),
+      playCount: (json['playCount'] as num?)?.toInt(),
+      created: DateTime.parse(json['created'] as String),
+      starred: json['starred'] == null
+          ? null
+          : DateTime.parse(json['starred'] as String),
+      year: (json['year'] as num?)?.toInt(),
+      genre: json['genre'] as String?,
       song: (json['song'] as List<dynamic>?)
           ?.map((e) => Child.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -417,6 +447,18 @@ _$AlbumWithSongsId3Impl _$$AlbumWithSongsId3ImplFromJson(
 Map<String, dynamic> _$$AlbumWithSongsId3ImplToJson(
         _$AlbumWithSongsId3Impl instance) =>
     <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'artist': instance.artist,
+      'artistId': instance.artistId,
+      'coverArt': instance.coverArt,
+      'songCount': instance.songCount,
+      'duration': instance.duration,
+      'playCount': instance.playCount,
+      'created': instance.created.toIso8601String(),
+      'starred': instance.starred?.toIso8601String(),
+      'year': instance.year,
+      'genre': instance.genre,
       'song': instance.song,
     };
 
@@ -622,6 +664,41 @@ _$NowPlayingEntryImpl _$$NowPlayingEntryImplFromJson(
       minutesAgo: (json['minutesAgo'] as num).toInt(),
       playerId: (json['playerId'] as num).toInt(),
       playerName: json['playerName'] as String?,
+      id: json['id'] as String,
+      parent: json['parent'] as String?,
+      isDir: json['isDir'] as bool,
+      title: json['title'] as String,
+      album: json['album'] as String?,
+      artist: json['artist'] as String?,
+      track: (json['track'] as num?)?.toInt(),
+      year: (json['year'] as num?)?.toInt(),
+      genre: json['genre'] as String?,
+      coverArt: json['coverArt'] as String?,
+      size: (json['size'] as num?)?.toInt(),
+      contentType: json['contentType'] as String?,
+      suffix: json['suffix'] as String?,
+      transcodedContentType: json['transcodedContentType'] as String?,
+      transcodedSuffix: json['transcodedSuffix'] as String?,
+      duration: (json['duration'] as num?)?.toInt(),
+      bitRate: (json['bitRate'] as num?)?.toInt(),
+      path: json['path'] as String?,
+      isVideo: json['isVideo'] as bool?,
+      userRating: (json['userRating'] as num?)?.toInt(),
+      averageRating: (json['averageRating'] as num?)?.toDouble(),
+      playCount: (json['playCount'] as num?)?.toInt(),
+      discNumber: (json['discNumber'] as num?)?.toInt(),
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      starred: json['starred'] == null
+          ? null
+          : DateTime.parse(json['starred'] as String),
+      albumId: json['albumId'] as String?,
+      artistId: json['artistId'] as String?,
+      type: $enumDecodeNullable(_$MediaTypeEnumMap, json['type']),
+      bookmarkPosition: (json['bookmarkPosition'] as num?)?.toInt(),
+      originalWidth: (json['originalWidth'] as num?)?.toInt(),
+      originalHeight: (json['originalHeight'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$NowPlayingEntryImplToJson(
@@ -631,6 +708,37 @@ Map<String, dynamic> _$$NowPlayingEntryImplToJson(
       'minutesAgo': instance.minutesAgo,
       'playerId': instance.playerId,
       'playerName': instance.playerName,
+      'id': instance.id,
+      'parent': instance.parent,
+      'isDir': instance.isDir,
+      'title': instance.title,
+      'album': instance.album,
+      'artist': instance.artist,
+      'track': instance.track,
+      'year': instance.year,
+      'genre': instance.genre,
+      'coverArt': instance.coverArt,
+      'size': instance.size,
+      'contentType': instance.contentType,
+      'suffix': instance.suffix,
+      'transcodedContentType': instance.transcodedContentType,
+      'transcodedSuffix': instance.transcodedSuffix,
+      'duration': instance.duration,
+      'bitRate': instance.bitRate,
+      'path': instance.path,
+      'isVideo': instance.isVideo,
+      'userRating': instance.userRating,
+      'averageRating': instance.averageRating,
+      'playCount': instance.playCount,
+      'discNumber': instance.discNumber,
+      'created': instance.created?.toIso8601String(),
+      'starred': instance.starred?.toIso8601String(),
+      'albumId': instance.albumId,
+      'artistId': instance.artistId,
+      'type': _$MediaTypeEnumMap[instance.type],
+      'bookmarkPosition': instance.bookmarkPosition,
+      'originalWidth': instance.originalWidth,
+      'originalHeight': instance.originalHeight,
     };
 
 _$SearchResultImpl _$$SearchResultImplFromJson(Map<String, dynamic> json) =>
@@ -736,15 +844,39 @@ Map<String, dynamic> _$$PlaylistImplToJson(_$PlaylistImpl instance) =>
 _$PlaylistWithSongsImpl _$$PlaylistWithSongsImplFromJson(
         Map<String, dynamic> json) =>
     _$PlaylistWithSongsImpl(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      comment: json['comment'] as String?,
+      owner: json['owner'] as String?,
+      public: json['public'] as bool?,
+      songCount: (json['songCount'] as num).toInt(),
+      duration: (json['duration'] as num).toInt(),
+      created: DateTime.parse(json['created'] as String),
+      changed: DateTime.parse(json['changed'] as String),
+      coverArt: json['coverArt'] as String?,
       entry: (json['entry'] as List<dynamic>?)
           ?.map((e) => Child.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      allowedUser: (json['allowedUser'] as List<dynamic>?)
+          ?.map((e) => e as String)
           .toList(),
     );
 
 Map<String, dynamic> _$$PlaylistWithSongsImplToJson(
         _$PlaylistWithSongsImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'comment': instance.comment,
+      'owner': instance.owner,
+      'public': instance.public,
+      'songCount': instance.songCount,
+      'duration': instance.duration,
+      'created': instance.created.toIso8601String(),
+      'changed': instance.changed.toIso8601String(),
+      'coverArt': instance.coverArt,
       'entry': instance.entry,
+      'allowedUser': instance.allowedUser,
     };
 
 _$JukeboxStatusImpl _$$JukeboxStatusImplFromJson(Map<String, dynamic> json) =>
@@ -766,6 +898,10 @@ Map<String, dynamic> _$$JukeboxStatusImplToJson(_$JukeboxStatusImpl instance) =>
 _$JukeboxPlaylistImpl _$$JukeboxPlaylistImplFromJson(
         Map<String, dynamic> json) =>
     _$JukeboxPlaylistImpl(
+      currentIndex: (json['currentIndex'] as num).toInt(),
+      playing: json['playing'] as bool,
+      gain: (json['gain'] as num).toDouble(),
+      position: (json['position'] as num?)?.toInt(),
       entry: (json['entry'] as List<dynamic>?)
           ?.map((e) => Child.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -774,6 +910,10 @@ _$JukeboxPlaylistImpl _$$JukeboxPlaylistImplFromJson(
 Map<String, dynamic> _$$JukeboxPlaylistImplToJson(
         _$JukeboxPlaylistImpl instance) =>
     <String, dynamic>{
+      'currentIndex': instance.currentIndex,
+      'playing': instance.playing,
+      'gain': instance.gain,
+      'position': instance.position,
       'entry': instance.entry,
     };
 
@@ -921,6 +1061,41 @@ _$PodcastEpisodeImpl _$$PodcastEpisodeImplFromJson(Map<String, dynamic> json) =>
       publishDate: json['publishDate'] == null
           ? null
           : DateTime.parse(json['publishDate'] as String),
+      id: json['id'] as String,
+      parent: json['parent'] as String?,
+      isDir: json['isDir'] as bool,
+      title: json['title'] as String,
+      album: json['album'] as String?,
+      artist: json['artist'] as String?,
+      track: (json['track'] as num?)?.toInt(),
+      year: (json['year'] as num?)?.toInt(),
+      genre: json['genre'] as String?,
+      coverArt: json['coverArt'] as String?,
+      size: (json['size'] as num?)?.toInt(),
+      contentType: json['contentType'] as String?,
+      suffix: json['suffix'] as String?,
+      transcodedContentType: json['transcodedContentType'] as String?,
+      transcodedSuffix: json['transcodedSuffix'] as String?,
+      duration: (json['duration'] as num?)?.toInt(),
+      bitRate: (json['bitRate'] as num?)?.toInt(),
+      path: json['path'] as String?,
+      isVideo: json['isVideo'] as bool?,
+      userRating: (json['userRating'] as num?)?.toInt(),
+      averageRating: (json['averageRating'] as num?)?.toDouble(),
+      playCount: (json['playCount'] as num?)?.toInt(),
+      discNumber: (json['discNumber'] as num?)?.toInt(),
+      created: json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String),
+      starred: json['starred'] == null
+          ? null
+          : DateTime.parse(json['starred'] as String),
+      albumId: json['albumId'] as String?,
+      artistId: json['artistId'] as String?,
+      type: $enumDecodeNullable(_$MediaTypeEnumMap, json['type']),
+      bookmarkPosition: (json['bookmarkPosition'] as num?)?.toInt(),
+      originalWidth: (json['originalWidth'] as num?)?.toInt(),
+      originalHeight: (json['originalHeight'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$PodcastEpisodeImplToJson(
@@ -931,6 +1106,37 @@ Map<String, dynamic> _$$PodcastEpisodeImplToJson(
       'description': instance.description,
       'status': _$PodcastStatusEnumMap[instance.status]!,
       'publishDate': instance.publishDate?.toIso8601String(),
+      'id': instance.id,
+      'parent': instance.parent,
+      'isDir': instance.isDir,
+      'title': instance.title,
+      'album': instance.album,
+      'artist': instance.artist,
+      'track': instance.track,
+      'year': instance.year,
+      'genre': instance.genre,
+      'coverArt': instance.coverArt,
+      'size': instance.size,
+      'contentType': instance.contentType,
+      'suffix': instance.suffix,
+      'transcodedContentType': instance.transcodedContentType,
+      'transcodedSuffix': instance.transcodedSuffix,
+      'duration': instance.duration,
+      'bitRate': instance.bitRate,
+      'path': instance.path,
+      'isVideo': instance.isVideo,
+      'userRating': instance.userRating,
+      'averageRating': instance.averageRating,
+      'playCount': instance.playCount,
+      'discNumber': instance.discNumber,
+      'created': instance.created?.toIso8601String(),
+      'starred': instance.starred?.toIso8601String(),
+      'albumId': instance.albumId,
+      'artistId': instance.artistId,
+      'type': _$MediaTypeEnumMap[instance.type],
+      'bookmarkPosition': instance.bookmarkPosition,
+      'originalWidth': instance.originalWidth,
+      'originalHeight': instance.originalHeight,
     };
 
 _$InternetRadioStationsImpl _$$InternetRadioStationsImplFromJson(
@@ -1127,11 +1333,23 @@ _$ArtistInfoImpl _$$ArtistInfoImplFromJson(Map<String, dynamic> json) =>
       similarArtist: (json['similarArtist'] as List<dynamic>?)
           ?.map((e) => Artist.fromJson(e as Map<String, dynamic>))
           .toList(),
+      biography: json['biography'] as String?,
+      musicBrainzId: json['musicBrainzId'] as String?,
+      lastFmUrl: json['lastFmUrl'] as String?,
+      smallImageUrl: json['smallImageUrl'] as String?,
+      mediumImageUrl: json['mediumImageUrl'] as String?,
+      largeImageUrl: json['largeImageUrl'] as String?,
     );
 
 Map<String, dynamic> _$$ArtistInfoImplToJson(_$ArtistInfoImpl instance) =>
     <String, dynamic>{
       'similarArtist': instance.similarArtist,
+      'biography': instance.biography,
+      'musicBrainzId': instance.musicBrainzId,
+      'lastFmUrl': instance.lastFmUrl,
+      'smallImageUrl': instance.smallImageUrl,
+      'mediumImageUrl': instance.mediumImageUrl,
+      'largeImageUrl': instance.largeImageUrl,
     };
 
 _$ArtistInfo2Impl _$$ArtistInfo2ImplFromJson(Map<String, dynamic> json) =>
@@ -1139,11 +1357,23 @@ _$ArtistInfo2Impl _$$ArtistInfo2ImplFromJson(Map<String, dynamic> json) =>
       similarArtist: (json['similarArtist'] as List<dynamic>?)
           ?.map((e) => ArtistId3.fromJson(e as Map<String, dynamic>))
           .toList(),
+      biography: json['biography'] as String?,
+      musicBrainzId: json['musicBrainzId'] as String?,
+      lastFmUrl: json['lastFmUrl'] as String?,
+      smallImageUrl: json['smallImageUrl'] as String?,
+      mediumImageUrl: json['mediumImageUrl'] as String?,
+      largeImageUrl: json['largeImageUrl'] as String?,
     );
 
 Map<String, dynamic> _$$ArtistInfo2ImplToJson(_$ArtistInfo2Impl instance) =>
     <String, dynamic>{
       'similarArtist': instance.similarArtist,
+      'biography': instance.biography,
+      'musicBrainzId': instance.musicBrainzId,
+      'lastFmUrl': instance.lastFmUrl,
+      'smallImageUrl': instance.smallImageUrl,
+      'mediumImageUrl': instance.mediumImageUrl,
+      'largeImageUrl': instance.largeImageUrl,
     };
 
 _$SimilarSongsImpl _$$SimilarSongsImplFromJson(Map<String, dynamic> json) =>
