@@ -25,6 +25,8 @@ dependencies:
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
   cached_network_image: ^3.4.1
+  carousel_slider: ^5.0.0
+  percent_indicator: ^4.2.4
 
 dev_dependencies:
   flutter_test:

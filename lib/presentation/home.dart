@@ -58,6 +58,7 @@ class HomePage extends ConsumerWidget {
                       child: ArtistCircle(
                         name: artist.name,
                         imageUrl: artist.artistImageUrl ?? '',
+                        cacheKey: artist.id,
                         onTap: () {
                           GoRouter.of(context).push('/artists/${artist.id}',
                               extra: artist.name);

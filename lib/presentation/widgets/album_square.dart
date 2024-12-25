@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AlbumSquare extends ConsumerStatefulWidget {
+class AlbumSquare extends ConsumerWidget {
   final String? coverArt;
   final String name;
   final String? artistName;
@@ -24,25 +24,12 @@ class AlbumSquare extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<AlbumSquare> createState() => _AlbumSquareState();
-}
-
-class _AlbumSquareState extends ConsumerState<AlbumSquare>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
-
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
-    final cover =
-        ref.watch(getCoverArtProvider(GetCoverArtRequest(id: widget.coverArt)));
-
+  Widget build(BuildContext context, ref) {
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: onTap,
       child: Container(
-        width: widget.size,
-        height: widget.size,
+        width: size,
+        height: size,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
@@ -56,18 +43,13 @@ class _AlbumSquareState extends ConsumerState<AlbumSquare>
         child: Stack(
           fit: StackFit.expand,
           children: [
-            // Album Image
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: CachedNetworkImage(
-                imageUrl: cover,
+                imageUrl: ref.watch(
+                    getCoverArtProvider(GetCoverArtRequest(id: coverArt))),
+                cacheKey: GetCoverArtRequest(id: coverArt).hashCode.toString(),
                 fit: BoxFit.cover,
-                placeholder: (context, url) => Container(
-                  color: Colors.grey[300],
-                  child: const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  ),
-                ),
                 errorWidget: (context, url, error) => Container(
                   color: Colors.grey[300],
                   child: const Icon(
@@ -79,7 +61,6 @@ class _AlbumSquareState extends ConsumerState<AlbumSquare>
               ),
             ),
 
-            // Gradient overlay
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
@@ -94,7 +75,6 @@ class _AlbumSquareState extends ConsumerState<AlbumSquare>
               ),
             ),
 
-            // Content overlay
             Padding(
               padding: const EdgeInsets.all(12),
               child: Column(
@@ -105,7 +85,7 @@ class _AlbumSquareState extends ConsumerState<AlbumSquare>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      if (widget.genre != null)
+                      if (genre != null)
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 8,
@@ -116,33 +96,30 @@ class _AlbumSquareState extends ConsumerState<AlbumSquare>
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
-                            widget.genre!,
+                            genre!,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelSmall
                                 ?.copyWith(
-                                  color: Colors.white.withValues(alpha: 0.6),
+                                  color: Colors.white.withValues(alpha: 0.8),
                                   fontWeight: FontWeight.w500,
                                 ),
                           ),
                         ),
-                      if (widget.year != null)
+                      if (year != null)
                         Text(
-                          widget.year!.toString(),
+                          year!.toString(),
                           style:
                               Theme.of(context).textTheme.labelSmall?.copyWith(
-                                    color: Colors.white.withValues(alpha: 0.1),
+                                    color: Colors.white.withValues(alpha: 0.9),
                                     fontWeight: FontWeight.w500,
                                   ),
                         ),
                     ],
                   ),
-
                   const Spacer(),
-
-                  // Album name
                   Text(
-                    widget.name,
+                    name,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -150,13 +127,11 @@ class _AlbumSquareState extends ConsumerState<AlbumSquare>
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-
-                  // Artist name
-                  if (widget.artistName != null)
+                  if (artistName != null)
                     Text(
-                      widget.artistName!,
+                      artistName!,
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.6),
+                            color: Colors.white.withValues(alpha: 0.8),
                             fontWeight: FontWeight.w500,
                           ),
                       maxLines: 1,

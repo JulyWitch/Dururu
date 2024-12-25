@@ -1,6 +1,7 @@
 import 'package:dururu/models/pagination.dart';
 import 'package:dururu/models/subsonic.dart';
 import 'package:dururu/presentation/widgets/album_grid.dart';
+import 'package:dururu/presentation/widgets/loading_indicator.dart';
 import 'package:dururu/providers/audio.dart';
 import 'package:dururu/providers/subsonic_apis.dart';
 import 'package:flutter/cupertino.dart';
@@ -208,12 +209,12 @@ class _ArtistPageState extends ConsumerState<ArtistPage> {
                           getCoverArtProvider(
                               GetCoverArtRequest(id: song.coverArt)),
                         ),
+                        cacheKey: GetCoverArtRequest(id: song.coverArt)
+                            .hashCode
+                            .toString(),
                         width: 48,
                         height: 48,
                         fit: BoxFit.cover,
-                        placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator.adaptive(),
-                        ),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.album),
                       ),
@@ -254,13 +255,13 @@ class _ArtistPageState extends ConsumerState<ArtistPage> {
                         ? const Center(
                             child: Padding(
                               padding: EdgeInsets.all(16),
-                              child: CircularProgressIndicator.adaptive(),
+                              child: LoadingIndicator(),
                             ),
                           )
                         : null;
                   }
 
-                  final song = songState.items[index];
+                    final song = songState.items[index];
                   return ListTile(
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(4),
@@ -269,11 +270,14 @@ class _ArtistPageState extends ConsumerState<ArtistPage> {
                           getCoverArtProvider(
                               GetCoverArtRequest(id: song.coverArt)),
                         ),
+                        cacheKey: GetCoverArtRequest(id: song.coverArt)
+                            .hashCode
+                            .toString(),
                         width: 48,
                         height: 48,
                         fit: BoxFit.cover,
                         placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator.adaptive(),
+                          child: LoadingIndicator(),
                         ),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.album),

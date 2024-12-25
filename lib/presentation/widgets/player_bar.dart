@@ -1,12 +1,13 @@
-import 'dart:nativewrappers/_internal/vm/lib/math_patch.dart';
-
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dururu/presentation/widgets/loading_indicator.dart';
+import 'package:dururu/presentation/widgets/wave.dart';
 import 'package:dururu/providers/audio.dart';
 import 'package:dururu/providers/subsonic_apis.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class PlayerBarShellLayout extends ConsumerStatefulWidget {
   final Widget child;
@@ -23,7 +24,7 @@ class PlayerBarShellLayout extends ConsumerStatefulWidget {
 
 class _PlayerBarShellLayoutState extends ConsumerState<PlayerBarShellLayout> {
   bool isExpanded = false;
-  double dragHeight = 72; // Initial height of the player bar
+  double dragHeight = 96; // Initial height of the player bar
   late double maxHeight;
 
   @override
@@ -32,51 +33,245 @@ class _PlayerBarShellLayoutState extends ConsumerState<PlayerBarShellLayout> {
     maxHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
-            child: widget.child,
-          ),
-          GestureDetector(
-            onTap: () {
-              dragHeight = maxHeight;
-              setState(() {});
-            },
-            onVerticalDragUpdate: (details) {
-              dragHeight =
-                  (dragHeight - details.delta.dy).clamp(72.0, maxHeight);
-              setState(() {});
-            },
-            onVerticalDragEnd: (details) {
-              isExpanded = dragHeight > maxHeight / 2;
-              dragHeight = isExpanded ? maxHeight : 72.0;
-              setState(() {});
-            },
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 50),
-              height: isQueueEmpty ? 0 : dragHeight,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.7),
-                    blurRadius: 10,
-                    offset: const Offset(0, -2),
-                  ),
-                ],
+          Column(
+            children: [
+              Expanded(
+                child: widget.child,
               ),
-              child: dragHeight > 100
-                  ? const _FullSizePlayer()
-                  : const PlayerBar(),
+              buildGestureDetector(isQueueEmpty),
+            ],
+          ),
+          Positioned(
+            bottom: 16,
+            left: 0,
+            right: 0,
+            child: buildGestureDetector(isQueueEmpty, const BottomPlayer()),
+          ),
+        ],
+      ),
+    );
+  }
+
+  GestureDetector buildGestureDetector(bool isQueueEmpty,
+      [Widget child = const SizedBox.expand()]) {
+    return GestureDetector(
+      onTap: () {
+        dragHeight = maxHeight;
+        setState(() {});
+      },
+      onVerticalDragUpdate: (details) {
+        dragHeight = (dragHeight - details.delta.dy).clamp(72.0, maxHeight);
+        setState(() {});
+      },
+      onVerticalDragEnd: (details) {
+        isExpanded = dragHeight > maxHeight / 2;
+        dragHeight = isExpanded ? maxHeight : 72.0;
+        setState(() {});
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 50),
+        height: isQueueEmpty ? 0 : dragHeight,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.7),
+              blurRadius: 10,
+              offset: const Offset(0, -2),
+            ),
+          ],
+        ),
+        child: child,
+      ),
+    );
+  }
+}
+
+class BottomPlayer extends ConsumerStatefulWidget {
+  const BottomPlayer({super.key});
+
+  @override
+  ConsumerState<BottomPlayer> createState() => _BottomPlayerState();
+}
+
+class _BottomPlayerState extends ConsumerState<BottomPlayer> {
+  get dd => 0.1;
+  final carouselController = CarouselSliderController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final audio = ref.watch(audioProvider);
+    ref.listen(currentSongProvider, (prev, next) async {
+      if (prev != next && next != null) {
+        await carouselController.onReady;
+        carouselController.animateToPage(
+          audio.queue.indexOf(next),
+          duration: const Duration(milliseconds: 100),
+          curve: Curves.easeIn,
+        );
+      }
+    });
+
+    if (audio.currentSong == null) {
+      return const SizedBox();
+    }
+
+    return SizedBox(
+      height: 96,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            height: 80,
+            left: 65,
+            right: 25,
+            child: backgroundWaves(context, audio.isPlaying),
+          ),
+          Positioned(
+            left: 25,
+            right: 45,
+            top: 0,
+            bottom: 0,
+            child: Row(
+              children: [
+                CircularPercentIndicator(
+                  radius: 45,
+                  lineWidth: 3.0,
+                  percent: (audio.position.inMicroseconds /
+                          audio.duration.inMicroseconds)
+                      .clamp(0, 1),
+                  fillColor: Colors.transparent,
+                  backgroundWidth: 8,
+                  backgroundColor: Theme.of(context).colorScheme.surfaceDim,
+                  center: Builder(
+                    builder: (_) {
+                      if (audio.currentSong == null) {
+                        return const LoadingIndicator();
+                      }
+
+                      return Hero(
+                        tag: "playing song",
+                        child: CircleAvatar(
+                          radius: 40,
+                          backgroundImage: CachedNetworkImageProvider(
+                            ref.watch(
+                              getCoverArtProvider(
+                                GetCoverArtRequest(
+                                    id: audio.currentSong!.coverArt),
+                              ),
+                            ),
+                            cacheKey: GetCoverArtRequest(
+                                    id: audio.currentSong!.coverArt)
+                                .hashCode
+                                .toString(),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  progressColor: Colors.red,
+                ),
+                Expanded(
+                  child: CarouselSlider.builder(
+                    itemCount: audio.queue.length,
+                    options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        viewportFraction: 0.9,
+                        initialPage: audio.queue.indexOf(audio.currentSong!),
+                        onPageChanged: (i, _) {
+                          ref
+                              .read(audioProvider.notifier)
+                              .playQueue(audio.queue, initialIndex: i);
+                        }),
+                    carouselController: carouselController,
+                    itemBuilder: (_, i, ri) {
+                      final song = audio.queue[i];
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 8,
+                        children: [
+                          Text(
+                            song.title,
+                            style: Theme.of(context).textTheme.labelMedium,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            "${song.album == null ? '' : '${song.album} '}${song.genre == null ? '' : '• ${song.genre} '}",
+                            style: Theme.of(context).textTheme.labelSmall,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    await ref.read(audioProvider.notifier).onTapPlayPause();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: audio.isPlaying
+                        ? const Icon(CupertinoIcons.pause, size: 30)
+                        : const Icon(CupertinoIcons.play_arrow, size: 30),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
       ),
     );
   }
+
+  Widget backgroundWaves(BuildContext context, bool isPlaying) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.blue[300]!, const Color.fromRGBO(20, 10, 70, 1)],
+        ),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.2),
+        ),
+        borderRadius: BorderRadius.circular(50),
+      ),
+      child: RotatedBox(
+        quarterTurns: 1,
+        child: WaveWidget(
+          isPlaying: isPlaying,
+          config: CustomConfig(
+            gradients: [
+              [Colors.blue, const Color(0xEE0B044B)],
+              [Colors.blue.shade800, const Color(0x77211591)],
+              [Colors.blue.shade200, const Color(0x667943DD)],
+              [Colors.blue.shade100, const Color(0x553691DB)]
+            ],
+            durations: [35000, 19440, 10800, 6000],
+            heightPercentages: [dd, dd + 0.03, dd + 0.5, dd + 0.1],
+            gradientBegin: Alignment.bottomLeft,
+            gradientEnd: Alignment.topRight,
+          ),
+          waveAmplitude: 0,
+          size: const Size(
+            double.infinity,
+            double.infinity,
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-class _FullSizePlayer extends ConsumerWidget {
-  const _FullSizePlayer();
+class FullSizePlayer extends ConsumerWidget {
+  const FullSizePlayer({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -369,9 +564,7 @@ class _AlbumArt extends ConsumerWidget {
               child: SizedBox(
                 width: 24,
                 height: 24,
-                child: LoadingIndicator(
-                  strokeWidth: 2,
-                ),
+                child: LoadingIndicator(),
               ),
             ),
           ),

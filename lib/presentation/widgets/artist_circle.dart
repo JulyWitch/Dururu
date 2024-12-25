@@ -5,12 +5,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 class ArtistCircle extends StatelessWidget {
   final String name;
   final String? imageUrl;
+  final String? cacheKey;
   final VoidCallback onTap;
 
   const ArtistCircle({
     super.key,
     required this.name,
     required this.imageUrl,
+     this.cacheKey,
     required this.onTap,
   });
 
@@ -37,15 +39,10 @@ class ArtistCircle extends StatelessWidget {
             ClipOval(
               child: CachedNetworkImage(
                 imageUrl: imageUrl ?? '',
+                cacheKey: cacheKey,
                 fit: BoxFit.cover,
                 width: 80,
                 height: 80,
-                placeholder: (context, url) => Container(
-                  color: Colors.grey[300],
-                  child: const Center(
-                    child: LoadingIndicator(),
-                  ),
-                ),
                 errorWidget: (context, url, error) => Container(
                   color: Colors.grey[300],
                   child: const Icon(

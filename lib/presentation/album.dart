@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:go_router/go_router.dart';
 
 class AlbumPage extends ConsumerWidget {
   final String albumId;
@@ -19,6 +20,13 @@ class AlbumPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final album = ref.watch(getAlbumProvider(GetAlbumRequest(id: albumId)));
+    final artist = ref.watch(
+      getArtistProvider(
+        GetArtistRequest(
+          id: album.value?.album?.artistId,
+        ),
+      ),
+    );
 
     return Scaffold(
       body: album.when(
@@ -42,14 +50,14 @@ class AlbumPage extends ConsumerWidget {
                             ),
                           ),
                         ),
+                        cacheKey: GetCoverArtRequest(
+                          id: data.album?.coverArt ??
+                              data.album?.song?[0].coverArt,
+                        ).hashCode.toString(),
                         fit: BoxFit.cover,
-                        placeholder: (context, url) => const Center(
-                          child: LoadingIndicator(),
-                        ),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.album),
                       ),
-                      // Gradient Overlay
                       Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -62,7 +70,6 @@ class AlbumPage extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      // Album Info
                       Positioned(
                         left: 16,
                         right: 16,
@@ -128,22 +135,15 @@ class AlbumPage extends ConsumerWidget {
                               ),
                             ),
                             if (data.album?.artist != 'Various Artists')
-                              Consumer(
-                                builder: (context, ref, child) {
-                                  final artist = ref.watch(
-                                    getArtistProvider(
-                                      GetArtistRequest(
-                                        id: data.album?.artistId,
-                                      ),
-                                    ),
-                                  );
-
-                                  return ArtistCircle(
-                                    name: data.album?.artist ?? '',
-                                    imageUrl:
-                                        artist.value?.artist?.artistImageUrl ??
-                                            '',
-                                    onTap: () {},
+                              ArtistCircle(
+                                name: data.album!.artist ?? '',
+                                imageUrl:
+                                    artist.value?.artist?.artistImageUrl ?? '',
+                                cacheKey: data.album!.artistId,
+                                onTap: () {
+                                  GoRouter.of(context).push(
+                                    '/artists/${data.album!.artistId}',
+                                    extra: data.album!.artist,
                                   );
                                 },
                               ),
@@ -154,57 +154,6 @@ class AlbumPage extends ConsumerWidget {
                   ),
                 ),
               ),
-              if (false)
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Artists",
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        const SizedBox(height: 16),
-                        SizedBox(
-                          height: 100,
-                          child: Consumer(builder: (context, ref, child) {
-                            final artists = ref.watch(getArtistProvider(
-                                GetArtistRequest(id: data.album?.artistId)));
-                            if (artists.isLoading) {
-                              return const LoadingIndicator();
-                            }
-                            final flatMap = artists.value?.artists?.index?.fold(
-                              <ArtistId3>[],
-                              (acc, curr) => [
-                                ...acc,
-                                if (curr.artist != null) ...curr.artist!
-                              ],
-                            );
-                            print('flatMap $flatMap');
-                            return ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: flatMap?.length ?? 0,
-                              itemBuilder: (context, index) {
-                                final artist = flatMap![index];
-
-                                return Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: ArtistCircle(
-                                    name: artist.name,
-                                    imageUrl: artist.artistImageUrl,
-                                    onTap: () {},
-                                  ),
-                                );
-                              },
-                            );
-                          }),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
