@@ -1,3 +1,4 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:dururu/providers/subsonic_apis.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,22 +25,23 @@ class AudioState with _$AudioState {
   }) = _AudioState;
 }
 
-@Riverpod(keepAlive: true)
+@Riverpod()
 class Audio extends _$Audio {
-  late final AudioPlayer _player;
+  AudioPlayer? _player;
+  AudioPlayer get player => _player!;
   ConcatenatingAudioSource? playlist;
 
   @override
   AudioState build() {
     _player = AudioPlayer();
     _initializePlayer();
-    ref.onDispose(() => _player.dispose());
+    ref.onDispose(() => player.dispose());
     return const AudioState();
   }
 
   void _initializePlayer() {
     // Listen to player state changes
-    _player.playerStateStream.listen((playerState) {
+    player.playerStateStream.listen((playerState) {
       state = state.copyWith(
         isPlaying: playerState.playing,
         isLoading: playerState.processingState == ProcessingState.loading ||
@@ -48,29 +50,31 @@ class Audio extends _$Audio {
     });
 
     // Listen to position changes
-    _player.positionStream.listen((position) {
+    player.positionStream.listen((position) {
       state = state.copyWith(position: position);
     });
 
     // Listen to duration changes
-    _player.durationStream.listen((duration) {
+    player.durationStream.listen((duration) {
       if (duration != null) {
         state = state.copyWith(duration: duration);
       }
     });
 
     // Listen to sequence state changes
-    _player.sequenceStateStream.listen((sequenceState) {
-      if (sequenceState?.currentSource?.tag != null) {
-        state = state.copyWith(
-          currentSong: sequenceState?.currentSource?.tag as Child,
-        );
-      }
+    player.sequenceStateStream.listen((sequenceState) {
+      if (sequenceState?.currentSource?.tag == null) return;
+      final mediaItem = sequenceState?.currentSource?.tag as MediaItem;
+      final index = state.queue.indexWhere((s) => s.id == mediaItem.id);
+      if (index == -1) return;
+      state = state.copyWith(
+        currentSong: state.queue[index],
+      );
     });
   }
 
   List<Child> getQueue() => state.queue;
-  int? get currentIndex => _player.currentIndex;
+  int? get currentIndex => player.currentIndex;
 
   Future<void> reorderQueue(int currentIndex, int newIndex) async {
     final backupQueue = state.queue.toList();
@@ -87,7 +91,7 @@ class Audio extends _$Audio {
   }
 
   Future<void> playAt(int index) async {
-    await _player.seek(null, index: index);
+    await player.seek(null, index: index);
   }
 
   Future<void> playQueue(List<Child> songs, {int initialIndex = 0}) async {
@@ -98,18 +102,32 @@ class Audio extends _$Audio {
 
     try {
       final audioSources = songs
-          .map(
-            (song) => AudioSource.uri(
-              Uri.parse(
-                ref.read(
-                  streamProvider(
-                    StreamRequest(id: song.id),
+          .map((song) => AudioSource.uri(
+                Uri.parse(
+                  ref.read(
+                    streamProvider(
+                      StreamRequest(id: song.id),
+                    ),
                   ),
                 ),
-              ),
-              tag: song,
-            ),
-          )
+                tag: MediaItem(
+                  id: song.id,
+                  title: song.title,
+                  album: song.album,
+                  genre: song.genre,
+                  artist: song.artist,
+                  artUri: Uri.parse(
+                    ref.read(
+                      getCoverArtProvider(
+                        GetCoverArtRequest(id: song.coverArt),
+                      ),
+                    ),
+                  ),
+                  duration: song.duration == null
+                      ? null
+                      : Duration(seconds: song.duration!),
+                ),
+              ))
           .toList();
       state = state.copyWith(isLoading: true, queue: songs);
 
@@ -117,12 +135,12 @@ class Audio extends _$Audio {
         children: audioSources,
         useLazyPreparation: true,
       );
-      await _player.setAudioSource(
+      await player.setAudioSource(
         playlist!,
         initialIndex: initialIndex,
       );
 
-      await _player.play();
+      await player.play();
     } catch (e) {
       // Handle errors appropriately
       debugPrint('Error playing queue: $e');
@@ -133,11 +151,11 @@ class Audio extends _$Audio {
 
   // Playback controls
   Future<void> play() async {
-    await _player.play();
+    await player.play();
   }
 
   Future<void> pause() async {
-    await _player.pause();
+    await player.pause();
   }
 
   Future<void> onTapPlayPause() async {
@@ -149,32 +167,32 @@ class Audio extends _$Audio {
   }
 
   Future<void> onTapNext() async {
-    if (_player.hasNext) {
-      await _player.seekToNext();
+    if (player.hasNext) {
+      await player.seekToNext();
     }
   }
 
   Future<void> onTapPrevious() async {
-    if (_player.hasPrevious) {
-      await _player.seekToPrevious();
+    if (player.hasPrevious) {
+      await player.seekToPrevious();
     }
   }
 
   // Position control
   Future<void> seek(Duration position) async {
-    await _player.seek(position);
+    await player.seek(position);
   }
 
   // Volume control
   Future<void> setVolume(double volume) async {
-    await _player.setVolume(volume);
+    await player.setVolume(volume);
     state = state.copyWith(volume: volume);
   }
 
   // Shuffle control
   Future<void> toggleShuffle() async {
     final newShuffleMode = !state.isShuffle;
-    await _player.setShuffleModeEnabled(newShuffleMode);
+    await player.setShuffleModeEnabled(newShuffleMode);
     state = state.copyWith(isShuffle: newShuffleMode);
   }
 
@@ -195,7 +213,7 @@ class Audio extends _$Audio {
         break;
     }
 
-    await _player.setLoopMode(nextMode);
+    await player.setLoopMode(nextMode);
     state = state.copyWith(loopMode: nextMode);
   }
 }

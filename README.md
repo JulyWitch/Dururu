@@ -22,7 +22,8 @@ This app is under development and is not ready to use yet!
 - [ ] UI: Add more details to pages
 - [x] UI: Lyrics page
 - [x] UI: Queue page
-- [ ] UI: Add notification
-- [ ] Ability to logout and login again
+- [x] UI: Add notification
+- [ ] UI: Starred songs page
+- [x] Ability to logout and login again
 - [ ] UI/UX Optimizations
 - [ ] Code refactor

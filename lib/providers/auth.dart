@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:dururu/models/auth_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -43,6 +42,12 @@ class Auth extends _$Auth {
     };
   }
 
+  Future<void> logout() async {
+    await storage.delete(
+      key: 'default_account',
+    );
+  }
+
   Future<void> login(
       {required String username,
       required String password,
@@ -68,7 +73,6 @@ class Auth extends _$Auth {
       'f': 'json'
     });
 
-    debugPrint(response.data.toString());
     if (response.data['subsonic-response']['status'] == 'ok') {
       final model = AuthModel(
           username: username, password: password, serverUrl: cleanServerUrl);

@@ -27,6 +27,7 @@ dependencies:
   cached_network_image: ^3.4.1
   carousel_slider: ^5.0.0
   percent_indicator: ^4.2.4
+  just_audio_background: ^0.0.1-beta.14
 
 dev_dependencies:
   flutter_test:

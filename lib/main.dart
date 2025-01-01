@@ -10,8 +10,14 @@ import 'package:dururu/providers/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
-void main() {
+Future<void> main() async {
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.example.dururu',
+    androidNotificationChannelName: 'Dururu Playback',
+    androidNotificationOngoing: true,
+  );
   runApp(const ProviderScope(child: MyApp()));
 }
 

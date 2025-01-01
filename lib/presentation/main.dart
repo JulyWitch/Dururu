@@ -1,3 +1,4 @@
+import 'package:dururu/presentation/drawer.dart';
 import 'package:dururu/presentation/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +17,9 @@ class MainPage extends StatelessWidget {
               .titleTextStyle
               ?.copyWith(fontWeight: FontWeight.w800, fontSize: 12),
         ),
-        leading: IconButton(
-          icon: const Icon(CupertinoIcons.search),
-          onPressed: () {},
-        ),
+        leading: const OpenDrawerButton(),
       ),
+      drawer: const AppDrawer(),
       body: DefaultTabController(
         length: 3,
         child: Column(
@@ -39,14 +38,30 @@ class MainPage extends StatelessWidget {
               child: TabBarView(
                 children: [
                   HomePage(),
-                  Text('Playlists'),
-                  Text('Browse'),
+                  Center(child: Text('Playlists')),
+                  Center(child: Text('Browse')),
                 ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class OpenDrawerButton extends StatelessWidget {
+  const OpenDrawerButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.menu),
+      onPressed: () {
+        Scaffold.of(context).openDrawer();
+      },
     );
   }
 }

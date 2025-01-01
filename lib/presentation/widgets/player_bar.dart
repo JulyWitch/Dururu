@@ -196,6 +196,7 @@ class _BottomPlayerState extends ConsumerState<BottomPlayer> {
                         enlargeCenterPage: true,
                         viewportFraction: 0.9,
                         initialPage: audio.queue.indexOf(audio.currentSong!),
+                        enableInfiniteScroll: false,
                         onPageChanged: (i, reason) {
                           if (reason == CarouselPageChangedReason.manual) {
                             ref.read(audioProvider.notifier).playAt(i);
