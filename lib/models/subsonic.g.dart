@@ -981,12 +981,14 @@ Map<String, dynamic> _$$SongsImplToJson(_$SongsImpl instance) =>
 _$LyricsImpl _$$LyricsImplFromJson(Map<String, dynamic> json) => _$LyricsImpl(
       artist: json['artist'] as String?,
       title: json['title'] as String?,
+      value: json['value'] as String?,
     );
 
 Map<String, dynamic> _$$LyricsImplToJson(_$LyricsImpl instance) =>
     <String, dynamic>{
       'artist': instance.artist,
       'title': instance.title,
+      'value': instance.value,
     };
 
 _$PodcastsImpl _$$PodcastsImplFromJson(Map<String, dynamic> json) =>

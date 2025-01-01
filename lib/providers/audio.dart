@@ -1,5 +1,5 @@
 import 'package:dururu/providers/subsonic_apis.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -27,6 +27,7 @@ class AudioState with _$AudioState {
 @Riverpod(keepAlive: true)
 class Audio extends _$Audio {
   late final AudioPlayer _player;
+  ConcatenatingAudioSource? playlist;
 
   @override
   AudioState build() {
@@ -68,11 +69,32 @@ class Audio extends _$Audio {
     });
   }
 
-  // Queue management
   List<Child> getQueue() => state.queue;
+  int? get currentIndex => _player.currentIndex;
+
+  Future<void> reorderQueue(int currentIndex, int newIndex) async {
+    final backupQueue = state.queue.toList();
+    final newQueue = state.queue.toList();
+    newQueue.insert(
+      newIndex,
+      newQueue.removeAt(currentIndex),
+    );
+    state = state.copyWith(queue: newQueue);
+
+    await playlist!.move(currentIndex, newIndex).catchError((_) {
+      state = state.copyWith(queue: backupQueue);
+    });
+  }
+
+  Future<void> playAt(int index) async {
+    await _player.seek(null, index: index);
+  }
 
   Future<void> playQueue(List<Child> songs, {int initialIndex = 0}) async {
-    state = state.copyWith(isLoading: true, queue: songs);
+    if (listEquals(songs, state.queue)) {
+      await playAt(initialIndex);
+      return;
+    }
 
     try {
       final audioSources = songs
@@ -89,10 +111,14 @@ class Audio extends _$Audio {
             ),
           )
           .toList();
+      state = state.copyWith(isLoading: true, queue: songs);
 
-      // Set the audio source sequence
+      playlist = ConcatenatingAudioSource(
+        children: audioSources,
+        useLazyPreparation: true,
+      );
       await _player.setAudioSource(
-        ConcatenatingAudioSource(children: audioSources),
+        playlist!,
         initialIndex: initialIndex,
       );
 

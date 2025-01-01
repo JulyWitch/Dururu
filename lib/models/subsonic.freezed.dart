@@ -11696,6 +11696,8 @@ mixin _$Lyrics {
   String? get artist => throw _privateConstructorUsedError;
   @JsonKey(name: 'title')
   String? get title => throw _privateConstructorUsedError;
+  @JsonKey(name: 'value')
+  String? get value => throw _privateConstructorUsedError;
 
   /// Serializes this Lyrics to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -11713,7 +11715,8 @@ abstract class $LyricsCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'artist') String? artist,
-      @JsonKey(name: 'title') String? title});
+      @JsonKey(name: 'title') String? title,
+      @JsonKey(name: 'value') String? value});
 }
 
 /// @nodoc
@@ -11733,6 +11736,7 @@ class _$LyricsCopyWithImpl<$Res, $Val extends Lyrics>
   $Res call({
     Object? artist = freezed,
     Object? title = freezed,
+    Object? value = freezed,
   }) {
     return _then(_value.copyWith(
       artist: freezed == artist
@@ -11742,6 +11746,10 @@ class _$LyricsCopyWithImpl<$Res, $Val extends Lyrics>
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -11756,7 +11764,8 @@ abstract class _$$LyricsImplCopyWith<$Res> implements $LyricsCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'artist') String? artist,
-      @JsonKey(name: 'title') String? title});
+      @JsonKey(name: 'title') String? title,
+      @JsonKey(name: 'value') String? value});
 }
 
 /// @nodoc
@@ -11774,6 +11783,7 @@ class __$$LyricsImplCopyWithImpl<$Res>
   $Res call({
     Object? artist = freezed,
     Object? title = freezed,
+    Object? value = freezed,
   }) {
     return _then(_$LyricsImpl(
       artist: freezed == artist
@@ -11784,6 +11794,10 @@ class __$$LyricsImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -11793,7 +11807,8 @@ class __$$LyricsImplCopyWithImpl<$Res>
 class _$LyricsImpl implements _Lyrics {
   const _$LyricsImpl(
       {@JsonKey(name: 'artist') this.artist,
-      @JsonKey(name: 'title') this.title});
+      @JsonKey(name: 'title') this.title,
+      @JsonKey(name: 'value') this.value});
 
   factory _$LyricsImpl.fromJson(Map<String, dynamic> json) =>
       _$$LyricsImplFromJson(json);
@@ -11804,10 +11819,13 @@ class _$LyricsImpl implements _Lyrics {
   @override
   @JsonKey(name: 'title')
   final String? title;
+  @override
+  @JsonKey(name: 'value')
+  final String? value;
 
   @override
   String toString() {
-    return 'Lyrics(artist: $artist, title: $title)';
+    return 'Lyrics(artist: $artist, title: $title, value: $value)';
   }
 
   @override
@@ -11816,12 +11834,13 @@ class _$LyricsImpl implements _Lyrics {
         (other.runtimeType == runtimeType &&
             other is _$LyricsImpl &&
             (identical(other.artist, artist) || other.artist == artist) &&
-            (identical(other.title, title) || other.title == title));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.value, value) || other.value == value));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, artist, title);
+  int get hashCode => Object.hash(runtimeType, artist, title, value);
 
   /// Create a copy of Lyrics
   /// with the given fields replaced by the non-null parameter values.
@@ -11842,7 +11861,8 @@ class _$LyricsImpl implements _Lyrics {
 abstract class _Lyrics implements Lyrics {
   const factory _Lyrics(
       {@JsonKey(name: 'artist') final String? artist,
-      @JsonKey(name: 'title') final String? title}) = _$LyricsImpl;
+      @JsonKey(name: 'title') final String? title,
+      @JsonKey(name: 'value') final String? value}) = _$LyricsImpl;
 
   factory _Lyrics.fromJson(Map<String, dynamic> json) = _$LyricsImpl.fromJson;
 
@@ -11852,6 +11872,9 @@ abstract class _Lyrics implements Lyrics {
   @override
   @JsonKey(name: 'title')
   String? get title;
+  @override
+  @JsonKey(name: 'value')
+  String? get value;
 
   /// Create a copy of Lyrics
   /// with the given fields replaced by the non-null parameter values.

@@ -102,7 +102,7 @@ final durationProvider = AutoDisposeProvider<Duration>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef DurationRef = AutoDisposeProviderRef<Duration>;
-String _$audioHash() => r'7d0217f345338e2ccd1cbc854f977dad3ac438cd';
+String _$audioHash() => r'99d6e2ca06754c833a028a115e87dcef7aa3f116';
 
 /// See also [Audio].
 @ProviderFor(Audio)

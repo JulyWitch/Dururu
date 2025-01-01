@@ -2,19 +2,27 @@
 
 
 
-This app is under development
+This app is under development and is not ready to use yet!
 
 
-Here, I keep a todo list of things that should be implemented:
+### Beta version progress
 
 - [x] State management for logged in user
 - [x] Storage (Store username and password)
-- [ ] In future, We might need to be able to switch between servers
-- [ ] Write providers for fetching songs
-- [ ] UI for showing songs of different folders
-- [ ] UI for showing songs of different geners
-- [ ] UI for showing songs of different artists
-- [ ] UI for showing songs of different albums
-- [ ] UI for playing songs
-- [ ] Work on offline access
-
+- [x] Login page
+- [x] Json serilization of subsonic models
+- [x] Implement Subsonic API calls
+- [x] Audio management (Play, pause, seek, duration and etc)
+- [x] UI: Home page (Albums, Hot songs and etc)
+- [x] UI: Album page
+- [x] UI: Player bar in bottom of the page
+- [x] UI: Artist page
+- [x] UI: Song page
+- [x] UI: Currently playing song page
+- [ ] UI: Add more details to pages
+- [x] UI: Lyrics page
+- [x] UI: Queue page
+- [ ] UI: Add notification
+- [ ] Ability to logout and login again
+- [ ] UI/UX Optimizations
+- [ ] Code refactor

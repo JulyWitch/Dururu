@@ -261,7 +261,7 @@ class _ArtistPageState extends ConsumerState<ArtistPage> {
                         : null;
                   }
 
-                    final song = songState.items[index];
+                  final song = songState.items[index];
                   return ListTile(
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(4),

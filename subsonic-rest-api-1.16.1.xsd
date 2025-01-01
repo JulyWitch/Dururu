@@ -404,6 +404,7 @@
     <xs:complexType name="Lyrics" mixed="true">
         <xs:attribute name="artist" type="xs:string" use="optional"/>
         <xs:attribute name="title" type="xs:string" use="optional"/>
+        <xs:attribute name="value" type="xs:string" use="optional"/>
     </xs:complexType>
 
     <xs:complexType name="Podcasts">

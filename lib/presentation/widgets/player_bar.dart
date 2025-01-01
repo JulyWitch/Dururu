@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dururu/presentation/full_size_player.dart';
 import 'package:dururu/presentation/widgets/loading_indicator.dart';
 import 'package:dururu/presentation/widgets/wave.dart';
 import 'package:dururu/providers/audio.dart';
@@ -47,7 +48,20 @@ class _PlayerBarShellLayoutState extends ConsumerState<PlayerBarShellLayout> {
             bottom: 16,
             left: 0,
             right: 0,
-            child: buildGestureDetector(isQueueEmpty, const BottomPlayer()),
+            child: SafeArea(
+              child: buildGestureDetector(
+                isQueueEmpty,
+                isExpanded
+                    ? FullSizePlayer(
+                        onExit: () {
+                          isExpanded = false;
+                          dragHeight = 96;
+                          setState(() {});
+                        },
+                      )
+                    : const BottomPlayer(),
+              ),
+            ),
           ),
         ],
       ),
@@ -59,15 +73,17 @@ class _PlayerBarShellLayoutState extends ConsumerState<PlayerBarShellLayout> {
     return GestureDetector(
       onTap: () {
         dragHeight = maxHeight;
+        isExpanded = true;
         setState(() {});
       },
       onVerticalDragUpdate: (details) {
-        dragHeight = (dragHeight - details.delta.dy).clamp(72.0, maxHeight);
+        dragHeight = (dragHeight - details.delta.dy).clamp(96.0, maxHeight);
+        isExpanded = dragHeight > 200;
         setState(() {});
       },
       onVerticalDragEnd: (details) {
         isExpanded = dragHeight > maxHeight / 2;
-        dragHeight = isExpanded ? maxHeight : 72.0;
+        dragHeight = isExpanded ? maxHeight : 96.0;
         setState(() {});
       },
       child: AnimatedContainer(
@@ -100,18 +116,15 @@ class _BottomPlayerState extends ConsumerState<BottomPlayer> {
   final carouselController = CarouselSliderController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final audio = ref.watch(audioProvider);
+
     ref.listen(currentSongProvider, (prev, next) async {
-      if (prev != next && next != null) {
+      final index = ref.read(audioProvider.notifier).currentIndex ?? -1;
+      if (index > -1) {
         await carouselController.onReady;
         carouselController.animateToPage(
-          audio.queue.indexOf(next),
+          index,
           duration: const Duration(milliseconds: 100),
           curve: Curves.easeIn,
         );
@@ -167,9 +180,8 @@ class _BottomPlayerState extends ConsumerState<BottomPlayer> {
                               ),
                             ),
                             cacheKey: GetCoverArtRequest(
-                                    id: audio.currentSong!.coverArt)
-                                .hashCode
-                                .toString(),
+                              id: audio.currentSong!.coverArt,
+                            ).hashCode.toString(),
                           ),
                         ),
                       );
@@ -184,10 +196,10 @@ class _BottomPlayerState extends ConsumerState<BottomPlayer> {
                         enlargeCenterPage: true,
                         viewportFraction: 0.9,
                         initialPage: audio.queue.indexOf(audio.currentSong!),
-                        onPageChanged: (i, _) {
-                          ref
-                              .read(audioProvider.notifier)
-                              .playQueue(audio.queue, initialIndex: i);
+                        onPageChanged: (i, reason) {
+                          if (reason == CarouselPageChangedReason.manual) {
+                            ref.read(audioProvider.notifier).playAt(i);
+                          }
                         }),
                     carouselController: carouselController,
                     itemBuilder: (_, i, ri) {
@@ -266,192 +278,6 @@ class _BottomPlayerState extends ConsumerState<BottomPlayer> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class FullSizePlayer extends ConsumerWidget {
-  const FullSizePlayer({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentSong = ref.watch(currentSongProvider);
-
-    return Stack(
-      children: [
-        // Background blur
-        Positioned.fill(
-          child: currentSong?.coverArt != null
-              ? Image.network(
-                  ref.watch(
-                    getCoverArtProvider(
-                      GetCoverArtRequest(id: currentSong!.coverArt),
-                    ),
-                  ),
-                  fit: BoxFit.cover,
-                )
-              : const SizedBox.shrink(),
-        ),
-        Positioned.fill(
-          child: Container(
-            color: Colors.black.withValues(alpha: 0.5),
-          ),
-        ),
-        Column(
-          children: [
-            const SizedBox(height: 32),
-            // Album Art
-            Center(
-              child: Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.5),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: currentSong?.coverArt != null
-                      ? Image.network(
-                          ref.watch(
-                            getCoverArtProvider(
-                              GetCoverArtRequest(id: currentSong!.coverArt),
-                            ),
-                          ),
-                          fit: BoxFit.cover,
-                        )
-                      : const Icon(Icons.album, size: 100, color: Colors.grey),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            // Song Info
-            Text(
-              currentSong?.title ?? "Unknown Title",
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              currentSong?.artist ?? "Unknown Artist",
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white70,
-                  ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              currentSong?.album ?? "Unknown Album",
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.white60,
-                  ),
-              textAlign: TextAlign.center,
-            ),
-            const Spacer(),
-            // Playback Controls
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.shuffle, color: Colors.white),
-                      onPressed: () {
-                        ref.read(audioProvider.notifier).toggleShuffle();
-                      },
-                    ),
-                    IconButton(
-                      icon:
-                          const Icon(Icons.skip_previous, color: Colors.white),
-                      onPressed: () {
-                        ref.read(audioProvider.notifier).onTapPrevious();
-                      },
-                    ),
-                    CircleAvatar(
-                      radius: 32,
-                      backgroundColor: Theme.of(context).primaryColor,
-                      child: IconButton(
-                        icon: Icon(
-                          ref.watch(isPlayingProvider)
-                              ? Icons.pause
-                              : Icons.play_arrow,
-                          color: Colors.white,
-                          size: 32,
-                        ),
-                        onPressed: () {
-                          ref.read(audioProvider.notifier).onTapPlayPause();
-                        },
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.skip_next, color: Colors.white),
-                      onPressed: () {
-                        ref.read(audioProvider.notifier).onTapNext();
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.repeat, color: Colors.white),
-                      onPressed: () {
-                        ref.read(audioProvider.notifier).toggleLoopMode();
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                // Volume Slider
-                Slider(
-                  value: ref.watch(positionProvider).inMicroseconds.toDouble(),
-                  min: 0,
-                  max: ref.watch(durationProvider).inMicroseconds.toDouble(),
-                  onChanged: (value) {
-                    final newPos = Duration(microseconds: value.toInt());
-
-                    ref.read(audioProvider.notifier).seek(newPos);
-                  },
-                  activeColor: Colors.white,
-                  inactiveColor: Colors.white24,
-                ),
-                const SizedBox(height: 16),
-                // Queue and Lyrics Toggle
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        // Toggle to Queue
-                      },
-                      child: const Text(
-                        "Queue",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    TextButton(
-                      onPressed: () {
-                        // Toggle to Lyrics
-                      },
-                      child: const Text(
-                        "Lyrics",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const Spacer(),
-          ],
-        ),
-      ],
     );
   }
 }

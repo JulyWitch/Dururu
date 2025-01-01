@@ -4,6 +4,7 @@ import 'package:dururu/presentation/artist.dart';
 import 'package:dururu/presentation/genre.dart';
 import 'package:dururu/presentation/login.dart';
 import 'package:dururu/presentation/main.dart';
+import 'package:dururu/presentation/queue.dart';
 import 'package:dururu/presentation/widgets/player_bar.dart';
 import 'package:dururu/providers/auth.dart';
 import 'package:flutter/material.dart';
@@ -67,6 +68,10 @@ class _MyAppState extends ConsumerState<MyApp> {
               title: state.uri.queryParameters['title']!,
             ),
           ),
+          GoRoute(
+            path: '/queue',
+            builder: (context, state) => const QueuePage(),
+          ),
         ],
       ),
     ],
@@ -75,7 +80,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: 'Dururu',
       routerConfig: _router,
       theme: buildTheme(),
     );

@@ -81,7 +81,7 @@ Future<Response> ping(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/ping',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
@@ -99,7 +99,7 @@ Future<Response> getLicense(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getLicense',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
@@ -117,7 +117,7 @@ Future<Response> getMusicFolders(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getMusicFolders',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
@@ -188,7 +188,7 @@ Future<Response> getGenres(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getGenres',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
@@ -306,7 +306,7 @@ Future<Response> getVideos(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getVideos',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
@@ -716,7 +716,7 @@ Future<Response> getNowPlaying(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getNowPlaying',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
@@ -1110,7 +1110,7 @@ String stream(Ref ref, StreamRequest request) {
       '${ref.read(authProvider).value!.serverUrl}/rest/stream?${params.entries.map((entry) => '${entry.key}=${entry.value}').join('&')}';
 
   return Uri.encodeFull(url);
-
+ 
 }
 
 @freezed
@@ -1222,7 +1222,7 @@ String getCoverArt(Ref ref, GetCoverArtRequest request) {
       '${ref.read(authProvider).value!.serverUrl}/rest/getCoverArt?${params.entries.map((entry) => '${entry.key}=${entry.value}').join('&')}';
 
   return Uri.encodeFull(url);
-
+ 
 }
 
 @freezed
@@ -1412,7 +1412,7 @@ Future<Response> getShares(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getShares',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
@@ -1572,7 +1572,7 @@ Future<Response> refreshPodcasts(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/refreshPodcasts',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
@@ -1727,7 +1727,7 @@ Future<Response> getInternetRadioStations(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getInternetRadioStations',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
@@ -1910,7 +1910,7 @@ Future<Response> getUsers(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getUsers',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
@@ -2142,7 +2142,7 @@ Future<Response> getBookmarks(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getBookmarks',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
@@ -2216,7 +2216,7 @@ Future<Response> getPlayQueue(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getPlayQueue',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
@@ -2265,7 +2265,7 @@ Future<Response> getScanStatus(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getScanStatus',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
@@ -2283,7 +2283,7 @@ Future<Response> startScan(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/startScan',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-
+      
     },
   ).then(
     (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),

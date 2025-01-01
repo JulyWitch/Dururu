@@ -794,6 +794,8 @@ class PlaylistWithSongs with _$PlaylistWithSongs {
     String? coverArt,
     @JsonKey(name: 'entry')
     List<Child>? entry,
+    @JsonKey(name: 'allowedUser')
+    List<String>? allowedUser,
   }) = _PlaylistWithSongs;
 
   factory PlaylistWithSongs.fromJson(Map<String, dynamic> json) =>
@@ -910,6 +912,8 @@ class Lyrics with _$Lyrics {
     String? artist,
     @JsonKey(name: 'title')
     String? title,
+    @JsonKey(name: 'value')
+    String? value,
   }) = _Lyrics;
 
   factory Lyrics.fromJson(Map<String, dynamic> json) =>
@@ -1242,6 +1246,18 @@ class ArtistInfo with _$ArtistInfo {
   const factory ArtistInfo({
     @JsonKey(name: 'similarArtist')
     List<Artist>? similarArtist,
+    @JsonKey(name: 'biography')
+    String? biography,
+    @JsonKey(name: 'musicBrainzId')
+    String? musicBrainzId,
+    @JsonKey(name: 'lastFmUrl')
+    String? lastFmUrl,
+    @JsonKey(name: 'smallImageUrl')
+    String? smallImageUrl,
+    @JsonKey(name: 'mediumImageUrl')
+    String? mediumImageUrl,
+    @JsonKey(name: 'largeImageUrl')
+    String? largeImageUrl,
   }) = _ArtistInfo;
 
   factory ArtistInfo.fromJson(Map<String, dynamic> json) =>
@@ -1254,6 +1270,18 @@ class ArtistInfo2 with _$ArtistInfo2 {
   const factory ArtistInfo2({
     @JsonKey(name: 'similarArtist')
     List<ArtistId3>? similarArtist,
+    @JsonKey(name: 'biography')
+    String? biography,
+    @JsonKey(name: 'musicBrainzId')
+    String? musicBrainzId,
+    @JsonKey(name: 'lastFmUrl')
+    String? lastFmUrl,
+    @JsonKey(name: 'smallImageUrl')
+    String? smallImageUrl,
+    @JsonKey(name: 'mediumImageUrl')
+    String? mediumImageUrl,
+    @JsonKey(name: 'largeImageUrl')
+    String? largeImageUrl,
   }) = _ArtistInfo2;
 
   factory ArtistInfo2.fromJson(Map<String, dynamic> json) =>

@@ -222,7 +222,7 @@ class __$$AudioStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AudioStateImpl implements _AudioState {
+class _$AudioStateImpl with DiagnosticableTreeMixin implements _AudioState {
   const _$AudioStateImpl(
       {this.currentSong,
       this.isPlaying = false,
@@ -269,8 +269,24 @@ class _$AudioStateImpl implements _AudioState {
   final LoopMode loopMode;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AudioState(currentSong: $currentSong, isPlaying: $isPlaying, isLoading: $isLoading, queue: $queue, position: $position, duration: $duration, volume: $volume, isShuffle: $isShuffle, loopMode: $loopMode)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AudioState'))
+      ..add(DiagnosticsProperty('currentSong', currentSong))
+      ..add(DiagnosticsProperty('isPlaying', isPlaying))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
+      ..add(DiagnosticsProperty('queue', queue))
+      ..add(DiagnosticsProperty('position', position))
+      ..add(DiagnosticsProperty('duration', duration))
+      ..add(DiagnosticsProperty('volume', volume))
+      ..add(DiagnosticsProperty('isShuffle', isShuffle))
+      ..add(DiagnosticsProperty('loopMode', loopMode));
   }
 
   @override
