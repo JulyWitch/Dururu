@@ -217,6 +217,7 @@ class WaveWidget extends StatefulWidget {
   final DecorationImage? backgroundImage;
   final bool isLoop;
   final bool isPlaying;
+  final Widget? child;
 
   const WaveWidget({
     super.key,
@@ -231,6 +232,7 @@ class WaveWidget extends StatefulWidget {
     this.backgroundColor,
     this.backgroundImage,
     this.isLoop = true,
+    this.child,
   });
 
   @override
@@ -364,7 +366,7 @@ class _WaveWidgetState extends State<WaveWidget> with TickerProviderStateMixin {
         image: widget.backgroundImage,
       ),
       child: Stack(
-        children: _buildPaints(),
+        children: [..._buildPaints(), if (widget.child != null) widget.child!],
       ),
     );
   }

@@ -64,7 +64,7 @@ class QueuePage extends ConsumerWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Queue',
+                          currentSong?.title ?? "Queue",
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall
@@ -123,7 +123,7 @@ class QueuePage extends ConsumerWidget {
                 final song = queue[index];
                 final isPlaying = song == currentSong;
 
-                return ReorderableDragStartListener(
+                return ReorderableDelayedDragStartListener(
                   key: Key('$index'),
                   index: index,
                   child: ListTile(
@@ -170,14 +170,12 @@ class QueuePage extends ConsumerWidget {
                     subtitle: Text(
                       '${song.artist ?? ''} • ${Duration(seconds: song.duration ?? 0).toString().split('.').first}',
                     ),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ReorderableDragStartListener(
-                          index: index,
-                          child: const Icon(CupertinoIcons.bars),
-                        ),
-                      ],
+                    trailing: ReorderableDragStartListener(
+                      index: index,
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(CupertinoIcons.bars),
+                      ),
                     ),
                     onTap: () {
                       ref.read(audioProvider.notifier).playAt(index);

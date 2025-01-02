@@ -1,6 +1,7 @@
 import 'package:dururu/presentation/album.dart';
 import 'package:dururu/presentation/album_list.dart';
 import 'package:dururu/presentation/artist.dart';
+import 'package:dururu/presentation/full_size_player.dart';
 import 'package:dururu/presentation/genre.dart';
 import 'package:dururu/presentation/login.dart';
 import 'package:dururu/presentation/main.dart';
@@ -14,7 +15,7 @@ import 'package:just_audio_background/just_audio_background.dart';
 
 Future<void> main() async {
   await JustAudioBackground.init(
-    androidNotificationChannelId: 'com.example.dururu',
+    androidNotificationChannelId: 'com.example.dururu.bg_audio',
     androidNotificationChannelName: 'Dururu Playback',
     androidNotificationOngoing: true,
   );
