@@ -20,15 +20,19 @@ Right now, we’re kicking things off with Android, but we’re dreaming big—s
 ---
 
 ### 🛠️ **Why Dururu Stands Out**
+
 🎨 **Beautiful UI**: Crafted with love to make your music experience delightful.
+
 🔊 **Feature-Rich**: From lyrics to playlists to notifications, Dururu’s got you covered.
 
 ---
 
 ### 📝 **Beta Version Progress**
+
 Here's a sneak peek at what’s done and what’s cooking:
 
 #### ✅ **Completed**
+
 - State management for logged-in users
 - Storage (Username and password)
 - Login page
@@ -52,6 +56,7 @@ Here's a sneak peek at what’s done and what’s cooking:
 - Logout and login functionality
 
 #### 🛠️ **In Progress**
+
 - Add more details to pages
 - Smooth image replacement after playing next or previous song
 - Smooth position slider in full size player page
@@ -74,6 +79,7 @@ Here's a sneak peek at what’s done and what’s cooking:
 ---
 
 ### 🌟 **Coming Soon**
+
 - Cross-platform support (iOS, Windows, macOS)
 - More UI/UX refinements
 - Advanced features like offline playback and custom themes
@@ -81,6 +87,7 @@ Here's a sneak peek at what’s done and what’s cooking:
 ---
 
 ### 💬 **Join the Party**
+
 We’re building a vibrant community around Dururu, and we’d love for you to join us! Share your ideas, report bugs, or just hang out with fellow music lovers.
 
 👉 **[Join our Discord server](https://discord.gg/QTvYUh74)**
@@ -88,6 +95,7 @@ We’re building a vibrant community around Dururu, and we’d love for you to j
 ---
 
 ### 💡 **Contributions Welcome!**
+
 Got a cool idea? Found a bug? Feel like coding? Contributions are always welcome! Check out our issues tab and start hacking.
 
 ---
