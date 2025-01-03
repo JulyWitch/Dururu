@@ -12,7 +12,7 @@ class ArtistCircle extends StatelessWidget {
     super.key,
     required this.name,
     required this.imageUrl,
-     this.cacheKey,
+    this.cacheKey,
     required this.onTap,
   });
 
@@ -57,14 +57,7 @@ class ArtistCircle extends StatelessWidget {
               child: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.black.withValues(alpha: 0.4),
-                      Colors.black.withValues(alpha: 0.4),
-                    ],
-                  ),
+                  color: Colors.black.withValues(alpha: 0.4),
                   shape: BoxShape.circle,
                 ),
                 child: Text(

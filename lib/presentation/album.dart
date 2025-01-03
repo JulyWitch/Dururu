@@ -1,4 +1,3 @@
-import 'package:dururu/models/subsonic.dart';
 import 'package:dururu/presentation/widgets/artist_circle.dart';
 import 'package:dururu/presentation/widgets/loading_indicator.dart';
 import 'package:dururu/providers/audio.dart';

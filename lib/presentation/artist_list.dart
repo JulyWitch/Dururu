@@ -1,33 +1,28 @@
 import 'package:dururu/models/pagination.dart';
 import 'package:dururu/models/subsonic.dart';
-import 'package:dururu/presentation/widgets/album_grid.dart';
+import 'package:dururu/presentation/widgets/artist_grid.dart';
 import 'package:dururu/providers/subsonic_apis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AlbumListPage extends ConsumerStatefulWidget {
-  final String type;
-  final String title;
-
-  const AlbumListPage({
+class ArtistListPage extends ConsumerStatefulWidget {
+  const ArtistListPage({
     super.key,
-    required this.type,
-    required this.title,
   });
 
   @override
-  ConsumerState<AlbumListPage> createState() => _AlbumListPageState();
+  ConsumerState<ArtistListPage> createState() => _ArtistListPageState();
 }
 
-class _AlbumListPageState extends ConsumerState<AlbumListPage> {
+class _ArtistListPageState extends ConsumerState<ArtistListPage> {
   static const pageSize = 20;
   final scrollController = ScrollController();
-  late PaginationState<AlbumId3> albumState;
+  late PaginationState<ArtistId3> artistState;
 
   @override
   void initState() {
     super.initState();
-    albumState = const PaginationState();
+    artistState = const PaginationState();
     loadMore();
     scrollController.addListener(onScroll);
   }
@@ -46,35 +41,37 @@ class _AlbumListPageState extends ConsumerState<AlbumListPage> {
   }
 
   Future<void> loadMore() async {
-    if (albumState.isLoading || !albumState.hasMore) return;
+    if (artistState.isLoading || !artistState.hasMore) return;
 
     setState(() {
-      albumState = albumState.copyWith(isLoading: true);
+      artistState = artistState.copyWith(isLoading: true);
     });
 
     try {
       final response = await ref.read(
-        getAlbumList2Provider(
-          GetAlbumList2Request(
-            type: widget.type,
-            size: pageSize,
-            offset: albumState.offset,
-          ),
+        getArtistsProvider(
+          const GetArtistsRequest(),
         ).future,
       );
 
-      final newAlbums = response.albumList2?.album ?? [];
+      final newArtists =
+          response.artists?.index?.fold(<ArtistId3>[], (acc, curr) {
+                if (curr.artist != null) acc.addAll(curr.artist!);
+                return acc;
+              }) ??
+              [];
+
       setState(() {
-        albumState = albumState.copyWith(
-          items: [...albumState.items, ...newAlbums],
-          hasMore: newAlbums.length >= pageSize,
-          offset: albumState.offset + newAlbums.length,
+        artistState = artistState.copyWith(
+          items: [...artistState.items, ...newArtists],
+          hasMore: newArtists.length >= pageSize,
+          offset: artistState.offset + newArtists.length,
           isLoading: false,
         );
       });
     } catch (e) {
       setState(() {
-        albumState = albumState.copyWith(isLoading: false);
+        artistState = artistState.copyWith(isLoading: false);
       });
     }
   }
@@ -121,7 +118,7 @@ class _AlbumListPageState extends ConsumerState<AlbumListPage> {
                     right: 16,
                     bottom: 48,
                     child: Text(
-                      widget.title,
+                      'Artists',
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
                                 color: Colors.white,
@@ -133,9 +130,9 @@ class _AlbumListPageState extends ConsumerState<AlbumListPage> {
               ),
             ),
           ),
-          AlbumGrid(
-            albums: albumState.items,
-            showLoading: albumState.isLoading,
+          ArtistGrid(
+            artists: artistState.items,
+            showLoading: artistState.isLoading,
           ),
         ],
       ),

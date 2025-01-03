@@ -19,11 +19,16 @@ This app is under development and is not ready to use yet!
 - [x] UI: Artist page
 - [x] UI: Song page
 - [x] UI: Currently playing song page
-- [ ] UI: Add more details to pages
 - [x] UI: Lyrics page
 - [x] UI: Queue page
 - [x] UI: Add notification
-- [ ] UI: Starred songs page
+- [ ] UI: Add more details to pages
+- [ ] UI: Enhance login page
+- [x] UI: Starred songs page
+- [x] UI: All albums page
+- [x] UI: All artists page
+- [x] UI: All genres page
 - [x] Ability to logout and login again
 - [ ] UI/UX Optimizations
 - [ ] Code refactor
+- [ ] Refactor song list tile item

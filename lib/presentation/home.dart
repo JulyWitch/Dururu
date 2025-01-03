@@ -32,7 +32,11 @@ class HomePage extends ConsumerWidget {
               children: [
                 Text("Artists", style: Theme.of(context).textTheme.titleMedium),
                 IconButton(
-                    icon: const Icon(CupertinoIcons.forward), onPressed: () {}),
+                  icon: const Icon(CupertinoIcons.forward),
+                  onPressed: () {
+                    GoRouter.of(context).push('/artists');
+                  },
+                ),
               ],
             ),
           ),
@@ -53,6 +57,7 @@ class HomePage extends ConsumerWidget {
                   itemCount: flatData.length,
                   itemBuilder: (context, i) {
                     final artist = flatData[i];
+
                     return Padding(
                       padding: const EdgeInsetsDirectional.only(end: 16),
                       child: ArtistCircle(
@@ -60,8 +65,10 @@ class HomePage extends ConsumerWidget {
                         imageUrl: artist.artistImageUrl ?? '',
                         cacheKey: artist.id,
                         onTap: () {
-                          GoRouter.of(context).push('/artists/${artist.id}',
-                              extra: artist.name);
+                          GoRouter.of(context).push(
+                            '/artists/${artist.id}',
+                            extra: artist.name,
+                          );
                         },
                       ),
                     );
@@ -82,7 +89,13 @@ class HomePage extends ConsumerWidget {
               children: [
                 Text("Albums", style: Theme.of(context).textTheme.titleMedium),
                 IconButton(
-                    icon: const Icon(CupertinoIcons.forward), onPressed: () {}),
+                  icon: const Icon(CupertinoIcons.forward),
+                  onPressed: () {
+                    GoRouter.of(context).push(
+                      '/albums?type=alphabeticalByName&title=Albums',
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -127,7 +140,11 @@ class HomePage extends ConsumerWidget {
               children: [
                 Text("Genres", style: Theme.of(context).textTheme.titleMedium),
                 IconButton(
-                    icon: const Icon(CupertinoIcons.forward), onPressed: () {}),
+                  icon: const Icon(CupertinoIcons.forward),
+                  onPressed: () {
+                    GoRouter.of(context).push('/genres');
+                  },
+                ),
               ],
             ),
           ),
@@ -174,7 +191,7 @@ class StatsCards extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final starredSongs =
+    final starred =
         ref.watch(getStarredProvider(const GetStarredRequest()));
     final frequentAlbums = ref.watch(
       getAlbumList2Provider(const GetAlbumList2Request(type: "frequent")),
@@ -192,9 +209,11 @@ class StatsCards extends ConsumerWidget {
           _buildCard(
             context,
             title: 'Starred',
-            onTap: () {},
+            onTap: () {
+              GoRouter.of(context).push('/starred');
+            },
             width: 250,
-            content: starredSongs.when(
+            content: starred.when(
               data: (data) {
                 final songs = data.starred?.song ?? [];
                 return Column(
@@ -227,7 +246,7 @@ class StatsCards extends ConsumerWidget {
             ),
             background: _buildArtworkGrid(
               ref,
-              starredSongs.value?.starred?.song
+              starred.value?.starred?.song
                       ?.take(4)
                       .map((song) => song.coverArt ?? '')
                       .toList() ??
@@ -240,7 +259,7 @@ class StatsCards extends ConsumerWidget {
             onTap: () {
               GoRouter.of(context).push('/albums?type=frequent&title=Frequent');
             },
-            title: 'Frequent',
+            title: 'Frequent Albums',
             width: 250,
             content: frequentAlbums.when(
               data: (data) {
@@ -281,7 +300,7 @@ class StatsCards extends ConsumerWidget {
             onTap: () {
               GoRouter.of(context).push('/albums?type=recent&title=Recent');
             },
-            title: 'Recent',
+            title: 'Recent Albums',
             width: 250,
             content: recentAlbums.when(
               data: (data) {

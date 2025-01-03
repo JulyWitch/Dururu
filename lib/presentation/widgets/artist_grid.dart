@@ -6,13 +6,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
 
-class AlbumGrid extends ConsumerWidget {
-  final List<AlbumId3> albums;
+class ArtistGrid extends ConsumerWidget {
+  final List<ArtistId3> artists;
   final bool showLoading;
 
-  const AlbumGrid({
+  const ArtistGrid({
     super.key,
-    required this.albums,
+    required this.artists,
     this.showLoading = false,
   });
 
@@ -23,15 +23,15 @@ class AlbumGrid extends ConsumerWidget {
       sliver: SliverGrid(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            if (index >= albums.length) {
+            if (index >= artists.length) {
               return const Center(
                 child: LoadingIndicator(),
               );
             }
 
-            final album = albums[index];
+            final artist = artists[index];
             return GestureDetector(
-              onTap: () => GoRouter.of(context).push('/albums/${album.id}'),
+              onTap: () => GoRouter.of(context).push('/artists/${artist.id}', extra: artist.name),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -41,27 +41,27 @@ class AlbumGrid extends ConsumerWidget {
                       child: CachedNetworkImage(
                         imageUrl: ref.watch(
                           getCoverArtProvider(
-                            GetCoverArtRequest(id: album.coverArt),
+                            GetCoverArtRequest(id: artist.coverArt),
                           ),
                         ),
-                        cacheKey: GetCoverArtRequest(id: album.coverArt)
+                        cacheKey: GetCoverArtRequest(id: artist.coverArt)
                             .hashCode
                             .toString(),
                         fit: BoxFit.cover,
                         errorWidget: (context, url, error) =>
-                            const Icon(Icons.album),
+                            const Icon(Icons.person),
                       ),
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    album.name,
+                    artist.name,
                     style: Theme.of(context).textTheme.titleSmall,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    album.year?.toString() ?? '',
+                    "${artist.albumCount} Albums",
                     style: Theme.of(context).textTheme.bodySmall,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -70,7 +70,7 @@ class AlbumGrid extends ConsumerWidget {
               ),
             );
           },
-          childCount: albums.length + (showLoading ? 1 : 0),
+          childCount: artists.length + (showLoading ? 1 : 0),
         ),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,

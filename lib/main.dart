@@ -1,11 +1,13 @@
 import 'package:dururu/presentation/album.dart';
 import 'package:dururu/presentation/album_list.dart';
 import 'package:dururu/presentation/artist.dart';
-import 'package:dururu/presentation/full_size_player.dart';
+import 'package:dururu/presentation/artist_list.dart';
 import 'package:dururu/presentation/genre.dart';
+import 'package:dururu/presentation/genre_list.dart';
 import 'package:dururu/presentation/login.dart';
 import 'package:dururu/presentation/main.dart';
 import 'package:dururu/presentation/queue.dart';
+import 'package:dururu/presentation/starrted.dart';
 import 'package:dururu/presentation/widgets/player_bar.dart';
 import 'package:dururu/providers/auth.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +58,10 @@ class _MyAppState extends ConsumerState<MyApp> {
             ),
           ),
           GoRoute(
+            path: '/genres',
+            builder: (context, state) => const GenreListPage(),
+          ),
+          GoRoute(
             path: '/genres/:genre',
             builder: (context, state) => GenrePage(
               genre: state.pathParameters['genre']!,
@@ -69,6 +75,10 @@ class _MyAppState extends ConsumerState<MyApp> {
             ),
           ),
           GoRoute(
+            path: '/artists',
+            builder: (context, state) => const ArtistListPage(),
+          ),
+          GoRoute(
             path: '/albums',
             builder: (context, state) => AlbumListPage(
               type: state.uri.queryParameters['type']!,
@@ -78,6 +88,10 @@ class _MyAppState extends ConsumerState<MyApp> {
           GoRoute(
             path: '/queue',
             builder: (context, state) => const QueuePage(),
+          ),
+          GoRoute(
+            path: '/starred',
+            builder: (context, state) => const StarredPage(),
           ),
         ],
       ),

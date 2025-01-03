@@ -66,6 +66,8 @@ class _PlayerBarShellLayoutState extends ConsumerState<PlayerBarShellLayout>
 
   @override
   Widget build(BuildContext context) {
+    final currentSong = ref.watch(currentSongProvider);
+
     return BackButtonListener(
       onBackButtonPressed: () async {
         if (isExpanded) {
@@ -86,50 +88,50 @@ class _PlayerBarShellLayoutState extends ConsumerState<PlayerBarShellLayout>
               onNotification: (notification) {
                 return true;
               },
-              child: DraggableScrollableSheet(
-                controller: _dragController,
-                initialChildSize: getPlayerBarSize(),
-                minChildSize: getPlayerBarSize(),
-                maxChildSize: 1.0,
-                snap: true,
-                builder: (context, scrollController) {
-                  return SingleChildScrollView(
-                    controller: scrollController,
-                    child: Column(
-                      children: [
-                        // Animated player content
-                        AnimatedBuilder(
-                          animation: _animationController,
-                          builder: (context, child) {
-                            return Stack(
-                              children: [
-                                Opacity(
-                                  opacity: _animationController.value,
-                                  child: _buildFullScreenPlayer(),
-                                ),
+              child: Visibility(
+                visible: currentSong != null,
+                child: DraggableScrollableSheet(
+                  controller: _dragController,
+                  initialChildSize: getPlayerBarSize(),
+                  minChildSize: getPlayerBarSize(),
+                  maxChildSize: 1.0,
+                  snap: true,
+                  builder: (context, scrollController) {
+                    return SingleChildScrollView(
+                      controller: scrollController,
+                      child: AnimatedBuilder(
+                        animation: _animationController,
+                        builder: (context, child) {
+                          return Stack(
+                            children: [
+                              Opacity(
+                                opacity: _animationController.value,
+                                child: _animationController.value == 0
+                                    ? null
+                                    : _buildFullScreenPlayer(),
+                              ),
 
-                                // Mini player
-                                Opacity(
-                                  opacity: 1 -
-                                      (_animationController.value * 4)
-                                          .clamp(0, 1),
-                                  child: SizedBox(
-                                    height: 96 +
-                                        _animationController.value
-                                                .clamp(0, 0.4) *
-                                            100,
-                                    child:
-                                        isExpanded ? null : _buildMiniPlayer(),
-                                  ),
+                              // Mini player
+                              Opacity(
+                                opacity: 1 -
+                                    (_animationController.value * 4)
+                                        .clamp(0, 1),
+                                child: SizedBox(
+                                  height: 96 +
+                                      _animationController.value
+                                              .clamp(0, 0.4) *
+                                          100,
+                                  child:
+                                      isExpanded ? null : _buildMiniPlayer(),
                                 ),
-                              ],
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ],
@@ -177,7 +179,9 @@ class _BottomPlayerState extends ConsumerState<WavePlayerBar> {
 
   @override
   Widget build(BuildContext context) {
-    final audio = ref.watch(audioProvider);
+    final currentSong = ref.watch(currentSongProvider);
+    final isPlaying = ref.watch(isPlayingProvider);
+    final queue = ref.watch(queueProvider);
 
     ref.listen(currentSongProvider, (prev, next) async {
       final index = ref.read(audioProvider.notifier).currentIndex ?? -1;
@@ -191,7 +195,7 @@ class _BottomPlayerState extends ConsumerState<WavePlayerBar> {
       }
     });
 
-    if (audio.currentSong == null) {
+    if (currentSong == null) {
       return const SizedBox();
     }
 
@@ -203,7 +207,7 @@ class _BottomPlayerState extends ConsumerState<WavePlayerBar> {
           top: 8,
           left: 65,
           right: 25,
-          child: backgroundWaves(context, audio.isPlaying),
+          child: backgroundWaves(context, isPlaying),
         ),
         Positioned(
           left: 25,
@@ -212,44 +216,42 @@ class _BottomPlayerState extends ConsumerState<WavePlayerBar> {
           bottom: 0,
           child: Row(
             children: [
-              CircularPercentIndicator(
-                radius: 45,
-                lineWidth: 3.0,
-                percent: (audio.position.inMicroseconds /
-                        audio.duration.inMicroseconds)
-                    .clamp(0, 1),
-                fillColor: Colors.transparent,
-                backgroundWidth: 8,
-                backgroundColor: Theme.of(context).colorScheme.surfaceDim,
-                center: Builder(
-                  builder: (_) {
-                    if (audio.currentSong == null) {
-                      return const LoadingIndicator();
-                    }
-                    return CircleAvatar(
-                      radius: 40,
-                      backgroundImage: CachedNetworkImageProvider(
-                        ref.watch(
-                          getCoverArtProvider(
-                            GetCoverArtRequest(id: audio.currentSong!.coverArt),
-                          ),
-                        ),
-                        cacheKey: GetCoverArtRequest(
-                          id: audio.currentSong!.coverArt,
-                        ).hashCode.toString(),
+              Consumer(
+                builder: (context, ref, child) {
+                  return CircularPercentIndicator(
+                    radius: 45,
+                    lineWidth: 3.0,
+                    percent: (ref.watch(positionProvider).inMicroseconds /
+                            ref.watch(durationProvider).inMicroseconds)
+                        .clamp(0, 1),
+                    fillColor: Colors.transparent,
+                    backgroundWidth: 8,
+                    backgroundColor: Theme.of(context).colorScheme.surfaceDim,
+                    center: child,
+                    progressColor: Colors.red,
+                  );
+                },
+                child: CircleAvatar(
+                  radius: 40,
+                  backgroundImage: CachedNetworkImageProvider(
+                    ref.watch(
+                      GetCoverArtProvider(
+                        GetCoverArtRequest(id: currentSong.coverArt),
                       ),
-                    );
-                  },
+                    ),
+                    cacheKey: GetCoverArtRequest(
+                      id: currentSong.coverArt,
+                    ).hashCode.toString(),
+                  ),
                 ),
-                progressColor: Colors.red,
               ),
               Expanded(
                 child: CarouselSlider.builder(
-                  itemCount: audio.queue.length,
+                  itemCount: queue.length,
                   options: CarouselOptions(
                       enlargeCenterPage: true,
                       viewportFraction: 0.9,
-                      initialPage: audio.queue.indexOf(audio.currentSong!),
+                      initialPage: queue.indexOf(currentSong),
                       enableInfiniteScroll: false,
                       onPageChanged: (i, reason) {
                         if (reason == CarouselPageChangedReason.manual) {
@@ -258,7 +260,7 @@ class _BottomPlayerState extends ConsumerState<WavePlayerBar> {
                       }),
                   carouselController: carouselController,
                   itemBuilder: (_, i, ri) {
-                    final song = audio.queue[i];
+                    final song = queue[i];
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -286,7 +288,7 @@ class _BottomPlayerState extends ConsumerState<WavePlayerBar> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(7.5),
-                  child: audio.isPlaying
+                  child: isPlaying
                       ? const Icon(CupertinoIcons.pause, size: 30)
                       : const Icon(CupertinoIcons.play_arrow, size: 30),
                 ),
