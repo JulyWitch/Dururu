@@ -105,4 +105,4 @@ Stay tuned for updates, and let’s create the ultimate music experience for Sub
 
 ---
 
-_**Dururu: Your music, your way. Always.**_ 🎧
+_**Dururu**_ 🎧
