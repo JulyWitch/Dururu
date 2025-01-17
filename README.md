@@ -64,17 +64,16 @@ Here's a sneak peek at what’s done and what’s cooking:
 - UI: Explore
 - UI: Implement search by keyword
 - UI: [Pend by the fastest icons search engine] Show instrument icons for different genres
+- UI: Full size cover page when tapping on it
 
 #### 🛠️ **In Progress**
 
-- UI: Song details
-- Scrobble
-
 - UI: Playlists page
 - UI: Playlist songs page
-- UI: Add play and shuffle button in album page
 - UI: Add favorite song button in full size player
+- UI: Add play and shuffle button in album page
 - UI: Add duration and position to full size player
+- Scrobble
 - Launcher icon
 - Do something for connection errors
 - R&D for offline mode

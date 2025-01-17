@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dururu/presentation/full_size_image.dart';
 import 'package:dururu/providers/audio.dart';
 import 'package:dururu/providers/subsonic_apis.dart';
 import 'package:flutter/material.dart';
@@ -38,17 +39,36 @@ class _PlayerState extends ConsumerState<FullSizePlayer> {
                 ),
               ],
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: CachedNetworkImage(
-                imageUrl: ref.watch(
-                  getCoverArtProvider(
-                    GetCoverArtRequest(id: currentSong?.coverArt),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context, rootNavigator: true).push(
+                  MaterialPageRoute(
+                    builder: (context) => FullSizeImage(
+                      imageUrl: ref.read(
+                        getCoverArtProvider(
+                          GetCoverArtRequest(
+                            id: currentSong?.coverArt,
+                            size: 2160,
+                          ),
+                        ),
+                      ),
+                    ),
+                    fullscreenDialog: true,
                   ),
+                );
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: CachedNetworkImage(
+                  imageUrl: ref.watch(
+                    getCoverArtProvider(
+                      GetCoverArtRequest(id: currentSong?.coverArt),
+                    ),
+                  ),
+                  cacheKey: GetCoverArtRequest(id: currentSong?.coverArt)
+                      .hashCode
+                      .toString(),
                 ),
-                cacheKey: GetCoverArtRequest(id: currentSong?.coverArt)
-                    .hashCode
-                    .toString(),
               ),
             ),
           ),
@@ -186,7 +206,7 @@ class _PlayerState extends ConsumerState<FullSizePlayer> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    PositionSlider(),
+                    const PositionSlider(),
                     const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

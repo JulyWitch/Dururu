@@ -6,6 +6,7 @@ import 'package:dururu/presentation/genre.dart';
 import 'package:dururu/presentation/genre_list.dart';
 import 'package:dururu/presentation/login.dart';
 import 'package:dururu/presentation/main.dart';
+import 'package:dururu/presentation/playlist.dart';
 import 'package:dururu/presentation/queue.dart';
 import 'package:dururu/presentation/starred.dart';
 import 'package:dururu/presentation/widgets/player_bar.dart';
@@ -92,6 +93,12 @@ class _MyAppState extends ConsumerState<MyApp> {
           GoRoute(
             path: '/starred',
             builder: (context, state) => const StarredPage(),
+          ),
+          GoRoute(
+            path: '/playlists/:playlistId',
+            builder: (context, state) => PlaylistPage(
+              playlistId: state.pathParameters['playlistId']!,
+            ),
           ),
         ],
       ),

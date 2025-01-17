@@ -4,6 +4,7 @@ import 'package:dururu/presentation/widgets/album_square.dart';
 import 'package:dururu/presentation/widgets/artist_circle.dart';
 import 'package:dururu/presentation/widgets/genre_badge.dart';
 import 'package:dururu/presentation/widgets/loading_indicator.dart';
+import 'package:dururu/presentation/widgets/playlist_badge.dart';
 import 'package:dururu/providers/subsonic_apis.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +21,61 @@ class HomePage extends ConsumerWidget {
       getAlbumListProvider(const GetAlbumListRequest(type: "recent")),
     );
     final genres = ref.watch(getGenresProvider);
+    final playlists = ref.watch(
+      getPlaylistsProvider(
+        const GetPlaylistsRequest(),
+      ),
+    );
 
     return Scaffold(
       body: ListView(
         children: [
           const StatsCards(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Playlists",
+                    style: Theme.of(context).textTheme.titleMedium),
+                IconButton(
+                  icon: const Icon(CupertinoIcons.forward),
+                  onPressed: () {
+                    GoRouter.of(context).push('/playlists');
+                  },
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 80,
+            child: playlists.when(
+              data: (data) {
+                final flatData = data.playlists?.playlist ?? [];
+
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  itemCount: flatData.length,
+                  itemBuilder: (context, i) {
+                    final pl = flatData[i];
+
+                    return Padding(
+                      padding: const EdgeInsetsDirectional.only(end: 16),
+                      child: PlaylistBadge(
+                        pl: pl,
+                      ),
+                    );
+                  },
+                );
+              },
+              error: (error, stack) => const Text("Error"),
+              loading: () => const Center(
+                child: LoadingIndicator(),
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
             child: Row(
