@@ -7,7 +7,7 @@ import 'package:dururu/presentation/genre_list.dart';
 import 'package:dururu/presentation/login.dart';
 import 'package:dururu/presentation/main.dart';
 import 'package:dururu/presentation/queue.dart';
-import 'package:dururu/presentation/starrted.dart';
+import 'package:dururu/presentation/starred.dart';
 import 'package:dururu/presentation/widgets/player_bar.dart';
 import 'package:dururu/providers/auth.dart';
 import 'package:flutter/material.dart';

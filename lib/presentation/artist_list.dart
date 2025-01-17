@@ -134,6 +134,9 @@ class _ArtistListPageState extends ConsumerState<ArtistListPage> {
             artists: artistState.items,
             showLoading: artistState.isLoading,
           ),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 120),
+          ),
         ],
       ),
     );

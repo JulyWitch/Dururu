@@ -1,9 +1,10 @@
 import 'package:dururu/presentation/widgets/album_grid.dart';
 import 'package:dururu/presentation/widgets/artist_grid.dart';
 import 'package:dururu/presentation/widgets/loading_indicator.dart';
+import 'package:dururu/presentation/widgets/song_trailing.dart';
 import 'package:dururu/providers/audio.dart';
 import 'package:dururu/providers/subsonic_apis.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:dururu/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -44,44 +45,45 @@ class _StarredPageState extends ConsumerState<StarredPage> {
                       ),
                     ),
                   ),
-                  const Positioned(
-                    left: 16,
-                    right: 16,
-                    bottom: 48,
-                    child: Text(
-                      'Starred',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
                   Positioned(
                     left: 16,
                     right: 16,
                     bottom: 16,
-                    child: SegmentedButton<ResourceType>(
-                      segments: const [
-                        ButtonSegment(
-                          value: ResourceType.songs,
-                          label: Text('Songs'),
+                    child: Column(
+                      spacing: 8,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Starred',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        ButtonSegment(
-                          value: ResourceType.albums,
-                          label: Text('Albums'),
-                        ),
-                        ButtonSegment(
-                          value: ResourceType.artists,
-                          label: Text('Artists'),
+                        SegmentedButton<ResourceType>(
+                          segments: const [
+                            ButtonSegment(
+                              value: ResourceType.songs,
+                              label: Text('Songs'),
+                            ),
+                            ButtonSegment(
+                              value: ResourceType.albums,
+                              label: Text('Albums'),
+                            ),
+                            ButtonSegment(
+                              value: ResourceType.artists,
+                              label: Text('Artists'),
+                            ),
+                          ],
+                          selected: {selectedResource},
+                          onSelectionChanged: (Set<ResourceType> selection) {
+                            setState(() {
+                              selectedResource = selection.first;
+                            });
+                          },
                         ),
                       ],
-                      selected: {selectedResource},
-                      onSelectionChanged: (Set<ResourceType> selection) {
-                        setState(() {
-                          selectedResource = selection.first;
-                        });
-                      },
                     ),
                   ),
                 ],
@@ -114,11 +116,13 @@ class _StarredPageState extends ConsumerState<StarredPage> {
                           child: CachedNetworkImage(
                             imageUrl: ref.watch(
                               getCoverArtProvider(
-                                  GetCoverArtRequest(id: song.coverArt)),
+                                GetCoverArtRequest(id: song.coverArt, size: 48),
+                              ),
                             ),
-                            cacheKey: GetCoverArtRequest(id: song.coverArt)
-                                .hashCode
-                                .toString(),
+                            cacheKey:
+                                GetCoverArtRequest(id: song.coverArt, size: 48)
+                                    .hashCode
+                                    .toString(),
                             width: 48,
                             height: 48,
                             fit: BoxFit.cover,
@@ -129,17 +133,15 @@ class _StarredPageState extends ConsumerState<StarredPage> {
                                 const Icon(Icons.album),
                           ),
                         ),
-                        title: Text(song.title),
+                        title: Text(
+                          song.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                         subtitle: Text(
-                          Duration(seconds: song.duration ?? 0)
-                              .toString()
-                              .split('.')
-                              .first,
+                          formatSongDuration(song.duration ?? 0),
                         ),
-                        trailing: IconButton(
-                          icon: const Icon(CupertinoIcons.ellipsis),
-                          onPressed: () {},
-                        ),
+                        trailing: SongTrailing(id: song.id),
                         onTap: () {
                           ref
                               .read(audioProvider.notifier)
@@ -160,6 +162,9 @@ class _StarredPageState extends ConsumerState<StarredPage> {
               child: Center(child: LoadingIndicator()),
             );
           }),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 120),
+          ),
         ],
       ),
     );

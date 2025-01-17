@@ -137,6 +137,9 @@ class _AlbumListPageState extends ConsumerState<AlbumListPage> {
             albums: albumState.items,
             showLoading: albumState.isLoading,
           ),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 120),
+          ),
         ],
       ),
     );

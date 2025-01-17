@@ -1,6 +1,5 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:dururu/providers/auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -52,7 +51,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       return null;
                     },
                     onSaved: (v) => username = v,
-                    initialValue: kDebugMode ? 'demo' : '',
                     decoration: const InputDecoration(
                       hintText: "Username",
                       suffixIcon: Icon(Icons.person),
@@ -67,7 +65,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       return null;
                     },
                     onSaved: (v) => password = v,
-                    initialValue: kDebugMode ? 'demo' : '',
                     obscureText: true,
                     decoration: const InputDecoration(
                       hintText: "Password",
@@ -82,49 +79,82 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       }
                       return null;
                     },
-                    initialValue:
-                        kDebugMode ? 'https://demo.navidrome.org' : '',
                     onSaved: (v) => serverUrl = v,
                     decoration: const InputDecoration(
                       hintText: "Server URL",
                       suffixIcon: Icon(Icons.http),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 16),
                   FutureBuilder<void>(
-                      future: loginFuture,
-                      builder: (context, snapshot) {
-                        return FilledButton(
-                          onPressed: snapshot.connectionState ==
-                                  ConnectionState.waiting
-                              ? null
-                              : () {
-                                  if (!formKey.currentState!.validate()) return;
-                                  formKey.currentState!.save();
+                    future: loginFuture,
+                    builder: (context, snapshot) {
+                      return FilledButton(
+                        onPressed: snapshot.connectionState ==
+                                ConnectionState.waiting
+                            ? null
+                            : () {
+                                if (!formKey.currentState!.validate()) return;
+                                formKey.currentState!.save();
 
-                                  loginFuture = ref
-                                      .read(authProvider.notifier)
-                                      .login(
-                                        username: username!,
-                                        password: password!,
-                                        serverUrl: serverUrl!,
-                                      )
-                                      .catchError((e) {
-                                    debugPrint(e.toString());
-                                    AnimatedSnackBar.material(
-                                      "Failed to login, $e",
-                                      type: AnimatedSnackBarType.error,
-                                      // ignore: use_build_context_synchronously
-                                    ).show(context);
-                                  }).then((v) {
+                                loginFuture = ref
+                                    .read(authProvider.notifier)
+                                    .login(
+                                      username: username!,
+                                      password: password!,
+                                      serverUrl: serverUrl!,
+                                    )
+                                    .catchError((e) {
+                                  debugPrint(e.toString());
+                                  AnimatedSnackBar.material(
+                                    "Failed to login, $e",
+                                    type: AnimatedSnackBarType.error,
                                     // ignore: use_build_context_synchronously
-                                    GoRouter.of(context).go('/');
-                                  });
-                                  setState(() {});
-                                },
-                          child: const Text("Login"),
-                        );
-                      })
+                                  ).show(context);
+                                }).then((v) {
+                                  // ignore: use_build_context_synchronously
+                                  GoRouter.of(context).go('/');
+                                });
+                                setState(() {});
+                              },
+                        child: const Text("Login"),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  const Row(
+                    spacing: 8,
+                    children: [
+                      Expanded(child: Divider()),
+                      Text("OR"),
+                      Expanded(child: Divider()),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  FilledButton.tonal(
+                    onPressed: () {
+                      loginFuture = ref
+                          .read(authProvider.notifier)
+                          .login(
+                            username: 'demo',
+                            password: 'demo',
+                            serverUrl: 'https://demo.navidrome.org',
+                          )
+                          .catchError((e) {
+                        debugPrint(e.toString());
+                        AnimatedSnackBar.material(
+                          "Failed to login, $e",
+                          type: AnimatedSnackBarType.error,
+                          // ignore: use_build_context_synchronously
+                        ).show(context);
+                      }).then((v) {
+                        // ignore: use_build_context_synchronously
+                        GoRouter.of(context).go('/');
+                      });
+                      setState(() {});
+                    },
+                    child: const Text("Navidrome Demo Server"),
+                  ),
                 ],
               ),
             ),

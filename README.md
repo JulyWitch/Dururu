@@ -54,26 +54,36 @@ Here's a sneak peek at what’s done and what’s cooking:
 - Player bar at the bottom
 - Notifications
 - Logout and login functionality
+- Smooth position slider in full size player page
+- UI: Fix overlapping player bar with items at the end of the list
+- Refactor song list tile item
+- UI: Add small play button on album widgets
+- UI: Fix wave bug in player bar and handle reaching to end of music
+- UI: Fix touch area for play pause button
+- Fix lag when changing the song: It was saw only on mac
+- UI: Explore
 
 #### 🛠️ **In Progress**
 
-- Add more details to pages
-- Smooth image replacement after playing next or previous song
-- Smooth position slider in full size player page
+- UI: Implement search by keyword
+- UI: Song details
+- Scrobble
+
+- UI: [Pend by the fastest icons search engine] Show instrument icons for different genres
 - UI: Playlists page
 - UI: Playlist songs page
-- UI: Fix wave bug in player bar
-- UI: Showing all songs in artist page
-- UI: Add small play button on album widgets
 - UI: Add play and shuffle button in album page
-- UI: Implement search by keyword
-- UI: Add favorite songs button in full size player
-- UI: Fix overlapping player bar with items at the end of the list
-- UI: Show instrument icons for different genres
+- UI: Add favorite song button in full size player
+- UI: Add duration and position to full size player
+- Launcher icon
+- Do something for connection errors
+- R&D for offline mode
+- Add more details to pages
+- Smooth image replacement after playing next or previous song
 - Enhance login page
 - UI/UX optimizations
+- Song lists lag on mac
 - Code refactor
-- Refactor song list tile item
 
 
 ---
@@ -83,6 +93,7 @@ Here's a sneak peek at what’s done and what’s cooking:
 - Cross-platform support (iOS, Windows, macOS)
 - More UI/UX refinements
 - Advanced features like offline playback and custom themes
+- UI: Showing all songs in artist page
 
 ---
 

@@ -1,10 +1,10 @@
 import 'package:dururu/models/pagination.dart';
 import 'package:dururu/models/subsonic.dart';
 import 'package:dururu/presentation/widgets/album_grid.dart';
-import 'package:dururu/presentation/widgets/loading_indicator.dart';
+import 'package:dururu/presentation/widgets/song_trailing.dart';
 import 'package:dururu/providers/audio.dart';
 import 'package:dururu/providers/subsonic_apis.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:dururu/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -207,11 +207,13 @@ class _ArtistPageState extends ConsumerState<ArtistPage> {
                       child: CachedNetworkImage(
                         imageUrl: ref.watch(
                           getCoverArtProvider(
-                              GetCoverArtRequest(id: song.coverArt)),
+                            GetCoverArtRequest(id: song.coverArt, size: 48),
+                          ),
                         ),
-                        cacheKey: GetCoverArtRequest(id: song.coverArt)
-                            .hashCode
-                            .toString(),
+                        cacheKey:
+                            GetCoverArtRequest(id: song.coverArt, size: 48)
+                                .hashCode
+                                .toString(),
                         width: 48,
                         height: 48,
                         fit: BoxFit.cover,
@@ -221,15 +223,9 @@ class _ArtistPageState extends ConsumerState<ArtistPage> {
                     ),
                     title: Text(song.title),
                     subtitle: Text(
-                      Duration(seconds: song.duration ?? 0)
-                          .toString()
-                          .split('.')
-                          .first,
+                      formatSongDuration(song.duration ?? 0),
                     ),
-                    trailing: IconButton(
-                      icon: const Icon(CupertinoIcons.ellipsis),
-                      onPressed: () {},
-                    ),
+                    trailing: SongTrailing(id: song.id),
                     onTap: () {
                       ref
                           .read(audioProvider.notifier)
@@ -247,64 +243,17 @@ class _ArtistPageState extends ConsumerState<ArtistPage> {
               showLoading: albumState.hasMore && albumState.isLoading,
             )
           else
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  if (index >= songState.items.length) {
-                    return songState.isLoading
-                        ? const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(16),
-                              child: LoadingIndicator(),
-                            ),
-                          )
-                        : null;
-                  }
-
-                  final song = songState.items[index];
-                  return ListTile(
-                    leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
-                      child: CachedNetworkImage(
-                        imageUrl: ref.watch(
-                          getCoverArtProvider(
-                              GetCoverArtRequest(id: song.coverArt)),
-                        ),
-                        cacheKey: GetCoverArtRequest(id: song.coverArt)
-                            .hashCode
-                            .toString(),
-                        width: 48,
-                        height: 48,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => const Center(
-                          child: LoadingIndicator(),
-                        ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.album),
-                      ),
-                    ),
-                    title: Text(song.title),
-                    subtitle: Text(
-                      Duration(seconds: song.duration ?? 0)
-                          .toString()
-                          .split('.')
-                          .first,
-                    ),
-                    trailing: IconButton(
-                      icon: const Icon(CupertinoIcons.ellipsis),
-                      onPressed: () {},
-                    ),
-                    onTap: () {
-                      ref
-                          .read(audioProvider.notifier)
-                          .playQueue(songState.items, initialIndex: index);
-                    },
-                  );
-                },
-                childCount:
-                    songState.items.length + (songState.hasMore ? 1 : 0),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 200,
+                child: Center(
+                  child: Text("Coming Soon!"),
+                ),
               ),
             ),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 120),
+          ),
         ],
       ),
     );

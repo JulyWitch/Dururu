@@ -151,6 +151,7 @@ class GenreGrid extends ConsumerWidget {
           },
           childCount: genres.length + (showLoading ? 1 : 0),
         ),
+
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           childAspectRatio: 16 / 9,
           maxCrossAxisExtent: 180,

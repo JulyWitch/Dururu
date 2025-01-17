@@ -1,7 +1,9 @@
 import 'package:dururu/presentation/widgets/artist_circle.dart';
 import 'package:dururu/presentation/widgets/loading_indicator.dart';
+import 'package:dururu/presentation/widgets/song_trailing.dart';
 import 'package:dururu/providers/audio.dart';
 import 'package:dururu/providers/subsonic_apis.dart';
+import 'package:dururu/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,7 +34,6 @@ class AlbumPage extends ConsumerWidget {
         data: (data) {
           return CustomScrollView(
             slivers: [
-              // Album Cover and Info
               SliverAppBar(
                 expandedHeight: 300,
                 pinned: true,
@@ -166,12 +167,9 @@ class AlbumPage extends ConsumerWidget {
                       ),
                       title: Text(song.title),
                       subtitle: Text(
-                        '${song.artist ?? ''} • ${Duration(seconds: song.duration ?? 0).toString().split('.').first}',
+                        '${song.artist ?? ''} • ${formatSongDuration(song.duration ?? 0)}',
                       ),
-                      trailing: IconButton(
-                        icon: const Icon(CupertinoIcons.ellipsis),
-                        onPressed: () {},
-                      ),
+                      trailing: SongTrailing(id: song.id),
                       onTap: () {
                         ref
                             .read(audioProvider.notifier)
@@ -180,6 +178,11 @@ class AlbumPage extends ConsumerWidget {
                     );
                   },
                   childCount: data.album?.song?.length ?? 0,
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 120,
                 ),
               ),
             ],

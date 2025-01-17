@@ -2,9 +2,10 @@ import 'package:dururu/models/pagination.dart';
 import 'package:dururu/models/subsonic.dart';
 import 'package:dururu/presentation/widgets/album_grid.dart';
 import 'package:dururu/presentation/widgets/loading_indicator.dart';
+import 'package:dururu/presentation/widgets/song_trailing.dart';
 import 'package:dururu/providers/audio.dart';
 import 'package:dururu/providers/subsonic_apis.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:dururu/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -117,52 +118,51 @@ class GenrePageState extends ConsumerState<GenrePage> {
   }
 
   Widget buildSongList() {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          if (index >= songState.items.length) {
-            return songState.isLoading
-                ? const Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(16),
-                      child: LoadingIndicator(),
-                    ),
-                  )
-                : null;
-          }
+    return SliverList.builder(
+      itemCount: songState.items.length + (songState.hasMore ? 1 : 0),
+      itemBuilder: (context, index) {
+        if (index >= songState.items.length) {
+          return songState.isLoading
+              ? const Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: LoadingIndicator(),
+                  ),
+                )
+              : null;
+        }
 
-          final song = songState.items[index];
+        final song = songState.items[index];
 
-          return ListTile(
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(4),
-              child: CachedNetworkImage(
-                imageUrl: ref.watch(
-                  getCoverArtProvider(GetCoverArtRequest(id: song.coverArt)),
-                ),
-                width: 48,
-                height: 48,
-                fit: BoxFit.cover,
-                errorWidget: (context, url, error) => const Icon(Icons.album),
+        return ListTile(
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: CachedNetworkImage(
+              imageUrl: ref.watch(
+                getCoverArtProvider(GetCoverArtRequest(id: song.coverArt)),
               ),
+              cacheKey:
+                  GetCoverArtRequest(id: song.coverArt).hashCode.toString(),
+              width: 48,
+              height: 48,
+              fit: BoxFit.cover,
+              fadeInDuration: Duration.zero,
+              fadeOutDuration: Duration.zero,
+              errorWidget: (context, url, error) => const Icon(Icons.album),
             ),
-            title: Text(song.title),
-            subtitle: Text(
-              '${song.artist ?? ''} • ${Duration(seconds: song.duration ?? 0).toString().split('.').first}',
-            ),
-            trailing: IconButton(
-              icon: const Icon(CupertinoIcons.ellipsis),
-              onPressed: () {},
-            ),
-            onTap: () {
-              ref
-                  .read(audioProvider.notifier)
-                  .playQueue(songState.items, initialIndex: index);
-            },
-          );
-        },
-        childCount: songState.items.length + (songState.hasMore ? 1 : 0),
-      ),
+          ),
+          title: Text(song.title),
+          subtitle: Text(
+            '${song.artist ?? ''} • ${formatSongDuration(song.duration ?? 0)}',
+          ),
+          trailing: SongTrailing(id: song.id),
+          onTap: () {
+            ref
+                .read(audioProvider.notifier)
+                .playQueue(songState.items, initialIndex: index);
+          },
+        );
+      },
     );
   }
 
@@ -259,6 +259,9 @@ class GenrePageState extends ConsumerState<GenrePage> {
               albums: albumState.items,
               showLoading: albumState.isLoading,
             ),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 120),
+          ),
         ],
       ),
     );

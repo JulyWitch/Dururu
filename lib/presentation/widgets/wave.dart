@@ -344,18 +344,19 @@ class _WaveWidgetState extends State<WaveWidget> with TickerProviderStateMixin {
   }
 
   @override
-  void didUpdateWidget(covariant WaveWidget oldWidget) {
-    if (oldWidget.isPlaying && !widget.isPlaying) {
-      for (var c in _waveControllers) {
-        c.stop();
-      }
-    }
-    if (!oldWidget.isPlaying && widget.isPlaying) {
-      for (var c in _waveControllers) {
-        c.forward();
-      }
-    }
+  void didUpdateWidget(WaveWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (widget.isPlaying != oldWidget.isPlaying) {
+      if (widget.isPlaying) {
+        for (var c in _waveControllers) {
+          c.forward();
+        }
+      } else {
+        for (var c in _waveControllers) {
+          c.stop();
+        }
+      }
+    }
   }
 
   @override

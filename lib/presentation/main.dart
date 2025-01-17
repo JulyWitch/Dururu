@@ -1,6 +1,6 @@
 import 'package:dururu/presentation/drawer.dart';
+import 'package:dururu/presentation/explore.dart';
 import 'package:dururu/presentation/home.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {
@@ -22,12 +22,16 @@ class MainPage extends StatelessWidget {
       drawer: const AppDrawer(),
       body: DefaultTabController(
         length: 3,
+        initialIndex: 1,
         child: Column(
           children: [
             const SizedBox(height: 8),
             TabBar(
-              tabs:
-                  ['Home', 'Playlists', 'Browse'].map((v) => Text(v)).toList(),
+              tabs: [
+                'Connect',
+                'Home',
+                'Explore',
+              ].map((v) => Text(v)).toList(),
               dividerHeight: 0,
               labelPadding: const EdgeInsets.only(bottom: 10),
               overlayColor: WidgetStateProperty.resolveWith(
@@ -37,9 +41,9 @@ class MainPage extends StatelessWidget {
             const Expanded(
               child: TabBarView(
                 children: [
+                  Center(child: Text('Coming Soon!')),
                   HomePage(),
-                  Center(child: Text('Playlists')),
-                  Center(child: Text('Browse')),
+                  ExplorePage(),
                 ],
               ),
             ),

@@ -1,9 +1,13 @@
+import 'package:dururu/providers/audio.dart';
 import 'package:dururu/providers/subsonic_apis.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AlbumSquare extends ConsumerWidget {
+  final String id;
   final String? coverArt;
   final String name;
   final String? artistName;
@@ -14,6 +18,7 @@ class AlbumSquare extends ConsumerWidget {
 
   const AlbumSquare({
     super.key,
+    required this.id,
     required this.coverArt,
     required this.name,
     required this.artistName,
@@ -60,7 +65,6 @@ class AlbumSquare extends ConsumerWidget {
                 ),
               ),
             ),
-
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
@@ -74,36 +78,39 @@ class AlbumSquare extends ConsumerWidget {
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // Genre and Year row
                   Row(
+                    spacing: 8,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       if (genre != null)
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.black.withValues(alpha: 0.5),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Text(
-                            genre!,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelSmall
-                                ?.copyWith(
-                                  color: Colors.white.withValues(alpha: 0.8),
-                                  fontWeight: FontWeight.w500,
-                                ),
+                        Flexible(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withValues(alpha: 0.5),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              genre!,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelSmall
+                                  ?.copyWith(
+                                    color: Colors.white.withValues(alpha: 0.8),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
                           ),
                         ),
                       if (year != null)
@@ -118,29 +125,120 @@ class AlbumSquare extends ConsumerWidget {
                     ],
                   ),
                   const Spacer(),
-                  Text(
-                    name,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              name,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            if (artistName != null)
+                              Text(
+                                artistName!,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelMedium
+                                    ?.copyWith(
+                                      color:
+                                          Colors.white.withValues(alpha: 0.8),
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                          ],
                         ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  if (artistName != null)
-                    Text(
-                      artistName!,
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.8),
-                            fontWeight: FontWeight.w500,
-                          ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                      ),
+                      AlbumPlayButton(id: id)
+                    ],
+                  )
                 ],
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class AlbumPlayButton extends ConsumerStatefulWidget {
+  final String id;
+
+  const AlbumPlayButton({
+    super.key,
+    required this.id,
+  });
+
+  @override
+  ConsumerState<AlbumPlayButton> createState() => _AlbumPlayButtonState();
+}
+
+class _AlbumPlayButtonState extends ConsumerState<AlbumPlayButton> {
+  bool isLoading = false;
+
+  void _handlePress() async {
+    if (isLoading) return;
+
+    isLoading = true;
+    setState(() {});
+
+    try {
+      final songs = await ref
+          .read(
+            getAlbumProvider(
+              GetAlbumRequest(id: widget.id),
+            ).future,
+          )
+          .then((v) => v.album?.song);
+
+      if (songs?.isNotEmpty ?? false) {
+        ref.read(audioProvider.notifier).playQueue(songs!, initialIndex: 0);
+      }
+    } finally {
+      isLoading = false;
+      setState(() {});
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 40,
+      height: 40,
+      decoration: BoxDecoration(
+        color: Colors.black.withValues(alpha: 0.3),
+        shape: BoxShape.circle,
+      ),
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: _handlePress,
+        child: Center(
+          child: isLoading
+              ? const SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
+                )
+              : const Icon(
+                  CupertinoIcons.play_fill,
+                  size: 24,
+                ),
         ),
       ),
     );

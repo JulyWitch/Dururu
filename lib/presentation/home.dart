@@ -113,6 +113,7 @@ class HomePage extends ConsumerWidget {
                     return Padding(
                       padding: const EdgeInsetsDirectional.only(end: 16),
                       child: AlbumSquare(
+                        id: val.id,
                         name: val.title,
                         year: val.year,
                         artistName: val.artist,
@@ -191,8 +192,7 @@ class StatsCards extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final starred =
-        ref.watch(getStarredProvider(const GetStarredRequest()));
+    final starred = ref.watch(getStarredProvider(const GetStarredRequest()));
     final frequentAlbums = ref.watch(
       getAlbumList2Provider(const GetAlbumList2Request(type: "frequent")),
     );
@@ -413,6 +413,7 @@ class StatsCards extends ConsumerWidget {
   }
 
   Widget _buildArtworkGrid(WidgetRef ref, List<String> artworkUrls) {
+    final reversed = artworkUrls.reversed.toList();
     return LayoutBuilder(
       builder: (context, constraints) {
         final baseSize = constraints.maxWidth * 0.65; // Base size for artwork
@@ -420,7 +421,6 @@ class StatsCards extends ConsumerWidget {
         return Stack(
           alignment: Alignment.center,
           children: [
-            // We'll create overlapping albums with different rotations and scales
             for (var i = 0; i < artworkUrls.length; i++)
               Positioned(
                 left: 0,
@@ -454,9 +454,9 @@ class StatsCards extends ConsumerWidget {
                       child: CachedNetworkImage(
                         imageUrl: ref.watch(
                           getCoverArtProvider(
-                              GetCoverArtRequest(id: artworkUrls[i])),
+                              GetCoverArtRequest(id: reversed[i])),
                         ),
-                        cacheKey: GetCoverArtRequest(id: artworkUrls[i])
+                        cacheKey: GetCoverArtRequest(id: reversed[i])
                             .hashCode
                             .toString(),
                         width: baseSize,

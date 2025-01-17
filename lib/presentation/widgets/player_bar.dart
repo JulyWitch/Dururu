@@ -104,12 +104,11 @@ class _PlayerBarShellLayoutState extends ConsumerState<PlayerBarShellLayout>
                         builder: (context, child) {
                           return Stack(
                             children: [
-                              Opacity(
-                                opacity: _animationController.value,
-                                child: _animationController.value == 0
-                                    ? null
-                                    : _buildFullScreenPlayer(),
-                              ),
+                              if (_animationController.value > 0.1)
+                                Opacity(
+                                  opacity: _animationController.value,
+                                  child: _buildFullScreenPlayer(),
+                                ),
 
                               // Mini player
                               Opacity(
@@ -118,11 +117,9 @@ class _PlayerBarShellLayoutState extends ConsumerState<PlayerBarShellLayout>
                                         .clamp(0, 1),
                                 child: SizedBox(
                                   height: 96 +
-                                      _animationController.value
-                                              .clamp(0, 0.4) *
+                                      _animationController.value.clamp(0, 0.4) *
                                           100,
-                                  child:
-                                      isExpanded ? null : _buildMiniPlayer(),
+                                  child: isExpanded ? null : _buildMiniPlayer(),
                                 ),
                               ),
                             ],
@@ -211,10 +208,11 @@ class _BottomPlayerState extends ConsumerState<WavePlayerBar> {
         ),
         Positioned(
           left: 25,
-          right: 45,
+          right: 15,
           top: 0,
           bottom: 0,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Consumer(
                 builder: (context, ref, child) {
@@ -286,11 +284,17 @@ class _BottomPlayerState extends ConsumerState<WavePlayerBar> {
                 onTap: () async {
                   await ref.read(audioProvider.notifier).onTapPlayPause();
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(7.5),
-                  child: isPlaying
-                      ? const Icon(CupertinoIcons.pause, size: 30)
-                      : const Icon(CupertinoIcons.play_arrow, size: 30),
+                child: Material(
+                  // HACK: This is the bit that makes the code work
+                  // And I don't have any idea why I need to wrap the child
+                  // in a Material
+                  color: Colors.transparent,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 40, 0),
+                    child: Center(
+                      child: AnimatedPlayPauseIcon(isPlaying: isPlaying),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -334,6 +338,82 @@ class _BottomPlayerState extends ConsumerState<WavePlayerBar> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class AnimatedPlayPauseIcon extends StatefulWidget {
+  final bool isPlaying;
+
+  const AnimatedPlayPauseIcon({
+    super.key,
+    required this.isPlaying,
+  });
+
+  @override
+  State<AnimatedPlayPauseIcon> createState() => _AnimatedPlayPauseIconState();
+}
+
+class _AnimatedPlayPauseIconState extends State<AnimatedPlayPauseIcon>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late bool initialIsPlaying;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+
+    initialIsPlaying = widget.isPlaying;
+  }
+
+  @override
+  void didUpdateWidget(AnimatedPlayPauseIcon oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.isPlaying != oldWidget.isPlaying) {
+      if (widget.isPlaying) {
+        playingMode();
+      } else {
+        notPlayingMode();
+      }
+    }
+  }
+
+  void notPlayingMode() {
+    if (initialIsPlaying) {
+      controller.forward();
+      return;
+    }
+
+    controller.reverse();
+  }
+
+  void playingMode() {
+    if (initialIsPlaying) {
+      controller.reverse();
+      return;
+    }
+
+    controller.forward();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedIcon(
+      icon: initialIsPlaying
+          ? AnimatedIcons.pause_play
+          : AnimatedIcons.play_pause,
+      progress: controller,
+      size: 30,
     );
   }
 }

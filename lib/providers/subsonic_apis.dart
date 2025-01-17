@@ -18,11 +18,9 @@ class IntroductionRequest with _$IntroductionRequest {
     dynamic s,
     required dynamic v,
     required dynamic c,
-@Default("xml")
-    dynamic f,
+    @Default("xml") dynamic f,
   }) = _IntroductionRequest;
 }
-
 
 /// The Subsonic API allows anyone to build their own programs using Subsonic as the media server, whether they're on the web, the desktop or on mobile devices. All the Subsonic apps are built using the Subsonic API.
 /// Feel free to join the Subsonic App Developers group for discussions, suggestions and questions.
@@ -66,11 +64,10 @@ Future<Response> introduction(Ref ref, IntroductionRequest request) {
       if (request.f != null) 'f': request.f
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/ping Since 1.0.0
 /// Used to test connectivity with the server. Takes no extra parameters.
@@ -81,14 +78,12 @@ Future<Response> ping(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/ping',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/getLicense Since 1.0.0
 /// Get details about the software license. Takes no extra parameters. Please note that access to the REST API requires that the server has a valid license (after a 30-day trial period). To get a license key you must upgrade to Subsonic Premium.
@@ -99,14 +94,12 @@ Future<Response> getLicense(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getLicense',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/getMusicFolders Since 1.0.0
 /// Returns all configured top-level music folders. Takes no extra parameters.
@@ -117,11 +110,11 @@ Future<Response> getMusicFolders(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getMusicFolders',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -131,7 +124,6 @@ class GetIndexesRequest with _$GetIndexesRequest {
     dynamic ifModifiedSince,
   }) = _GetIndexesRequest;
 }
-
 
 /// http://your-server/rest/getIndexes Since 1.0.0
 /// Returns an indexed structure of all artists.
@@ -145,11 +137,13 @@ Future<Response> getIndexes(Ref ref, GetIndexesRequest request) {
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
       if (request.musicFolderId != null) 'musicFolderId': request.musicFolderId,
-      if (request.ifModifiedSince != null) 'ifModifiedSince': request.ifModifiedSince
+      if (request.ifModifiedSince != null)
+        'ifModifiedSince': request.ifModifiedSince
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -158,7 +152,6 @@ class GetMusicDirectoryRequest with _$GetMusicDirectoryRequest {
     required dynamic id,
   }) = _GetMusicDirectoryRequest;
 }
-
 
 /// http://your-server/rest/getMusicDirectory Since 1.0.0
 /// Returns a listing of all files in a music directory. Typically used to get list of albums for an artist, or list of songs for an album.
@@ -173,11 +166,10 @@ Future<Response> getMusicDirectory(Ref ref, GetMusicDirectoryRequest request) {
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/getGenres Since 1.9.0
 /// Returns all genres.
@@ -188,11 +180,11 @@ Future<Response> getGenres(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getGenres',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -201,7 +193,6 @@ class GetArtistsRequest with _$GetArtistsRequest {
     dynamic musicFolderId,
   }) = _GetArtistsRequest;
 }
-
 
 /// http://your-server/rest/getArtists Since 1.8.0
 /// Similar to getIndexes, but organizes music according to ID3 tags.
@@ -216,8 +207,9 @@ Future<Response> getArtists(Ref ref, GetArtistsRequest request) {
       if (request.musicFolderId != null) 'musicFolderId': request.musicFolderId
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -226,7 +218,6 @@ class GetArtistRequest with _$GetArtistRequest {
     required dynamic id,
   }) = _GetArtistRequest;
 }
-
 
 /// http://your-server/rest/getArtist Since 1.8.0
 /// Returns details for an artist, including a list of albums. This method organizes music according to ID3 tags.
@@ -241,8 +232,9 @@ Future<Response> getArtist(Ref ref, GetArtistRequest request) {
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -251,7 +243,6 @@ class GetAlbumRequest with _$GetAlbumRequest {
     required dynamic id,
   }) = _GetAlbumRequest;
 }
-
 
 /// http://your-server/rest/getAlbum Since 1.8.0
 /// Returns details for an album, including a list of songs. This method organizes music according to ID3 tags.
@@ -266,8 +257,9 @@ Future<Response> getAlbum(Ref ref, GetAlbumRequest request) {
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -276,7 +268,6 @@ class GetSongRequest with _$GetSongRequest {
     required dynamic id,
   }) = _GetSongRequest;
 }
-
 
 /// http://your-server/rest/getSong Since 1.8.0
 /// Returns details for a song.
@@ -291,11 +282,10 @@ Future<Response> getSong(Ref ref, GetSongRequest request) {
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/getVideos Since 1.8.0
 /// Returns all video files.
@@ -306,11 +296,11 @@ Future<Response> getVideos(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getVideos',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -319,7 +309,6 @@ class GetVideoInfoRequest with _$GetVideoInfoRequest {
     required dynamic id,
   }) = _GetVideoInfoRequest;
 }
-
 
 /// http://your-server/rest/getVideoInfo Since 1.14.0
 /// Returns details for a video, including information about available audio tracks, subtitles (captions) and conversions.
@@ -334,21 +323,19 @@ Future<Response> getVideoInfo(Ref ref, GetVideoInfoRequest request) {
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
 class GetArtistInfoRequest with _$GetArtistInfoRequest {
   const factory GetArtistInfoRequest({
     required dynamic id,
-@Default(20)
-    dynamic count,
-@Default(false)
-    dynamic includeNotPresent,
+    @Default(20) dynamic count,
+    @Default(false) dynamic includeNotPresent,
   }) = _GetArtistInfoRequest;
 }
-
 
 /// http://your-server/rest/getArtistInfo Since 1.11.0
 /// Returns artist info with biography, image URLs and similar artists, using data from last.fm.
@@ -364,24 +351,23 @@ Future<Response> getArtistInfo(Ref ref, GetArtistInfoRequest request) {
       ...ref.read(authProvider.notifier).getAuthorization(),
       'id': request.id,
       if (request.count != null) 'count': request.count,
-      if (request.includeNotPresent != null) 'includeNotPresent': request.includeNotPresent
+      if (request.includeNotPresent != null)
+        'includeNotPresent': request.includeNotPresent
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
 class GetArtistInfo2Request with _$GetArtistInfo2Request {
   const factory GetArtistInfo2Request({
     required dynamic id,
-@Default(20)
-    dynamic count,
-@Default(false)
-    dynamic includeNotPresent,
+    @Default(20) dynamic count,
+    @Default(false) dynamic includeNotPresent,
   }) = _GetArtistInfo2Request;
 }
-
 
 /// http://your-server/rest/getArtistInfo2 Since 1.11.0
 /// Similar to getArtistInfo, but organizes music according to ID3 tags.
@@ -397,11 +383,13 @@ Future<Response> getArtistInfo2(Ref ref, GetArtistInfo2Request request) {
       ...ref.read(authProvider.notifier).getAuthorization(),
       'id': request.id,
       if (request.count != null) 'count': request.count,
-      if (request.includeNotPresent != null) 'includeNotPresent': request.includeNotPresent
+      if (request.includeNotPresent != null)
+        'includeNotPresent': request.includeNotPresent
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -410,7 +398,6 @@ class GetAlbumInfoRequest with _$GetAlbumInfoRequest {
     required dynamic id,
   }) = _GetAlbumInfoRequest;
 }
-
 
 /// http://your-server/rest/getAlbumInfo Since 1.14.0
 /// Returns album notes, image URLs etc, using data from last.fm.
@@ -425,8 +412,9 @@ Future<Response> getAlbumInfo(Ref ref, GetAlbumInfoRequest request) {
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -435,7 +423,6 @@ class GetAlbumInfo2Request with _$GetAlbumInfo2Request {
     required dynamic id,
   }) = _GetAlbumInfo2Request;
 }
-
 
 /// http://your-server/rest/getAlbumInfo2 Since 1.14.0
 /// Similar to getAlbumInfo, but organizes music according to ID3 tags.
@@ -450,19 +437,18 @@ Future<Response> getAlbumInfo2(Ref ref, GetAlbumInfo2Request request) {
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
 class GetSimilarSongsRequest with _$GetSimilarSongsRequest {
   const factory GetSimilarSongsRequest({
     required dynamic id,
-@Default(50)
-    dynamic count,
+    @Default(50) dynamic count,
   }) = _GetSimilarSongsRequest;
 }
-
 
 /// http://your-server/rest/getSimilarSongs Since 1.11.0
 /// Returns a random collection of songs from the given artist and similar artists, using data from last.fm. Typically used for artist radio features.
@@ -479,19 +465,18 @@ Future<Response> getSimilarSongs(Ref ref, GetSimilarSongsRequest request) {
       if (request.count != null) 'count': request.count
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
 class GetSimilarSongs2Request with _$GetSimilarSongs2Request {
   const factory GetSimilarSongs2Request({
     required dynamic id,
-@Default(50)
-    dynamic count,
+    @Default(50) dynamic count,
   }) = _GetSimilarSongs2Request;
 }
-
 
 /// http://your-server/rest/getSimilarSongs2 Since 1.11.0
 /// Similar to getSimilarSongs, but organizes music according to ID3 tags.
@@ -508,19 +493,18 @@ Future<Response> getSimilarSongs2(Ref ref, GetSimilarSongs2Request request) {
       if (request.count != null) 'count': request.count
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
 class GetTopSongsRequest with _$GetTopSongsRequest {
   const factory GetTopSongsRequest({
     required dynamic artist,
-@Default(50)
-    dynamic count,
+    @Default(50) dynamic count,
   }) = _GetTopSongsRequest;
 }
-
 
 /// http://your-server/rest/getTopSongs Since 1.13.0
 /// Returns top songs for the given artist, using data from last.fm.
@@ -537,25 +521,23 @@ Future<Response> getTopSongs(Ref ref, GetTopSongsRequest request) {
       if (request.count != null) 'count': request.count
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
 class GetAlbumListRequest with _$GetAlbumListRequest {
   const factory GetAlbumListRequest({
     required dynamic type,
-@Default(10)
-    dynamic size,
-@Default(0)
-    dynamic offset,
+    @Default(10) dynamic size,
+    @Default(0) dynamic offset,
     dynamic fromYear,
     dynamic toYear,
     dynamic genre,
     dynamic musicFolderId,
   }) = _GetAlbumListRequest;
 }
-
 
 /// http://your-server/rest/getAlbumList Since 1.2.0
 /// Returns a list of random, newest, highest rated etc. albums. Similar to the album lists on the home page of the Subsonic web interface.
@@ -582,25 +564,23 @@ Future<Response> getAlbumList(Ref ref, GetAlbumListRequest request) {
       if (request.musicFolderId != null) 'musicFolderId': request.musicFolderId
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
 class GetAlbumList2Request with _$GetAlbumList2Request {
   const factory GetAlbumList2Request({
     required dynamic type,
-@Default(10)
-    dynamic size,
-@Default(0)
-    dynamic offset,
+    @Default(10) dynamic size,
+    @Default(0) dynamic offset,
     dynamic fromYear,
     dynamic toYear,
     dynamic genre,
     dynamic musicFolderId,
   }) = _GetAlbumList2Request;
 }
-
 
 /// http://your-server/rest/getAlbumList2 Since 1.8.0
 /// Similar to getAlbumList, but organizes music according to ID3 tags.
@@ -627,22 +607,21 @@ Future<Response> getAlbumList2(Ref ref, GetAlbumList2Request request) {
       if (request.musicFolderId != null) 'musicFolderId': request.musicFolderId
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
 class GetRandomSongsRequest with _$GetRandomSongsRequest {
   const factory GetRandomSongsRequest({
-@Default(10)
-    dynamic size,
+    @Default(10) dynamic size,
     dynamic genre,
     dynamic fromYear,
     dynamic toYear,
     dynamic musicFolderId,
   }) = _GetRandomSongsRequest;
 }
-
 
 /// http://your-server/rest/getRandomSongs Since 1.2.0
 /// Returns random songs matching the given criteria.
@@ -665,22 +644,20 @@ Future<Response> getRandomSongs(Ref ref, GetRandomSongsRequest request) {
       if (request.musicFolderId != null) 'musicFolderId': request.musicFolderId
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
 class GetSongsByGenreRequest with _$GetSongsByGenreRequest {
   const factory GetSongsByGenreRequest({
     required dynamic genre,
-@Default(10)
-    dynamic count,
-@Default(0)
-    dynamic offset,
+    @Default(10) dynamic count,
+    @Default(0) dynamic offset,
     dynamic musicFolderId,
   }) = _GetSongsByGenreRequest;
 }
-
 
 /// http://your-server/rest/getSongsByGenre Since 1.9.0
 /// Returns songs in a given genre.
@@ -701,11 +678,10 @@ Future<Response> getSongsByGenre(Ref ref, GetSongsByGenreRequest request) {
       if (request.musicFolderId != null) 'musicFolderId': request.musicFolderId
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/getNowPlaying Since 1.0.0
 /// Returns what is currently being played by all users. Takes no extra parameters.
@@ -716,11 +692,11 @@ Future<Response> getNowPlaying(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getNowPlaying',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -729,7 +705,6 @@ class GetStarredRequest with _$GetStarredRequest {
     dynamic musicFolderId,
   }) = _GetStarredRequest;
 }
-
 
 /// http://your-server/rest/getStarred Since 1.8.0
 /// Returns starred songs, albums and artists.
@@ -744,8 +719,9 @@ Future<Response> getStarred(Ref ref, GetStarredRequest request) {
       if (request.musicFolderId != null) 'musicFolderId': request.musicFolderId
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -754,7 +730,6 @@ class GetStarred2Request with _$GetStarred2Request {
     dynamic musicFolderId,
   }) = _GetStarred2Request;
 }
-
 
 /// http://your-server/rest/getStarred2 Since 1.8.0
 /// Similar to getStarred, but organizes music according to ID3 tags.
@@ -769,8 +744,9 @@ Future<Response> getStarred2(Ref ref, GetStarred2Request request) {
       if (request.musicFolderId != null) 'musicFolderId': request.musicFolderId
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -780,14 +756,11 @@ class SearchRequest with _$SearchRequest {
     dynamic album,
     dynamic title,
     dynamic any,
-@Default(20)
-    dynamic count,
-@Default(0)
-    dynamic offset,
+    @Default(20) dynamic count,
+    @Default(0) dynamic offset,
     dynamic newerThan,
   }) = _SearchRequest;
 }
-
 
 /// http://your-server/rest/search Since 1.0.0 Deprecated since 1.4.0, use search2 instead.
 /// Returns a listing of files matching the given search criteria. Supports paging through the result.
@@ -814,30 +787,24 @@ Future<Response> search(Ref ref, SearchRequest request) {
       if (request.newerThan != null) 'newerThan': request.newerThan
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
 class Search2Request with _$Search2Request {
   const factory Search2Request({
     required dynamic query,
-@Default(20)
-    dynamic artistCount,
-@Default(0)
-    dynamic artistOffset,
-@Default(20)
-    dynamic albumCount,
-@Default(0)
-    dynamic albumOffset,
-@Default(20)
-    dynamic songCount,
-@Default(0)
-    dynamic songOffset,
+    @Default(20) dynamic artistCount,
+    @Default(0) dynamic artistOffset,
+    @Default(20) dynamic albumCount,
+    @Default(0) dynamic albumOffset,
+    @Default(20) dynamic songCount,
+    @Default(0) dynamic songOffset,
     dynamic musicFolderId,
   }) = _Search2Request;
 }
-
 
 /// http://your-server/rest/search2 Since 1.4.0
 /// Returns albums, artists and songs matching the given search criteria. Supports paging through the result.
@@ -866,30 +833,24 @@ Future<Response> search2(Ref ref, Search2Request request) {
       if (request.musicFolderId != null) 'musicFolderId': request.musicFolderId
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
 class Search3Request with _$Search3Request {
   const factory Search3Request({
     required dynamic query,
-@Default(20)
-    dynamic artistCount,
-@Default(0)
-    dynamic artistOffset,
-@Default(20)
-    dynamic albumCount,
-@Default(0)
-    dynamic albumOffset,
-@Default(20)
-    dynamic songCount,
-@Default(0)
-    dynamic songOffset,
+    @Default(20) dynamic artistCount,
+    @Default(0) dynamic artistOffset,
+    @Default(20) dynamic albumCount,
+    @Default(0) dynamic albumOffset,
+    @Default(20) dynamic songCount,
+    @Default(0) dynamic songOffset,
     dynamic musicFolderId,
   }) = _Search3Request;
 }
-
 
 /// http://your-server/rest/search3 Since 1.8.0
 /// Similar to search2, but organizes music according to ID3 tags.
@@ -918,8 +879,9 @@ Future<Response> search3(Ref ref, Search3Request request) {
       if (request.musicFolderId != null) 'musicFolderId': request.musicFolderId
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -928,7 +890,6 @@ class GetPlaylistsRequest with _$GetPlaylistsRequest {
     dynamic username,
   }) = _GetPlaylistsRequest;
 }
-
 
 /// http://your-server/rest/getPlaylists Since 1.0.0
 /// Returns all playlists a user is allowed to play.
@@ -943,8 +904,9 @@ Future<Response> getPlaylists(Ref ref, GetPlaylistsRequest request) {
       if (request.username != null) 'username': request.username
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -953,7 +915,6 @@ class GetPlaylistRequest with _$GetPlaylistRequest {
     required dynamic id,
   }) = _GetPlaylistRequest;
 }
-
 
 /// http://your-server/rest/getPlaylist Since 1.0.0
 /// Returns a listing of files in a saved playlist.
@@ -968,8 +929,9 @@ Future<Response> getPlaylist(Ref ref, GetPlaylistRequest request) {
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -980,7 +942,6 @@ class CreatePlaylistRequest with _$CreatePlaylistRequest {
     dynamic songId,
   }) = _CreatePlaylistRequest;
 }
-
 
 /// http://your-server/rest/createPlaylist Since 1.2.0
 /// Creates (or updates) a playlist.
@@ -999,8 +960,9 @@ Future<Response> createPlaylist(Ref ref, CreatePlaylistRequest request) {
       if (request.songId != null) 'songId': request.songId
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1014,7 +976,6 @@ class UpdatePlaylistRequest with _$UpdatePlaylistRequest {
     dynamic songIndexToRemove,
   }) = _UpdatePlaylistRequest;
 }
-
 
 /// http://your-server/rest/updatePlaylist Since 1.8.0
 /// Updates a playlist. Only the owner of a playlist is allowed to update it.
@@ -1036,11 +997,13 @@ Future<Response> updatePlaylist(Ref ref, UpdatePlaylistRequest request) {
       if (request.comment != null) 'comment': request.comment,
       if (request.public != null) 'public': request.public,
       if (request.songIdToAdd != null) 'songIdToAdd': request.songIdToAdd,
-      if (request.songIndexToRemove != null) 'songIndexToRemove': request.songIndexToRemove
+      if (request.songIndexToRemove != null)
+        'songIndexToRemove': request.songIndexToRemove
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1049,7 +1012,6 @@ class DeletePlaylistRequest with _$DeletePlaylistRequest {
     required dynamic id,
   }) = _DeletePlaylistRequest;
 }
-
 
 /// http://your-server/rest/deletePlaylist Since 1.2.0
 /// Deletes a saved playlist.
@@ -1064,8 +1026,9 @@ Future<Response> deletePlaylist(Ref ref, DeletePlaylistRequest request) {
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1076,13 +1039,10 @@ class StreamRequest with _$StreamRequest {
     dynamic format,
     dynamic timeOffset,
     dynamic size,
-@Default(false)
-    dynamic estimateContentLength,
-@Default(false)
-    dynamic converted,
+    @Default(false) dynamic estimateContentLength,
+    @Default(false) dynamic converted,
   }) = _StreamRequest;
 }
-
 
 /// http://your-server/rest/stream Since 1.0.0
 /// Streams a given media file.
@@ -1099,18 +1059,18 @@ String stream(Ref ref, StreamRequest request) {
   final params = {
     ...ref.read(authProvider.notifier).getAuthorization(),
     'id': request.id,
-      if (request.maxBitRate != null) 'maxBitRate': request.maxBitRate,
-      if (request.format != null) 'format': request.format,
-      if (request.timeOffset != null) 'timeOffset': request.timeOffset,
-      if (request.size != null) 'size': request.size,
-      if (request.estimateContentLength != null) 'estimateContentLength': request.estimateContentLength,
-      if (request.converted != null) 'converted': request.converted
+    if (request.maxBitRate != null) 'maxBitRate': request.maxBitRate,
+    if (request.format != null) 'format': request.format,
+    if (request.timeOffset != null) 'timeOffset': request.timeOffset,
+    if (request.size != null) 'size': request.size,
+    if (request.estimateContentLength != null)
+      'estimateContentLength': request.estimateContentLength,
+    if (request.converted != null) 'converted': request.converted
   };
   final url =
       '${ref.read(authProvider).value!.serverUrl}/rest/stream?${params.entries.map((entry) => '${entry.key}=${entry.value}').join('&')}';
 
   return Uri.encodeFull(url);
- 
 }
 
 @freezed
@@ -1119,7 +1079,6 @@ class DownloadRequest with _$DownloadRequest {
     required dynamic id,
   }) = _DownloadRequest;
 }
-
 
 /// http://your-server/rest/download Since 1.0.0
 /// Downloads a given media file. Similar to stream, but this method returns the original media data without transcoding or downsampling.
@@ -1134,8 +1093,9 @@ Future<Response> download(Ref ref, DownloadRequest request) {
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1146,7 +1106,6 @@ class HlsRequest with _$HlsRequest {
     dynamic audioTrack,
   }) = _HlsRequest;
 }
-
 
 /// http://your-server/rest/hls.m3u8 Since 1.8.0
 /// Creates an HLS (HTTP Live Streaming) playlist used for streaming video or audio. HLS is a streaming protocol implemented by Apple and works by breaking the overall stream into a sequence of small HTTP-based file downloads. It's supported by iOS and newer versions of Android. This method also supports adaptive bitrate streaming, see the bitRate parameter.
@@ -1165,8 +1124,9 @@ Future<Response> hls(Ref ref, HlsRequest request) {
       if (request.audioTrack != null) 'audioTrack': request.audioTrack
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1176,7 +1136,6 @@ class GetCaptionsRequest with _$GetCaptionsRequest {
     dynamic format,
   }) = _GetCaptionsRequest;
 }
-
 
 /// http://your-server/rest/getCaptions Since 1.14.0
 /// Returns captions (subtitles) for a video. Use getVideoInfo to get a list of available captions.
@@ -1193,8 +1152,9 @@ Future<Response> getCaptions(Ref ref, GetCaptionsRequest request) {
       if (request.format != null) 'format': request.format
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1204,7 +1164,6 @@ class GetCoverArtRequest with _$GetCoverArtRequest {
     dynamic size,
   }) = _GetCoverArtRequest;
 }
-
 
 /// http://your-server/rest/getCoverArt Since 1.0.0
 /// Returns a cover art image.
@@ -1216,13 +1175,12 @@ String getCoverArt(Ref ref, GetCoverArtRequest request) {
   final params = {
     ...ref.read(authProvider.notifier).getAuthorization(),
     'id': request.id,
-      if (request.size != null) 'size': request.size
+    if (request.size != null) 'size': request.size
   };
   final url =
       '${ref.read(authProvider).value!.serverUrl}/rest/getCoverArt?${params.entries.map((entry) => '${entry.key}=${entry.value}').join('&')}';
 
   return Uri.encodeFull(url);
- 
 }
 
 @freezed
@@ -1232,7 +1190,6 @@ class GetLyricsRequest with _$GetLyricsRequest {
     dynamic title,
   }) = _GetLyricsRequest;
 }
-
 
 /// http://your-server/rest/getLyrics Since 1.2.0
 /// Searches for and returns lyrics for a given song.
@@ -1249,8 +1206,9 @@ Future<Response> getLyrics(Ref ref, GetLyricsRequest request) {
       if (request.title != null) 'title': request.title
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1259,7 +1217,6 @@ class GetAvatarRequest with _$GetAvatarRequest {
     required dynamic username,
   }) = _GetAvatarRequest;
 }
-
 
 /// http://your-server/rest/getAvatar Since 1.8.0
 /// Returns the avatar (personal image) for a user.
@@ -1274,8 +1231,9 @@ Future<Response> getAvatar(Ref ref, GetAvatarRequest request) {
       'username': request.username
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1286,7 +1244,6 @@ class StarRequest with _$StarRequest {
     dynamic artistId,
   }) = _StarRequest;
 }
-
 
 /// http://your-server/rest/star Since 1.8.0
 /// Attaches a star to a song, album or artist.
@@ -1305,8 +1262,9 @@ Future<Response> star(Ref ref, StarRequest request) {
       if (request.artistId != null) 'artistId': request.artistId
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1317,7 +1275,6 @@ class UnstarRequest with _$UnstarRequest {
     dynamic artistId,
   }) = _UnstarRequest;
 }
-
 
 /// http://your-server/rest/unstar Since 1.8.0
 /// Removes the star from a song, album or artist.
@@ -1336,8 +1293,9 @@ Future<Response> unstar(Ref ref, UnstarRequest request) {
       if (request.artistId != null) 'artistId': request.artistId
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1347,7 +1305,6 @@ class SetRatingRequest with _$SetRatingRequest {
     required dynamic rating,
   }) = _SetRatingRequest;
 }
-
 
 /// http://your-server/rest/setRating Since 1.6.0
 /// Sets the rating for a music file.
@@ -1364,8 +1321,9 @@ Future<Response> setRating(Ref ref, SetRatingRequest request) {
       'rating': request.rating
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1373,11 +1331,9 @@ class ScrobbleRequest with _$ScrobbleRequest {
   const factory ScrobbleRequest({
     required dynamic id,
     dynamic time,
-@Default("True")
-    dynamic submission,
+    @Default("True") dynamic submission,
   }) = _ScrobbleRequest;
 }
-
 
 /// http://your-server/rest/scrobble Since 1.5.0
 /// Registers the local playback of one or more media files. Typically used when playing media that is cached on the client. This operation includes the following:
@@ -1397,11 +1353,10 @@ Future<Response> scrobble(Ref ref, ScrobbleRequest request) {
       if (request.submission != null) 'submission': request.submission
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/getShares Since 1.6.0
 /// Returns information about shared media this user is allowed to manage. Takes no extra parameters.
@@ -1412,11 +1367,11 @@ Future<Response> getShares(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getShares',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1427,7 +1382,6 @@ class CreateShareRequest with _$CreateShareRequest {
     dynamic expires,
   }) = _CreateShareRequest;
 }
-
 
 /// http://your-server/rest/createShare Since 1.6.0
 /// Creates a public URL that can be used by anyone to stream music or video from the Subsonic server. The URL is short and suitable for posting on Facebook, Twitter etc. Note: The user must be authorized to share (see Settings > Users > User is allowed to share files with anyone).
@@ -1446,8 +1400,9 @@ Future<Response> createShare(Ref ref, CreateShareRequest request) {
       if (request.expires != null) 'expires': request.expires
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1458,7 +1413,6 @@ class UpdateShareRequest with _$UpdateShareRequest {
     dynamic expires,
   }) = _UpdateShareRequest;
 }
-
 
 /// http://your-server/rest/updateShare Since 1.6.0
 /// Updates the description and/or expiration date for an existing share.
@@ -1477,8 +1431,9 @@ Future<Response> updateShare(Ref ref, UpdateShareRequest request) {
       if (request.expires != null) 'expires': request.expires
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1487,7 +1442,6 @@ class DeleteShareRequest with _$DeleteShareRequest {
     required dynamic id,
   }) = _DeleteShareRequest;
 }
-
 
 /// http://your-server/rest/deleteShare Since 1.6.0
 /// Deletes an existing share.
@@ -1502,19 +1456,18 @@ Future<Response> deleteShare(Ref ref, DeleteShareRequest request) {
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
 class GetPodcastsRequest with _$GetPodcastsRequest {
   const factory GetPodcastsRequest({
-@Default(true)
-    dynamic includeEpisodes,
+    @Default(true) dynamic includeEpisodes,
     dynamic id,
   }) = _GetPodcastsRequest;
 }
-
 
 /// http://your-server/rest/getPodcasts Since 1.6.0
 /// Returns all Podcast channels the server subscribes to, and (optionally) their episodes. This method can also be used to return details for only one channel - refer to the id parameter. A typical use case for this method would be to first retrieve all channels without episodes, and then retrieve all episodes for the single channel the user selects.
@@ -1527,22 +1480,22 @@ Future<Response> getPodcasts(Ref ref, GetPodcastsRequest request) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getPodcasts',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      if (request.includeEpisodes != null) 'includeEpisodes': request.includeEpisodes,
+      if (request.includeEpisodes != null)
+        'includeEpisodes': request.includeEpisodes,
       if (request.id != null) 'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
 class GetNewestPodcastsRequest with _$GetNewestPodcastsRequest {
   const factory GetNewestPodcastsRequest({
-@Default(20)
-    dynamic count,
+    @Default(20) dynamic count,
   }) = _GetNewestPodcastsRequest;
 }
-
 
 /// http://your-server/rest/getNewestPodcasts Since 1.13.0
 /// Returns the most recently published Podcast episodes.
@@ -1557,11 +1510,10 @@ Future<Response> getNewestPodcasts(Ref ref, GetNewestPodcastsRequest request) {
       if (request.count != null) 'count': request.count
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/refreshPodcasts Since 1.9.0
 /// Requests the server to check for new Podcast episodes. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).
@@ -1572,11 +1524,11 @@ Future<Response> refreshPodcasts(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/refreshPodcasts',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1586,13 +1538,13 @@ class CreatePodcastChannelRequest with _$CreatePodcastChannelRequest {
   }) = _CreatePodcastChannelRequest;
 }
 
-
 /// http://your-server/rest/createPodcastChannel Since 1.9.0
 /// Adds a new Podcast channel. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).
 /// Returns an empty <subsonic-response> element on success.
 /// @param url The URL of the Podcast to add.
 @riverpod
-Future<Response> createPodcastChannel(Ref ref, CreatePodcastChannelRequest request) {
+Future<Response> createPodcastChannel(
+    Ref ref, CreatePodcastChannelRequest request) {
   return ref.read(dioProvider).get(
     '${ref.read(authProvider).value!.serverUrl}/rest/createPodcastChannel',
     queryParameters: {
@@ -1600,8 +1552,9 @@ Future<Response> createPodcastChannel(Ref ref, CreatePodcastChannelRequest reque
       'url': request.url
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1611,13 +1564,13 @@ class DeletePodcastChannelRequest with _$DeletePodcastChannelRequest {
   }) = _DeletePodcastChannelRequest;
 }
 
-
 /// http://your-server/rest/deletePodcastChannel Since 1.9.0
 /// Deletes a Podcast channel. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).
 /// Returns an empty <subsonic-response> element on success.
 /// @param id The ID of the Podcast channel to delete.
 @riverpod
-Future<Response> deletePodcastChannel(Ref ref, DeletePodcastChannelRequest request) {
+Future<Response> deletePodcastChannel(
+    Ref ref, DeletePodcastChannelRequest request) {
   return ref.read(dioProvider).get(
     '${ref.read(authProvider).value!.serverUrl}/rest/deletePodcastChannel',
     queryParameters: {
@@ -1625,8 +1578,9 @@ Future<Response> deletePodcastChannel(Ref ref, DeletePodcastChannelRequest reque
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1636,13 +1590,13 @@ class DeletePodcastEpisodeRequest with _$DeletePodcastEpisodeRequest {
   }) = _DeletePodcastEpisodeRequest;
 }
 
-
 /// http://your-server/rest/deletePodcastEpisode Since 1.9.0
 /// Deletes a Podcast episode. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).
 /// Returns an empty <subsonic-response> element on success.
 /// @param id The ID of the Podcast episode to delete.
 @riverpod
-Future<Response> deletePodcastEpisode(Ref ref, DeletePodcastEpisodeRequest request) {
+Future<Response> deletePodcastEpisode(
+    Ref ref, DeletePodcastEpisodeRequest request) {
   return ref.read(dioProvider).get(
     '${ref.read(authProvider).value!.serverUrl}/rest/deletePodcastEpisode',
     queryParameters: {
@@ -1650,8 +1604,9 @@ Future<Response> deletePodcastEpisode(Ref ref, DeletePodcastEpisodeRequest reque
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1661,13 +1616,13 @@ class DownloadPodcastEpisodeRequest with _$DownloadPodcastEpisodeRequest {
   }) = _DownloadPodcastEpisodeRequest;
 }
 
-
 /// http://your-server/rest/downloadPodcastEpisode Since 1.9.0
 /// Request the server to start downloading a given Podcast episode. Note: The user must be authorized for Podcast administration (see Settings > Users > User is allowed to administrate Podcasts).
 /// Returns an empty <subsonic-response> element on success.
 /// @param id The ID of the Podcast episode to download.
 @riverpod
-Future<Response> downloadPodcastEpisode(Ref ref, DownloadPodcastEpisodeRequest request) {
+Future<Response> downloadPodcastEpisode(
+    Ref ref, DownloadPodcastEpisodeRequest request) {
   return ref.read(dioProvider).get(
     '${ref.read(authProvider).value!.serverUrl}/rest/downloadPodcastEpisode',
     queryParameters: {
@@ -1675,8 +1630,9 @@ Future<Response> downloadPodcastEpisode(Ref ref, DownloadPodcastEpisodeRequest r
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1689,7 +1645,6 @@ class JukeboxControlRequest with _$JukeboxControlRequest {
     dynamic gain,
   }) = _JukeboxControlRequest;
 }
-
 
 /// http://your-server/rest/jukeboxControl Since 1.2.0
 /// Controls the jukebox, i.e., playback directly on the server's audio hardware. Note: The user must be authorized to control the jukebox (see Settings > Users > User is allowed to play files in jukebox mode).
@@ -1712,11 +1667,10 @@ Future<Response> jukeboxControl(Ref ref, JukeboxControlRequest request) {
       if (request.gain != null) 'gain': request.gain
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/getInternetRadioStations Since 1.9.0
 /// Returns all internet radio stations. Takes no extra parameters.
@@ -1727,22 +1681,22 @@ Future<Response> getInternetRadioStations(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getInternetRadioStations',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
-class CreateInternetRadioStationRequest with _$CreateInternetRadioStationRequest {
+class CreateInternetRadioStationRequest
+    with _$CreateInternetRadioStationRequest {
   const factory CreateInternetRadioStationRequest({
     required dynamic streamUrl,
     required dynamic name,
     dynamic homepageUrl,
   }) = _CreateInternetRadioStationRequest;
 }
-
 
 /// http://your-server/rest/createInternetRadioStation Since 1.16.0
 /// Adds a new internet radio station. Only users with admin privileges are allowed to call this method.
@@ -1751,7 +1705,8 @@ class CreateInternetRadioStationRequest with _$CreateInternetRadioStationRequest
 /// @param name The user-defined name for the station.
 /// @param homepageUrl The home page URL for the station.
 @riverpod
-Future<Response> createInternetRadioStation(Ref ref, CreateInternetRadioStationRequest request) {
+Future<Response> createInternetRadioStation(
+    Ref ref, CreateInternetRadioStationRequest request) {
   return ref.read(dioProvider).get(
     '${ref.read(authProvider).value!.serverUrl}/rest/createInternetRadioStation',
     queryParameters: {
@@ -1761,12 +1716,14 @@ Future<Response> createInternetRadioStation(Ref ref, CreateInternetRadioStationR
       if (request.homepageUrl != null) 'homepageUrl': request.homepageUrl
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
-class UpdateInternetRadioStationRequest with _$UpdateInternetRadioStationRequest {
+class UpdateInternetRadioStationRequest
+    with _$UpdateInternetRadioStationRequest {
   const factory UpdateInternetRadioStationRequest({
     required dynamic id,
     required dynamic streamUrl,
@@ -1774,7 +1731,6 @@ class UpdateInternetRadioStationRequest with _$UpdateInternetRadioStationRequest
     dynamic homepageUrl,
   }) = _UpdateInternetRadioStationRequest;
 }
-
 
 /// http://your-server/rest/updateInternetRadioStation Since 1.16.0
 /// Updates an existing internet radio station. Only users with admin privileges are allowed to call this method.
@@ -1784,7 +1740,8 @@ class UpdateInternetRadioStationRequest with _$UpdateInternetRadioStationRequest
 /// @param name The user-defined name for the station.
 /// @param homepageUrl The home page URL for the station.
 @riverpod
-Future<Response> updateInternetRadioStation(Ref ref, UpdateInternetRadioStationRequest request) {
+Future<Response> updateInternetRadioStation(
+    Ref ref, UpdateInternetRadioStationRequest request) {
   return ref.read(dioProvider).get(
     '${ref.read(authProvider).value!.serverUrl}/rest/updateInternetRadioStation',
     queryParameters: {
@@ -1795,24 +1752,26 @@ Future<Response> updateInternetRadioStation(Ref ref, UpdateInternetRadioStationR
       if (request.homepageUrl != null) 'homepageUrl': request.homepageUrl
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
-class DeleteInternetRadioStationRequest with _$DeleteInternetRadioStationRequest {
+class DeleteInternetRadioStationRequest
+    with _$DeleteInternetRadioStationRequest {
   const factory DeleteInternetRadioStationRequest({
     required dynamic id,
   }) = _DeleteInternetRadioStationRequest;
 }
-
 
 /// http://your-server/rest/deleteInternetRadioStation Since 1.16.0
 /// Deletes an existing internet radio station. Only users with admin privileges are allowed to call this method.
 /// Returns an empty <subsonic-response> element on success.
 /// @param id The ID for the station.
 @riverpod
-Future<Response> deleteInternetRadioStation(Ref ref, DeleteInternetRadioStationRequest request) {
+Future<Response> deleteInternetRadioStation(
+    Ref ref, DeleteInternetRadioStationRequest request) {
   return ref.read(dioProvider).get(
     '${ref.read(authProvider).value!.serverUrl}/rest/deleteInternetRadioStation',
     queryParameters: {
@@ -1820,8 +1779,9 @@ Future<Response> deleteInternetRadioStation(Ref ref, DeleteInternetRadioStationR
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1830,7 +1790,6 @@ class GetChatMessagesRequest with _$GetChatMessagesRequest {
     dynamic since,
   }) = _GetChatMessagesRequest;
 }
-
 
 /// http://your-server/rest/getChatMessages Since 1.2.0
 /// Returns the current visible (non-expired) chat messages.
@@ -1845,8 +1804,9 @@ Future<Response> getChatMessages(Ref ref, GetChatMessagesRequest request) {
       if (request.since != null) 'since': request.since
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1855,7 +1815,6 @@ class AddChatMessageRequest with _$AddChatMessageRequest {
     required dynamic message,
   }) = _AddChatMessageRequest;
 }
-
 
 /// http://your-server/rest/addChatMessage Since 1.2.0
 /// Adds a message to the chat log.
@@ -1870,8 +1829,9 @@ Future<Response> addChatMessage(Ref ref, AddChatMessageRequest request) {
       'message': request.message
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1880,7 +1840,6 @@ class GetUserRequest with _$GetUserRequest {
     required dynamic username,
   }) = _GetUserRequest;
 }
-
 
 /// http://your-server/rest/getUser Since 1.3.0
 /// Get details about a given user, including which authorization roles and folder access it has. Can be used to enable/disable certain features in the client, such as jukebox control.
@@ -1895,11 +1854,10 @@ Future<Response> getUser(Ref ref, GetUserRequest request) {
       'username': request.username
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/getUsers Since 1.8.0
 /// Get details about all users, including which authorization roles and folder access they have. Only users with admin privileges are allowed to call this method.
@@ -1910,11 +1868,11 @@ Future<Response> getUsers(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getUsers',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -1923,37 +1881,22 @@ class CreateUserRequest with _$CreateUserRequest {
     required dynamic username,
     required dynamic password,
     required dynamic email,
-@Default(false)
-    dynamic ldapAuthenticated,
-@Default(false)
-    dynamic adminRole,
-@Default(true)
-    dynamic settingsRole,
-@Default(true)
-    dynamic streamRole,
-@Default(false)
-    dynamic jukeboxRole,
-@Default(false)
-    dynamic downloadRole,
-@Default(false)
-    dynamic uploadRole,
-@Default(false)
-    dynamic playlistRole,
-@Default(false)
-    dynamic coverArtRole,
-@Default(false)
-    dynamic commentRole,
-@Default(false)
-    dynamic podcastRole,
-@Default(false)
-    dynamic shareRole,
-@Default(false)
-    dynamic videoConversionRole,
-@Default("All folders")
-    dynamic musicFolderId,
+    @Default(false) dynamic ldapAuthenticated,
+    @Default(false) dynamic adminRole,
+    @Default(true) dynamic settingsRole,
+    @Default(true) dynamic streamRole,
+    @Default(false) dynamic jukeboxRole,
+    @Default(false) dynamic downloadRole,
+    @Default(false) dynamic uploadRole,
+    @Default(false) dynamic playlistRole,
+    @Default(false) dynamic coverArtRole,
+    @Default(false) dynamic commentRole,
+    @Default(false) dynamic podcastRole,
+    @Default(false) dynamic shareRole,
+    @Default(false) dynamic videoConversionRole,
+    @Default("All folders") dynamic musicFolderId,
   }) = _CreateUserRequest;
 }
-
 
 /// http://your-server/rest/createUser Since 1.1.0
 /// Creates a new Subsonic user, using the following parameters:
@@ -1984,7 +1927,8 @@ Future<Response> createUser(Ref ref, CreateUserRequest request) {
       'username': request.username,
       'password': request.password,
       'email': request.email,
-      if (request.ldapAuthenticated != null) 'ldapAuthenticated': request.ldapAuthenticated,
+      if (request.ldapAuthenticated != null)
+        'ldapAuthenticated': request.ldapAuthenticated,
       if (request.adminRole != null) 'adminRole': request.adminRole,
       if (request.settingsRole != null) 'settingsRole': request.settingsRole,
       if (request.streamRole != null) 'streamRole': request.streamRole,
@@ -1996,12 +1940,14 @@ Future<Response> createUser(Ref ref, CreateUserRequest request) {
       if (request.commentRole != null) 'commentRole': request.commentRole,
       if (request.podcastRole != null) 'podcastRole': request.podcastRole,
       if (request.shareRole != null) 'shareRole': request.shareRole,
-      if (request.videoConversionRole != null) 'videoConversionRole': request.videoConversionRole,
+      if (request.videoConversionRole != null)
+        'videoConversionRole': request.videoConversionRole,
       if (request.musicFolderId != null) 'musicFolderId': request.musicFolderId
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -2021,13 +1967,11 @@ class UpdateUserRequest with _$UpdateUserRequest {
     dynamic commentRole,
     dynamic podcastRole,
     dynamic shareRole,
-@Default(false)
-    dynamic videoConversionRole,
+    @Default(false) dynamic videoConversionRole,
     dynamic musicFolderId,
     dynamic maxBitRate,
   }) = _UpdateUserRequest;
 }
-
 
 /// http://your-server/rest/updateUser Since 1.10.1
 /// Modifies an existing Subsonic user, using the following parameters:
@@ -2058,7 +2002,8 @@ Future<Response> updateUser(Ref ref, UpdateUserRequest request) {
       'username': request.username,
       if (request.password != null) 'password': request.password,
       if (request.email != null) 'email': request.email,
-      if (request.ldapAuthenticated != null) 'ldapAuthenticated': request.ldapAuthenticated,
+      if (request.ldapAuthenticated != null)
+        'ldapAuthenticated': request.ldapAuthenticated,
       if (request.adminRole != null) 'adminRole': request.adminRole,
       if (request.settingsRole != null) 'settingsRole': request.settingsRole,
       if (request.streamRole != null) 'streamRole': request.streamRole,
@@ -2069,13 +2014,15 @@ Future<Response> updateUser(Ref ref, UpdateUserRequest request) {
       if (request.commentRole != null) 'commentRole': request.commentRole,
       if (request.podcastRole != null) 'podcastRole': request.podcastRole,
       if (request.shareRole != null) 'shareRole': request.shareRole,
-      if (request.videoConversionRole != null) 'videoConversionRole': request.videoConversionRole,
+      if (request.videoConversionRole != null)
+        'videoConversionRole': request.videoConversionRole,
       if (request.musicFolderId != null) 'musicFolderId': request.musicFolderId,
       if (request.maxBitRate != null) 'maxBitRate': request.maxBitRate
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -2084,7 +2031,6 @@ class DeleteUserRequest with _$DeleteUserRequest {
     required dynamic username,
   }) = _DeleteUserRequest;
 }
-
 
 /// http://your-server/rest/deleteUser Since 1.3.0
 /// Deletes an existing Subsonic user, using the following parameters:
@@ -2099,8 +2045,9 @@ Future<Response> deleteUser(Ref ref, DeleteUserRequest request) {
       'username': request.username
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -2110,7 +2057,6 @@ class ChangePasswordRequest with _$ChangePasswordRequest {
     required dynamic password,
   }) = _ChangePasswordRequest;
 }
-
 
 /// http://your-server/rest/changePassword Since 1.1.0
 /// Changes the password of an existing Subsonic user, using the following parameters. You can only change your own password unless you have admin privileges.
@@ -2127,11 +2073,10 @@ Future<Response> changePassword(Ref ref, ChangePasswordRequest request) {
       'password': request.password
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/getBookmarks Since 1.9.0
 /// Returns all bookmarks for this user. A bookmark is a position within a certain media file.
@@ -2142,11 +2087,11 @@ Future<Response> getBookmarks(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getBookmarks',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -2157,7 +2102,6 @@ class CreateBookmarkRequest with _$CreateBookmarkRequest {
     dynamic comment,
   }) = _CreateBookmarkRequest;
 }
-
 
 /// http://your-server/rest/createBookmark Since 1.9.0
 /// Creates or updates a bookmark (a position within a media file). Bookmarks are personal and not visible to other users.
@@ -2176,8 +2120,9 @@ Future<Response> createBookmark(Ref ref, CreateBookmarkRequest request) {
       if (request.comment != null) 'comment': request.comment
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -2186,7 +2131,6 @@ class DeleteBookmarkRequest with _$DeleteBookmarkRequest {
     required dynamic id,
   }) = _DeleteBookmarkRequest;
 }
-
 
 /// http://your-server/rest/deleteBookmark Since 1.9.0
 /// Deletes the bookmark for a given file.
@@ -2201,11 +2145,10 @@ Future<Response> deleteBookmark(Ref ref, DeleteBookmarkRequest request) {
       'id': request.id
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/getPlayQueue Since 1.12.0
 /// Returns the state of the play queue for this user (as set by savePlayQueue). This includes the tracks in the play queue, the currently playing track, and the position within this track. Typically used to allow a user to move between different clients/apps while retaining the same play queue (for instance when listening to an audio book).
@@ -2216,11 +2159,11 @@ Future<Response> getPlayQueue(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getPlayQueue',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
 
 @freezed
@@ -2231,7 +2174,6 @@ class SavePlayQueueRequest with _$SavePlayQueueRequest {
     dynamic position,
   }) = _SavePlayQueueRequest;
 }
-
 
 /// http://your-server/rest/savePlayQueue Since 1.12.0
 /// Saves the state of the play queue for this user. This includes the tracks in the play queue, the currently playing track, and the position within this track. Typically used to allow a user to move between different clients/apps while retaining the same play queue (for instance when listening to an audio book).
@@ -2250,11 +2192,10 @@ Future<Response> savePlayQueue(Ref ref, SavePlayQueueRequest request) {
       if (request.position != null) 'position': request.position
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/getScanStatus Since 1.15.0
 /// Returns the current status for media library scanning. Takes no extra parameters.
@@ -2265,14 +2206,12 @@ Future<Response> getScanStatus(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/getScanStatus',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-
-
 
 /// http://your-server/rest/startScan Since 1.15.0
 /// Initiates a rescan of the media libraries. Takes no extra parameters.
@@ -2283,10 +2222,9 @@ Future<Response> startScan(Ref ref) {
     '${ref.read(authProvider).value!.serverUrl}/rest/startScan',
     queryParameters: {
       ...ref.read(authProvider.notifier).getAuthorization(),
-      
     },
   ).then(
-    (value) => Response.fromJson(value.data['subsonic-response'] as Map<String, dynamic>),
-    );
+    (value) => Response.fromJson(
+        value.data['subsonic-response'] as Map<String, dynamic>),
+  );
 }
-

@@ -1,4 +1,5 @@
 import 'package:dururu/models/subsonic.dart';
+import 'package:dururu/presentation/widgets/album_square.dart';
 import 'package:dururu/presentation/widgets/loading_indicator.dart';
 import 'package:dururu/providers/subsonic_apis.dart';
 import 'package:flutter/material.dart';
@@ -38,18 +39,27 @@ class AlbumGrid extends ConsumerWidget {
                   Expanded(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: CachedNetworkImage(
-                        imageUrl: ref.watch(
-                          getCoverArtProvider(
-                            GetCoverArtRequest(id: album.coverArt),
+                      child: Stack(
+                        children: [
+                          CachedNetworkImage(
+                            imageUrl: ref.watch(
+                              getCoverArtProvider(
+                                GetCoverArtRequest(id: album.coverArt),
+                              ),
+                            ),
+                            cacheKey: GetCoverArtRequest(id: album.coverArt)
+                                .hashCode
+                                .toString(),
+                            fit: BoxFit.cover,
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.album),
                           ),
-                        ),
-                        cacheKey: GetCoverArtRequest(id: album.coverArt)
-                            .hashCode
-                            .toString(),
-                        fit: BoxFit.cover,
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.album),
+                          Positioned(
+                            right: 8,
+                            bottom: 16,
+                            child: AlbumPlayButton(id: album.id),
+                          ),
+                        ],
                       ),
                     ),
                   ),

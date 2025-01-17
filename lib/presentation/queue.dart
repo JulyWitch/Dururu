@@ -1,5 +1,6 @@
 import 'package:dururu/providers/audio.dart';
 import 'package:dururu/providers/subsonic_apis.dart';
+import 'package:dururu/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -134,11 +135,13 @@ class QueuePage extends ConsumerWidget {
                           child: CachedNetworkImage(
                             imageUrl: ref.watch(
                               getCoverArtProvider(
-                                  GetCoverArtRequest(id: song.coverArt)),
+                                GetCoverArtRequest(id: song.coverArt, size: 48),
+                              ),
                             ),
-                            cacheKey: GetCoverArtRequest(id: song.coverArt)
-                                .hashCode
-                                .toString(),
+                            cacheKey:
+                                GetCoverArtRequest(id: song.coverArt, size: 48)
+                                    .hashCode
+                                    .toString(),
                             width: 48,
                             height: 48,
                             fit: BoxFit.cover,
@@ -168,7 +171,7 @@ class QueuePage extends ConsumerWidget {
                           : null,
                     ),
                     subtitle: Text(
-                      '${song.artist ?? ''} • ${Duration(seconds: song.duration ?? 0).toString().split('.').first}',
+                      '${song.artist ?? ''} • ${formatSongDuration(song.duration ?? 0)}',
                     ),
                     trailing: ReorderableDragStartListener(
                       index: index,
@@ -184,6 +187,9 @@ class QueuePage extends ConsumerWidget {
                 );
               },
             ),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 120),
+          ),
         ],
       ),
     );

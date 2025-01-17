@@ -67,6 +67,9 @@ class GenreListPage extends ConsumerWidget {
             genres: genres.value?.genres?.genre ?? [],
             showLoading: genres.isLoading,
           ),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 120),
+          ),
         ],
       ),
     );

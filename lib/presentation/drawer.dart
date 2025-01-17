@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppDrawer extends ConsumerWidget {
   const AppDrawer({super.key});
@@ -15,8 +16,8 @@ class AppDrawer extends ConsumerWidget {
     return Drawer(
       child: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Drawer header with app logo/name
             DrawerHeader(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -38,12 +39,10 @@ class AppDrawer extends ConsumerWidget {
                 ),
               ),
             ),
-
-            // Server URL section
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
                     'Server',
@@ -86,14 +85,21 @@ class AppDrawer extends ConsumerWidget {
                       ],
                     ),
                   ),
+                  const Divider(),
+                  MenuItemButton(
+                    onPressed: () async {
+                      await launchUrl(
+                        Uri.parse('https://github.com/julywitch/dururu'),
+                      );
+                    },
+                    child: const Text("GitHub"),
+                  ),
                 ],
               ),
             ),
-
             const Spacer(),
-
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 58),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 140),
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
@@ -104,7 +110,7 @@ class AppDrawer extends ConsumerWidget {
                     // Show confirmation dialog
                     showDialog(
                       context: context,
-                      builder: (context) => LogoutDialog(),
+                      builder: (context) => const LogoutDialog(),
                     );
                   },
                   icon: const Icon(CupertinoIcons.square_arrow_left),
@@ -150,8 +156,7 @@ class LogoutDialog extends ConsumerWidget {
             GoRouter.of(context).go('/login'); // Navigate to login
           },
           style: TextButton.styleFrom(
-            foregroundColor:
-                Theme.of(context).colorScheme.error,
+            foregroundColor: Theme.of(context).colorScheme.error,
           ),
           child: const Text('Logout'),
         ),

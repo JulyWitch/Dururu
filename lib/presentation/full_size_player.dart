@@ -186,29 +186,7 @@ class _PlayerState extends ConsumerState<FullSizePlayer> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    Slider(
-                      value: ref
-                          .watch(positionProvider)
-                          .inMicroseconds
-                          .toDouble()
-                          .clamp(
-                            0,
-                            ref
-                                .watch(durationProvider)
-                                .inMicroseconds
-                                .toDouble(),
-                          ),
-                      min: 0,
-                      max:
-                          ref.watch(durationProvider).inMicroseconds.toDouble(),
-                      onChanged: (value) {
-                        final newPos = Duration(microseconds: value.toInt());
-
-                        ref.read(audioProvider.notifier).seek(newPos);
-                      },
-                      activeColor: Colors.white,
-                      inactiveColor: Colors.white24,
-                    ),
+                    PositionSlider(),
                     const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -246,6 +224,45 @@ class _PlayerState extends ConsumerState<FullSizePlayer> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class PositionSlider extends ConsumerStatefulWidget {
+  const PositionSlider({
+    super.key,
+  });
+
+  @override
+  ConsumerState<PositionSlider> createState() => _PositionSliderState();
+}
+
+class _PositionSliderState extends ConsumerState<PositionSlider> {
+  double? value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Slider(
+      value: value ??
+          ref.watch(positionProvider).inMicroseconds.toDouble().clamp(
+                0,
+                ref.watch(durationProvider).inMicroseconds.toDouble(),
+              ),
+      min: 0,
+      max: ref.watch(durationProvider).inMicroseconds.toDouble(),
+      onChanged: (v) {
+        value = v;
+        setState(() {});
+      },
+      onChangeEnd: (v) {
+        value = null;
+        ref
+            .read(audioProvider.notifier)
+            .seek(Duration(microseconds: v.toInt()));
+        setState(() {});
+      },
+      activeColor: Colors.white,
+      inactiveColor: Colors.white24,
     );
   }
 }

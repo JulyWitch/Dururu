@@ -1,4 +1,6 @@
-import 'package:audio_service/audio_service.dart';
+import 'dart:async';
+
+import 'package:audio_service/audio_service.dart' as audio_service;
 import 'package:dururu/providers/subsonic_apis.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,47 +32,51 @@ class Audio extends _$Audio {
   AudioPlayer? _player;
   AudioPlayer get player => _player!;
   ConcatenatingAudioSource? playlist;
+  List<StreamSubscription> subs = [];
 
   @override
   AudioState build() {
     _player = AudioPlayer();
     _initializePlayer();
-    ref.onDispose(() => player.dispose());
+    ref.onDispose(() {
+      player.dispose();
+      Future.wait(subs.map((s) => s.cancel()));
+    });
     return const AudioState();
   }
 
   void _initializePlayer() {
-    // Listen to player state changes
-    player.playerStateStream.listen((playerState) {
+    subs.add(player.playerStateStream.listen((playerState) {
       state = state.copyWith(
         isPlaying: playerState.playing,
         isLoading: playerState.processingState == ProcessingState.loading ||
             playerState.processingState == ProcessingState.buffering,
       );
-    });
+      if (playerState.processingState == ProcessingState.completed) {
+        player.pause();
+      }
+    }));
 
-    // Listen to position changes
-    player.positionStream.listen((position) {
+    subs.add(player.positionStream.listen((position) {
       state = state.copyWith(position: position);
-    });
+    }));
 
-    // Listen to duration changes
-    player.durationStream.listen((duration) {
+    subs.add(player.durationStream.listen((duration) {
       if (duration != null) {
         state = state.copyWith(duration: duration);
       }
-    });
+    }));
 
-    // Listen to sequence state changes
-    player.sequenceStateStream.listen((sequenceState) {
+    subs.add(player.sequenceStateStream.listen((sequenceState) {
       if (sequenceState?.currentSource?.tag == null) return;
-      final mediaItem = sequenceState?.currentSource?.tag as MediaItem;
+      final mediaItem =
+          sequenceState?.currentSource?.tag as audio_service.MediaItem;
       final index = state.queue.indexWhere((s) => s.id == mediaItem.id);
       if (index == -1) return;
       state = state.copyWith(
         currentSong: state.queue[index],
       );
-    });
+    }));
   }
 
   List<Child> getQueue() => state.queue;
@@ -91,7 +97,16 @@ class Audio extends _$Audio {
   }
 
   Future<void> playAt(int index) async {
-    await player.seek(null, index: index);
+    if (player.currentIndex != index) {
+      final stopwatch = Stopwatch();
+      stopwatch.start();
+      await player.seek(null, index: index);
+      stopwatch.stop();
+      print('elapsed time is: ${stopwatch.elapsedMilliseconds} ms');
+    }
+
+    if (state.isPlaying) return;
+    await player.play();
   }
 
   Future<void> playQueue(List<Child> songs, {int initialIndex = 0}) async {
@@ -110,7 +125,7 @@ class Audio extends _$Audio {
                     ),
                   ),
                 ),
-                tag: MediaItem(
+                tag: audio_service.MediaItem(
                   id: song.id,
                   title: song.title,
                   album: song.album,
@@ -151,6 +166,9 @@ class Audio extends _$Audio {
 
   // Playback controls
   Future<void> play() async {
+    if (player.processingState == ProcessingState.completed) {
+      await player.seek(Duration.zero);
+    }
     await player.play();
   }
 
@@ -218,7 +236,6 @@ class Audio extends _$Audio {
   }
 }
 
-// Convenience providers for commonly accessed values
 @riverpod
 bool isPlaying(Ref ref) {
   return ref.watch(audioProvider.select((state) => state.isPlaying));
