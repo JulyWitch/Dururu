@@ -1,6 +1,7 @@
 import 'package:dururu/models/pagination.dart';
 import 'package:dururu/models/subsonic.dart';
 import 'package:dururu/presentation/widgets/album_grid.dart';
+import 'package:dururu/presentation/widgets/genre_grid.dart';
 import 'package:dururu/presentation/widgets/loading_indicator.dart';
 import 'package:dururu/presentation/widgets/song_trailing.dart';
 import 'package:dururu/providers/audio.dart';
@@ -151,7 +152,11 @@ class GenrePageState extends ConsumerState<GenrePage> {
               errorWidget: (context, url, error) => const Icon(Icons.album),
             ),
           ),
-          title: Text(song.title),
+          title: Text(
+            song.title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
           subtitle: Text(
             '${song.artist ?? ''} • ${formatSongDuration(song.duration ?? 0)}',
           ),
@@ -206,44 +211,64 @@ class GenrePageState extends ConsumerState<GenrePage> {
                   Positioned(
                     left: 16,
                     right: 16,
-                    bottom: 48,
-                    child: Text(
-                      widget.genre,
-                      style:
-                          Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                    ),
-                  ),
-                  Positioned(
-                    right: 16,
                     bottom: 16,
-                    child: Row(
+                    child: Column(
+                      spacing: 8,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(
-                          'Songs',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelMedium
-                              ?.copyWith(
-                                color:
-                                    showSongs ? Colors.white : Colors.white60,
+                        Row(
+                          spacing: 8,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                widget.genre,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall
+                                    ?.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                               ),
+                            ),
+                            GenreIcon(
+                              genre: widget.genre,
+                              color: Theme.of(context).colorScheme.onSurface,
+                              scale: 1.5,
+                            )
+                          ],
                         ),
-                        Switch.adaptive(
-                          value: !showSongs,
-                          onChanged: (_) => toggleView(),
-                        ),
-                        Text(
-                          'Albums',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelMedium
-                              ?.copyWith(
-                                color:
-                                    !showSongs ? Colors.white : Colors.white60,
-                              ),
+                        Row(
+                          children: [
+                            Text(
+                              'Songs',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(
+                                    color: showSongs
+                                        ? Colors.white
+                                        : Colors.white60,
+                                  ),
+                            ),
+                            Switch.adaptive(
+                              value: !showSongs,
+                              onChanged: (_) => toggleView(),
+                            ),
+                            Text(
+                              'Albums',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(
+                                    color: !showSongs
+                                        ? Colors.white
+                                        : Colors.white60,
+                                  ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

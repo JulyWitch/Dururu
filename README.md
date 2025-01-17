@@ -62,14 +62,14 @@ Here's a sneak peek at what’s done and what’s cooking:
 - UI: Fix touch area for play pause button
 - Fix lag when changing the song: It was saw only on mac
 - UI: Explore
+- UI: Implement search by keyword
+- UI: [Pend by the fastest icons search engine] Show instrument icons for different genres
 
 #### 🛠️ **In Progress**
 
-- UI: Implement search by keyword
 - UI: Song details
 - Scrobble
 
-- UI: [Pend by the fastest icons search engine] Show instrument icons for different genres
 - UI: Playlists page
 - UI: Playlist songs page
 - UI: Add play and shuffle button in album page

@@ -165,7 +165,11 @@ class AlbumPage extends ConsumerWidget {
                         '${index + 1}',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      title: Text(song.title),
+                      title: Text(
+                        song.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                       subtitle: Text(
                         '${song.artist ?? ''} • ${formatSongDuration(song.duration ?? 0)}',
                       ),

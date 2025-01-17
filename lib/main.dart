@@ -102,6 +102,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Dururu',
+      debugShowCheckedModeBanner: false,
       routerConfig: _router,
       theme: buildTheme(),
     );
